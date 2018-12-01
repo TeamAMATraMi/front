@@ -1,6 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
-@import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
-
 body {
   padding: 0;
   margin: 0;
@@ -14,7 +11,6 @@ body {
   line-height: 1.42857143;
   color: inherit;
 }
-
 h1, * /deep/ h1 {
   font-size: 36px;
   margin-top: 20px;
