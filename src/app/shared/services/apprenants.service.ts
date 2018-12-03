@@ -1,15 +1,79 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {environment} from '../../../environments/environment';
+import {Apprenant} from '../interfaces/apprenant';
+import {defaultIfEmpty, filter, map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApprenantsService {
 
-  constructor(private http: HttpClient) { }
+  private readonly _backendURL: any;
 
-  /*getAllApprenant(): Observable<any> {
-    return this.http.get('//localhost:8080/__');
-  }*/
+  constructor(private _http: HttpClient) {
+    this._backendURL = {};
+
+    // build backend base url
+    let baseUrl = `${environment.backend.protocol}://${environment.backend.host}`;
+    if (environment.backend.port) {
+      baseUrl += `:${environment.backend.port}`;
+    }
+    // build all backend urls
+    Object.keys(environment.backend.endpoints.apprenants)
+      .forEach(k => this._backendURL[ k ] = `${baseUrl}${environment.backend.endpoints.apprenants[ k ]}`);
+  }
+
+  /**
+   * Function to return all Apprenants
+   */
+  fetch(): Observable<Apprenant []> {
+    return this._http.get<Apprenant[]>(this._backendURL.allApprenants)
+      .pipe(
+        filter(_ => !!_),
+        defaultIfEmpty([])
+      );
+  }
+
+  /**
+   * Function to return one Apprenant for current id
+   */
+  fetchOne(id: string): Observable<Apprenant> {
+    return this._http.get<Apprenant>(this._backendURL.oneApprenants.replace(':id', id));
+  }
+
+  /**
+   * Function to create a new Apprenant
+   */
+  create(apprenant: Apprenant): Observable<any> {
+    return this._http.post<Apprenant>(this._backendURL.allApprenants, apprenant, this._options());
+  }
+
+  /**
+   * Function to delete one Apprenant for current id
+   */
+  delete(id: string): Observable<string> {
+    return this._http.delete(this._backendURL.oneApprenants.replace(':id', id))
+      .pipe(
+        map(_ => id)
+      );
+  }
+
+  /**
+   * Function to update one Apprenant
+   */
+  update(apprenant: Apprenant): Observable<any> {
+    return this._http.put<Apprenant>(this._backendURL.oneApprenants.replace(':id', apprenant.id_apprenant), apprenant, this._options());
+  }
+
+  /**
+   * Function to return request options
+   */
+  private _options(headerList: Object = {}): any {
+    return { headers: new HttpHeaders(Object.assign({
+        'Content-Type': 'application/json'
+      }, headerList)) };
+  }
+
 }
