@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Apprenant} from '../shared/interfaces/apprenant';
 
 @Component({
   selector: 'app-apprenants',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApprenantsComponent implements OnInit {
 
-  constructor() { }
+  private _apprenants: Apprenant[];
+
+  constructor() {
+      this._apprenants = [];
+  }
 
   ngOnInit() {
+      // TODO : fetch with associated service
+  }
+
+  get apprenants(): Apprenant[] {
+      return this._apprenants;
   }
 
 }
