@@ -9,10 +9,14 @@ export const environment = {
     host: '0.0.0.0',
     port: '4443',
     endpoints: {
-      apprenants: {
-        allApprenants: '/api/apprenants',
-        oneApprenants: '/api/apprenants/:id'
-      }
+        apprenants: {
+            allApprenants: '/api/apprenants',
+            oneApprenant: '/api/apprenants/:id'
+        },
+        formateurs: {
+            allFormateurs: '/api/apprenants',
+            oneFormateur: '/api/apprenants/:id'
+        }
     }
   }
 };

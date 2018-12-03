@@ -7,7 +7,7 @@ export const environment = {
     endpoints: {
       apprenants: {
         allApprenants: '/api/apprenants',
-        oneApprenants: '/api/apprenants/:id'
+        oneApprenant: '/api/apprenants/:id'
       }
     }
   }
