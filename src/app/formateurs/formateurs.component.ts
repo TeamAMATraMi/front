@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Formateur} from '../shared/interfaces/formateur';
 
 @Component({
   selector: 'app-formateurs',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormateursComponent implements OnInit {
 
-  constructor() { }
+  private _formateur: Formateur[];
+
+  constructor() {
+    this._formateur = [];
+  }
 
   ngOnInit() {
+    // TODO : fetch with associated service formateur
   }
 
 }
