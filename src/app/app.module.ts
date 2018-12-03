@@ -12,6 +12,7 @@ import { SitesComponent } from './sites/sites.component';
 import { ApprenantsComponent } from './apprenants/apprenants.component';
 import { FormateursComponent } from './formateurs/formateurs.component';
 import { StatistiquesComponent } from './statistiques/statistiques.component';
+import { ApprenantCardComponent } from './shared/apprenant-card/apprenant-card.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { StatistiquesComponent } from './statistiques/statistiques.component';
     SitesComponent,
     ApprenantsComponent,
     FormateursComponent,
-    StatistiquesComponent
+    StatistiquesComponent,
+    ApprenantCardComponent
   ],
   imports: [
     BrowserModule,

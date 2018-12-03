@@ -1,3 +1,5 @@
-<p>
-  apprenants works!
-</p>
+<section [ngSwitch]="view">
+  <section *ngSwitchCase="'card'">
+    <app-apprenants-card [apprenant]="apprenant" *ngFor="let apprenant of apprenants"></app-apprenants-card>
+  </section>
+</section>
