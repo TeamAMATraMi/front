@@ -6,13 +6,16 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 
 import {
-    MatToolbarModule
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
 } from '@angular/material';
 import { SitesComponent } from './sites/sites.component';
 import { ApprenantsComponent } from './apprenants/apprenants.component';
 import { FormateursComponent } from './formateurs/formateurs.component';
 import { StatistiquesComponent } from './statistiques/statistiques.component';
 import { ApprenantCardComponent } from './shared/apprenant-card/apprenant-card.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -29,6 +32,9 @@ import { ApprenantCardComponent } from './shared/apprenant-card/apprenant-card.c
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
+    MatMenuModule,
+    BrowserAnimationsModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

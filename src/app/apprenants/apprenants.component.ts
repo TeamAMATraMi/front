@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Apprenant} from '../shared/interfaces/apprenant';
 
 @Component({
   selector: 'app-apprenants',
