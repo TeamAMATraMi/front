@@ -8,7 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import {
     MatToolbarModule,
     MatMenuModule,
-    MatIconModule,
+    MatIconModule, MatInputModule,
 } from '@angular/material';
 import { SitesComponent } from './sites/sites.component';
 import { ApprenantsComponent } from './apprenants/apprenants.component';
@@ -35,6 +35,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatMenuModule,
     BrowserAnimationsModule,
     MatIconModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
