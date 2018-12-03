@@ -40,7 +40,7 @@ export class ApprenantsService {
    * Function to return one Apprenant for current id
    */
   fetchOne(id: string): Observable<Apprenant> {
-    return this._http.get<Apprenant>(this._backendURL.oneApprenants.replace(':id', id));
+    return this._http.get<Apprenant>(this._backendURL.oneApprenant.replace(':id', id));
   }
 
   /**
@@ -54,7 +54,7 @@ export class ApprenantsService {
    * Function to delete one Apprenant for current id
    */
   delete(id: string): Observable<string> {
-    return this._http.delete(this._backendURL.oneApprenants.replace(':id', id))
+    return this._http.delete(this._backendURL.oneApprenant.replace(':id', id))
       .pipe(
         map(_ => id)
       );
@@ -64,7 +64,7 @@ export class ApprenantsService {
    * Function to update one Apprenant
    */
   update(apprenant: Apprenant): Observable<any> {
-    return this._http.put<Apprenant>(this._backendURL.oneApprenants.replace(':id', apprenant.id_apprenant), apprenant, this._options());
+    return this._http.put<Apprenant>(this._backendURL.oneApprenant.replace(':id', apprenant.id_apprenant), apprenant, this._options());
   }
 
   /**
