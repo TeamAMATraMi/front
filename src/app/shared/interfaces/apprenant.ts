@@ -1,5 +1,5 @@
-export interface Apprenant{
-  id_apprenant: string;
+export interface Apprenant {
+  id_apprenant: number;
   nom: string;
   prenom: string;
   telephone: number;
@@ -9,7 +9,7 @@ export interface Apprenant{
   id_groupe: number;
   date_inscription: number;
   auteur_dossier: number;
-  majeur: number;
+  majeur: boolean;
   date_naissance: number;
   genre: string;
   pays_origine: string;
