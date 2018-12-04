@@ -16,6 +16,7 @@ import { FormateursComponent } from './formateurs/formateurs.component';
 import { StatistiquesComponent } from './statistiques/statistiques.component';
 import { ApprenantCardComponent } from './shared/apprenant-card/apprenant-card.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { SiteCardComponent } from './shared/site-card/site-card.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     ApprenantsComponent,
     FormateursComponent,
     StatistiquesComponent,
-    ApprenantCardComponent
+    ApprenantCardComponent,
+    SiteCardComponent
   ],
   imports: [
     BrowserModule,
