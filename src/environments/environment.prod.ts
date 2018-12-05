@@ -8,6 +8,14 @@ export const environment = {
       apprenants: {
         allApprenants: '/api/apprenants',
         oneApprenant: '/api/apprenants/:id'
+      },
+      formateurs: {
+        allFormateurs: '/api/apprenants',
+        oneFormateur: '/api/apprenants/:id'
+      },
+      sites: {
+        allSites: '/api/sites',
+        oneSite: '/api/sites/:id'
       }
     }
   }

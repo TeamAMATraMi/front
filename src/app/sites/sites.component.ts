@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Site} from "../shared/interfaces/site";
-import {FormGroup} from "@angular/forms";
+import {Site} from '../shared/interfaces/site';
 
 @Component({
   selector: 'app-sites',
@@ -10,7 +9,6 @@ import {FormGroup} from "@angular/forms";
 export class SitesComponent implements OnInit {
 
   private _sites: Site[];
-  private _siteForm: FormGroup;
 
   constructor() {
     this._sites = [];
@@ -24,7 +22,4 @@ export class SitesComponent implements OnInit {
         return this._sites;
     }
 
-    set sites(value: Site[]) {
-        this._sites = value;
-    }
 }
