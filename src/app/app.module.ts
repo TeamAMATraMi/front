@@ -6,9 +6,9 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 
 import {
-    MatToolbarModule,
-    MatMenuModule,
-    MatIconModule, MatInputModule,
+  MatToolbarModule,
+  MatMenuModule,
+  MatIconModule, MatInputModule, MatCardModule, MatButtonModule, MatListModule,
 } from '@angular/material';
 import { SitesComponent } from './sites/sites.component';
 import { ApprenantsComponent } from './apprenants/apprenants.component';
@@ -32,7 +32,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
+    MatCardModule,
     MatMenuModule,
+    MatButtonModule,
+    MatListModule,
     BrowserAnimationsModule,
     MatIconModule,
     MatInputModule
