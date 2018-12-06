@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   backend: {
     protocol: 'http',
-    host: '0.0.0.0',
+    host: '127.0.0.1',
     port: '8080',
     endpoints: {
         apprenants: {
@@ -22,7 +22,8 @@ export const environment = {
             oneSite: '/sites/:id'
         }
     }
-  }
+  },
+
 };
 /*
  * For easier debugging in development mode, you can import the following file
