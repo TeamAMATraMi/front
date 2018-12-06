@@ -28,31 +28,10 @@
 
   </mat-toolbar-row>
 </mat-toolbar>
-<section>
-    <mat-card class="mat-whiteframe-2dp">
-        <mat-card-title-group>
-            <mat-card-title>
-                <span>{{ apprenant.nom }} {{ apprenant.prenom }}</span>
-            </mat-card-title>
-            <mat-card-subtitle>
 
-            </mat-card-subtitle>
+<app-apprenant-card>
 
-        </mat-card-title-group>
-        <mat-card-content>
-            Telephone : {{ apprenant.telephone}}
-        </mat-card-content>
-        <mat-card-content>
-            Adresse : {{ apprenant.adresse}}
-        </mat-card-content>
-        <mat-card-content>
-            Code postale : {{ apprenant.code_postal}}
-        </mat-card-content>
-        <mat-card-content>
-            Commune : {{ apprenant.commune}}
-        </mat-card-content>
-    </mat-card>
+</app-apprenant-card>
 
-</section>
 
 <app-apprenant-card [apprenant]="apprenant" *ngFor="let apprenant of apprenants"> </app-apprenant-card>
