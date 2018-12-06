@@ -17,6 +17,7 @@ import { StatistiquesComponent } from './statistiques/statistiques.component';
 import { ApprenantCardComponent } from './shared/apprenant-card/apprenant-card.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { SitesCardComponent } from './shared/sites-card/sites-card.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
     ApprenantsComponent,
     FormateursComponent,
     StatistiquesComponent,
-    ApprenantCardComponent
+    ApprenantCardComponent,
+    SitesCardComponent
   ],
   imports: [
     BrowserModule,
