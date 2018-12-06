@@ -6,74 +6,74 @@ import {Apprenant} from '../interfaces/apprenant';
 import {defaultIfEmpty, filter, map} from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ApprenantsService {
 
-  private readonly _backendURL: any;
+    private readonly _backendURL: any;
 
-  constructor(private _http: HttpClient) {
-    this._backendURL = {};
+    constructor(private _http: HttpClient) {
+        this._backendURL = {};
 
-    // build backend base url
-    let baseUrl = `${environment.backend.protocol}://${environment.backend.host}`;
-    if (environment.backend.port) {
-      baseUrl += `:${environment.backend.port}`;
+        // build backend base url
+        let baseUrl = `${environment.backend.protocol}://${environment.backend.host}`;
+        if (environment.backend.port) {
+            baseUrl += `:${environment.backend.port}`;
+        }
+        // build all backend urls
+        Object.keys(environment.backend.endpoints.apprenants)
+            .forEach(k => this._backendURL[ k ] = `${baseUrl}${environment.backend.endpoints.apprenants[ k ]}`);
     }
-    // build all backend urls
-    Object.keys(environment.backend.endpoints.apprenants)
-      .forEach(k => this._backendURL[ k ] = `${baseUrl}${environment.backend.endpoints.apprenants[ k ]}`);
-  }
 
-  /**
-   * Function to return all Apprenants
-   */
-  fetch(): Observable<Apprenant []> {
-    return this._http.get<Apprenant[]>(this._backendURL.allApprenants)
-      .pipe(
-        filter(_ => !!_),
-        defaultIfEmpty([])
-      );
-  }
+    /**
+     * Function to return all Apprenants
+     */
+    fetch(): Observable<Apprenant []> {
+        return this._http.get<Apprenant[]>(this._backendURL.allApprenants)
+            .pipe(
+                filter(_ => !!_),
+                defaultIfEmpty([])
+            );
+    }
 
-  /**
-   * Function to return one Apprenant for current id
-   */
-  fetchOne(id: string): Observable<Apprenant> {
-    return this._http.get<Apprenant>(this._backendURL.oneApprenant.replace(':id', id));
-  }
+    /**
+     * Function to return one Apprenant for current id
+     */
+    fetchOne(id: string): Observable<Apprenant> {
+        return this._http.get<Apprenant>(this._backendURL.oneApprenant.replace(':id', id));
+    }
 
-  /**
-   * Function to create a new Apprenant
-   */
-  create(apprenant: Apprenant): Observable<any> {
-    return this._http.post<Apprenant>(this._backendURL.allApprenants, apprenant, this._options());
-  }
+    /**
+     * Function to create a new Apprenant
+     */
+    create(apprenant: Apprenant): Observable<any> {
+        return this._http.post<Apprenant>(this._backendURL.allApprenants, apprenant, this._options());
+    }
 
-  /**
-   * Function to delete one Apprenant for current id
-   */
-  delete(id: string): Observable<string> {
-    return this._http.delete(this._backendURL.oneApprenant.replace(':id', id))
-      .pipe(
-        map(_ => id)
-      );
-  }
+    /**
+     * Function to delete one Apprenant for current id
+     */
+    delete(id: string): Observable<string> {
+        return this._http.delete(this._backendURL.oneApprenant.replace(':id', id))
+            .pipe(
+                map(_ => id)
+            );
+    }
 
-  /**
-   * Function to update one Apprenant
-   */
-  update(apprenant: Apprenant): Observable<any> {
-    return this._http.put<Apprenant>(this._backendURL.oneApprenant.replace(':id', apprenant.id_apprenant), apprenant, this._options());
-  }
+    /**
+     * Function to update one Apprenant
+     */
+    update(apprenant: Apprenant): Observable<any> {
+        return this._http.put<Apprenant>(this._backendURL.oneApprenant.replace(':id', apprenant.id_apprenant), apprenant, this._options());
+    }
 
-  /**
-   * Function to return request options
-   */
-  private _options(headerList: Object = {}): any {
-    return { headers: new HttpHeaders(Object.assign({
-        'Content-Type': 'application/json'
-      }, headerList)) };
-  }
+    /**
+     * Function to return request options
+     */
+    private _options(headerList: Object = {}): any {
+        return { headers: new HttpHeaders(Object.assign({
+                'Content-Type': 'application/json'
+            }, headerList)) };
+    }
 
 }

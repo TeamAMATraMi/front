@@ -16,6 +16,7 @@ import { FormateursComponent } from './formateurs/formateurs.component';
 import { StatistiquesComponent } from './statistiques/statistiques.component';
 import { ApprenantCardComponent } from './shared/apprenant-card/apprenant-card.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatMenuModule,
     BrowserAnimationsModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
