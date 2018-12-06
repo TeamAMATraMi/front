@@ -21,14 +21,14 @@ export class SitesService {
             baseUrl += `:${environment.backend.port}`;
         }
         // build all backend urls
-        Object.keys(environment.backend.endpoints.formateurs)
+        Object.keys(environment.backend.endpoints.sites)
             .forEach(k => this._backendURL[ k ] = `${baseUrl}${environment.backend.endpoints.sites[ k ]}`);
     }
 
     /**
      * Function to return all Sites
      */
-    fetch(): Observable<Site []> {
+    fetch(): Observable<Site[]> {
         return this._http.get<Site[]>(this._backendURL.allSites)
             .pipe(
                 filter(_ => !!_),

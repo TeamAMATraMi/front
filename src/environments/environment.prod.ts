@@ -1,22 +1,23 @@
+
 export const environment = {
-  production: true,
-  backend: {
-    protocol: 'http',
-    host: '0.0.0.0',
-    port: '4443',
-    endpoints: {
-      apprenants: {
-        allApprenants: '/api/apprenants',
-        oneApprenant: '/api/apprenants/:id'
-      },
-      formateurs: {
-        allFormateurs: '/api/apprenants',
-        oneFormateur: '/api/apprenants/:id'
-      },
-      sites: {
-        allSites: '/api/sites',
-        oneSite: '/api/sites/:id'
-      }
+    production: false,
+    backend: {
+        protocol: 'http',
+        host: '0.0.0.0',
+        port: '8080',
+        endpoints: {
+            apprenants: {
+                allApprenants: '/apprenants',
+                oneApprenant: '/apprenants/:id'
+            },
+            formateurs: {
+                allFormateurs: '/formateurs',
+                oneFormateur: '/formateurs/:id'
+            },
+            sites: {
+                allSites: '/sites',
+                oneSite: '/sites/:id'
+            }
+        }
     }
-  }
 };

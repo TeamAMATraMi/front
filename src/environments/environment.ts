@@ -7,19 +7,19 @@ export const environment = {
   backend: {
     protocol: 'http',
     host: '0.0.0.0',
-    port: '4443',
+    port: '8080',
     endpoints: {
         apprenants: {
-            allApprenants: '/api/apprenants',
-            oneApprenant: '/api/apprenants/:id'
+            allApprenants: '/apprenants',
+            oneApprenant: '/apprenants/:id'
         },
         formateurs: {
-            allFormateurs: '/api/apprenants',
-            oneFormateur: '/api/apprenants/:id'
+            allFormateurs: '/formateurs',
+            oneFormateur: '/formateurs/:id'
         },
         sites: {
-            allSites: '/api/sites',
-            oneSite: '/api/sites/:id'
+            allSites: '/sites',
+            oneSite: '/sites/:id'
         }
     }
   }

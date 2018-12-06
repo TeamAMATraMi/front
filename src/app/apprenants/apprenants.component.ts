@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import {APPRENANT} from '../_static/bdd';
+import {ApprenantsService} from '../shared/services/apprenants.service';
+
 
 @Component({
   selector: 'app-apprenants',
@@ -10,7 +13,8 @@ export class ApprenantsComponent implements OnInit {
 
   private _apprenant: any;
 
-  constructor() {
+
+  constructor(private _apprenantsService: ApprenantsService) {
       this._apprenant = APPRENANT[0];
   }
 
