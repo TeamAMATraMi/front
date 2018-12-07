@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import {APPRENANT} from '../_static/bdd';
-import {ApprenantsService} from '../shared/services/apprenants.service';
-
 
 @Component({
   selector: 'app-apprenants',
@@ -11,19 +8,8 @@ import {ApprenantsService} from '../shared/services/apprenants.service';
 })
 export class ApprenantsComponent implements OnInit {
 
-  private _apprenant: any;
-
-
-  constructor(private _apprenantsService: ApprenantsService) {
-      this._apprenant = APPRENANT[0];
-  }
-
   ngOnInit() {
       // TODO : fetch with associated service
-  }
-
-  get apprenant(): any {
-      return this._apprenant;
   }
 
 }

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {Apprenant} from '../interfaces/apprenant';
+import {APPRENANT} from '../../_static/bdd';
+import {ApprenantsService} from '../services/apprenants.service';
 
 @Component({
   selector: 'app-apprenant-card',
@@ -9,23 +9,18 @@ import {Apprenant} from '../interfaces/apprenant';
 })
 export class ApprenantCardComponent implements OnInit {
 
-  private _apprenant: Apprenant;
+  private _apprenant: any;
 
-  constructor(private _router: Router) {
-    this._apprenant = {} as Apprenant;
-  }
-
-  get apprenant(): Apprenant {
-    return this._apprenant;
+  constructor(private _apprenantsService: ApprenantsService) {
+    this._apprenant = APPRENANT[0];
   }
 
   @Input()
-  set apprenant(apprenant: Apprenant) {
-      this._apprenant = apprenant;
+  get apprenant(): any {
+    return this._apprenant;
   }
 
-
-    ngOnInit() {
+  ngOnInit() {
   }
 
 }
