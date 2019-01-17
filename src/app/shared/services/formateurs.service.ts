@@ -64,7 +64,7 @@ export class FormateursService {
      * Function to update one Apprenant
      */
     update(formateur: Formateur): Observable<any> {
-        return this._http.put<Formateur>(this._backendURL.oneFormateur.replace(':id', formateur.id_formateur), formateur, this._options());
+        return this._http.put<Formateur>(this._backendURL.oneFormateur.replace(':id', formateur.idFormateur), formateur, this._options());
     }
 
     /**
