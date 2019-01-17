@@ -2,11 +2,11 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Apprenant} from '../interfaces/apprenant';
 
 @Component({
-  selector: 'app-apprenant-card',
-  templateUrl: './apprenant-card.component.html',
-  styleUrls: ['./apprenant-card.component.css']
+  selector: 'app-apprenant-details',
+  templateUrl: './apprenant-details.component.html',
+  styleUrls: ['./apprenant-details.component.css']
 })
-export class ApprenantCardComponent implements OnInit {
+export class ApprenantDetailsComponent implements OnInit {
 
   private _apprenant: any;
 
