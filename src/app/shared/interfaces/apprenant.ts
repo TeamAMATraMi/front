@@ -1,5 +1,5 @@
 export interface Apprenant {
-  id_apprenant: number;
+  id: number;
   nom: string;
   prenom: string;
   telephone: number;
@@ -13,7 +13,7 @@ export interface Apprenant {
   date_naissance: number;
   genre: string;
   pays_origine: string;
-  nationalité: number;
+  nationalite: number;
   date_arrivee: number;
   quartier_prioritaire: number;
   situation_personelle: string;
