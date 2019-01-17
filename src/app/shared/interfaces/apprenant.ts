@@ -16,7 +16,7 @@ export interface Apprenant {
   nationalite: number;
   dateArrivee: number;
   quartierPrioritaire: number;
-  situationPersonelle: string;
+  situationPersonnelle: string;
   priseCharge: string;
   rsa: boolean;
   tempsScolarisation: number;

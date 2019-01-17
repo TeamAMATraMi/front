@@ -2,7 +2,9 @@
   <mat-card class="mat-whiteframe-2dp">
     <mat-card-title-group>
       <mat-card-title>
-        <span>{{ apprenant.nom }} {{ apprenant.prenom }}</span>
+        <a [routerLink]="['/apprenant', apprenant.id]">
+          <span>{{ apprenant.nom }} {{ apprenant.prenom }}</span>
+        </a>
       </mat-card-title>
       <mat-card-subtitle>
 
