@@ -1,5 +1,5 @@
 export interface Enfant {
-  id_enfant: number;
-  id_apprenant_ref: number;
+  idEnfant: number;
+  idApprenantRef: number;
   age: number;
 }

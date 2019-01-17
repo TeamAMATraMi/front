@@ -1,8 +1,8 @@
 export interface Sejour {
-  id_apprenant: number;
+  idApprenant: number;
   statut: string;
-  date_carte_sejour: number;
-  date_fin_carte_sejour: number;
-  titre_sejour: string;
-  type_contrat:string;
+  dateCarteSejour: number;
+  dateFinCarteSejour: number;
+  titreSejour: string;
+  typeContrat: string;
 }

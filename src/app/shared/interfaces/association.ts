@@ -1,4 +1,4 @@
 export interface Association {
-  id_association: number;
+  idAssociation: number;
   nom: string;
 }

@@ -1,11 +1,11 @@
 export interface Formateur {
-  id_formateur: number;
-  id_site: number;
+  idFormateur: number;
+  idSite: number;
   salarie: boolean;
   nom: string;
   prenom: string;
   telephone: string;
   adresse: string;
-  code_postal: string;
+  codePostal: string;
   commune: string;
 }

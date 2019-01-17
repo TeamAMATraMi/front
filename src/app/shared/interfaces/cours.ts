@@ -1,7 +1,7 @@
 export interface Cours {
-  id_cours: number;
-  id_formateur: number;
-  id_groupe: number;
+  idCours: number;
+  idFormateur: number;
+  idGroupe: number;
   horaire: number;
   matiere: string;
   duree: number;
