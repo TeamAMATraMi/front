@@ -1,4 +1,4 @@
 export interface QuartierPrioritaire {
-  idQuartier: number;
+  id: number;
   nomQuartier: string;
 }

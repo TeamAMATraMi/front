@@ -1,5 +1,5 @@
 export interface Pays {
-  idPays: string;
+  id: string;
   nationalite: string;
   langue: string;
 }

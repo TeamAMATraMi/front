@@ -64,7 +64,7 @@ export class SitesService {
      * Function to update one Site
      */
     update(site: Site): Observable<any> {
-        return this._http.put<Site>(this._backendURL.oneSite.replace(':id', site.idSite), site, this._options());
+        return this._http.put<Site>(this._backendURL.oneSite.replace(':id', site.id), site, this._options());
     }
 
     /**

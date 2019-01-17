@@ -1,5 +1,5 @@
 export interface Groupe {
-  idGroupe: number;
+  id: number;
   idSite: number;
   nom: string;
 }

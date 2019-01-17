@@ -1,5 +1,5 @@
 export interface Cours {
-  idCours: number;
+  id: number;
   idFormateur: number;
   idGroupe: number;
   horaire: number;

@@ -1,5 +1,5 @@
 export interface Formateur {
-  idFormateur: number;
+  id: number;
   idSite: number;
   salarie: boolean;
   nom: string;
