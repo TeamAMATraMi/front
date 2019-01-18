@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import {Groupe} from '../shared/interfaces/groupe';
+import {GroupesService} from '../shared/services/groupes.service';
 
 @Component({
   selector: 'app-groupes',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GroupesComponent implements OnInit {
 
-  constructor() { }
+  private _groupes: Groupe[];
 
-  ngOnInit() {
+  constructor(private _router: Router, private _groupesService: GroupesService) {
+    this._groupes = [];
   }
 
+
+  get groupes(): Groupe[] {
+    return this._groupes;
+  }
+
+
+  ngOnInit() {
+    // TODO : fetch with associated service
+    this._groupesService.fetch().subscribe((groupes: Groupe[]) => this._groupes = groupes);
+  }
+
+  /*
+  navigate(groupe: Groupe) {
+    this._router.navigate(['/apprenant', apprenant.id]);
+  }*/
 }
