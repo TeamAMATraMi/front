@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
     /**
      * Component constructor
      */
-    contructor(private _matIconRegistry: MatIconRegistry, private _domSanitizer: DomSanitizer){
+    constructor(private _matIconRegistry: MatIconRegistry, private _domSanitizer: DomSanitizer){
     }
 
     /**

@@ -22,6 +22,12 @@ export class ApprenantsComponent implements OnInit {
   }
 
 
+  delete(apprenant: Apprenant) {
+    this._apprenantsService
+        .delete(apprenant.id)
+        .subscribe(_ => this._apprenants = this._apprenants.filter(__ => __.id !== _));
+  }
+
   ngOnInit() {
       // TODO : fetch with associated service
     this._apprenantsService.fetch().subscribe((apprenants: Apprenant[]) => this._apprenants = apprenants);

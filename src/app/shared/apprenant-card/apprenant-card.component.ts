@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Apprenant} from '../interfaces/apprenant';
 
 @Component({
@@ -9,9 +9,11 @@ import {Apprenant} from '../interfaces/apprenant';
 export class ApprenantCardComponent implements OnInit {
 
   private _apprenant: any;
+  private readonly _delete$: EventEmitter<Apprenant>;
 
-  contructor() {
+  constructor() {
     this._apprenant = {} as Apprenant;
+    this._delete$ = new EventEmitter<Apprenant>();
   }
 
 
@@ -22,6 +24,15 @@ export class ApprenantCardComponent implements OnInit {
   @Input()
   set apprenant(apprenant: Apprenant) {
     this._apprenant = apprenant;
+  }
+
+  @Output('deleteApprenant')
+  get delete$(): EventEmitter<Apprenant> {
+    return this._delete$;
+  }
+
+  delete(apprenant: Apprenant){
+    this._delete$.emit(apprenant);
   }
 
 
