@@ -10,7 +10,7 @@ import {GroupesComponent} from './groupes/groupes.component';
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'apprenants', component: ApprenantsComponent },
-    { path: 'apprenants/:id', component: ApprenantComponent },
+    { path: 'apprenant/:id', component: ApprenantComponent },
     { path: 'formateurs', component: FormateursComponent},
     { path: 'sites', component: SitesComponent },
     { path: 'groupes', component: GroupesComponent },
