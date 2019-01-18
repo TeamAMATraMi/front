@@ -1,0 +1,278 @@
+<h2 mat-dialog-title *ngIf="isUpdateMode">Update Apprenant</h2>
+<h2 mat-dialog-title *ngIf="!isUpdateMode">Create new Apprenant</h2>
+
+<mat-dialog-content>
+    <form novalidate [formGroup]="form">
+
+        <p *ngIf="isUpdateMode">
+            <span style="width:100%">{{ apprenant.nom }} {{ apprenant.prenom }}</span>
+        </p>
+
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Nom : </span>
+                <input matInput formControlName="nom" required name="nom" />
+                <mat-error *ngIf="form.get('nom').dirty && form.get('nom').hasError('required')">
+                    nom is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Prénom : </span>
+                <input matInput formControlName="prenom" required name="prenom" />
+                <mat-error *ngIf="form.get('prenom').dirty && form.get('prenom').hasError('required')">
+                    prenom is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Téléphone : </span>
+                <input matInput formControlName="telephone" required name="telephone" />
+                <mat-error *ngIf="form.get('telephone').dirty && form.get('telephone').hasError('required')">
+                    telephone is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Adresse : </span>
+                <input matInput formControlName="adresse" required name="adresse" />
+                <mat-error *ngIf="form.get('adresse').dirty && form.get('adresse').hasError('required')">
+                    adresse is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Code postal : </span>
+                <input matInput formControlName="codePostal" required name="codePostal" />
+                <mat-error *ngIf="form.get('codePostal').dirty && form.get('codePostal').hasError('required')">
+                    codePostal is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Commune : </span>
+                <input matInput formControlName="commune" required name="commune" />
+                <mat-error *ngIf="form.get('commune').dirty && form.get('commune').hasError('required')">
+                    commune is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">ID du groupe : </span>
+                <input matInput formControlName="idGroupe" required name="idGroupe" />
+                <mat-error *ngIf="form.get('idGroupe').dirty && form.get('idGroupe').hasError('required')">
+                    idGroupe is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Date de l'inscription : </span>
+                <input matInput formControlName="dateInscription" required name="dateInscription" />
+                <mat-error *ngIf="form.get('dateInscription').dirty && form.get('dateInscription').hasError('required')">
+                    dateInscription is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Auteur du dossier : </span>
+                <input matInput formControlName="auteurDossier" required name="auteurDossier" />
+                <mat-error *ngIf="form.get('auteurDossier').dirty && form.get('auteurDossier').hasError('required')">
+                    auteurDossier is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Majeur : </span>
+                <input matInput formControlName="majeur" required name="majeur" />
+                <mat-error *ngIf="form.get('majeur').dirty && form.get('majeur').hasError('required')">
+                    majeur is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Date de naissance : </span>
+                <input matInput formControlName="dateNaissance" required name="dateNaissance" />
+                <mat-error *ngIf="form.get('dateNaissance').dirty && form.get('dateNaissance').hasError('required')">
+                    dateNaissance is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Genre : </span>
+                <input matInput formControlName="genre" required name="genre" />
+                <mat-error *ngIf="form.get('genre').dirty && form.get('genre').hasError('required')">
+                    genre is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Pays d'origine : </span>
+                <input matInput formControlName="paysOrigine" required name="paysOrigine" />
+                <mat-error *ngIf="form.get('paysOrigine').dirty && form.get('paysOrigine').hasError('required')">
+                    paysOrigine is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Nationalité : </span>
+                <input matInput formControlName="nationalite" required name="nationalite" />
+                <mat-error *ngIf="form.get('nationalite').dirty && form.get('nationalite').hasError('required')">
+                    nationalite is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Date d'arrivée : </span>
+                <input matInput formControlName="dateArrivee" required name="dateArrivee" />
+                <mat-error *ngIf="form.get('dateArrivee').dirty && form.get('dateArrivee').hasError('required')">
+                    dateArrivee is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Quartier prioritaire : </span>
+                <input matInput formControlName="quartierPrioritaire" required name="quartierPrioritaire" />
+                <mat-error *ngIf="form.get('quartierPrioritaire').dirty && form.get('quartierPrioritaire').hasError('required')">
+                    quartierPrioritaire is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Situation personnelle : </span>
+                <input matInput formControlName="situationPersonnelle" required name="situationPersonnelle" />
+                <mat-error *ngIf="form.get('situationPersonnelle').dirty && form.get('situationPersonnelle').hasError('required')">
+                    situationPersonnelle is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Prise en charge : </span>
+                <input matInput formControlName="priseCharge" required name="priseCharge" />
+                <mat-error *ngIf="form.get('priseCharge').dirty && form.get('priseCharge').hasError('required')">
+                    priseCharge is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">RSA : </span>
+                <input matInput formControlName="rsa" required name="rsa" />
+                <mat-error *ngIf="form.get('rsa').dirty && form.get('rsa').hasError('required')">
+                    rsa is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Temps de scolarisation : </span>
+                <input matInput formControlName="tempsScolarisation" required name="tempsScolarisation" />
+                <mat-error *ngIf="form.get('tempsScolarisation').dirty && form.get('tempsScolarisation').hasError('required')">
+                    tempsScolarisation is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Diplôme : </span>
+                <input matInput formControlName="diplome" required name="diplome" />
+                <mat-error *ngIf="form.get('diplome').dirty && form.get('diplome').hasError('required')">
+                    diplome is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Milieu scolaire : </span>
+                <input matInput formControlName="milieuScolaire" required name="milieuScolaire" />
+                <mat-error *ngIf="form.get('milieuScolaire').dirty && form.get('milieuScolaire').hasError('required')">
+                    milieuScolaire is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Niveau de langue : </span>
+                <input matInput formControlName="niveauLangue" required name="niveauLangue" />
+                <mat-error *ngIf="form.get('niveauLangue').dirty && form.get('niveauLangue').hasError('required')">
+                    niveauLangue is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Sait lire dans sa langue : </span>
+                <input matInput formControlName="lireLangue" required name="lireLangue" />
+                <mat-error *ngIf="form.get('lireLangue').dirty && form.get('lireLangue').hasError('required')">
+                    lireLangue is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Sait écrire dans sa langue : </span>
+                <input matInput formControlName="ecrireLangue" required name="ecrireLangue" />
+                <mat-error *ngIf="form.get('ecrireLangue').dirty && form.get('ecrireLangue').hasError('required')">
+                    ecrireLangue is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Sait lire l'alphabet latin : </span>
+                <input matInput formControlName="lireAlphaLatin" required name="lireAlphaLatin" />
+                <mat-error *ngIf="form.get('lireAlphaLatin').dirty && form.get('lireAlphaLatin').hasError('required')">
+                    lireAlphaLatin is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Sait écrire l'alphabet latin : </span>
+                <input matInput formControlName="ecrireAlphaLatin" required name="ecrireAlphaLatin" />
+                <mat-error *ngIf="form.get('ecrireAlphaLatin').dirty && form.get('ecrireAlphaLatin').hasError('required')">
+                    ecrireAlphaLatin is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Cotisation : </span>
+                <input matInput formControlName="cotisationPayee" required name="cotisationPayee" />
+                <mat-error *ngIf="form.get('cotisationPayee').dirty && form.get('cotisationPayee').hasError('required')">
+                    cotisationPayee is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <span style="width:100%">Remarques : </span>
+                <input matInput formControlName="remarques" required name="remarques" />
+                <mat-error *ngIf="form.get('remarques').dirty && form.get('remarques').hasError('required')">
+                    remarques is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="cancel()">Cancel</button>
+    <button mat-button color="primary" type="submit" (click)="submit(form.value)" [disabled]="form.invalid">Save</button>
+</mat-dialog-actions>

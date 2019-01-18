@@ -1,14 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 
 import {
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
   MatToolbarModule,
-  MatMenuModule,
-  MatIconModule, MatInputModule, MatCardModule, MatButtonModule, MatListModule,
+  MatMenuModule
 } from '@angular/material';
 import { SitesComponent } from './sites/sites.component';
 import { ApprenantsComponent } from './apprenants/apprenants.component';
@@ -24,7 +32,8 @@ import { GroupesComponent } from './groupes/groupes.component';
 import { GroupeComponent } from './groupe/groupe.component';
 import { FormateursCardComponent } from './shared/formateurs-card/formateurs-card.component';
 
-
+import { ApprenantFormComponent } from './shared/forms/apprenant-form/apprenant-form.component';
+import { UpdateComponent } from './update/update.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,18 +49,25 @@ import { FormateursCardComponent } from './shared/formateurs-card/formateurs-car
     GroupesComponent,
     GroupeComponent,
     FormateursCardComponent,
+    ApprenantFormComponent,
+    UpdateComponent
   ],
+
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
     AppRoutingModule,
     MatToolbarModule,
     MatCardModule,
-    MatMenuModule,
     MatButtonModule,
     MatListModule,
-    BrowserAnimationsModule,
     MatIconModule,
+    MatCheckboxModule,
+    MatDialogModule,
     MatInputModule,
+    MatMenuModule,
+    BrowserAnimationsModule,
     HttpClientModule
   ],
   providers: [],

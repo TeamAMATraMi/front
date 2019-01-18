@@ -18,7 +18,7 @@ export class ApprenantComponent implements OnInit {
     this._apprenant = {} as Apprenant;
   }
 
-  get apprenant(): Apprenant{
+  get apprenant(): Apprenant {
     return this._apprenant;
   }
 
