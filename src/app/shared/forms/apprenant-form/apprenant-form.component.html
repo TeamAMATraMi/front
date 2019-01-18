@@ -11,9 +11,12 @@
         <p>
             <mat-form-field class="full-width">
                 <span style="width:100%">Nom : </span>
-                <input matInput formControlName="nom" required name="nom" />
+                <input matInput formControlName="nom" minlength="2" required name="nom" />
                 <mat-error *ngIf="form.get('nom').dirty && form.get('nom').hasError('required')">
-                    nom is <strong>required</strong>
+                    nom est <strong>requis</strong>
+                </mat-error>
+                <mat-error *ngIf="form.get('nom').dirty && form.get('nom').hasError('minlength')">
+                    min <strong>2 lettres</strong>
                 </mat-error>
             </mat-form-field>
         </p>

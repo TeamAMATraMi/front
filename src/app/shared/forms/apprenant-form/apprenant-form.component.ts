@@ -104,10 +104,10 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
     return new FormGroup({
       id: new FormControl('0'),
       nom: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(1)
+        Validators.required, Validators.minLength(2)
       ])),
       prenom: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(1)
+        Validators.required, Validators.minLength(2)
       ])),
       telephone: new FormControl('', Validators.compose([
         Validators.required, Validators.minLength(10), Validators.maxLength(15)
