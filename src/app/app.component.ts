@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {MatIconRegistry} from '@angular/material';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
     selector: 'app-root',
@@ -6,7 +8,18 @@ import {Component, OnInit} from '@angular/core';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+    /**
+     * Component constructor
+     */
+    contructor(private _matIconRegistry: MatIconRegistry, private _domSanitizer: DomSanitizer){
+    }
 
-    ngOnInit() {}
+    /**
+     * OnInit implementation
+     */
+    ngOnInit() {
+        this._matIconRegistry.addSvgIcon('icon-delete',
+            this._domSanitizer.bypassSecurityTrustResourceUrl('/assets/images/icon-delete.svg'));
+    }
 
 }
