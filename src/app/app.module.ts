@@ -21,6 +21,7 @@ import { SitesCardComponent } from './shared/sites-card/sites-card.component';
 import { ApprenantComponent } from './apprenant/apprenant.component';
 import { ApprenantDetailsComponent } from './shared/apprenant-details/apprenant-details.component';
 import { GroupesComponent } from './groupes/groupes.component';
+import { GroupeComponent } from './groupe/groupe.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { GroupesComponent } from './groupes/groupes.component';
     SitesCardComponent,
     ApprenantComponent,
     ApprenantDetailsComponent,
-    GroupesComponent
+    GroupesComponent,
+    GroupeComponent
   ],
   imports: [
     BrowserModule,

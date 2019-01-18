@@ -17,7 +17,11 @@ export const environment = {
             sites: {
                 allSites: '/sites',
                 oneSite: '/sites/:id'
-            }
+            },
+            groupes: {
+            allGroupes: '/groupes',
+            oneGroupe: '/groupes/:id'
+          }
         }
     }
 };
