@@ -64,7 +64,7 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
         adresse: '',
         codePostal: '',
         commune: '',
-        idGroupe: 0,
+        idgroupe: 0,
         dateInscription: 0,
         auteurDossier: 0,
         majeur: true,
