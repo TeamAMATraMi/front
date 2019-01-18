@@ -8,7 +8,7 @@ import {Apprenant} from '../interfaces/apprenant';
 })
 export class ApprenantDetailsComponent implements OnInit {
 
-  private _apprenant: any;
+  private _apprenant: Apprenant;
 
   contructor() {
     this._apprenant = {} as Apprenant;
