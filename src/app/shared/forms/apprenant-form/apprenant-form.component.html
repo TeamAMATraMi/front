@@ -11,54 +11,81 @@
         <p>
             <mat-form-field class="full-width">
                 <span style="width:100%">Nom : </span>
-                <input matInput formControlName="nom" required name="nom" />
+                <input matInput formControlName="nom" minlength="2" required name="nom" />
                 <mat-error *ngIf="form.get('nom').dirty && form.get('nom').hasError('required')">
-                    nom is <strong>required</strong>
+                    nom est <strong>requis</strong>
+                </mat-error>
+                <mat-error *ngIf="form.get('nom').dirty && form.get('nom').hasError('minlength')">
+                    min <strong>2 lettres</strong>
                 </mat-error>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field class="full-width">
                 <span style="width:100%">Prénom : </span>
-                <input matInput formControlName="prenom" required name="prenom" />
+                <input matInput formControlName="prenom" minlength="2" required name="prenom" />
                 <mat-error *ngIf="form.get('prenom').dirty && form.get('prenom').hasError('required')">
-                    prenom is <strong>required</strong>
+                    prenom est <strong>requis</strong>
+                </mat-error>
+                <mat-error *ngIf="form.get('prenom').dirty && form.get('prenom').hasError('minlength')">
+                    min <strong>2 lettres</strong>
                 </mat-error>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field class="full-width">
                 <span style="width:100%">Téléphone : </span>
-                <input matInput formControlName="telephone" required name="telephone" />
+                <input matInput formControlName="telephone" pattern="[0-9]*" minlength="10" maxlength="15" required name="telephone" />
                 <mat-error *ngIf="form.get('telephone').dirty && form.get('telephone').hasError('required')">
-                    telephone is <strong>required</strong>
+                    telephone est <strong>requis</strong>
+                </mat-error>
+                <mat-error *ngIf="form.get('telephone').dirty && form.get('telephone').hasError('minlength')">
+                    minimum <strong>10 chiffres</strong>
+                </mat-error>
+                <mat-error *ngIf="form.get('telephone').dirty && form.get('telephone').hasError('maxlength')">
+                    maximum<strong>15 chiffres</strong>
+                </mat-error>
+                <mat-error *ngIf="form.get('telephone').dirty && form.get('telephone').hasError('pattern')">
+                    uniquement des <strong>chiffres</strong>
                 </mat-error>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field class="full-width">
                 <span style="width:100%">Adresse : </span>
-                <input matInput formControlName="adresse" required name="adresse" />
+                <input matInput formControlName="adresse" minlength="3" maxlength="255" required name="adresse" />
                 <mat-error *ngIf="form.get('adresse').dirty && form.get('adresse').hasError('required')">
-                    adresse is <strong>required</strong>
+                    adresse est <strong>requis</strong>
+                </mat-error>
+                <mat-error *ngIf="form.get('adresse').dirty && form.get('adresse').hasError('minlength')">
+                    min <strong>3 characteres</strong>
                 </mat-error>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field class="full-width">
                 <span style="width:100%">Code postal : </span>
-                <input matInput formControlName="codePostal" required name="codePostal" />
+                <input matInput formControlName="codePostal" required pattern="[0-9]*" maxlength="5" minlength="5" name="codePostal" />
                 <mat-error *ngIf="form.get('codePostal').dirty && form.get('codePostal').hasError('required')">
                     codePostal is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="form.get('codePostal').dirty && form.get('codePostal').hasError('minlength')">
+                    <strong>5 chiffres requis</strong>
+                </mat-error>
+                <mat-error *ngIf="form.get('codePostal').dirty && form.get('codePostal').hasError('pattern')">
+                    uniquements des <strong>chiffres</strong>
                 </mat-error>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field class="full-width">
                 <span style="width:100%">Commune : </span>
-                <input matInput formControlName="commune" required name="commune" />
+                <input matInput formControlName="commune" minlength="2" required name="commune" />
                 <mat-error *ngIf="form.get('commune').dirty && form.get('commune').hasError('required')">
-                    commune is <strong>required</strong>
+                    commune est <strong>requis</strong>
+                </mat-error>
+                <mat-error *ngIf="form.get('commune').dirty && form.get('commune').hasError('minlength')">
+                    minimum <strong>2 characteres</strong>
                 </mat-error>
             </mat-form-field>
         </p>
