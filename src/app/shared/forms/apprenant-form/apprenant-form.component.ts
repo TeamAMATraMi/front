@@ -1,13 +1,13 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
-import {Apprenant} from '../interfaces/apprenant';
+import {Apprenant} from '../../interfaces/apprenant';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  templateUrl: './apprenant-form.component.html',
+  styleUrls: ['./apprenant-form.component.css']
 })
-export class FormComponent implements OnInit, OnChanges {
+export class ApprenantFormComponent implements OnInit, OnChanges {
 
   private _isUpdateMode: boolean;
   private _apprenant: Apprenant;
@@ -57,7 +57,7 @@ export class FormComponent implements OnInit, OnChanges {
       this._isUpdateMode = true;
       this._form.patchValue(this._apprenant);
     } else {
-      //this._apprenant = {};
+      // this._apprenant = {};
       this._isUpdateMode = false;
     }
   }

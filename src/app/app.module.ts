@@ -31,7 +31,7 @@ import { ApprenantDetailsComponent } from './shared/apprenant-details/apprenant-
 import { GroupesComponent } from './groupes/groupes.component';
 import { GroupeComponent } from './groupe/groupe.component';
 import { FormateursCardComponent } from './shared/formateurs-card/formateurs-card.component';
-import { FormComponent } from './shared/form/form.component';
+import { ApprenantFormComponent } from './shared/forms/apprenant-form/apprenant-form.component';
 import { UpdateComponent } from './update/update.component';
 
 @NgModule({
@@ -49,7 +49,7 @@ import { UpdateComponent } from './update/update.component';
     GroupesComponent,
     GroupeComponent,
     FormateursCardComponent,
-    FormComponent,
+    ApprenantFormComponent,
     UpdateComponent
   ],
 
