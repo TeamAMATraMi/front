@@ -6,14 +6,19 @@ import {SitesComponent} from './sites/sites.component';
 import {StatistiquesComponent} from './statistiques/statistiques.component';
 import {ApprenantComponent} from './apprenant/apprenant.component';
 import {GroupesComponent} from './groupes/groupes.component';
+import {GroupeComponent} from './groupe/groupe.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'apprenants', component: ApprenantsComponent },
     { path: 'apprenant/:id', component: ApprenantComponent },
+    { path: 'apprenantsG/:id', component: GroupeComponent },
     { path: 'formateurs', component: FormateursComponent},
+   // { path: 'formateur', component: FormateurComponent},
     { path: 'sites', component: SitesComponent },
+  //  { path: 'site', component: SiteComponent },
     { path: 'groupes', component: GroupesComponent },
+    { path: 'groupe', component: GroupeComponent },
     { path: 'statistiques', component: StatistiquesComponent},
 ];
 

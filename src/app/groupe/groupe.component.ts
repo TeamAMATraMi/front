@@ -3,7 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {Groupe} from '../shared/interfaces/groupe';
 import {filter} from 'rxjs/operators';
 import {flatMap} from 'rxjs/internal/operators';
-import {GroupesService} from '../shared/services/groupes.service';
+import {Apprenant} from '../shared/interfaces/apprenant';
+import {ApprenantsService} from '../shared/services/apprenants.service';
 
 @Component({
   selector: 'app-groupe',
@@ -13,21 +14,31 @@ import {GroupesService} from '../shared/services/groupes.service';
 export class GroupeComponent implements OnInit {
 
   private _groupe: Groupe;
+  private _apprenants: Apprenant[];
 
 
-  constructor(private _groupesService: GroupesService, private _route: ActivatedRoute) {
+  constructor(private _apprenantsService: ApprenantsService, private _route: ActivatedRoute) {
     this._groupe = {} as Groupe;
+    this._apprenants = [];
   }
 
   get groupe(): Groupe {
     return this._groupe;
   }
+
+  get apprenants(): Apprenant[] {
+    return this._apprenants;
+  }
+
   ngOnInit() {
     this._route.params.pipe(
-      filter(params => !!params['id']),
-      flatMap(params => this._groupesService.fetchOne(params['id']))
+        filter(params => !!params['id']),
+        flatMap(params => this._apprenantsService.fetchByGroup(params['id']))
     )
-      .subscribe((groupe: any) => this._groupe = groupe);
+        .subscribe((apprenants: Apprenant[]) => {
+          this._apprenants = apprenants;
+        });
+
   }
 
 }

@@ -25,7 +25,6 @@ import { GroupeComponent } from './groupe/groupe.component';
 import { FormateursCardComponent } from './shared/formateurs-card/formateurs-card.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +39,7 @@ import { FormateursCardComponent } from './shared/formateurs-card/formateurs-car
     ApprenantDetailsComponent,
     GroupesComponent,
     GroupeComponent,
-    FormateursCardComponent
+    FormateursCardComponent,
   ],
   imports: [
     BrowserModule,

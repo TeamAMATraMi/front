@@ -27,8 +27,6 @@ export class ApprenantsComponent implements OnInit {
     this._apprenantsService.fetch().subscribe((apprenants: Apprenant[]) => this._apprenants = apprenants);
   }
 
-  navigate(apprenant: Apprenant) {
-    this._router.navigate(['/apprenant', apprenant.id]);
-  }
+
 
 }

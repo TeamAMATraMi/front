@@ -11,7 +11,8 @@ export const environment = {
     endpoints: {
       apprenants: {
             allApprenants: '/apprenants',
-            oneApprenant: '/apprenants/:id'
+            oneApprenant: '/apprenants/:id',
+            grpApprenant: '/apprenantsG/:idgroupe'
         },
         formateurs: {
             allFormateurs: '/formateurs',

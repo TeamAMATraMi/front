@@ -22,9 +22,11 @@
 </mat-toolbar>
 
 <mat-list *ngFor="let groupe of groupes">
-    <mat-list-item class="mat-whiteframe-2dp mat-card">
-        <h3 matLine> {{groupe.nom}} </h3>
-    </mat-list-item>
+    <a [routerLink]="['/apprenantsG', groupe.id]">
+      <mat-list-item class="mat-whiteframe-2dp mat-card">
+            <h3 matLine> {{groupe.nom}} </h3>
+      </mat-list-item>
+    </a>
 </mat-list>
 
 

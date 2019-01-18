@@ -6,7 +6,7 @@ export interface Apprenant {
   adresse: string;
   codePostal: string;
   commune: string;
-  idGroupe: number;
+  idgroupe: number;
   dateInscription: number;
   auteurDossier: number;
   majeur: boolean;
