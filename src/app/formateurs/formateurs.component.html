@@ -27,6 +27,10 @@
 
       </span>
 
-
   </mat-toolbar-row>
+
 </mat-toolbar>
+
+<section>
+  <app-formateurs-card [formateur]="formateur" *ngFor="let formateur of formateurs"></app-formateurs-card>
+</section>
