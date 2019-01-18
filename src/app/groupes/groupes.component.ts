@@ -29,6 +29,6 @@ export class GroupesComponent implements OnInit {
 
   /*
   navigate(groupe: Groupe) {
-    this._router.navigate(['/apprenant', apprenant.id]);
+    this._router.navigate(['/apprenants', apprenant.id]);
   }*/
 }
