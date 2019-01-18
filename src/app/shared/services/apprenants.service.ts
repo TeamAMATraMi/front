@@ -64,7 +64,7 @@ export class ApprenantsService {
     /**
      * Function to delete one Apprenant for current id
      */
-    delete(id: string): Observable<string> {
+    delete(id: number): Observable<number> {
         return this._http.delete(this._backendURL.oneApprenant.replace(':id', id))
             .pipe(
                 map(_ => id)
