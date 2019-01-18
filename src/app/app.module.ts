@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SitesCardComponent } from './shared/sites-card/sites-card.component';
 import { ApprenantComponent } from './apprenant/apprenant.component';
 import { ApprenantDetailsComponent } from './shared/apprenant-details/apprenant-details.component';
+import { GroupesComponent } from './groupes/groupes.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ApprenantDetailsComponent } from './shared/apprenant-details/apprenant-
     ApprenantCardComponent,
     SitesCardComponent,
     ApprenantComponent,
-    ApprenantDetailsComponent
+    ApprenantDetailsComponent,
+    GroupesComponent
   ],
   imports: [
     BrowserModule,

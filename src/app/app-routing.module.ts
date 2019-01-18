@@ -5,6 +5,7 @@ import {FormateursComponent} from './formateurs/formateurs.component';
 import {SitesComponent} from './sites/sites.component';
 import {StatistiquesComponent} from './statistiques/statistiques.component';
 import {ApprenantComponent} from './apprenant/apprenant.component';
+import {GroupesComponent} from './groupes/groupes.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -12,6 +13,7 @@ const routes: Routes = [
     { path: 'apprenant/:id', component: ApprenantComponent },
     { path: 'formateurs', component: FormateursComponent},
     { path: 'sites', component: SitesComponent },
+    { path: 'groupes', component: GroupesComponent },
     { path: 'statistiques', component: StatistiquesComponent},
 ];
 
