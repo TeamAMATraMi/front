@@ -21,7 +21,9 @@ import { SitesCardComponent } from './shared/sites-card/sites-card.component';
 import { ApprenantComponent } from './apprenant/apprenant.component';
 import { ApprenantDetailsComponent } from './shared/apprenant-details/apprenant-details.component';
 import { GroupesComponent } from './groupes/groupes.component';
+import { GroupeComponent } from './groupe/groupe.component';
 import { FormateursCardComponent } from './shared/formateurs-card/formateurs-card.component';
+
 
 
 @NgModule({
@@ -37,6 +39,7 @@ import { FormateursCardComponent } from './shared/formateurs-card/formateurs-car
     ApprenantComponent,
     ApprenantDetailsComponent,
     GroupesComponent,
+    GroupeComponent,
     FormateursCardComponent
   ],
   imports: [

@@ -9,7 +9,7 @@ export const environment = {
     host: '127.0.0.1',
     port: '8080',
     endpoints: {
-        apprenants: {
+      apprenants: {
             allApprenants: '/apprenants',
             oneApprenant: '/apprenants/:id'
         },
@@ -20,6 +20,10 @@ export const environment = {
         sites: {
             allSites: '/sites',
             oneSite: '/sites/:id'
+        },
+        groupes: {
+            allGroupes: '/groupes',
+            oneGroupe: '/groupes/:id'
         }
     }
   },
