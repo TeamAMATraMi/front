@@ -75,7 +75,7 @@ export class ApprenantsService {
      * Function to update one Apprenant
      */
     update(apprenant: Apprenant): Observable<any> {
-        return this._http.put<Apprenant>(this._backendURL.oneApprenant.replace(':id', apprenant.id), apprenant, this._options());
+        return this._http.put<Apprenant>(this._backendURL.allApprenants, apprenant, this._options());
     }
 
     /**

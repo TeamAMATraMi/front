@@ -7,14 +7,14 @@ import {StatistiquesComponent} from './statistiques/statistiques.component';
 import {ApprenantComponent} from './apprenant/apprenant.component';
 import {GroupesComponent} from './groupes/groupes.component';
 import {GroupeComponent} from './groupe/groupe.component';
-import {ApprenantFormComponent} from './shared/forms/apprenant-form/apprenant-form.component';
+import {UpdateComponent} from './update/update.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'apprenants', component: ApprenantsComponent },
     { path: 'apprenant/:id', component: ApprenantComponent },
     { path: 'apprenantsG/:id', component: GroupeComponent },
-    { path: 'updateApprenant/:id', component: ApprenantFormComponent },
+    { path: 'updateApprenant/:id', component: UpdateComponent },
     { path: 'formateurs', component: FormateursComponent},
    // { path: 'formateur', component: FormateurComponent},
     { path: 'sites', component: SitesComponent },

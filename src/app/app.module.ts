@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
+import { DialogComponent } from './shared/dialog/dialog.component';
 
 import {
   MatButtonModule,
@@ -38,6 +39,7 @@ import { UpdateComponent } from './update/update.component';
   declarations: [
     AppComponent,
     HeaderComponent,
+    DialogComponent,
     SitesComponent,
     ApprenantsComponent,
     FormateursComponent,
@@ -52,7 +54,9 @@ import { UpdateComponent } from './update/update.component';
     ApprenantFormComponent,
     UpdateComponent
   ],
-
+  entryComponents: [
+      DialogComponent
+  ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
