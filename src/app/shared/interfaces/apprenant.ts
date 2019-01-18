@@ -1,5 +1,5 @@
 export interface Apprenant {
-  id: number;
+  id?: number;
   nom: string;
   prenom: string;
   telephone: string;
