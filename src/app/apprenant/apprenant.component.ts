@@ -30,4 +30,9 @@ export class ApprenantComponent implements OnInit {
         .subscribe((apprenant: any) => this._apprenant = apprenant);
   }
 
+  modifier(apprenant: Apprenant){
+    this._apprenantsService
+        .update(apprenant)
+        .subscribe( _ => this._apprenant = _);
+  }
 }
