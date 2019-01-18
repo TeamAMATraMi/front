@@ -14,7 +14,7 @@ const routes: Routes = [
     { path: 'apprenants', component: ApprenantsComponent },
     { path: 'apprenant/:id', component: ApprenantComponent },
     { path: 'apprenantsG/:id', component: GroupeComponent },
-    { path: 'updateApprenant', component: ApprenantFormComponent },
+    { path: 'updateApprenant/:id', component: ApprenantFormComponent },
     { path: 'formateurs', component: FormateursComponent},
    // { path: 'formateur', component: FormateurComponent},
     { path: 'sites', component: SitesComponent },

@@ -1,5 +1,9 @@
 <section>
   <mat-card class="mat-whiteframe-2dp">
+    <mat-dialog-actions align="end">
+      <button mat-button type="button" [routerLink]="['/updateApprenant', apprenant.id]">Modifier</button>
+    </mat-dialog-actions>
+
     <mat-card-title-group>
       <mat-card-title>
         <span>{{ apprenant.nom }} {{ apprenant.prenom }}</span>
