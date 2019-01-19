@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Apprenant} from '../shared/interfaces/apprenant';
 import {ApprenantsService} from '../shared/services/apprenants.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
+import {Site} from '../shared/interfaces/site';
+import {SitesService} from '../shared/services/sites.service';
+import {GroupesService} from '../shared/services/groupes.service';
+import {Groupe} from '../shared/interfaces/groupe';
 
 @Component({
   selector: 'app-apprenants',
@@ -11,14 +15,27 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class ApprenantsComponent implements OnInit {
 
   private _apprenants: Apprenant[];
+  private _sites: Site[];
+  private  _groupes: Groupe[];
 
-  constructor(private _router: Router, private _apprenantsService: ApprenantsService) {
+  constructor(private _router: Router, private _apprenantsService: ApprenantsService, private _sitesService: SitesService,
+              private _groupesService: GroupesService) {
     this._apprenants = [];
+    this._sites = [];
+    this._groupes = [];
   }
 
 
   get apprenants(): Apprenant[] {
     return this._apprenants;
+  }
+
+  get sites(): Site[] {
+    return this._sites;
+  }
+
+  get groupes(): Groupe[] {
+    return this._groupes;
   }
 
 
@@ -31,6 +48,8 @@ export class ApprenantsComponent implements OnInit {
   ngOnInit() {
       // TODO : fetch with associated service
     this._apprenantsService.fetch().subscribe((apprenants: Apprenant[]) => this._apprenants = apprenants);
+    this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
+    this._groupesService.fetch().subscribe((groupes: Groupe[]) => this._groupes = groupes);
   }
 
 
