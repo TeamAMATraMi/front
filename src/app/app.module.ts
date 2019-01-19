@@ -35,6 +35,7 @@ import { FormateursCardComponent } from './shared/formateurs-card/formateurs-car
 
 import { ApprenantFormComponent } from './shared/forms/apprenant-form/apprenant-form.component';
 import { UpdateComponent } from './update/update.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +73,7 @@ import { UpdateComponent } from './update/update.component';
     MatInputModule,
     MatMenuModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

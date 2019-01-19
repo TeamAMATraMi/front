@@ -35,18 +35,12 @@
         <p>
             <mat-form-field class="full-width">
                 <span style="width:100%">Téléphone : </span>
-                <input matInput formControlName="telephone" pattern="[0-9]*" minlength="10" maxlength="15" required name="telephone" />
+                <input matInput formControlName="telephone" required name="telephone" />
                 <mat-error *ngIf="form.get('telephone').dirty && form.get('telephone').hasError('required')">
                     telephone est <strong>requis</strong>
                 </mat-error>
-                <mat-error *ngIf="form.get('telephone').dirty && form.get('telephone').hasError('minlength')">
-                    minimum <strong>10 chiffres</strong>
-                </mat-error>
-                <mat-error *ngIf="form.get('telephone').dirty && form.get('telephone').hasError('maxlength')">
-                    maximum<strong>15 chiffres</strong>
-                </mat-error>
                 <mat-error *ngIf="form.get('telephone').dirty && form.get('telephone').hasError('pattern')">
-                    uniquement des <strong>chiffres</strong>
+                    Ceci n'est pas un <strong>numéro français</strong>
                 </mat-error>
             </mat-form-field>
         </p>
@@ -65,15 +59,12 @@
         <p>
             <mat-form-field class="full-width">
                 <span style="width:100%">Code postal : </span>
-                <input matInput formControlName="codePostal" required pattern="[0-9]*" maxlength="5" minlength="5" name="codePostal" />
+                <input matInput formControlName="codePostal" required name="codePostal" />
                 <mat-error *ngIf="form.get('codePostal').dirty && form.get('codePostal').hasError('required')">
-                    codePostal is <strong>required</strong>
-                </mat-error>
-                <mat-error *ngIf="form.get('codePostal').dirty && form.get('codePostal').hasError('minlength')">
-                    <strong>5 chiffres requis</strong>
+                    codePostal est <strong>required</strong>
                 </mat-error>
                 <mat-error *ngIf="form.get('codePostal').dirty && form.get('codePostal').hasError('pattern')">
-                    uniquements des <strong>chiffres</strong>
+                    nécessite <strong> 5 chiffres</strong>
                 </mat-error>
             </mat-form-field>
         </p>
@@ -105,6 +96,9 @@
                 <mat-error *ngIf="form.get('dateInscription').dirty && form.get('dateInscription').hasError('required')">
                     dateInscription is <strong>required</strong>
                 </mat-error>
+                <mat-error *ngIf="form.get('dateInscription').dirty && form.get('dateInscription').hasError('pattern')">
+                    Date de type <strong>JJ/MM/YYYY</strong>
+                </mat-error>
             </mat-form-field>
         </p>
         <p>
@@ -131,6 +125,9 @@
                 <input matInput formControlName="dateNaissance" required name="dateNaissance" />
                 <mat-error *ngIf="form.get('dateNaissance').dirty && form.get('dateNaissance').hasError('required')">
                     dateNaissance is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="form.get('dateNaissance').dirty && form.get('dateNaissance').hasError('pattern')">
+                    Date de type <strong>JJ/MM/YYYY</strong>
                 </mat-error>
             </mat-form-field>
         </p>
@@ -168,15 +165,15 @@
                 <mat-error *ngIf="form.get('dateArrivee').dirty && form.get('dateArrivee').hasError('required')">
                     dateArrivee is <strong>required</strong>
                 </mat-error>
+                <mat-error *ngIf="form.get('dateArrivee').dirty && form.get('dateArrivee').hasError('pattern')">
+                    Date de type <strong>JJ/MM/YYYY</strong>
+                </mat-error>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field class="full-width">
                 <span style="width:100%">Quartier prioritaire : </span>
-                <input matInput formControlName="quartierPrioritaire" required name="quartierPrioritaire" />
-                <mat-error *ngIf="form.get('quartierPrioritaire').dirty && form.get('quartierPrioritaire').hasError('required')">
-                    quartierPrioritaire is <strong>required</strong>
-                </mat-error>
+                <input matInput formControlName="quartierPrioritaire" name="quartierPrioritaire" />
             </mat-form-field>
         </p>
         <p>
@@ -290,9 +287,7 @@
         <p>
             <mat-form-field class="full-width">
                 <span style="width:100%">Remarques : </span>
-                <input matInput formControlName="remarques" required name="remarques" />
-                <mat-error *ngIf="form.get('remarques').dirty && form.get('remarques').hasError('required')">
-                </mat-error>
+                <input matInput formControlName="remarques" name="remarques" />
             </mat-form-field>
         </p>
     </form>

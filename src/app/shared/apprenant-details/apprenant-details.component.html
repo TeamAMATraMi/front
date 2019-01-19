@@ -25,7 +25,7 @@
       Numéro de groupe : {{ apprenant.idGroupe }}
     </mat-card-content>
     <mat-card-content>
-      Date de l'inscription : {{ apprenant.dateInscription}}
+      Date de l'inscription : {{ apprenant.dateInscription | date:'dd/MM/yyyy' }}
     </mat-card-content>
     <mat-card-content>
       Auteur du dossier : {{ apprenant.auteurDossier }}
@@ -34,7 +34,7 @@
       Majeur : {{ apprenant.majeur }}
     </mat-card-content>
     <mat-card-content>
-      Date de naissance : {{ apprenant.dateNaissance }}
+      Date de naissance : {{ apprenant.dateNaissance | date:'dd/MM/yyyy' }}
     </mat-card-content>
     <mat-card-content>
       Genre : {{ apprenant.genre }}
@@ -46,7 +46,7 @@
       Nationalité : {{ apprenant.nationalite }}
     </mat-card-content>
     <mat-card-content>
-      Date d'arrivée : {{ apprenant.dateArrivee }}
+      Date d'arrivée : {{ apprenant.dateArrivee | date:'dd/MM/yyyy' }}
     </mat-card-content>
     <mat-card-content>
       Quartier prioritaire : {{ apprenant.quartierPrioritaire}}

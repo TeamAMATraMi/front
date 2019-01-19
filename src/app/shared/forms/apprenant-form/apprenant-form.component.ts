@@ -110,13 +110,13 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
         Validators.required, Validators.minLength(2)
       ])),
       telephone: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(10), Validators.maxLength(15)
+        Validators.required, Validators.pattern('(0|\\+33|0033)[1-9][0-9]{8}')
       ])),
       adresse: new FormControl('', Validators.compose([
         Validators.required, Validators.minLength(3)
       ])),
       codePostal: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(5), Validators.maxLength(5)
+        Validators.required, Validators.pattern('[0-9]{5}')
       ])),
       commune: new FormControl('', Validators.compose([
         Validators.required, Validators.minLength(1)
@@ -125,7 +125,10 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
         Validators.required
       ])),
       dateInscription: new FormControl('', Validators.compose([
-        Validators.required
+        Validators.required, Validators.pattern('^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)' +
+            '(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]' +
+            '|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])' +
+            '|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$')
       ])),
       auteurDossier: new FormControl('', Validators.compose([
         Validators.required, Validators.minLength(1)
@@ -134,7 +137,10 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
         Validators.required
       ])),
       dateNaissance: new FormControl('', Validators.compose([
-        Validators.required
+        Validators.required, Validators.pattern('^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)' +
+            '(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]' +
+            '|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])' +
+            '|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$')
       ])),
       genre: new FormControl('', Validators.compose([
         Validators.required
@@ -146,10 +152,13 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
         Validators.required, Validators.minLength(1)
       ])),
       dateArrivee: new FormControl('', Validators.compose([
-        Validators.required
+        Validators.required, Validators.pattern('^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)' +
+            '(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]' +
+            '|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])' +
+            '|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$')
       ])),
       quartierPrioritaire: new FormControl('', Validators.compose([
-        Validators.required
+
       ])),
       situationPersonnelle: new FormControl('', Validators.compose([
       ])),
