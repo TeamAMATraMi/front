@@ -52,8 +52,8 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(record) {
-    if (record.model && record.model.currentValue) {
-      this._apprenant = record.model.currentValue;
+    if (record.apprenant && record.apprenant.currentValue) {
+      this._apprenant = record.apprenant.currentValue;
       this._isUpdateMode = true;
       this._form.patchValue(this._apprenant);
     } else {
