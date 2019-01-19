@@ -6,6 +6,10 @@ import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
 import {GroupesService} from '../shared/services/groupes.service';
 import {Groupe} from '../shared/interfaces/groupe';
+import {DialogComponent} from '../shared/dialog/dialog.component';
+import {MatDialog, MatDialogRef} from '@angular/material';
+import {filter, flatMap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-apprenants',
@@ -20,14 +24,22 @@ export class ApprenantsComponent implements OnInit {
   private _site: Site;
   private _groupesSite: Groupe[];
 
+  private _dialogStatus: string;
+  private _apprenantsDialog: MatDialogRef<DialogComponent>;
+
   constructor(private _router: Router, private _apprenantsService: ApprenantsService, private _sitesService: SitesService,
-              private _groupesService: GroupesService) {
+              private _groupesService: GroupesService, private _dialog: MatDialog) {
     this._apprenants = [];
     this._sites = [];
     this._groupes = [];
     this._groupesSite = [];
+
+    this._dialogStatus = 'inactive';
   }
 
+  get dialogStatus(): string {
+    return this._dialogStatus;
+  }
 
   get apprenants(): Apprenant[] {
     return this._apprenants;
@@ -74,6 +86,38 @@ export class ApprenantsComponent implements OnInit {
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => { this._groupes = groupes; this._groupesSite = this._groupes; });
   }
 
+  /**
+   * Function to display modal
+   */
+  showDialog() {
+    // set dialog status
+    this._dialogStatus = 'active';
 
+    // open modal
+    this._apprenantsDialog = this._dialog.open(DialogComponent, {
+      width: '500px',
+      disableClose: true
+    });
+
+    // subscribe to afterClosed observable to set dialog status and do process
+    this._apprenantsDialog.afterClosed()
+        .pipe(
+            filter(_ => !!_),
+            flatMap(_ => this._add(_))
+        )
+        .subscribe(
+            (apprenants: Apprenant[]) => this._apprenants = apprenants,
+            _ => this._dialogStatus = 'inactive',
+            () => this._dialogStatus = 'inactive'
+        );
+  }
+
+  private _add(apprenant: Apprenant): Observable<Apprenant[]> {
+    return this._apprenantsService
+        .create(apprenant)
+        .pipe(
+            flatMap(_ => this._apprenantsService.fetch())
+        );
+  }
 
 }

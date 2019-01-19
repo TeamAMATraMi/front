@@ -152,3 +152,16 @@ img {
         margin-right: 5px;
     }
 }
+
+.buttons-fab {
+    display: block;
+    height: 170px;
+    width: 90px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+.buttons-fab button {
+    transition: bottom 0.2s;
+}
