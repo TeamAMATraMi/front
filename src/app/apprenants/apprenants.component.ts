@@ -48,6 +48,10 @@ export class ApprenantsComponent implements OnInit {
     );
   }
 
+  changeApprenants(groupe: Groupe) {
+    this._apprenantsService.fetchByGroup(groupe.id).subscribe((apprenants: Apprenant[]) => this._apprenants = apprenants);
+  }
+
   get groupes(): Groupe[] {
     return this._groupes;
   }

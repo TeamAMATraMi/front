@@ -16,7 +16,7 @@
         <button mat-button [matMenuTriggerFor]="menuGroupe">Menu</button>
         <mat-menu #menuGroupe="matMenu">
             <ng-container *ngFor="let groupe of groupesSites">
-                <button mat-menu-item>{{groupe.nom}}</button>
+                <button mat-menu-item (click)="changeApprenants(groupe)">{{groupe.nom}}</button>
             </ng-container>
         </mat-menu>
 
