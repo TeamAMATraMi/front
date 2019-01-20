@@ -72,6 +72,10 @@ export class ApprenantsComponent implements OnInit {
     return this._groupesSite;
   }
 
+  set groupesSites(groupe: Groupe[]) {
+    this._groupesSite = groupe;
+  }
+
 
   delete(apprenant: Apprenant) {
     this._apprenantsService
