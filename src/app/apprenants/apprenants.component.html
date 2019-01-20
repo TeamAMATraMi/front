@@ -15,7 +15,7 @@
         <span>Groupe : </span>
         <mat-form-field>
             <mat-select>
-                <mat-option mdInput *ngFor="let groupe of groupesSites" (click)="changeApprenants(groupe)">{{groupe.nom}}</mat-option>
+                <mat-option mdInput *ngFor="let groupe of groupesSites" value="option" (click)="changeApprenants(groupe)">{{groupe.nom}}</mat-option>
             </mat-select>
         </mat-form-field>
 
