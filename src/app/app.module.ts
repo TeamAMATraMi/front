@@ -17,7 +17,7 @@ import {
   MatInputModule,
   MatListModule,
   MatToolbarModule,
-  MatMenuModule
+  MatMenuModule, MatSelectModule
 } from '@angular/material';
 import { SitesComponent } from './sites/sites.component';
 import { ApprenantsComponent } from './apprenants/apprenants.component';
@@ -74,6 +74,7 @@ import { UpdateComponent } from './update/update.component';
     MatMenuModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

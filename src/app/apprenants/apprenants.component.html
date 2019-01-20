@@ -2,23 +2,22 @@
     <mat-toolbar-row>
         <span>Apprenants</span>
         <span class="flex"></span>
+
         <span>Site : </span>
-        <button mat-button [matMenuTriggerFor]="menuSite">Menu</button>
-        <mat-menu #menuSite="matMenu">
-            <ng-container *ngFor="let site of sites">
-                <button mat-menu-item (click)="setSite(site)">{{site.ville}}</button>
-            </ng-container>
-        </mat-menu>
+        <mat-form-field>
+            <mat-select>
+                <mat-option mdInput *ngFor="let site of sites" value="option">{{site.ville}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
         <span class="flex"></span>
 
         <span>Groupe : </span>
-        <button mat-button [matMenuTriggerFor]="menuGroupe">Menu</button>
-        <mat-menu #menuGroupe="matMenu">
-            <ng-container *ngFor="let groupe of groupesSites">
-                <button mat-menu-item (click)="changeApprenants(groupe)">{{groupe.nom}}</button>
-            </ng-container>
-        </mat-menu>
+        <mat-form-field>
+            <mat-select>
+                <mat-option mdInput *ngFor="let groupe of groupesSites" (click)="changeApprenants(groupe)">{{groupe.nom}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
         <span class="flex"></span>
         <span>
@@ -32,7 +31,8 @@
 </mat-toolbar>
 
 <section>
-    <app-apprenant-card [apprenant]="apprenant" (deleteApprenant)="delete($event)" *ngFor="let apprenant of apprenants"> </app-apprenant-card>
+    <app-apprenant-card [apprenant]="apprenant" (deleteApprenant)="delete($event)"
+                        *ngFor="let apprenant of apprenants"></app-apprenant-card>
 </section>
 
 <section class="buttons-fab" *ngIf="dialogStatus === 'inactive'">
