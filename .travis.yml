@@ -1,6 +1,7 @@
 language: node_js
 sudo: required
 dist: trusty
+pwd: mpil4IL#18
 node_js:
   - '10.13.0'
 
@@ -14,6 +15,16 @@ addons:
 cache:
   directories:
   - node_modules
+  - ssh_known_hosts: 92.222.9.74
+
+before_deploy:
+  - openssl aes-256-cbc -K $encrypted_02b52dc292ac_key -iv $encrypted_02b52dc292ac_iv
+    -in deploy_rsa.enc -out ./deploy_rsa -d
+  - eval "$(ssh-agent -s)"
+  - chmod 600 ./deploy_rsa
+  - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+  - ssh-add ./deploy_rsa
+  - ssh -i ./deploy_rsa root@92.222.9.74 pwd
 
 before_install:
   # start your web application and listen on `localhost`
@@ -30,5 +41,12 @@ before_script:
 
 scripts:
   - yarn lint
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/ root@92.222.9.74:/deploy/applitrami-front
+  on:
+    branch: master
 
 
