@@ -40,3 +40,7 @@ deploy:
   on:
     branch: master
   endpoint: https://api.travis-ci.org
+
+after_deploy:
+  - yarn install
+  - yarn run
