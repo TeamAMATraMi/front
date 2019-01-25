@@ -49,5 +49,4 @@ deploy:
   script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/ root@92.222.9.74:/deploy/applitrami-front
   on:
     branch: master
-
-
+  endpoint: https://api.travis-ci.org
