@@ -26,7 +26,7 @@ before_install:
 - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://92.222.9.74
   &
 - sudo apt install ruby
-- sudo gem install travis
+- sudo apt install travis
 install:
 - npm install
 - npm install -g @angular/cli@7.0.5
