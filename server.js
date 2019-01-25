@@ -8,7 +8,7 @@ const app = express();
 app.use(express.static(__dirname + '/deploy/applitrami-front/src'));
 
 app.get('/*', function(req,res) {
-  res.sendFile(path.join(__dirname+'/deploy/applitrami-front/src/index.html'));
+  res.sendFile(path.join(__dirname+'index.html'));
 });
 
 // Start the app by listening on the default Heroku port
