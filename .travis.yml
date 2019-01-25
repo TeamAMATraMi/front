@@ -22,17 +22,22 @@ cache:
   directories:
   - node_modules
 before_install:
-- google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://92.222.9.74
-  &
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://92.222.9.74
+    &
+  - npm install -g @angular/cli
+  - npm install enhanced-resolve@3.3.0 --save-dev
+  - npm install express path --save
 install:
-- npm install
-- npm install -g @angular/cli@7.0.5
+  - yarn install
+
 before_script:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 - sleep 3
+
 scripts:
 - yarn lint
+
 deploy:
   provider: script
   skip_cleanup: true
@@ -41,5 +46,6 @@ deploy:
     branch: master
   endpoint: https://api.travis-ci.org
 
+
 after_deploy:
-  - npm start
+  - node server.js --port 8181 >> log.txt
