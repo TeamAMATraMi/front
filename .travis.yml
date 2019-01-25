@@ -19,10 +19,10 @@ cache:
 install:
   - npm install
   - npm install -g @angular/cli@7.0.5
-  - yarn install
 
 script:
-  - yarn lint
+  - yarn install
+  - yarn run start
 
 before_deploy:
   - openssl aes-256-cbc -K $encrypted_7c98c3dda81a_key -iv $encrypted_7c98c3dda81a_iv
