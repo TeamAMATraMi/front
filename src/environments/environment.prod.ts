@@ -4,7 +4,7 @@ export const environment = {
     backend: {
         protocol: 'http',
         host: '0.0.0.0',
-        port: '8181',
+        port: '8080',
         endpoints: {
             apprenants: {
                 allApprenants: '/apprenants',
