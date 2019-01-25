@@ -16,14 +16,13 @@ cache:
   directories:
     - node_modules
 
-before_install:
-  # start your web application and listen on `localhost`
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+install:
   - npm install
   - npm install -g @angular/cli@7.0.5
-
-install:
   - yarn install
+
+script:
+  - yarn lint
 
 before_deploy:
   - openssl aes-256-cbc -K $encrypted_7c98c3dda81a_key -iv $encrypted_7c98c3dda81a_iv
@@ -38,7 +37,6 @@ deploy:
   script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/ root@92.222.9.74:/deploy/applitrami-front
   on:
     branch: master
-  endpoint: https://api.travis-ci.org
 
 after_deploy:
-  - ssh -i deploy_rsa root@92.222.9.74 node /deploy/applitrami-front/server.js --port 8181 &
+  - ssh -i front/deploy_rsa root@92.222.9.74 node /front/server.js --port 8181 &
