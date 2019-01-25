@@ -48,4 +48,4 @@ deploy:
 
 
 after_deploy:
-  - node server.js --port 8181 >> log.txt
+  - node server.js --port 8181
