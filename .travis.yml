@@ -43,4 +43,4 @@ deploy:
 
 after_deploy:
   - yarn install
-  - yarn run start
+  - yarn run start &
