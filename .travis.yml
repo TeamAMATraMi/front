@@ -11,8 +11,8 @@ addons:
   chrome: stable
   ssh_known_hosts: 92.222.9.74
 before_deploy:
-- openssl aes-256-cbc -K $encrypted_02b52dc292ac_key -iv $encrypted_02b52dc292ac_iv
-  -in deploy_rsa.enc -out ./deploy_rsa -d
+- openssl aes-256-cbc -K $encrypted_7c98c3dda81a_key -iv $encrypted_7c98c3dda81a_iv
+    -in deploy_rsa.enc -out deploy_rsa -d
 - eval "$(ssh-agent -s)"
 - chmod 600 ./deploy_rsa
 - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
@@ -23,8 +23,6 @@ cache:
   directories:
   - node_modules
 before_install:
-- openssl aes-256-cbc -K $encrypted_7c98c3dda81a_key -iv $encrypted_7c98c3dda81a_iv
-  -in deploy_rsa.enc -out deploy_rsa -d
 - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://92.222.9.74
   &
 install:
