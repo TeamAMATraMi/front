@@ -42,5 +42,4 @@ deploy:
   endpoint: https://api.travis-ci.org
 
 after_deploy:
-  - yarn install
-  - yarn run start
+  - npm start
