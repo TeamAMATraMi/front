@@ -38,4 +38,4 @@ deploy:
     branch: master
 
 after_deploy:
-  - ssh -i ./deploy_rsa root@92.222.9.74 "sh /deploy/applitrami-front/scripts/launch.sh > node_output"
+  - ssh -i ./deploy_rsa root@92.222.9.74 "sh /deploy/applitrami-front/scripts/launch.sh > node_output &"
