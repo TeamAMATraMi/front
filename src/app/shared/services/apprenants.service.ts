@@ -47,7 +47,7 @@ export class ApprenantsService {
      * Function to return all Apprenants corresponding to idgroup
      */
     fetchByGroup(idgroupe: number): Observable<Apprenant[]> {
-        return this._http.get<Apprenant[]>(this._backendURL.grpApprenant.replace(':idgroupe', idgroupe))
+        return this._http.get<Apprenant[]>(this._backendURL.grpApprenant.replace(':idGroupe', idgroupe))
             .pipe(
                 filter(_ => !!_),
                 defaultIfEmpty([])

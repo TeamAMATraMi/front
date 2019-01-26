@@ -1,15 +1,15 @@
 
 export const environment = {
-    production: false,
+    production: true,
     backend: {
         protocol: 'http',
-        host: '0.0.0.0',
+        host: '92.222.9.74',
         port: '8080',
         endpoints: {
             apprenants: {
                 allApprenants: '/apprenants',
                 oneApprenant: '/apprenants/:id',
-                grpApprenant: '/apprenantsG/:idgroupe'
+                grpApprenant: '/apprenantsG/:idGroupe'
             },
             formateurs: {
                 allFormateurs: '/formateurs',
