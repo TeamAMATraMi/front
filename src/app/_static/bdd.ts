@@ -31,7 +31,7 @@ export const APPRENANT = [
     'cotisation_payee': 0,
     'remarques': 1
 },
-]
+];
 
 // TODO : REMOVE ME BEFORE FINISHING THE PROJECT, I'M JUST HERE FOR TESTS
 

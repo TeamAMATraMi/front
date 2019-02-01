@@ -1,6 +1,4 @@
 language: node_js
-sudo: required
-dist: trusty
 node_js:
   - '10.13.0'
 
@@ -10,25 +8,34 @@ branches:
 
 addons:
   chrome: stable
-    
+  ssh_known_hosts: 92.222.9.74
+
 cache:
   directories:
-  - node_modules
-
-before_install:
-  # start your web application and listen on `localhost`
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+    - node_modules
 
 install:
-- npm install
-- npm install -g @angular/cli@7.0.5
+  - npm install -g @angular/cli
+  - npm install enhanced-resolve@3.3.0 --save-dev
+  - npm install express path --save
 
-before_script:
-    - "export DISPLAY=:99.0"
-    - "sh -e /etc/init.d/xvfb start"
-    - sleep 3 # give xvfb some time to start
+script:
+  - yarn install
+  - ng build --prod
 
-scripts:
-  - yarn lint
+before_deploy:
+  - openssl aes-256-cbc -K $encrypted_7c98c3dda81a_key -iv $encrypted_7c98c3dda81a_iv
+    -in deploy_rsa.enc -out deploy_rsa -d
+  - eval "$(ssh-agent -s)"
+  - chmod 600 ./deploy_rsa
+  - ssh-add ./deploy_rsa
 
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/ root@92.222.9.74:/deploy/applitrami-front
+  on:
+    branch: master
 
+after_deploy:
+  - ssh -i ./deploy_rsa root@92.222.9.74 "sh /deploy/applitrami-front/scripts/launch.sh > node_output &"
