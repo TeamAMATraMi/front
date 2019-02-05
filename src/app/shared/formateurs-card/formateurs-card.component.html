@@ -2,7 +2,9 @@
   <mat-card class="mat-whiteframe-2dp">
     <mat-card-title-group>
       <mat-card-title>
-        <span>{{ formateur.nom}} {{formateur.prenom}}</span>
+        <a [routerLink]="['/formateur', formateur.id]">
+          <span>{{ formateur.nom}} {{formateur.prenom}}</span>
+        </a>
       </mat-card-title>
       <mat-card-subtitle>
       </mat-card-subtitle>

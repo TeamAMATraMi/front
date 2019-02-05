@@ -36,6 +36,14 @@ export class FormateursService {
             );
     }
 
+    fetchBySite(id: number): Observable<Formateur []> {
+        return this._http.get<Formateur[]>(this._backendURL.siteFormateur.replace(':id', id))
+            .pipe(
+                filter(_ => !!_),
+                defaultIfEmpty([])
+            );
+    }
+
     /**
      * Function to return one Apprenant for current id
      */
@@ -53,7 +61,7 @@ export class FormateursService {
     /**
      * Function to delete one Apprenant for current id
      */
-    delete(id: string): Observable<string> {
+    delete(id: number): Observable<number> {
         return this._http.delete(this._backendURL.oneFormateur.replace(':id', id))
             .pipe(
                 map(_ => id)

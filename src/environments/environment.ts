@@ -16,7 +16,8 @@ export const environment = {
         },
         formateurs: {
             allFormateurs: '/formateurs',
-            oneFormateur: '/formateurs/:id'
+            oneFormateur: '/formateurs/:id',
+            siteFormateur: '/formateursSite/:id'
         },
         sites: {
             allSites: '/sites',

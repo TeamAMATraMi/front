@@ -8,6 +8,7 @@ import {ApprenantComponent} from './apprenant/apprenant.component';
 import {GroupesComponent} from './groupes/groupes.component';
 import {GroupeComponent} from './groupe/groupe.component';
 import {UpdateComponent} from './update/update.component';
+import {FormateurComponent} from './formateur/formateur.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -16,6 +17,8 @@ const routes: Routes = [
     { path: 'apprenantsG/:id', component: GroupeComponent },
     { path: 'updateApprenant/:id', component: UpdateComponent },
     { path: 'formateurs', component: FormateursComponent},
+    { path: 'formateur/:id', component: FormateurComponent },
+    { path: 'formateurG/:id', component: GroupeComponent },
    // { path: 'formateur', component: FormateurComponent},
     { path: 'sites', component: SitesComponent },
   //  { path: 'site', component: SiteComponent },

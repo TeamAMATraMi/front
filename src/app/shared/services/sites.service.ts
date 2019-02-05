@@ -11,7 +11,7 @@ import {Site} from '../interfaces/site';
 export class SitesService {
 
     private readonly _backendURL: any;
-
+git
     constructor(private _http: HttpClient) {
         this._backendURL = {};
 
@@ -40,6 +40,7 @@ export class SitesService {
      * Function to return one Site for current id
      */
     fetchOne(id: string): Observable<Site> {
+        console.log(id);
         return this._http.get<Site>(this._backendURL.oneSite.replace(':id', id));
     }
 

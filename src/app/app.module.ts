@@ -34,6 +34,8 @@ import {FormateursCardComponent} from './shared/formateurs-card/formateurs-card.
 
 import {ApprenantFormComponent} from './shared/forms/apprenant-form/apprenant-form.component';
 import {UpdateComponent} from './update/update.component';
+import { FormateurComponent } from './formateur/formateur.component';
+import {FormateurDetailsComponent} from './shared/formateur-details/formateur-details.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import {UpdateComponent} from './update/update.component';
     GroupeComponent,
     FormateursCardComponent,
     ApprenantFormComponent,
-    UpdateComponent
+    UpdateComponent,
+    FormateurComponent,
+    FormateurDetailsComponent
   ],
   entryComponents: [
     DialogComponent
