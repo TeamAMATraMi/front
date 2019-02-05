@@ -3,11 +3,12 @@
     <span>Formateurs</span>
     <span class="flex"></span>
     <span>Site : </span>
-    <button mat-button [matMenuTriggerFor]="menuSite">Menu</button>
-    <mat-menu #menuSite="matMenu">
-      <button mat-menu-item>Item 1</button>
-      <button mat-menu-item>Item 2</button>
-    </mat-menu>
+      <mat-form-field>
+          <mat-select>
+              <mat-option matInput  value="all" (click)="changeFormateurAll()">Tous les sites</mat-option>
+              <mat-option matInput *ngFor="let s of sites" (click)="changeFormateur(s.id)" value="{{s.ville}}">{{s.ville}}</mat-option>
+          </mat-select>
+      </mat-form-field>
 
 
     <span class="flex"></span>
@@ -26,4 +27,10 @@
 
 <section>
   <app-formateurs-card [formateur]="formateur" *ngFor="let formateur of formateurs"></app-formateurs-card>
+</section>
+
+<section class="buttons-fab" *ngIf="dialogStatus === 'inactive'">
+    <button (click)="showDialog()" mat-fab color="accent" class="button-add">
+        <i class="material-icons">add</i>
+    </button>
 </section>
