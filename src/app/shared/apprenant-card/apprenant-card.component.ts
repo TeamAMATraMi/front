@@ -31,7 +31,7 @@ export class ApprenantCardComponent implements OnInit {
     return this._delete$;
   }
 
-  delete(apprenant: Apprenant){
+  delete(apprenant: Apprenant) {
     this._delete$.emit(apprenant);
   }
 
