@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Formateur} from '../interfaces/formateur';
 
 @Component({
@@ -9,8 +9,12 @@ import {Formateur} from '../interfaces/formateur';
 export class FormateursCardComponent implements OnInit {
 
   private _formateur: Formateur;
+  private readonly _delete$: EventEmitter<Formateur>;
 
-  constructor() { }
+  constructor() {
+    this._formateur = {} as Formateur;
+    this._delete$ = new EventEmitter<Formateur>();
+  }
 
   ngOnInit() {
   }
@@ -22,5 +26,14 @@ export class FormateursCardComponent implements OnInit {
   @Input()
   set formateur(value: Formateur) {
     this._formateur = value;
+  }
+
+  @Output('deleteFormateur')
+  get delete$(): EventEmitter<Formateur> {
+    return this._delete$;
+  }
+
+  delete(formateur: Formateur) {
+    this._delete$.emit(formateur);
   }
 }

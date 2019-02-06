@@ -22,6 +22,10 @@
     <mat-card-content>
       Commune : {{ formateur.commune}}
     </mat-card-content>
-
+    <mat-card-content>
+      <button mat-button title="Delete" (click)="delete(formateur)">
+        <mat-icon svgIcon="icon-delete"></mat-icon>
+      </button>
+    </mat-card-content>
   </mat-card>
 </section>
