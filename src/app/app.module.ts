@@ -16,7 +16,7 @@ import {
   MatInputModule,
   MatListModule,
   MatToolbarModule,
-  MatMenuModule, MatSelectModule, MatExpansionModule
+  MatMenuModule, MatSelectModule, MatExpansionModule, MatRadioModule, MatFormFieldModule
 } from '@angular/material';
 import {SitesComponent} from './sites/sites.component';
 import {ApprenantsComponent} from './apprenants/apprenants.component';
@@ -36,6 +36,8 @@ import {ApprenantFormComponent} from './shared/forms/apprenant-form/apprenant-fo
 import {UpdateComponent} from './update/update.component';
 import { FormateurComponent } from './formateur/formateur.component';
 import {FormateurDetailsComponent} from './shared/formateur-details/formateur-details.component';
+import {FormateurDialogComponent} from './shared/formateur-dialog/formateur-dialog.component';
+import { FormateurFormComponent } from './shared/forms/formateur-form/formateur-form.component';
 
 @NgModule({
   declarations: [
@@ -56,10 +58,13 @@ import {FormateurDetailsComponent} from './shared/formateur-details/formateur-de
     ApprenantFormComponent,
     UpdateComponent,
     FormateurComponent,
-    FormateurDetailsComponent
+    FormateurDetailsComponent,
+    FormateurDialogComponent,
+    FormateurFormComponent
   ],
   entryComponents: [
-    DialogComponent
+    DialogComponent,
+    FormateurDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +83,9 @@ import {FormateurDetailsComponent} from './shared/formateur-details/formateur-de
     BrowserAnimationsModule,
     HttpClientModule,
     MatSelectModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatRadioModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

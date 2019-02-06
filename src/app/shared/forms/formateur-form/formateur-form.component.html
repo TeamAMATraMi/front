@@ -1,0 +1,108 @@
+<h2 mat-dialog-title *ngIf="isUpdateMode">Modifier un formateur</h2>
+<h2 mat-dialog-title *ngIf="!isUpdateMode">Créer un formateur</h2>
+
+<mat-dialog-content>
+  <form novalidate [formGroup]="form">
+    <p *ngIf="isUpdateMode">
+      <span style="width:100%">{{ form.get('nom').value }} {{ form.get('prenom').value }}</span>
+    </p>
+    <mat-accordion>
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Information</mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Nom" formControlName="nom" minlength="2" required name="nom" />
+            <mat-error *ngIf="form.get('nom').dirty && form.get('nom').hasError('required')">
+              nom est <strong>requis</strong>
+            </mat-error>
+            <mat-error *ngIf="form.get('nom').dirty && form.get('nom').hasError('minlength')">
+              min <strong>2 lettres</strong>
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Prénom" formControlName="prenom" minlength="2" required name="prenom" />
+            <mat-error *ngIf="form.get('prenom').dirty && form.get('prenom').hasError('required')">
+              prenom est <strong>requis</strong>
+            </mat-error>
+            <mat-error *ngIf="form.get('prenom').dirty && form.get('prenom').hasError('minlength')">
+              min <strong>2 lettres</strong>
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Adresse" formControlName="adresse" minlength="3" maxlength="255" required name="adresse" />
+            <mat-error *ngIf="form.get('adresse').dirty && form.get('adresse').hasError('required')">
+              adresse est <strong>requis</strong>
+            </mat-error>
+            <mat-error *ngIf="form.get('adresse').dirty && form.get('adresse').hasError('minlength')">
+              min <strong>3 characteres</strong>
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Code postal" formControlName="codePostal" required name="codePostal" />
+            <mat-error *ngIf="form.get('codePostal').dirty && form.get('codePostal').hasError('required')">
+              codePostal est <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="form.get('codePostal').dirty && form.get('codePostal').hasError('pattern')">
+              nécessite <strong> 5 chiffres</strong>
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="full-width">
+                <mat-select placeholder="Site" formControlName="ville" name="ville">
+                  <mat-option *ngFor="let s of sites; let i = index;" [value]="s.ville">
+                    {{s.ville}}
+                  </mat-option>
+                </mat-select>
+            <mat-error *ngIf="form.get('ville').dirty && form.get('ville').hasError('required')">
+              codePostal est <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Commune" formControlName="commune" minlength="2" required name="commune" />
+            <mat-error *ngIf="form.get('commune').dirty && form.get('commune').hasError('required')">
+              commune est <strong>requis</strong>
+            </mat-error>
+            <mat-error *ngIf="form.get('commune').dirty && form.get('commune').hasError('minlength')">
+              minimum <strong>2 characteres</strong>
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Téléphone" formControlName="telephone" required name="telephone" />
+            <mat-error *ngIf="form.get('telephone').dirty && form.get('telephone').hasError('required')">
+              telephone est <strong>requis</strong>
+            </mat-error>
+            <mat-error *ngIf="form.get('telephone').dirty && form.get('telephone').hasError('pattern')">
+              Ceci n'est pas un <strong>numéro français</strong>
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <div class="color">Salarié</div>
+        <br/>
+        <div>
+            <mat-radio-group placeholder="Salarié" class="full-width" formControlName="salarie">
+              <mat-radio-button class="full-width, color" *ngFor="let c of choices" [value]="c">
+                {{c}}
+              </mat-radio-button>
+            </mat-radio-group>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()">Cancel</button>
+  <button mat-button color="primary" type="submit" (click)="submit(form.value)" [disabled]="form.invalid">Save</button>
+</mat-dialog-actions>

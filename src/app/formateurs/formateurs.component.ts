@@ -4,12 +4,12 @@ import {Router} from '@angular/router';
 import {FormateursService} from '../shared/services/formateurs.service';
 import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
-import {DialogComponent} from '../shared/dialog/dialog.component';
 import {filter, flatMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {Groupe} from '../shared/interfaces/groupe';
 import {GroupesService} from '../shared/services/groupes.service';
+import {FormateurDialogComponent} from '../shared/formateur-dialog/formateur-dialog.component';
 
 @Component({
   selector: 'app-formateurs',
@@ -25,7 +25,7 @@ export class FormateursComponent implements OnInit {
   private _groupes: Groupe[];
 
   private _dialogStatus: string;
-  private _formateursDialog: MatDialogRef<DialogComponent>;
+  private _formateursDialog: MatDialogRef<FormateurDialogComponent>;
 
   constructor(private _router: Router, private _formateursService: FormateursService, private _sitesService: SitesService,
               private _dialog: MatDialog, private _groupesService: GroupesService) {
@@ -91,7 +91,7 @@ export class FormateursComponent implements OnInit {
     this._dialogStatus = 'active';
 
     // open modal
-    this._formateursDialog = this._dialog.open(DialogComponent, {
+    this._formateursDialog = this._dialog.open(FormateurDialogComponent, {
       width: '500px',
       disableClose: true
     });
@@ -109,11 +109,11 @@ export class FormateursComponent implements OnInit {
         );
   }
 
-  get formateursDialog(): MatDialogRef<DialogComponent> {
+  get formateursDialog(): MatDialogRef<FormateurDialogComponent> {
     return this._formateursDialog;
   }
 
-  set formateursDialog(value: MatDialogRef<DialogComponent>) {
+  set formateursDialog(value: MatDialogRef<FormateurDialogComponent>) {
     this._formateursDialog = value;
   }
 
