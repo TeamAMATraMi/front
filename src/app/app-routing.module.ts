@@ -10,9 +10,11 @@ import {GroupeComponent} from './groupe/groupe.component';
 import {UpdateComponent} from './update/update.component';
 import {FormateurComponent} from './formateur/formateur.component';
 import {UpdateFormateurComponent} from './update-formateur/update-formateur.component';
+import {HomeComponent} from './home/home.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent },
     { path: 'apprenants', component: ApprenantsComponent },
     { path: 'apprenant/:id', component: ApprenantComponent },
     { path: 'apprenantsG/:id', component: GroupeComponent },
