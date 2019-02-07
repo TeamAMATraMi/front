@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {Apprenant} from '../../interfaces/apprenant';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-form',
@@ -54,6 +55,8 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   ngOnChanges(record) {
     if (record.apprenant && record.apprenant.currentValue) {
       this._apprenant = record.apprenant.currentValue;
+      // let datePipe = new DatePipe('fr-EU');
+      // this._apprenant.dateInscription = Number(datePipe.transform(this._apprenant.dateInscription, 'dd/MM/yyyy'));
       this._isUpdateMode = true;
       this._form.patchValue(this._apprenant);
     } else {
@@ -125,10 +128,7 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
         Validators.required
       ])),
       dateInscription: new FormControl('', Validators.compose([
-        Validators.required, Validators.pattern('^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)' +
-            '(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]' +
-            '|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])' +
-            '|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$')
+        Validators.required
       ])),
       auteurDossier: new FormControl('', Validators.compose([
         Validators.required, Validators.minLength(1)
@@ -137,10 +137,7 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
         Validators.required
       ])),
       dateNaissance: new FormControl('', Validators.compose([
-        Validators.required, Validators.pattern('^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)' +
-            '(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]' +
-            '|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])' +
-            '|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$')
+        Validators.required
       ])),
       genre: new FormControl('', Validators.compose([
         Validators.required
@@ -152,10 +149,7 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
         Validators.required, Validators.minLength(1)
       ])),
       dateArrivee: new FormControl('', Validators.compose([
-        Validators.required, Validators.pattern('^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)' +
-            '(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]' +
-            '|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])' +
-            '|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$')
+        Validators.required
       ])),
       quartierPrioritaire: new FormControl('', Validators.compose([
 

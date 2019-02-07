@@ -11,7 +11,7 @@
         <mat-accordion>
             <mat-expansion-panel expanded>
                 <mat-expansion-panel-header>
-                    <mat-panel-title>Profile</mat-panel-title>
+                    <mat-panel-title>Profil</mat-panel-title>
                 </mat-expansion-panel-header>
                 <p>
                     <mat-form-field class="full-width">
@@ -81,7 +81,7 @@
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Date de naissance" formControlName="dateNaissance" required name="dateNaissance" />
+                        <input matInput type="date" placeholder="Date de naissance" formControlName="dateNaissance" required name="dateNaissance" />
                         <mat-error *ngIf="form.get('dateNaissance').dirty && form.get('dateNaissance').hasError('required')">
                             dateNaissance is <strong>required</strong>
                         </mat-error>
@@ -114,7 +114,7 @@
                 </mat-expansion-panel-header>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Date d'inscription" formControlName="dateInscription" required name="dateInscription" />
+                        <input matInput type="date" placeholder="Date d'inscription" formControlName="dateInscription" required name="dateInscription" />
                         <mat-error *ngIf="form.get('dateInscription').dirty && form.get('dateInscription').hasError('required')">
                             dateInscription is <strong>required</strong>
                         </mat-error>
@@ -141,7 +141,7 @@
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Date d'arrivée" formControlName="dateArrivee" required name="dateArrivee" />
+                        <input matInput type="date" placeholder="Date d'arrivée" formControlName="dateArrivee" required name="dateArrivee" />
                         <mat-error *ngIf="form.get('dateArrivee').dirty && form.get('dateArrivee').hasError('required')">
                             dateArrivee is <strong>required</strong>
                         </mat-error>
