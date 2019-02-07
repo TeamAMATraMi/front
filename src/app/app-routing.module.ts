@@ -9,6 +9,7 @@ import {GroupesComponent} from './groupes/groupes.component';
 import {GroupeComponent} from './groupe/groupe.component';
 import {UpdateComponent} from './update/update.component';
 import {FormateurComponent} from './formateur/formateur.component';
+import {UpdateFormateurComponent} from './update-formateur/update-formateur.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: 'formateurs', component: FormateursComponent},
     { path: 'formateur/:id', component: FormateurComponent },
     { path: 'formateurG/:id', component: GroupeComponent },
+    { path: 'updateFormateur/:id', component: UpdateFormateurComponent },
    // { path: 'formateur', component: FormateurComponent},
     { path: 'sites', component: SitesComponent },
   //  { path: 'site', component: SiteComponent },

@@ -40,7 +40,6 @@ git
      * Function to return one Site for current id
      */
     fetchOne(id: string): Observable<Site> {
-        console.log(id);
         return this._http.get<Site>(this._backendURL.oneSite.replace(':id', id));
     }
 

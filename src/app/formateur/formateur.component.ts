@@ -14,7 +14,9 @@ export class FormateurComponent implements OnInit {
 
   private _formateur: Formateur;
 
-  constructor(private _formateurService: FormateursService, private _route: ActivatedRoute) { }
+  constructor(private _formateurService: FormateursService, private _route: ActivatedRoute) {
+    this._formateur = {} as Formateur;
+  }
 
   ngOnInit() {
     this._route.params.pipe(

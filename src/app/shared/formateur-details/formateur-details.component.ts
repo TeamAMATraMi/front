@@ -19,6 +19,7 @@ export class FormateurDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   get formateur(): any {
@@ -28,18 +29,13 @@ export class FormateurDetailsComponent implements OnInit {
   @Input()
   set formateur(value: any) {
     this._formateur = value;
+    if (this._formateur.idSite !== undefined) {
+    this._sitesService.fetchOne(this._formateur.idSite).subscribe((site: Site) => this._site = site);
+    }
   }
 
-
-
   get site(): Site {
-    console.log('site');
-    this._sitesService.fetchOne(this.formateur.idSite).subscribe((site: Site) => this._site = site);
     return this._site;
   }
 
-  @Input()
-  set site(value: Site) {
-    this._site = value;
-  }
 }
