@@ -109,22 +109,6 @@ export class FormateursComponent implements OnInit {
         );
   }
 
-  get formateursDialog(): MatDialogRef<FormateurDialogComponent> {
-    return this._formateursDialog;
-  }
-
-  set formateursDialog(value: MatDialogRef<FormateurDialogComponent>) {
-    this._formateursDialog = value;
-  }
-
-  get groupesSite(): Groupe[] {
-    return this._groupesSite;
-  }
-
-  set groupesSite(value: Groupe[]) {
-    this._groupesSite = value;
-  }
-
   get groupes(): Groupe[] {
     return this._groupes;
   }

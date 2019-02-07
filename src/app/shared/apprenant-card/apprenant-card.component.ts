@@ -16,7 +16,6 @@ export class ApprenantCardComponent implements OnInit {
     this._delete$ = new EventEmitter<Apprenant>();
   }
 
-
   get apprenant(): Apprenant {
     return this._apprenant;
   }
@@ -34,7 +33,6 @@ export class ApprenantCardComponent implements OnInit {
   delete(apprenant: Apprenant) {
     this._delete$.emit(apprenant);
   }
-
 
   ngOnInit() {
   }
