@@ -32,7 +32,7 @@ export class FormateurFormComponent implements OnInit, OnChanges {
     this.ville = 'Tous les sites';
     this._sitesService.fetch().subscribe((sites: Site[]) => {
         this._sites = sites;
-        this._form.patchValue({ville: this._sites.length > 0 ? this._sites[0].ville : '' });
+        this._form.patchValue({ville: this._sites.filter(site => site.id === this._formateur.idSite)[0].ville});
       }
     );
   }
