@@ -29,6 +29,7 @@ export class FormateurFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this.ville = 'Tous les sites';
     this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
   }
 
@@ -153,5 +154,10 @@ export class FormateurFormComponent implements OnInit, OnChanges {
       };
       this._isUpdateMode = false;
     }
+  }
+
+  isSalarie(): string {
+    if (this._formateur.salarie) { return 'Oui'; }
+    return 'Non';
   }
 }
