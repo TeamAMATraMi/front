@@ -39,7 +39,10 @@ import {FormateurDetailsComponent} from './shared/formateur-details/formateur-de
 import {FormateurDialogComponent} from './shared/formateur-dialog/formateur-dialog.component';
 import { FormateurFormComponent } from './shared/forms/formateur-form/formateur-form.component';
 import { UpdateFormateurComponent } from './update-formateur/update-formateur.component';
+import {GroupeDialogComponent} from './shared/groupe-dialog/groupe-dialog.component';
+import {GroupeFormComponent} from './shared/forms/groupe-form/groupe-form.component';
 import {SearchPipe} from './shared/pipes/search.pipe';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +59,8 @@ import {SearchPipe} from './shared/pipes/search.pipe';
     ApprenantDetailsComponent,
     GroupesComponent,
     GroupeComponent,
+    GroupeDialogComponent,
+    GroupeFormComponent,
     FormateursCardComponent,
     ApprenantFormComponent,
     UpdateComponent,
@@ -64,11 +69,13 @@ import {SearchPipe} from './shared/pipes/search.pipe';
     FormateurDialogComponent,
     FormateurFormComponent,
     UpdateFormateurComponent,
-    SearchPipe
+    SearchPipe,
+    HomeComponent
   ],
   entryComponents: [
     DialogComponent,
-    FormateurDialogComponent
+    FormateurDialogComponent,
+    GroupeDialogComponent
   ],
   imports: [
     BrowserModule,
