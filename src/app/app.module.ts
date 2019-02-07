@@ -40,6 +40,7 @@ import {FormateurDialogComponent} from './shared/formateur-dialog/formateur-dial
 import { FormateurFormComponent } from './shared/forms/formateur-form/formateur-form.component';
 import { UpdateFormateurComponent } from './update-formateur/update-formateur.component';
 import {SearchPipe} from './shared/pipes/search.pipe';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import {SearchPipe} from './shared/pipes/search.pipe';
     FormateurDialogComponent,
     FormateurFormComponent,
     UpdateFormateurComponent,
-    SearchPipe
+    SearchPipe,
+    HomeComponent
   ],
   entryComponents: [
     DialogComponent,
