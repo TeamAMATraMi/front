@@ -1,5 +1,5 @@
 mat-toolbar.extend-toolbar {
-    background-color: #ab7642;
+    background-color: #FD861C;
     background-repeat: no-repeat;
     background-position: right;
     top: 0px;
@@ -42,4 +42,10 @@ mat-toolbar-row:nth-child(2) {
     text-align: center;
     height: 56px;
     margin-top: 56px;
+}
+
+.logo {
+    padding-left: 50px;
+    height: 60px;
+    width: 60px;
 }
