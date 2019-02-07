@@ -15,8 +15,8 @@ export class GroupesComponent implements OnInit {
 
   constructor(private _router: Router, private _groupesService: GroupesService) {
     this._groupes = [];
-  }
 
+  }
 
   get groupes(): Groupe[] {
     return this._groupes;
