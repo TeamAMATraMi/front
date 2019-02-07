@@ -38,7 +38,5 @@ export class GroupeComponent implements OnInit {
         .subscribe((apprenants: Apprenant[]) => {
           this._apprenants = apprenants;
         });
-
   }
-
 }

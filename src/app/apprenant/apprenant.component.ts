@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ApprenantsService} from '../shared/services/apprenants.service';
 import {ActivatedRoute} from '@angular/router';
 import {Apprenant} from '../shared/interfaces/apprenant';
-import {filter, flatMap, tap} from 'rxjs/operators';
+import {filter, flatMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-apprenant',
