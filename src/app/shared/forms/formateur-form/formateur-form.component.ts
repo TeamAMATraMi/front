@@ -24,12 +24,17 @@ export class FormateurFormComponent implements OnInit, OnChanges {
   constructor(private _sitesService: SitesService) {
     this._submit$ = new EventEmitter<Formateur>();
     this._cancel$ = new EventEmitter<void>();
-    this._form = this._buildForm();
     this._sites = [];
+    this._form = this._buildForm();
   }
 
   ngOnInit() {
-    this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
+    this.ville = 'Tous les sites';
+    this._sitesService.fetch().subscribe((sites: Site[]) => {
+        this._sites = sites;
+        this._form.patchValue({ville: this._sites.length > 0 ? this._sites[0].ville : '' });
+      }
+    );
   }
 
   get form(): FormGroup {
@@ -153,5 +158,10 @@ export class FormateurFormComponent implements OnInit, OnChanges {
       };
       this._isUpdateMode = false;
     }
+  }
+
+  isSalarie(): string {
+    if (this._formateur.salarie) { return 'Oui'; }
+    return 'Non';
   }
 }

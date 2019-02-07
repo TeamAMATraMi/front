@@ -57,7 +57,7 @@
         </p>
         <p>
           <mat-form-field class="full-width">
-                <mat-select placeholder="Site" formControlName="ville" name="ville">
+                <mat-select placeholder="Site" formControlName="ville" name="ville" [value]="ville">
                   <mat-option *ngFor="let s of sites; let i = index;" [value]="s.ville">
                     {{s.ville}}
                   </mat-option>
@@ -93,7 +93,7 @@
         <br/>
         <div>
             <mat-radio-group placeholder="Salarié" class="full-width" formControlName="salarie">
-              <mat-radio-button class="full-width, color" *ngFor="let c of choices" [value]="c">
+              <mat-radio-button class="full-width, color" *ngFor="let c of choices" [value]="c" [checked]="isSalarie() === c">
                 {{c}}
               </mat-radio-button>
             </mat-radio-group>
