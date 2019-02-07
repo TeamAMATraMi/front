@@ -3,7 +3,6 @@ import {Formateur} from '../shared/interfaces/formateur';
 import {FormateursService} from '../shared/services/formateurs.service';
 import {ActivatedRoute} from '@angular/router';
 import {filter, flatMap} from 'rxjs/operators';
-import {SitesService} from '../shared/services/sites.service';
 
 @Component({
   selector: 'app-formateur',

@@ -3,7 +3,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Formateur} from '../../interfaces/formateur';
 import {SitesService} from '../../services/sites.service';
 import {Site} from '../../interfaces/site';
-import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-formateur-form',
@@ -73,10 +72,6 @@ export class FormateurFormComponent implements OnInit, OnChanges {
 
   get choices(): string[] {
     return this._choices;
-  }
-
-  set choices(value: string[]) {
-    this._choices = value;
   }
 
   get salarie(): string {
