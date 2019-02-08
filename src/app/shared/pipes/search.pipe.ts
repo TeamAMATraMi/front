@@ -6,16 +6,19 @@ import {Apprenant} from '../interfaces/apprenant';
 })
 export class SearchPipe implements PipeTransform {
 
-  transform(items: Apprenant[], field: string, text: string): Apprenant[] {
-    if (!items) { console.log('NO ITEMS '); return []; }
-    if (!field || !text) { console.log('NO FIELD '); return items; }
+  transform(items: Apprenant[], field: string[], text: string): Apprenant[] {
+    if (!items) { return []; }
+    if (!field || !text) { return items; }
 
     let res: Apprenant[];
     res = [];
 
     for (let i = 0; i < items.length; i++) {
-      if (items[i][field].toLowerCase().includes(text.toLowerCase())) {
-        res.push(items[i]);
+      for (let j = 0; j < field.length; j++) {
+        if (items[i][field[j]].toLowerCase().includes(text.toLowerCase())) {
+          res.push(items[i]);
+          break;
+        }
       }
     }
 
