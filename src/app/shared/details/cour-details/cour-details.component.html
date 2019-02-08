@@ -1,3 +1,18 @@
-<p>
-  cour-details works!
-</p>
+<section>
+  <mat-card class="mat-whiteframe-2dp">
+    <mat-dialog-actions align="end">
+      <button mat-button type="button" [routerLink]="['/updateCours', cour.id]">Modifier</button>
+    </mat-dialog-actions>
+
+    <mat-card-content>
+      horaire : {{ cour.horaire}}
+    </mat-card-content>
+    <mat-card-content>
+      matiere: {{ cour.matiere }}
+    </mat-card-content>
+    <mat-card-content>
+      duree : {{ cour.duree }}
+    </mat-card-content>
+  </mat-card>
+
+</section>
