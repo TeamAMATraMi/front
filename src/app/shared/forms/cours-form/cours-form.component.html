@@ -37,31 +37,31 @@
         </p>
         <p>
           <mat-form-field class="full-width">
-            <input matInput placeholder="Durée" formControlName="duree" minlength="3" maxlength="255" required name="duree" />
+            <input matInput placeholder="Durée" formControlName="duree" maxlength="255" required name="duree" />
             <mat-error *ngIf="form.get('duree').dirty && form.get('duree').hasError('required')">
               duree est <strong>requis</strong>
-            </mat-error>
-            <mat-error *ngIf="form.get('duree').dirty && form.get('duree').hasError('minlength')">
-              min <strong>3 characteres</strong>
             </mat-error>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field class="full-width">
             <mat-select placeholder="Formateur" formControlName="formateur" name="formateur" [value]="formateur">
-              <mat-option *ngFor="let f of formateurs; let i = index;" [value]="f.nom">
-                {{f.nom}}
+              <mat-option *ngFor="let f of formateurs;" [value]="f.nom + ' ' + f.prenom">
+                {{f.nom}} {{f.prenom}}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="form.get('ville').dirty && form.get('ville').hasError('required')">
+            <mat-error *ngIf="form.get('formateur').dirty && form.get('formateur').hasError('required')">
               codePostal est <strong>required</strong>
             </mat-error>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field class="full-width">
-            <input matInput placeholder="Groupe" formControlName="groupe" minlength="2" required name="groupe" />
-            <mat-error *ngIf="form.get('groupe').dirty && form.get('groupe').hasError('required')">
+            <mat-select placeholder="Groupes" formControlName="groupe" name="groupe" [value]="groupe">
+              <mat-option *ngFor="let g of groupes;" [value]="g.nom">
+                {{g.nom}}
+              </mat-option>
+            </mat-select><mat-error *ngIf="form.get('groupe').dirty && form.get('groupe').hasError('required')">
               groupe est <strong>requis</strong>
             </mat-error>
             <mat-error *ngIf="form.get('groupe').dirty && form.get('groupe').hasError('minlength')">

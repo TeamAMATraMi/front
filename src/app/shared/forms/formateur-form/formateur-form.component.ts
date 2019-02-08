@@ -94,7 +94,6 @@ export class FormateurFormComponent implements OnInit, OnChanges {
   submit(formateur: Formateur) {
     if (this._form.get('salarie').value === 'Oui') { formateur.salarie = true; } else { formateur.salarie = false; }
     for (let i = 0; i < this.sites.length; i++) {
-      console.log(this._sites[i].ville + ', ' + this._form.get('ville').value);
       if (this._sites[i].ville === this._form.get('ville').value) { formateur.idSite = this._sites[i].id; }
     }
     this._submit$.emit(formateur);

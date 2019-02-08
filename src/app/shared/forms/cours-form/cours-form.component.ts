@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Apprenant} from '../../interfaces/apprenant';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Cours} from '../../interfaces/cours';
 import {GroupesService} from '../../services/groupes.service';
@@ -28,18 +27,19 @@ export class CoursFormComponent implements OnInit {
     this._submit$ = new EventEmitter<Cours>();
     this._cancel$ = new EventEmitter<void>();
     this._formateurs = [];
+    this._groupes = [];
     this._form = this._buildForm();
   }
 
   ngOnInit() {
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => {
           this._groupes = groupes;
-          this._form.patchValue({groupe: this._groupes.filter(groupe => groupe.id === this._cours.idGroupe)[0].nom});
+          // this._form.patchValue({groupe: this._groupes.filter(groupe => groupe.id === this._cours.idGroupe)[0].nom});
         }
     );
     this._formateurService.fetch().subscribe((formateurs: Formateur[]) => {
           this._formateurs = formateurs;
-          this._form.patchValue({formateur: this._formateurs.filter(formateur => formateur.id === this._cours.idFormateur)[0].nom});
+          // this._form.patchValue({formateur: this._formateurs.filter(formateur => formateur.id === this._cours.idFormateur)[0].nom});
         }
     );
   }
@@ -89,6 +89,22 @@ export class CoursFormComponent implements OnInit {
     return this._form;
   }
 
+  get formateur(): string {
+    return this._formateur;
+  }
+
+  set formateur(value: string) {
+    this._formateur = value;
+  }
+
+  get formateurs(): Formateur[] {
+    return this._formateurs;
+  }
+
+  set formateurs(value: Formateur[]) {
+    this._formateurs = value;
+  }
+
   private _buildForm(): FormGroup {
     return new FormGroup({
       id: new FormControl('0'),
@@ -122,5 +138,17 @@ export class CoursFormComponent implements OnInit {
   @Output('submit')
   get submit$(): EventEmitter<Cours> {
     return this._submit$;
+  }
+
+  submit(cours: Cours) {
+    for (let i = 0; i < this._groupes.length; i++) {
+      if (this._groupes[i].nom === this._form.get('groupe').value) { cours.idGroupe = this._groupes[i].id; }
+    }
+    for (let i = 0; i < this._formateurs.length; i++) {
+      if ((this._formateurs[i].nom + ' ' + this.formateurs[i].prenom) === this._form.get('formateur').value) {
+        cours.idFormateur = this._formateurs[i].id;
+      }
+    }
+    this._submit$.emit(cours);
   }
 }
