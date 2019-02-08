@@ -19,5 +19,5 @@
 </mat-toolbar>
 
 <section>
-    <app-cours-card [cours]="cours" *ngFor="let monCour of cours" (deleteCours)="delete($event)"></app-cours-card>
+    <app-cours-card [cours]="monCour" *ngFor="let monCour of cours" (deleteCours)="delete($event)"></app-cours-card>
 </section>

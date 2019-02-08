@@ -19,7 +19,8 @@ export class CoursComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._coursService.fetch().subscribe((cours: Cours[]) => this._cours = cours);
+    this._coursService.fetch().subscribe((cours: Cours[]) =>
+      this._cours = cours);
   }
 
   get cours(): Cours[] {
