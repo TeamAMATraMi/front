@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material';
-import {FormateurDialogComponent} from '../shared/dialog/formateur-dialog/formateur-dialog.component';
+import {FormateurDialogComponent} from '../shared/dialogs/formateur-dialog/formateur-dialog.component';
 import {filter, flatMap, map} from 'rxjs/operators';
 import {Formateur} from '../shared/interfaces/formateur';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -31,7 +31,7 @@ export class UpdateFormateurComponent implements OnInit {
             data: formateur
           });
 
-          // subscribe to afterClosed observable to set apprenant-dialog status and do process
+          // subscribe to afterClosed observable to set apprenant-dialogs status and do process
           this._formateursDialog.afterClosed()
               .pipe(
                   filter(_ => !!_),

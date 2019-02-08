@@ -16,7 +16,7 @@ export class DialogComponent implements OnInit {
   }
 
   /**
-   * Returns travel passed in apprenant-dialog open
+   * Returns travel passed in apprenant-dialogs open
    */
   get apprenant(): Apprenant {
     return this._apprenant;

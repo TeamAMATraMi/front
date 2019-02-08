@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material';
-import {FormateurDialogComponent} from '../shared/formateur-dialog/formateur-dialog.component';
 import {filter, flatMap, map} from 'rxjs/operators';
-import {Formateur} from '../shared/interfaces/formateur';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormateursService} from '../shared/services/formateurs.service';
 import {GroupeDialogComponent} from '../shared/groupe-dialog/groupe-dialog.component';
 import {GroupesService} from '../shared/services/groupes.service';
 import {Groupe} from '../shared/interfaces/groupe';
@@ -34,7 +31,7 @@ export class UpdateGroupeComponent implements OnInit {
             data: groupe
           });
 
-          // subscribe to afterClosed observable to set dialog status and do process
+          // subscribe to afterClosed observable to set dialogs status and do process
           this._groupesDialog.afterClosed()
               .pipe(
                   filter(_ => !!_),
