@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {Formateur} from '../interfaces/formateur';
+import {Formateur} from '../../interfaces/formateur';
 
 @Component({
   selector: 'app-formateur-dialog',
