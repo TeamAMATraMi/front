@@ -47,7 +47,7 @@ export class GroupesComponent implements OnInit {
    * Function to display modal
    */
   showDialog() {
-    // set dialog status
+    // set apprenant-dialog status
     this._dialogStatus = 'active';
 
     // open modal
@@ -56,7 +56,7 @@ export class GroupesComponent implements OnInit {
       disableClose: true
     });
 
-    // subscribe to afterClosed observable to set dialog status and do process
+    // subscribe to afterClosed observable to set apprenant-dialog status and do process
     this._groupesDialog.afterClosed()
         .pipe(
             filter(_ => !!_),

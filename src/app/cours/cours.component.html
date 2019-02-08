@@ -1,6 +1,9 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <span>Sites</span>
+    <span>Cours</span>
+    <span class="flex"></span>
+    <span>Site : </span>
+
 
     <span class="flex"></span>
     <span>
@@ -9,11 +12,12 @@
               <input matInput
                      placeholder="Chercher">
         </mat-form-field>
-
       </span>
 
-
   </mat-toolbar-row>
+
 </mat-toolbar>
 
-<app-sites-card [site]="site" *ngFor="let site of sites"> </app-sites-card>
+<section>
+    <app-cours-card [cours]="cours" *ngFor="let monCour of cours" (deleteCours)="delete($event)"></app-cours-card>
+</section>

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Apprenant } from '../interfaces/apprenant';
+import { Apprenant } from '../../interfaces/apprenant';
 
 @Component({
   selector: 'app-add-dialog',
@@ -16,7 +16,7 @@ export class DialogComponent implements OnInit {
   }
 
   /**
-   * Returns travel passed in dialog open
+   * Returns travel passed in apprenant-dialog open
    */
   get apprenant(): Apprenant {
     return this._apprenant;
