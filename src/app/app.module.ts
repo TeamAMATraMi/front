@@ -49,6 +49,8 @@ import {CoursComponent } from './cours/cours.component';
 import {CoursCardComponent } from './shared/cards/cours-card/cours-card.component';
 import {CourDetailsComponent } from './shared/details/cour-details/cour-details.component';
 import {CourComponent } from './cour/cour.component';
+import {CoursFormComponent} from './shared/forms/cours-form/cours-form.component';
+import { CoursDialogComponent } from './shared/dialogs/cours-dialog/cours-dialog.component';
 
 @NgModule({
   declarations: [
@@ -80,13 +82,14 @@ import {CourComponent } from './cour/cour.component';
     HomeComponent,
     CoursComponent,
     CoursCardComponent,
-    CourDetailsComponent,
-    CourComponent
+    CoursFormComponent,
+    CoursDialogComponent
   ],
   entryComponents: [
     DialogComponent,
     FormateurDialogComponent,
-    GroupeDialogComponent
+    GroupeDialogComponent,
+    CoursDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -21,3 +21,9 @@
 <section>
     <app-cours-card [cours]="monCour" *ngFor="let monCour of cours" (deleteCours)="delete($event)"></app-cours-card>
 </section>
+
+<section class="buttons-fab" *ngIf="dialogStatus === 'inactive'">
+    <button (click)="showDialog()" mat-fab color="primary" class="button-add">
+        <b class="material-icons">+</b>
+    </button>
+</section>
