@@ -129,7 +129,16 @@ export class GroupeFormComponent implements OnInit, OnChanges {
       this._groupe = record.groupe.currentValue;
       this._isUpdateMode = true;
       console.log(this._groupe.idSite);
+
+      for (let i = 0; i < this.sites.length; i++) {
+        if (this._sites[i].id === record.groupe.idSite) {
+          this._ville = this._sites[i].ville;
+        }
+      }
+      this._form.patchValue({ville: this._ville});
+
       this._form.patchValue(this._groupe);
+
     } else {
       this._groupe = {
         idSite: 0,
