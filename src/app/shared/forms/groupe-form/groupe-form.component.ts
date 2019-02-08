@@ -29,7 +29,12 @@ export class GroupeFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
+    this.ville = 'Tous les sites';
+    this._sitesService.fetch().subscribe((sites: Site[]) => {
+          this._sites = sites;
+          this._form.patchValue({ville: this._sites.length > 0 ? this._sites[0].ville : '' });
+        }
+    );
   }
 
   get form(): FormGroup {
@@ -53,7 +58,6 @@ export class GroupeFormComponent implements OnInit, OnChanges {
   }
 
   get sites(): Site[] {
-
     return this._sites;
   }
 
@@ -116,6 +120,7 @@ export class GroupeFormComponent implements OnInit, OnChanges {
     if (record.groupe && record.groupe.currentValue) {
       this._groupe = record.groupe.currentValue;
       this._isUpdateMode = true;
+      console.log(this._groupe.idSite);
       this._form.patchValue(this._groupe);
     } else {
       this._groupe = {

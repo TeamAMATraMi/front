@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {Groupe} from '../shared/interfaces/groupe';
 import {GroupesService} from '../shared/services/groupes.service';
@@ -6,6 +6,7 @@ import {filter, flatMap} from 'rxjs/operators';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {Observable} from 'rxjs';
 import {GroupeDialogComponent} from '../shared/groupe-dialog/groupe-dialog.component';
+import {Formateur} from '../shared/interfaces/formateur';
 
 @Component({
   selector: 'app-groupes',
@@ -17,10 +18,12 @@ export class GroupesComponent implements OnInit {
   private _groupes: Groupe[];
   private _dialogStatus: string;
   private _groupesDialog: MatDialogRef<GroupeDialogComponent>;
+  private readonly _delete$: EventEmitter<Groupe>;
 
   constructor(private _router: Router, private _groupesService: GroupesService, private _dialog: MatDialog) {
     this._groupes = [];
     this._dialogStatus = 'inactive';
+    this._delete$ = new EventEmitter<Groupe>();
   }
 
   get groupes(): Groupe[] {
@@ -72,6 +75,15 @@ export class GroupesComponent implements OnInit {
         .pipe(
             flatMap(_ => this._groupesService.fetch())
         );
+  }
+
+  @Output('deleteGroupe')
+  get delete$(): EventEmitter<Groupe> {
+    return this._delete$;
+  }
+
+  delete(groupe: Groupe) {
+    this._delete$.emit(groupe);
   }
 
 }
