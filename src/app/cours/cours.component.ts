@@ -13,6 +13,7 @@ import {flatMap} from 'rxjs/operators';
 export class CoursComponent implements OnInit {
 
   private _cours: Cours[];
+  private _searchText: string;
 
   constructor(private _router: Router, private _coursService: CoursService) {
     this._cours = [];
@@ -21,6 +22,14 @@ export class CoursComponent implements OnInit {
   ngOnInit() {
     this._coursService.fetch().subscribe((cours: Cours[]) =>
       this._cours = cours);
+  }
+
+  get searchText(): string {
+    return this._searchText;
+  }
+
+  set searchText(value: string) {
+    this._searchText = value;
   }
 
   get cours(): Cours[] {
