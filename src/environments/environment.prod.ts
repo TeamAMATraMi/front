@@ -25,8 +25,8 @@ export const environment = {
                 oneSite: '/sites/:id'
             },
             groupes: {
-            allGroupes: '/groupes',
-            oneGroupe: '/groupes/:id'
+                allGroupes: '/groupes',
+                oneGroupe: '/groupes/:id'
           }
         }
     }

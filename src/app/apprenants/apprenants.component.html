@@ -33,11 +33,11 @@
 
 <section>
     <app-apprenant-card [apprenant]="apprenant" (deleteApprenant)="delete($event)"
-                        *ngFor="let apprenant of apprenants | search : 'nom' : searchText"></app-apprenant-card>
+                        *ngFor="let apprenant of apprenants | search : ['nom','prenom'] : searchText"></app-apprenant-card>
 </section>
 
 <section class="buttons-fab" *ngIf="dialogStatus === 'inactive'">
-    <button (click)="showDialog()" mat-fab color="accent" class="button-add">
-        <i class="material-icons">add</i>
+    <button (click)="showDialog()" mat-fab color="primary" class="button-add">
+        <b class="material-icons">+</b>
     </button>
 </section>
