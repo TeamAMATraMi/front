@@ -5,7 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
-import {DialogComponent} from './shared/dialog/dialog.component';
+import {DialogComponent} from './shared/dialog/apprenant-dialog/dialog.component';
 
 import {
   MatButtonModule,
@@ -36,11 +36,12 @@ import {ApprenantFormComponent} from './shared/forms/apprenant-form/apprenant-fo
 import {UpdateComponent} from './update/update.component';
 import { FormateurComponent } from './formateur/formateur.component';
 import {FormateurDetailsComponent} from './shared/formateur-details/formateur-details.component';
-import {FormateurDialogComponent} from './shared/formateur-dialog/formateur-dialog.component';
+import {FormateurDialogComponent} from './shared/dialog/formateur-dialog/formateur-dialog.component';
 import { FormateurFormComponent } from './shared/forms/formateur-form/formateur-form.component';
 import { UpdateFormateurComponent } from './update-formateur/update-formateur.component';
 import {GroupeDialogComponent} from './shared/groupe-dialog/groupe-dialog.component';
 import {GroupeFormComponent} from './shared/forms/groupe-form/groupe-form.component';
+import { UpdateGroupeComponent } from './update-groupe/update-groupe.component';
 import {SearchPipe} from './shared/pipes/search.pipe';
 import { HomeComponent } from './home/home.component';
 import { CoursComponent } from './cours/cours.component';
@@ -71,6 +72,7 @@ import { CoursCardComponent } from './shared/cours-card/cours-card.component';
     FormateurDialogComponent,
     FormateurFormComponent,
     UpdateFormateurComponent,
+    UpdateGroupeComponent,
     SearchPipe,
     HomeComponent,
     CoursComponent,

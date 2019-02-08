@@ -19,12 +19,12 @@ export class CoursCardComponent implements OnInit {
   ngOnInit() {
   }
 
-  get formateur(): Cours {
+  get cours(): Cours {
     return this._cours;
   }
 
   @Input()
-  set formateur(value: Cours) {
+  set cours(value: Cours) {
     this._cours = value;
   }
 

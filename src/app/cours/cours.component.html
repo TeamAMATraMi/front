@@ -12,9 +12,12 @@
               <input matInput
                      placeholder="Chercher">
         </mat-form-field>
-
       </span>
 
   </mat-toolbar-row>
 
 </mat-toolbar>
+
+<section>
+    <app-cours-card [cours]="cours" *ngFor="let monCour of cours" (deleteCours)="delete($event)"></app-cours-card>
+</section>
