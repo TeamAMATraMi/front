@@ -41,6 +41,14 @@ export class GroupeFormComponent implements OnInit, OnChanges {
     return this._form;
   }
 
+  get nom(): string {
+    return this._nom;
+  }
+
+  set nom(value: string) {
+    this._nom = value;
+  }
+
   get idSite(): string {
     return this._idSite;
   }

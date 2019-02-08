@@ -1,14 +1,17 @@
 <section>
   <mat-card class="mat-whiteframe-2dp">
+    <mat-card-title-group>
+      <mat-card-title>
+        <a [routerLink]="['/cours', cours.id]">
+          <span>{{cours.matiere}}</span>
+        </a>
+      </mat-card-title>
+    </mat-card-title-group>
+
     <mat-card-content>
       horaire : {{ cours.horaire}}
     </mat-card-content>
-    <mat-card-content>
-      matiere : {{ cours.matiere}}
-    </mat-card-content>
-    <mat-card-content>
-      duree : {{ cours.duree }}
-    </mat-card-content>
+
     <mat-card-content>
       <button mat-button title="Delete" (click)="delete(cours)">
         <mat-icon svgIcon="icon-delete"></mat-icon>

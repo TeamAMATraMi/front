@@ -13,6 +13,7 @@ import {UpdateFormateurComponent} from './update-formateur/update-formateur.comp
 import {HomeComponent} from './home/home.component';
 import {UpdateGroupeComponent} from './update-groupe/update-groupe.component';
 import {CoursComponent} from './cours/cours.component';
+import {CourComponent} from './cour/cour.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,6 +24,8 @@ const routes: Routes = [
     { path: 'updateApprenant/:id', component: UpdateComponent },
     { path: 'formateurs', component: FormateursComponent},
     { path: 'cours', component: CoursComponent},
+    { path: 'cours/:id', component: CourComponent},
+    { path: 'updateCours/:id', component: CoursComponent},
     { path: 'formateur/:id', component: FormateurComponent },
     { path: 'formateurG/:id', component: GroupeComponent },
     { path: 'updateFormateur/:id', component: UpdateFormateurComponent },

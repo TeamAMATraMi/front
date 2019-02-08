@@ -17,16 +17,16 @@ export const environment = {
                 siteFormateur: '/formateursSite/:id'
             },
             cours: {
-                allCours: '/formateurs',
-                oneCour: '/formateurs/:id'
-            },
+                allCours: '/cours',
+                oneCours: '/cours/:id',
+          },
             sites: {
                 allSites: '/sites',
                 oneSite: '/sites/:id'
             },
             groupes: {
-            allGroupes: '/groupes',
-            oneGroupe: '/groupes/:id'
+                allGroupes: '/groupes',
+                oneGroupe: '/groupes/:id'
           }
         }
     }

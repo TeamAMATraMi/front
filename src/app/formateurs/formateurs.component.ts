@@ -27,6 +27,8 @@ export class FormateursComponent implements OnInit {
   private _dialogStatus: string;
   private _formateursDialog: MatDialogRef<FormateurDialogComponent>;
 
+  private _searchText: string;
+
   constructor(private _router: Router, private _formateursService: FormateursService, private _sitesService: SitesService,
               private _dialog: MatDialog, private _groupesService: GroupesService) {
     this._formateurs = [];
@@ -45,6 +47,14 @@ export class FormateursComponent implements OnInit {
 
   navigate(formateur: Formateur) {
     this._router.navigate(['/formateur', formateur.id]);
+  }
+
+  get searchText(): string {
+    return this._searchText;
+  }
+
+  set searchText(value: string) {
+    this._searchText = value;
   }
 
   get formateurs(): Formateur[] {

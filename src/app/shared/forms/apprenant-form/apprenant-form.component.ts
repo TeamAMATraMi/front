@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {Apprenant} from '../../interfaces/apprenant';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-form',
@@ -55,8 +54,6 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   ngOnChanges(record) {
     if (record.apprenant && record.apprenant.currentValue) {
       this._apprenant = record.apprenant.currentValue;
-      // let datePipe = new DatePipe('fr-EU');
-      // this._apprenant.dateInscription = Number(datePipe.transform(this._apprenant.dateInscription, 'dd/MM/yyyy'));
       this._isUpdateMode = true;
       this._form.patchValue(this._apprenant);
     } else {

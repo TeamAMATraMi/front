@@ -1,17 +1,28 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import {Apprenant} from '../interfaces/apprenant';
 
 @Pipe({
   name: 'search'
 })
 export class SearchPipe implements PipeTransform {
 
-  transform(items: any[], field: string, text: string): any[] {
+  transform(items: Apprenant[], field: string[], text: string): Apprenant[] {
     if (!items) { return []; }
     if (!field || !text) { return items; }
 
-    return items.filter(it => {
-      it[field].toLowerCase().includes(text.toLowerCase());
-    });
+    let res: Apprenant[];
+    res = [];
+
+    for (let i = 0; i < items.length; i++) {
+      for (let j = 0; j < field.length; j++) {
+        if (items[i][field[j]].toLowerCase().includes(text.toLowerCase())) {
+          res.push(items[i]);
+          break;
+        }
+      }
+    }
+
+    return res;
   }
 
 }

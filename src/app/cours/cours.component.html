@@ -10,7 +10,7 @@
           <mat-form-field>
              <mat-icon matPrefix></mat-icon>
               <input matInput
-                     placeholder="Chercher">
+                     placeholder="Chercher" [(ngModel)]="searchText">
         </mat-form-field>
       </span>
 
@@ -19,5 +19,5 @@
 </mat-toolbar>
 
 <section>
-    <app-cours-card [cours]="monCour" *ngFor="let monCour of cours" (deleteCours)="delete($event)"></app-cours-card>
+    <app-cours-card [cours]="monCour" *ngFor="let monCour of cours | search : ['matiere'] : searchText" (deleteCours)="delete($event)"></app-cours-card>
 </section>
