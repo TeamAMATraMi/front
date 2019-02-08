@@ -53,7 +53,7 @@ export class GroupesService {
   /**
    * Function to delete one Groupe for current id
    */
-  delete(id: string): Observable<string> {
+  delete(id: number): Observable<number> {
     return this._http.delete(this._backendURL.oneGroupe.replace(':id', id))
         .pipe(
             map(_ => id)

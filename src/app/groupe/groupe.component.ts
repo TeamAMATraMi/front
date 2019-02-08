@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Groupe} from '../shared/interfaces/groupe';
 import {filter} from 'rxjs/operators';
@@ -19,12 +19,14 @@ export class GroupeComponent implements OnInit {
   private _groupe: Groupe;
   private _apprenants: Apprenant[];
   private _site: Site;
+  private readonly _delete$: EventEmitter<Groupe>;
 
 
   constructor(private _apprenantsService: ApprenantsService, private _route: ActivatedRoute, private _sitesService: SitesService) {
     this._groupe = {} as Groupe;
     this._apprenants = [];
     this._site = {} as Site;
+    this._delete$ = new EventEmitter<Formateur>();
   }
 
   get groupe(): Groupe {
@@ -56,4 +58,13 @@ export class GroupeComponent implements OnInit {
           this._apprenants = apprenants;
         });
   }
+
+    @Output('deleteGroupe')
+    get delete$(): EventEmitter<Groupe> {
+        return this._delete$;
+    }
+
+    delete(groupe: Groupe) {
+        this._delete$.emit(groupe);
+    }
 }
