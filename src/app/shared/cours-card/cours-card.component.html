@@ -1,0 +1,31 @@
+<section>
+  <mat-card class="mat-whiteframe-2dp">
+    <mat-card-title-group>
+      <mat-card-title>
+        <a [routerLink]="['/formateur', formateur.id]">
+          <span>{{ formateur.nom}} {{formateur.prenom}}</span>
+        </a>
+      </mat-card-title>
+      <mat-card-subtitle>
+      </mat-card-subtitle>
+
+    </mat-card-title-group>
+    <mat-card-content>
+      Telephone : {{ formateur.telephone}}
+    </mat-card-content>
+    <mat-card-content>
+      Adresse : {{ formateur.adresse}}
+    </mat-card-content>
+    <mat-card-content>
+      Code postal : {{ formateur.codePostal }}
+    </mat-card-content>
+    <mat-card-content>
+      Commune : {{ formateur.commune}}
+    </mat-card-content>
+    <mat-card-content>
+      <button mat-button title="Delete" (click)="delete(formateur)">
+        <mat-icon svgIcon="icon-delete"></mat-icon>
+      </button>
+    </mat-card-content>
+  </mat-card>
+</section>

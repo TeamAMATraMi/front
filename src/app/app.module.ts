@@ -43,6 +43,8 @@ import {GroupeDialogComponent} from './shared/groupe-dialog/groupe-dialog.compon
 import {GroupeFormComponent} from './shared/forms/groupe-form/groupe-form.component';
 import {SearchPipe} from './shared/pipes/search.pipe';
 import { HomeComponent } from './home/home.component';
+import { CoursComponent } from './cours/cours.component';
+import { CoursCardComponent } from './shared/cours-card/cours-card.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,9 @@ import { HomeComponent } from './home/home.component';
     FormateurFormComponent,
     UpdateFormateurComponent,
     SearchPipe,
-    HomeComponent
+    HomeComponent,
+    CoursComponent,
+    CoursCardComponent
   ],
   entryComponents: [
     DialogComponent,
