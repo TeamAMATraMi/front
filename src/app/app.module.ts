@@ -34,18 +34,20 @@ import {FormateursCardComponent} from './shared/cards/formateurs-card/formateurs
 
 import {ApprenantFormComponent} from './shared/forms/apprenant-form/apprenant-form.component';
 import {UpdateComponent} from './update/update.component';
-import { FormateurComponent } from './formateur/formateur.component';
+import {FormateurComponent } from './formateur/formateur.component';
 import {FormateurDetailsComponent} from './shared/details/formateur-details/formateur-details.component';
 import {FormateurDialogComponent} from './shared/dialogs/formateur-dialog/formateur-dialog.component';
-import { FormateurFormComponent } from './shared/forms/formateur-form/formateur-form.component';
-import { UpdateFormateurComponent } from './update-formateur/update-formateur.component';
+import {FormateurFormComponent } from './shared/forms/formateur-form/formateur-form.component';
+import {UpdateFormateurComponent } from './update-formateur/update-formateur.component';
 import {GroupeDialogComponent} from './shared/groupe-dialog/groupe-dialog.component';
 import {GroupeFormComponent} from './shared/forms/groupe-form/groupe-form.component';
-import { UpdateGroupeComponent } from './update-groupe/update-groupe.component';
+import {UpdateGroupeComponent } from './update-groupe/update-groupe.component';
 import {SearchPipe} from './shared/pipes/search.pipe';
-import { HomeComponent } from './home/home.component';
-import { CoursComponent } from './cours/cours.component';
-import { CoursCardComponent } from './shared/cards/cours-card/cours-card.component';
+import {HomeComponent } from './home/home.component';
+import {CoursComponent } from './cours/cours.component';
+import {CoursCardComponent } from './shared/cards/cours-card/cours-card.component';
+import {CourDetailsComponent } from './shared/details/cour-details/cour-details.component';
+import {CourComponent } from './cour/cour.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +78,9 @@ import { CoursCardComponent } from './shared/cards/cours-card/cours-card.compone
     SearchPipe,
     HomeComponent,
     CoursComponent,
-    CoursCardComponent
+    CoursCardComponent,
+    CourDetailsComponent,
+    CourComponent
   ],
   entryComponents: [
     DialogComponent,
