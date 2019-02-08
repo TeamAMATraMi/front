@@ -41,6 +41,7 @@ import { FormateurFormComponent } from './shared/forms/formateur-form/formateur-
 import { UpdateFormateurComponent } from './update-formateur/update-formateur.component';
 import {GroupeDialogComponent} from './shared/groupe-dialog/groupe-dialog.component';
 import {GroupeFormComponent} from './shared/forms/groupe-form/groupe-form.component';
+import { UpdateGroupeComponent } from './update-groupe/update-groupe.component';
 import {SearchPipe} from './shared/pipes/search.pipe';
 import { HomeComponent } from './home/home.component';
 
@@ -69,6 +70,7 @@ import { HomeComponent } from './home/home.component';
     FormateurDialogComponent,
     FormateurFormComponent,
     UpdateFormateurComponent,
+    UpdateGroupeComponent,
     SearchPipe,
     HomeComponent
   ],

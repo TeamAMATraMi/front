@@ -3,9 +3,7 @@
 
 <mat-dialog-content>
   <form novalidate [formGroup]="form">
-    <p *ngIf="isUpdateMode">
-      <span style="width:100%">{{ form.get('idSite').value }} {{ form.get('nom').value }}</span>
-    </p>
+
     <mat-accordion>
         <p>
           <mat-form-field class="full-width">

@@ -24,11 +24,17 @@
 </mat-toolbar>
 
 <mat-list *ngFor="let groupe of groupes">
-    <a [routerLink]="['/apprenantsG', groupe.id]">
         <mat-list-item class="mat-whiteframe-2dp mat-card">
-            <h3 matLine> {{groupe.nom}} </h3>
+            <a [routerLink]="['/apprenantsG', groupe.id]">
+                <h3 matLine> {{groupe.nom}} </h3>
+            </a>
+            <mat-dialog-actions align="end">
+                <button mat-button type="button" [routerLink]="['/updateGroupe', groupe.id]">Modifier</button>
+            </mat-dialog-actions>
+            <button mat-button title="Delete" (click)="delete(groupe)">
+                <mat-icon svgIcon="icon-delete"></mat-icon>
+            </button>
         </mat-list-item>
-    </a>
 </mat-list>
 
 <section class="buttons-fab" *ngIf="dialogStatus === 'inactive'">
