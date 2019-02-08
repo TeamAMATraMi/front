@@ -27,6 +27,8 @@ export class ApprenantsComponent implements OnInit {
   private _dialogStatus: string;
   private _apprenantsDialog: MatDialogRef<DialogComponent>;
 
+  private _searchText: string;
+
   constructor(private _router: Router, private _apprenantsService: ApprenantsService, private _sitesService: SitesService,
               private _groupesService: GroupesService, private _dialog: MatDialog) {
     this._apprenants = [];
@@ -35,6 +37,16 @@ export class ApprenantsComponent implements OnInit {
     this._groupesSite = [];
 
     this._dialogStatus = 'inactive';
+  }
+
+  get searchText(): string {
+    return this._searchText;
+    console.log('GET ' + this._searchText);
+  }
+
+  set searchText(s: string) {
+    this._searchText = s;
+    console.log('SET ' + this._searchText);
   }
 
   get dialogStatus(): string {
