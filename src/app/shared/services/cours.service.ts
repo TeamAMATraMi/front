@@ -53,11 +53,11 @@ export class CoursService {
     /**
      * Function to delete one Cours for current id
      */
-    delete(id: string): Observable<string> {
-        return this._http.delete(this._backendURL.oneCours.replace(':id', id))
-            .pipe(
-                map(_ => id)
-            );
+    delete(id: number): Observable<number> {
+      return this._http.delete(this._backendURL.oneCours.replace(':id', id))
+        .pipe(
+          map(_ => id)
+        );
     }
 
     /**
