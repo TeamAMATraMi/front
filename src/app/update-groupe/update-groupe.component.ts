@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {filter, flatMap, map} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
-import {GroupeDialogComponent} from '../shared/groupe-dialog/groupe-dialog.component';
+import {GroupeDialogComponent} from '../shared/dialogs/groupe-dialog/groupe-dialog.component';
 import {GroupesService} from '../shared/services/groupes.service';
 import {Groupe} from '../shared/interfaces/groupe';
 

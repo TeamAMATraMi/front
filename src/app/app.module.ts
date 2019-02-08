@@ -39,7 +39,7 @@ import {FormateurDetailsComponent} from './shared/details/formateur-details/form
 import {FormateurDialogComponent} from './shared/dialogs/formateur-dialog/formateur-dialog.component';
 import { FormateurFormComponent } from './shared/forms/formateur-form/formateur-form.component';
 import { UpdateFormateurComponent } from './update-formateur/update-formateur.component';
-import {GroupeDialogComponent} from './shared/groupe-dialog/groupe-dialog.component';
+import {GroupeDialogComponent} from './shared/dialogs/groupe-dialog/groupe-dialog.component';
 import {GroupeFormComponent} from './shared/forms/groupe-form/groupe-form.component';
 import { UpdateGroupeComponent } from './update-groupe/update-groupe.component';
 import {SearchPipe} from './shared/pipes/search.pipe';

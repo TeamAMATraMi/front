@@ -5,7 +5,7 @@ import {GroupesService} from '../shared/services/groupes.service';
 import {filter, flatMap} from 'rxjs/operators';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {Observable} from 'rxjs';
-import {GroupeDialogComponent} from '../shared/groupe-dialog/groupe-dialog.component';
+import {GroupeDialogComponent} from '../shared/dialogs/groupe-dialog/groupe-dialog.component';
 @Component({
   selector: 'app-groupes',
   templateUrl: './groupes.component.html',
