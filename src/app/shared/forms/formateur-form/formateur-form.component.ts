@@ -24,13 +24,17 @@ export class FormateurFormComponent implements OnInit, OnChanges {
   constructor(private _sitesService: SitesService) {
     this._submit$ = new EventEmitter<Formateur>();
     this._cancel$ = new EventEmitter<void>();
-    this._form = this._buildForm();
     this._sites = [];
+    this._form = this._buildForm();
   }
 
   ngOnInit() {
     this.ville = 'Tous les sites';
-    this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
+    this._sitesService.fetch().subscribe((sites: Site[]) => {
+        this._sites = sites;
+        this._form.patchValue({ville: this._sites.filter(site => site.id === this._formateur.idSite)[0].ville});
+      }
+    );
   }
 
   get form(): FormGroup {

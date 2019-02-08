@@ -12,7 +12,7 @@
         <span class="flex"></span>
         <span>
           <mat-form-field>
-             <mat-icon matPrefix>search</mat-icon>
+             <mat-icon matPrefix></mat-icon>
               <input matInput
                      placeholder="Chercher"
                      formControlName="search">
@@ -31,3 +31,8 @@
     </a>
 </mat-list>
 
+<section class="buttons-fab" *ngIf="dialogStatus === 'inactive'">
+    <button (click)="showDialog()" mat-fab color="accent" class="button-add">
+        <i class="material-icons">add</i>
+    </button>
+</section>
