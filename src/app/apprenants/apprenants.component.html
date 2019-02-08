@@ -24,7 +24,7 @@
         <span>
           <mat-form-field>
               <mat-icon matPrefix></mat-icon>
-              <input matInput placeholder="Chercher">
+              <input matInput placeholder="Chercher" [(ngModel)]="searchText">
           </mat-form-field>
       </span>
 
@@ -33,7 +33,7 @@
 
 <section>
     <app-apprenant-card [apprenant]="apprenant" (deleteApprenant)="delete($event)"
-                        *ngFor="let apprenant of apprenants"></app-apprenant-card>
+                        *ngFor="let apprenant of apprenants | search : 'nom' : searchText"></app-apprenant-card>
 </section>
 
 <section class="buttons-fab" *ngIf="dialogStatus === 'inactive'">
