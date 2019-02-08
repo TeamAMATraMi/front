@@ -31,7 +31,7 @@ export class UpdateGroupeComponent implements OnInit {
             data: groupe
           });
 
-          // subscribe to afterClosed observable to set dialog status and do process
+          // subscribe to afterClosed observable to set dialogs status and do process
           this._groupesDialog.afterClosed()
               .pipe(
                   filter(_ => !!_),
