@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 import { filter, flatMap, map } from 'rxjs/operators';
 import { ApprenantsService } from '../shared/services/apprenants.service';
 import { Apprenant } from '../shared/interfaces/apprenant';
-import { DialogComponent } from '../shared/dialog/dialog.component';
+import {DialogComponent} from '../shared/dialogs/apprenant-dialog/dialog.component';
 
 @Component({
   selector: 'app-update',
@@ -12,7 +12,7 @@ import { DialogComponent } from '../shared/dialog/dialog.component';
   styleUrls: [ './update.component.css' ]
 })
 export class UpdateComponent implements OnInit {
-  // private property to store dialog reference
+  // private property to store apprenant-dialogs reference
   private _apprenantsDialog: MatDialogRef<DialogComponent>;
 
   /**
@@ -38,7 +38,7 @@ constructor(private _route: ActivatedRoute, private _router: Router, private _ap
             data: apprenant
           });
 
-          // subscribe to afterClosed observable to set dialog status and do process
+          // subscribe to afterClosed observable to set apprenant-dialogs status and do process
           this._apprenantsDialog.afterClosed()
               .pipe(
                   filter(_ => !!_),

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Apprenant} from '../interfaces/apprenant';
-import {Site} from '../interfaces/site';
+import {Apprenant} from '../../interfaces/apprenant';
+import {Site} from '../../interfaces/site';
 
 @Component({
   selector: 'app-sites-card',

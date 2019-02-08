@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {Groupe} from '../shared/interfaces/groupe';
 import {GroupesService} from '../shared/services/groupes.service';
-import {FormateurDialogComponent} from '../shared/formateur-dialog/formateur-dialog.component';
+import {FormateurDialogComponent} from '../shared/dialogs/formateur-dialog/formateur-dialog.component';
 
 @Component({
   selector: 'app-formateurs',
@@ -87,7 +87,7 @@ export class FormateursComponent implements OnInit {
   }
 
   showDialog() {
-    // set dialog status
+    // set apprenant-dialogs status
     this._dialogStatus = 'active';
 
     // open modal
@@ -96,7 +96,7 @@ export class FormateursComponent implements OnInit {
       disableClose: true
     });
 
-    // subscribe to afterClosed observable to set dialog status and do process
+    // subscribe to afterClosed observable to set apprenant-dialogs status and do process
     this._formateursDialog.afterClosed()
         .pipe(
             filter(_ => !!_),

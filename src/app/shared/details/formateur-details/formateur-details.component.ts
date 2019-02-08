@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Formateur} from '../interfaces/formateur';
-import {SitesService} from '../services/sites.service';
-import {Site} from '../interfaces/site';
+import {Formateur} from '../../interfaces/formateur';
+import {SitesService} from '../../services/sites.service';
+import {Site} from '../../interfaces/site';
 
 @Component({
   selector: 'app-formateur-details',

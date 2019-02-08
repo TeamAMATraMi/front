@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Formateur} from '../interfaces/formateur';
+import {Formateur} from '../../interfaces/formateur';
 
 @Component({
   selector: 'app-formateurs-card',

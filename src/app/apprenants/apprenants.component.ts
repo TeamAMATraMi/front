@@ -6,7 +6,7 @@ import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
 import {GroupesService} from '../shared/services/groupes.service';
 import {Groupe} from '../shared/interfaces/groupe';
-import {DialogComponent} from '../shared/dialog/dialog.component';
+import {DialogComponent} from '../shared/dialogs/apprenant-dialog/dialog.component';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {filter, flatMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
@@ -106,7 +106,7 @@ export class ApprenantsComponent implements OnInit {
    * Function to display modal
    */
   showDialog() {
-    // set dialog status
+    // set apprenant-dialogs status
     this._dialogStatus = 'active';
 
     // open modal
@@ -115,7 +115,7 @@ export class ApprenantsComponent implements OnInit {
       disableClose: true
     });
 
-    // subscribe to afterClosed observable to set dialog status and do process
+    // subscribe to afterClosed observable to set apprenant-dialogs status and do process
     this._apprenantsDialog.afterClosed()
         .pipe(
             filter(_ => !!_),

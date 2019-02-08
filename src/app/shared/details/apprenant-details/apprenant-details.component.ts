@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Apprenant} from '../interfaces/apprenant';
+import {Apprenant} from '../../interfaces/apprenant';
 
 @Component({
   selector: 'app-apprenant-details',
