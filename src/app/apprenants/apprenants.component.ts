@@ -41,12 +41,10 @@ export class ApprenantsComponent implements OnInit {
 
   get searchText(): string {
     return this._searchText;
-    console.log('GET ' + this._searchText);
   }
 
   set searchText(s: string) {
     this._searchText = s;
-    console.log('SET ' + this._searchText);
   }
 
   get dialogStatus(): string {

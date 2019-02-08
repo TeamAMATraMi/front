@@ -11,7 +11,7 @@ import {Site} from '../interfaces/site';
 export class SitesService {
 
     private readonly _backendURL: any;
-git
+
     constructor(private _http: HttpClient) {
         this._backendURL = {};
 
@@ -53,7 +53,7 @@ git
     /**
      * Function to delete one Site for current id
      */
-    delete(id: string): Observable<string> {
+    delete(id: number): Observable<number> {
         return this._http.delete(this._backendURL.oneSite.replace(':id', id))
             .pipe(
                 map(_ => id)

@@ -16,10 +16,19 @@ export class GroupesComponent implements OnInit {
   private _groupes: Groupe[];
   private _dialogStatus: string;
   private _groupesDialog: MatDialogRef<GroupeDialogComponent>;
+  private _searchText: string;
 
   constructor(private _router: Router, private _groupesService: GroupesService, private _dialog: MatDialog) {
     this._groupes = [];
     this._dialogStatus = 'inactive';
+  }
+
+  get searchText(): string {
+    return this._searchText;
+  }
+
+  set searchText(value: string) {
+    this._searchText = value;
   }
 
   get groupes(): Groupe[] {

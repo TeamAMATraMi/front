@@ -49,6 +49,9 @@ import {CoursComponent } from './cours/cours.component';
 import {CoursCardComponent } from './shared/cards/cours-card/cours-card.component';
 import {CourDetailsComponent } from './shared/details/cour-details/cour-details.component';
 import {CourComponent } from './cour/cour.component';
+import { SiteFormComponent } from './shared/forms/site-form/site-form.component';
+import {SiteDialogComponent} from './shared/dialogs/site-dialog/site-dialog.component';
+import { SiteComponent } from './site/site.component';
 
 @NgModule({
   declarations: [
@@ -81,12 +84,16 @@ import {CourComponent } from './cour/cour.component';
     CoursComponent,
     CoursCardComponent,
     CourDetailsComponent,
-    CourComponent
+    CourComponent,
+    SiteDialogComponent,
+    SiteFormComponent,
+    SiteComponent
   ],
   entryComponents: [
     DialogComponent,
     FormateurDialogComponent,
-    GroupeDialogComponent
+    GroupeDialogComponent,
+    SiteDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Créer un groupe</h2>
+
+<mat-dialog-content>
+  <form novalidate [formGroup]="form">
+    <mat-accordion>
+      <p>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Ville" formControlName="ville" minlength="2" required name="ville" />
+          <mat-error *ngIf="form.get('ville').dirty && form.get('ville').hasError('required')">
+            ville est <strong>requis</strong>
+          </mat-error>
+          <mat-error *ngIf="form.get('ville').dirty && form.get('ville').hasError('minlength')">
+            min <strong>2 lettres</strong>
+          </mat-error>
+        </mat-form-field>
+      </p>
+    </mat-accordion>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()">Cancel</button>
+  <button mat-button color="primary" type="submit" (click)="submit(form.value)" [disabled]="form.invalid">Save</button>
+</mat-dialog-actions>

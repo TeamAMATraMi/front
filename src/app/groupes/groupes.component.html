@@ -13,9 +13,7 @@
         <span>
           <mat-form-field>
              <mat-icon matPrefix></mat-icon>
-              <input matInput
-                     placeholder="Chercher"
-                     formControlName="search">
+              <input matInput placeholder="Chercher" [(ngModel)]="searchText">
         </mat-form-field>
 
       </span>
@@ -23,7 +21,7 @@
     </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-list *ngFor="let groupe of groupes">
+<mat-list *ngFor="let groupe of groupes | search : ['nom'] : searchText">
         <mat-list-item class="mat-whiteframe-2dp mat-card">
             <a [routerLink]="['/apprenantsG', groupe.id]">
                 <h3 matLine> {{groupe.nom}} </h3>
