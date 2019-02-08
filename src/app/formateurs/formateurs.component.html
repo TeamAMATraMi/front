@@ -16,7 +16,7 @@
           <mat-form-field>
              <mat-icon matPrefix></mat-icon>
               <input matInput
-                     placeholder="Chercher">
+                     placeholder="Chercher" [(ngModel)]="searchText">
         </mat-form-field>
 
       </span>
@@ -26,7 +26,7 @@
 </mat-toolbar>
 
 <section>
-  <app-formateurs-card [formateur]="formateur" *ngFor="let formateur of formateurs" (deleteFormateur)="delete($event)"></app-formateurs-card>
+  <app-formateurs-card [formateur]="formateur" *ngFor="let formateur of formateurs | search : ['nom','prenom'] : searchText" (deleteFormateur)="delete($event)"></app-formateurs-card>
 </section>
 
 <section class="buttons-fab" *ngIf="dialogStatus === 'inactive'">

@@ -26,7 +26,7 @@ export class GroupeComponent implements OnInit {
     this._groupe = {} as Groupe;
     this._apprenants = [];
     this._site = {} as Site;
-    this._delete$ = new EventEmitter<Formateur>();
+    this._delete$ = new EventEmitter<Groupe>();
   }
 
   get groupe(): Groupe {

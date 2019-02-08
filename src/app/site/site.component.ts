@@ -1,30 +1,31 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Site} from '../../interfaces/site';
+import {Site} from '../shared/interfaces/site';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-sites-card',
-  templateUrl: './sites-card.component.html',
-  styleUrls: ['./sites-card.component.css']
+  selector: 'app-site',
+  templateUrl: './site.component.html',
+  styleUrls: ['./site.component.css']
 })
-export class SitesCardComponent implements OnInit {
+export class SiteComponent implements OnInit {
 
   private _site: Site;
   private readonly _delete$: EventEmitter<Site>;
 
-  constructor() {
-    this._site = {} as Site;
+  constructor(private _route: ActivatedRoute) {
     this._delete$ = new EventEmitter<Site>();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   get site(): Site {
     return this._site;
   }
 
   @Input()
-  set site(site: Site) {
-    this._site = site;
+  set site(value: Site) {
+    this._site = value;
   }
 
   @Output('deleteSite')
@@ -35,5 +36,4 @@ export class SitesCardComponent implements OnInit {
   delete(site: Site) {
     this._delete$.emit(site);
   }
-
 }

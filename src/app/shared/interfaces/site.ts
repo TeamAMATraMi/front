@@ -1,4 +1,4 @@
 export interface Site {
-  id: number;
+  id?: number;
   ville: string;
 }

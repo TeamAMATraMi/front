@@ -1,19 +1,23 @@
 <mat-toolbar>
   <mat-toolbar-row>
     <span>Sites</span>
-
     <span class="flex"></span>
     <span>
-          <mat-form-field>
-             <mat-icon matPrefix></mat-icon>
-              <input matInput
-                     placeholder="Chercher">
+        <mat-form-field>
+            <mat-icon matPrefix></mat-icon>
+            <input matInput placeholder="Chercher">
         </mat-form-field>
-
-      </span>
-
-
+    </span>
   </mat-toolbar-row>
 </mat-toolbar>
 
-<app-sites-card [site]="site" *ngFor="let site of sites"> </app-sites-card>
+<section>
+    <app-sites-card [site]="site" (deleteSite)="delete($event)"
+                    *ngFor="let site of sites"> </app-sites-card>
+</section>
+
+<section class="buttons-fab" *ngIf="dialogStatus === 'inactive'">
+    <button (click)="showDialog()" mat-fab color="primary" class="button-add">
+        <b class="material-icons">+</b>
+    </button>
+</section>

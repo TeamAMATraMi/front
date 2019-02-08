@@ -21,6 +21,7 @@ import {Groupe} from '../shared/interfaces/groupe';
 export class CoursComponent implements OnInit {
 
   private _cours: Cours[];
+  private _searchText: string;
   private _dialogStatus: string;
   private _coursDialog: MatDialogRef<CoursDialogComponent>;
   private _formateurs: Formateur[];
@@ -37,6 +38,14 @@ export class CoursComponent implements OnInit {
   ngOnInit() {
     this._coursService.fetch().subscribe((cours: Cours[]) =>
       this._cours = cours);
+  }
+
+  get searchText(): string {
+    return this._searchText;
+  }
+
+  set searchText(value: string) {
+    this._searchText = value;
   }
 
   get cours(): Cours[] {

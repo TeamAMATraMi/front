@@ -2,11 +2,13 @@
   <mat-card class="mat-whiteframe-2dp">
     <mat-card-title-group>
       <mat-card-title>
-        <span>{{ site.id}} {{ site.ville}}</span>
+        <span>{{ site.id }} {{ site.ville }}</span>
+        <button mat-button title="Delete" (click)="delete(site)">
+          <mat-icon svgIcon="icon-delete"></mat-icon>
+        </button>
       </mat-card-title>
       <mat-card-subtitle>
       </mat-card-subtitle>
-
     </mat-card-title-group>
   </mat-card>
 </section>
