@@ -71,7 +71,7 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
         dateNaissance: 0,
         genre: '',
         paysOrigine: '',
-        nationalite: 0,
+        nationalite: '',
         dateArrivee: 0,
         quartierPrioritaire: 0,
         situationPersonnelle: '',
@@ -143,7 +143,7 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
         Validators.required, Validators.minLength(1)
       ])),
       nationalite: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(1)
+        Validators.required
       ])),
       dateArrivee: new FormControl('', Validators.compose([
         Validators.required

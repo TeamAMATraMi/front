@@ -13,7 +13,7 @@ export interface Apprenant {
   dateNaissance: number;
   genre: string;
   paysOrigine: string;
-  nationalite: number;
+  nationalite: string;
   dateArrivee: number;
   quartierPrioritaire: number;
   situationPersonnelle: string;
