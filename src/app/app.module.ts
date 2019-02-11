@@ -8,15 +8,15 @@ import {HeaderComponent} from './header/header.component';
 import {DialogComponent} from './shared/dialogs/apprenant-dialog/dialog.component';
 
 import {
-    MatButtonModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatDialogModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatToolbarModule,
-    MatMenuModule, MatSelectModule, MatExpansionModule, MatRadioModule, MatFormFieldModule
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatToolbarModule,
+  MatMenuModule, MatSelectModule, MatExpansionModule, MatRadioModule, MatFormFieldModule, MatTableDataSource, MatTableModule
 } from '@angular/material';
 import {SitesComponent} from './sites/sites.component';
 import {ApprenantsComponent} from './apprenants/apprenants.component';
@@ -120,7 +120,8 @@ import { UpdateCoursComponent } from './update-cours/update-cours.component';
         MatSelectModule,
         MatExpansionModule,
         MatRadioModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        MatTableModule
     ],
     providers: [],
     bootstrap: [AppComponent]
