@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {Apprenant} from '../../interfaces/apprenant';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {AssociationsService} from '../../services/associations.service';
+import {Association} from '../../interfaces/association';
 
 @Component({
   selector: 'app-form',
@@ -15,10 +17,15 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   private readonly _submit$: EventEmitter<Apprenant>;
   private readonly _form: FormGroup;
 
-  constructor() {
+  private _quartierPrio: string[] = ['Oui', 'Non'];
+  private _situation: string[] = ['Marié(e)', 'Célibataire', 'Concubinage', 'Veuf(ve)', 'Divorcé(e]', 'Séparé(e)', 'Pacsé(e)'];
+  private _associations: Association[];
+
+  constructor(private _associationsService: AssociationsService) {
     this._submit$ = new EventEmitter<Apprenant>();
     this._cancel$ = new EventEmitter<void>();
     this._form = this._buildForm();
+    this._associations = [];
   }
 
   @Input()
@@ -49,6 +56,7 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this._associationsService.fetch().subscribe((associations: Association[]) => this._associations = associations);
   }
 
   ngOnChanges(record) {
@@ -191,4 +199,15 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
     });
   }
 
+  get quartierPrio(): string[] {
+    return this._quartierPrio;
+  }
+
+  get situation(): string[] {
+    return this._situation;
+  }
+
+  get associations(): Association[] {
+    return this._associations;
+  }
 }

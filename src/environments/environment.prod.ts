@@ -19,7 +19,7 @@ export const environment = {
             cours: {
                 allCours: '/cours',
                 oneCours: '/cours/:id',
-          },
+            },
             sites: {
                 allSites: '/sites',
                 oneSite: '/sites/:id'
@@ -27,7 +27,11 @@ export const environment = {
             groupes: {
                 allGroupes: '/groupes',
                 oneGroupe: '/groupes/:id'
-          }
+            },
+            associations: {
+                allAssociations: '/associations',
+                oneAssociation: '/associations/:id'
+            }
         }
     }
 };

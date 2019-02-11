@@ -30,6 +30,10 @@ export const environment = {
         groupes: {
             allGroupes: '/groupes',
             oneGroupe: '/groupes/:id'
+        },
+        associations: {
+          allAssociations: '/associations',
+          oneAssociation: '/associations/:id'
         }
     }
   },

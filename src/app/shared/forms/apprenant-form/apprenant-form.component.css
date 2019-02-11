@@ -15,3 +15,7 @@ img {
 .mgb15{
     margin-bottom: 15px;
 }
+
+.radiobutton-width {
+    width: 25%;
+}
