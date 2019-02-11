@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Formateur} from '../shared/interfaces/formateur';
 import {Router} from '@angular/router';
 import {FormateursService} from '../shared/services/formateurs.service';
@@ -17,6 +17,12 @@ import {FormateurDialogComponent} from '../shared/dialogs/formateur-dialog/forma
   styleUrls: ['./formateurs.component.css']
 })
 export class FormateursComponent implements OnInit {
+
+  private _dataSource: Formateur[];
+  private _displayedColumns = ['NomPrenom', 'Tel', 'Address', 'Delete'];
+
+  private _formateur: Formateur;
+  private readonly _delete$: EventEmitter<Formateur>;
 
   private _formateurs: Formateur[];
   private _sites: Site[];
@@ -43,6 +49,7 @@ export class FormateursComponent implements OnInit {
     this._formateursService.fetch().subscribe((formateur: Formateur[]) => this._formateurs = formateur);
     this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => { this._groupes = groupes; this._groupesSite = this._groupes; });
+    this._formateursService.fetch().subscribe((_) => this._dataSource = _);
   }
 
   navigate(formateur: Formateur) {
@@ -135,11 +142,28 @@ export class FormateursComponent implements OnInit {
         );
   }
 
-  delete(formateur: Formateur) {
-    this._formateursService
-        .delete(formateur.id)
-        .subscribe(_ => {
-          return this._formateurs = this._formateurs.filter(__ => __.id !== _);
-        });
+  get formateur(): Formateur {
+    return this._formateur;
+  }
+
+  @Input()
+  set formateur(value: Formateur) {
+    this._formateur = value;
+  }
+
+  @Output('deleteFormateur')
+  get delete$(): EventEmitter<Formateur> {
+    return this._delete$;
+  }
+
+  delete(id: number) {
+    this._formateursService.delete(id).subscribe(null, null, () => this.ngOnInit());
+  }
+  get dataSource(): Formateur[] {
+    return this._dataSource;
+  }
+
+  get displayedColumns(): any {
+    return this._displayedColumns;
   }
 }
