@@ -3,6 +3,10 @@ import {Apprenant} from '../../interfaces/apprenant';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {AssociationsService} from '../../services/associations.service';
 import {Association} from '../../interfaces/association';
+import {QuartierPrioritaire} from '../../interfaces/quartier_prioritaire';
+import {QuartiersService} from '../../services/quartiers.service';
+import {GroupesService} from '../../services/groupes.service';
+import {Groupe} from '../../interfaces/groupe';
 
 @Component({
   selector: 'app-form',
@@ -17,15 +21,19 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   private readonly _submit$: EventEmitter<Apprenant>;
   private readonly _form: FormGroup;
 
-  private _quartierPrio: string[] = ['Oui', 'Non'];
   private _situation: string[] = ['Marié(e)', 'Célibataire', 'Concubinage', 'Veuf(ve)', 'Divorcé(e]', 'Séparé(e)', 'Pacsé(e)'];
   private _associations: Association[];
+  private _quartiersPrio: QuartierPrioritaire[];
+  private _groupes: Groupe[];
 
-  constructor(private _associationsService: AssociationsService) {
+  constructor(private _associationsService: AssociationsService, private _quartiersService: QuartiersService,
+              private _groupesService: GroupesService) {
     this._submit$ = new EventEmitter<Apprenant>();
     this._cancel$ = new EventEmitter<void>();
     this._form = this._buildForm();
     this._associations = [];
+    this._quartiersPrio = [];
+    this._groupes = [];
   }
 
   @Input()
@@ -57,6 +65,8 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this._associationsService.fetch().subscribe((associations: Association[]) => this._associations = associations);
+    this._quartiersService.fetch().subscribe((quartiers: QuartierPrioritaire[]) => this._quartiersPrio = quartiers);
+    this._groupesService.fetch().subscribe((groupes: Groupe[]) => this._groupes = groupes);
   }
 
   ngOnChanges(record) {
@@ -199,15 +209,19 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
     });
   }
 
-  get quartierPrio(): string[] {
-    return this._quartierPrio;
-  }
-
   get situation(): string[] {
     return this._situation;
   }
 
   get associations(): Association[] {
     return this._associations;
+  }
+
+  get quartiersPrio(): QuartierPrioritaire[] {
+    return this._quartiersPrio;
+  }
+
+  get groupes(): Groupe[] {
+    return this._groupes;
   }
 }

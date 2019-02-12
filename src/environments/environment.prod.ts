@@ -31,6 +31,10 @@ export const environment = {
             associations: {
                 allAssociations: '/associations',
                 oneAssociation: '/associations/:id'
+            },
+            quartiersPrio: {
+                allQuartiersPrio: '/quartiersPrio',
+                oneQuartierPrio: '/quartiersPrio/:id'
             }
         }
     }

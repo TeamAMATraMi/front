@@ -32,8 +32,12 @@ export const environment = {
             oneGroupe: '/groupes/:id'
         },
         associations: {
-          allAssociations: '/associations',
-          oneAssociation: '/associations/:id'
+            allAssociations: '/associations',
+            oneAssociation: '/associations/:id'
+        },
+        quartiers: {
+            allQuartiers: '/quartiers',
+            oneQuartier: '/quartiers/:id'
         }
     }
   },
