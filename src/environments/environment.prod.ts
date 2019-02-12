@@ -32,9 +32,9 @@ export const environment = {
                 allAssociations: '/associations',
                 oneAssociation: '/associations/:id'
             },
-            quartiersPrio: {
-                allQuartiersPrio: '/quartiersPrio',
-                oneQuartierPrio: '/quartiersPrio/:id'
+            quartiers: {
+                allQuartiers: '/quartiersPrio',
+                oneQuartier: '/quartiersPrio/:id'
             }
         }
     }
