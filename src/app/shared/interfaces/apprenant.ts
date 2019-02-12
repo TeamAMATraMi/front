@@ -8,7 +8,7 @@ export interface Apprenant {
   commune: string;
   idGroupe: number;
   dateInscription: number;
-  auteurDossier: number;
+  auteurDossier: string;
   majeur: boolean;
   dateNaissance: number;
   genre: string;
