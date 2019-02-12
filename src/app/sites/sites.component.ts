@@ -90,12 +90,10 @@ export class SitesComponent implements OnInit {
           );
   }
 
-  delete(site: Site) {
+  delete(id: number) {
       this._sitesService
-          .delete(site.id)
-          .subscribe(_ => {
-              return this._sites = this._sites.filter(__ => __.id !== _);
-          });
+          .delete(id)
+          .subscribe(null, null, () => this.ngOnInit());
   }
 
 }
