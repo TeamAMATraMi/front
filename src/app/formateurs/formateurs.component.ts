@@ -120,7 +120,7 @@ export class FormateursComponent implements OnInit {
             flatMap(_ => this._add(_))
         )
         .subscribe(
-            (formateurs: Formateur[]) => this._formateurs = formateurs,
+            (formateurs: Formateur[]) => this._dataSource = formateurs,
             _ => this._dialogStatus = 'inactive',
             () => this._dialogStatus = 'inactive'
         );
