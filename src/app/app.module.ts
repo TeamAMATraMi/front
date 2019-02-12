@@ -99,7 +99,8 @@ import { UpdateCoursComponent } from './update-cours/update-cours.component';
         DialogComponent,
         FormateurDialogComponent,
         GroupeDialogComponent,
-        CoursDialogComponent
+        CoursDialogComponent,
+        SiteDialogComponent
     ],
     imports: [
         BrowserModule,
