@@ -17,6 +17,11 @@ export class SitesComponent implements OnInit {
   private _sites: Site[];
   private _dialogStatus: string;
   private _sitesDialog: MatDialogRef<SiteDialogComponent>;
+  private _searchText: string;
+  private _dataSource: Site[];
+  private _displayedColumns = ['id', 'ville', 'Delete'];
+
+
 
   constructor(private _router: Router, private _sitesService: SitesService, private _dialog: MatDialog) {
     this._sites = [];
@@ -24,7 +29,23 @@ export class SitesComponent implements OnInit {
   }
 
   ngOnInit() {
-      this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
+      this._sitesService.fetch().subscribe((sites: Site[]) => this._dataSource = sites);
+  }
+
+  get dataSource(): Site[] {
+      return this._dataSource;
+  }
+
+  get searchText(): string {
+      return this._searchText;
+  }
+
+  set searchText(value: string) {
+      this._searchText = value;
+  }
+
+  get displayedColumns(): any {
+      return this._displayedColumns;
   }
 
   get sites(): Site[] {
@@ -55,7 +76,7 @@ export class SitesComponent implements OnInit {
               flatMap(_ => this._add(_))
           )
           .subscribe(
-              (sites: Site[]) => this._sites = sites,
+              (sites: Site[]) => this._dataSource = sites,
               _ => this._dialogStatus = 'inactive',
               () => this._dialogStatus = 'inactive'
           );

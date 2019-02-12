@@ -159,6 +159,7 @@ export class FormateursComponent implements OnInit {
   delete(id: number) {
     this._formateursService.delete(id).subscribe(null, null, () => this.ngOnInit());
   }
+
   get dataSource(): Formateur[] {
     return this._dataSource;
   }

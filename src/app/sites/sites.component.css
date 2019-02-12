@@ -8,3 +8,41 @@ section {
     align-items: center;
     justify-content: center;
 }
+
+.card {
+    min-width: 80%;
+}
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    min-width: 175vh;
+}
+
+.mat-table {
+    overflow: auto;
+    max-height: 500px;
+}
+
+a {
+    cursor: pointer;
+}
+
+mat-cell{
+    position: relative;
+}
+
+mat-header-cell{
+    position: relative;
+}
+
+.content-page {
+    display:flex;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    height:calc(100vh - 130px);
+    top:130px;
+}
