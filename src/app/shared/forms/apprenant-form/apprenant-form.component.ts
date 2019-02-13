@@ -128,16 +128,16 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
         Validators.required, Validators.minLength(2)
       ])),
       telephone: new FormControl('', Validators.compose([
-        Validators.required, Validators.pattern('(0|\\+33|0033)[1-9][0-9]{8}')
+        Validators.pattern('(0|\\+33|0033)[1-9][0-9]{8}')
       ])),
       adresse: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(3)
+        Validators.minLength(3)
       ])),
       codePostal: new FormControl('', Validators.compose([
-        Validators.required, Validators.pattern('[0-9]{5}')
+        Validators.pattern('[0-9]{5}')
       ])),
       commune: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(1)
+        Validators.required, Validators.minLength(2)
       ])),
       idGroupe: new FormControl('', Validators.compose([
         Validators.required
@@ -146,63 +146,46 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
         Validators.required
       ])),
       auteurDossier: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(1)
+        Validators.required
       ])),
       majeur: new FormControl('', Validators.compose([
-        Validators.required
       ])),
       dateNaissance: new FormControl('', Validators.compose([
-        Validators.required
       ])),
       genre: new FormControl('', Validators.compose([
-        Validators.required
       ])),
       paysOrigine: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(1)
+        Validators.required
       ])),
       nationalite: new FormControl('', Validators.compose([
-        Validators.required
       ])),
       dateArrivee: new FormControl('', Validators.compose([
-        Validators.required
       ])),
       quartierPrioritaire: new FormControl('', Validators.compose([
-
       ])),
       situationPersonnelle: new FormControl('', Validators.compose([
       ])),
       priseCharge: new FormControl('', Validators.compose([
-        Validators.required
       ])),
       rsa: new FormControl('', Validators.compose([
-        Validators.required
       ])),
       tempsScolarisation: new FormControl('', Validators.compose([
-        Validators.required
       ])),
       diplome: new FormControl('', Validators.compose([
-        Validators.required
       ])),
       milieuScolaire: new FormControl('', Validators.compose([
-        Validators.required
       ])),
       niveauLangue: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(2), Validators.maxLength(2)
       ])),
       lireLangue: new FormControl('', Validators.compose([
-        Validators.required
       ])),
       ecrireLangue: new FormControl('', Validators.compose([
-        Validators.required
       ])),
       lireAlphaLatin: new FormControl('', Validators.compose([
-        Validators.required
       ])),
       ecrireAlphaLatin: new FormControl('', Validators.compose([
-        Validators.required
       ])),
       cotisationPayee: new FormControl('', Validators.compose([
-        Validators.required
       ])),
       remarques: new FormControl('', Validators.compose([
       ]))
