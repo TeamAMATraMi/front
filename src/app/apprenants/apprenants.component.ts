@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Apprenant} from '../shared/interfaces/apprenant';
 import {ApprenantsService} from '../shared/services/apprenants.service';
 import {Router} from '@angular/router';
@@ -28,6 +28,7 @@ export class ApprenantsComponent implements OnInit {
   private _apprenantsDialog: MatDialogRef<DialogComponent>;
 
   private _searchText: string;
+  private _displayedColumns = ['NomPrenom', 'DateNaissance', 'PaysOrigine', 'Delete'];
 
   constructor(private _router: Router, private _apprenantsService: ApprenantsService, private _sitesService: SitesService,
               private _groupesService: GroupesService, private _dialog: MatDialog) {
@@ -132,6 +133,10 @@ export class ApprenantsComponent implements OnInit {
         .pipe(
             flatMap(_ => this._apprenantsService.fetch())
         );
+  }
+
+  get displayedColumns(): any {
+    return this._displayedColumns;
   }
 
 }
