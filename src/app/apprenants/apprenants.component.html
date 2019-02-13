@@ -32,12 +32,10 @@
 </mat-toolbar>
 
 <section>
-    <!--<app-apprenant-card [apprenant]="apprenant" (deleteApprenant)="delete($event)"
-                        *ngFor="let apprenant of apprenants | search : ['nom','prenom'] : searchText"></app-apprenant-card>-->
     <mat-card class="mat-whiteframe-2dp">
         <mat-card-content>
             <div class="example-container mat-elevation-z8">
-                <mat-table #table [dataSource]="apprenants">
+                <mat-table #table [dataSource]="apprenants | search : ['nom','prenom'] : searchText">
                     <ng-container matColumnDef="NomPrenom">
                         <mat-header-cell *matHeaderCellDef>Nom</mat-header-cell>
                         <mat-cell *matCellDef="let element">
