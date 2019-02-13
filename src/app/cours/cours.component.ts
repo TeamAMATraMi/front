@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {CoursService} from '../shared/services/cours.service';
 import {Cours} from '../shared/interfaces/cours';
 import {Observable} from 'rxjs';
 import {filter, flatMap} from 'rxjs/operators';
-import {FormateurDialogComponent} from '../shared/dialogs/formateur-dialog/formateur-dialog.component';
 import {Formateur} from '../shared/interfaces/formateur';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {CoursDialogComponent} from '../shared/dialogs/cours-dialog/cours-dialog.component';
 import {FormateursService} from '../shared/services/formateurs.service';
-import {SitesService} from '../shared/services/sites.service';
 import {GroupesService} from '../shared/services/groupes.service';
 import {Groupe} from '../shared/interfaces/groupe';
 
@@ -19,6 +17,9 @@ import {Groupe} from '../shared/interfaces/groupe';
   styleUrls: ['./cours.component.css']
 })
 export class CoursComponent implements OnInit {
+
+  private _displayedColumns = ['matiere', 'horaire', 'formateur', 'Delete'];
+
 
   private _cours: Cours[];
   private _searchText: string;
@@ -60,18 +61,6 @@ export class CoursComponent implements OnInit {
     return this._dialogStatus;
   }
 
-  set dialogStatus(value: string) {
-    this._dialogStatus = value;
-  }
-
-  get coursDialog(): MatDialogRef<CoursDialogComponent> {
-    return this._coursDialog;
-  }
-
-  set coursDialog(value: MatDialogRef<CoursDialogComponent>) {
-    this._coursDialog = value;
-  }
-
   get formateurs(): Formateur[] {
     return this._formateurs;
   }
@@ -105,7 +94,7 @@ export class CoursComponent implements OnInit {
   }
 
   showDialog() {
-    // set apprenant-dialogs status
+    // set cours-dialogs status
     this._dialogStatus = 'active';
 
     // open modal
@@ -121,9 +110,13 @@ export class CoursComponent implements OnInit {
             flatMap(_ => this._add(_))
         )
         .subscribe(
-            (cours: Cours[]) => this.cours = cours,
+            (cours: Cours[]) => this._cours = cours,
             _ => this._dialogStatus = 'inactive',
             () => this._dialogStatus = 'inactive'
         );
+  }
+
+  get displayedColumns(): any {
+    return this._displayedColumns;
   }
 }

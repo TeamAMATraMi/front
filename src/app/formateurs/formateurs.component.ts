@@ -18,7 +18,6 @@ import {FormateurDialogComponent} from '../shared/dialogs/formateur-dialog/forma
 })
 export class FormateursComponent implements OnInit {
 
-  private _dataSource: Formateur[];
   private _displayedColumns = ['NomPrenom', 'Tel', 'Address', 'Delete'];
 
   private _formateur: Formateur;
@@ -49,11 +48,6 @@ export class FormateursComponent implements OnInit {
     this._formateursService.fetch().subscribe((formateur: Formateur[]) => this._formateurs = formateur);
     this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => { this._groupes = groupes; this._groupesSite = this._groupes; });
-    this._formateursService.fetch().subscribe((_) => this._dataSource = _);
-  }
-
-  navigate(formateur: Formateur) {
-    this._router.navigate(['/formateur', formateur.id]);
   }
 
   get searchText(): string {
@@ -99,12 +93,8 @@ export class FormateursComponent implements OnInit {
     return this._dialogStatus;
   }
 
-  set dialogStatus(value: string) {
-    this._dialogStatus = value;
-  }
-
   showDialog() {
-    // set apprenant-dialogs status
+    // set formateur-dialogs status
     this._dialogStatus = 'active';
 
     // open modal
@@ -120,7 +110,7 @@ export class FormateursComponent implements OnInit {
             flatMap(_ => this._add(_))
         )
         .subscribe(
-            (formateurs: Formateur[]) => this._dataSource = formateurs,
+            (formateurs: Formateur[]) => this._formateurs = formateurs,
             _ => this._dialogStatus = 'inactive',
             () => this._dialogStatus = 'inactive'
         );
@@ -158,10 +148,6 @@ export class FormateursComponent implements OnInit {
 
   delete(id: number) {
     this._formateursService.delete(id).subscribe(null, null, () => this.ngOnInit());
-  }
-
-  get dataSource(): Formateur[] {
-    return this._dataSource;
   }
 
   get displayedColumns(): any {

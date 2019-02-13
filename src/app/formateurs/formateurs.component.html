@@ -27,7 +27,7 @@
         <mat-card class="mat-whiteframe-2dp">
             <mat-card-content>
                 <div class="example-container mat-elevation-z8">
-                    <mat-table #table [dataSource]="dataSource | search : ['nom','prenom'] : searchText">
+                    <mat-table #table [dataSource]="formateurs | search : ['nom','prenom'] : searchText">
                         <ng-container matColumnDef="NomPrenom">
                             <mat-header-cell *matHeaderCellDef> Nom du Formateur</mat-header-cell>
 
