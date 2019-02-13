@@ -12,13 +12,10 @@
 </mat-toolbar>
 
 <section>
-
-    <!--<app-sites-card [site]="site" (deleteSite)="delete($event)" *ngFor="let site of sites"> </app-sites-card>-->
-
     <mat-card class="mat-whiteframe-2dp">
         <mat-card-content>
             <div class="example-container mat-elevation-z8">
-                <mat-table #table [dataSource]="dataSource | search : ['ville'] : searchText">
+                <mat-table [dataSource]="sites | search : ['ville'] : searchText">
                     <ng-container matColumnDef="id">
                         <mat-header-cell *matHeaderCellDef> Id du site</mat-header-cell>
 

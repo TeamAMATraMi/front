@@ -18,7 +18,6 @@ export class SitesComponent implements OnInit {
   private _dialogStatus: string;
   private _sitesDialog: MatDialogRef<SiteDialogComponent>;
   private _searchText: string;
-  private _dataSource: Site[];
   private _displayedColumns = ['id', 'ville', 'Delete'];
 
 
@@ -29,11 +28,7 @@ export class SitesComponent implements OnInit {
   }
 
   ngOnInit() {
-      this._sitesService.fetch().subscribe((sites: Site[]) => this._dataSource = sites);
-  }
-
-  get dataSource(): Site[] {
-      return this._dataSource;
+      this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
   }
 
   get searchText(): string {
@@ -56,10 +51,6 @@ export class SitesComponent implements OnInit {
       return this._dialogStatus;
   }
 
-  set dialogStatus(value: string) {
-      this._dialogStatus = value;
-  }
-
   showDialog() {
       this._dialogStatus = 'active';
 
@@ -69,14 +60,14 @@ export class SitesComponent implements OnInit {
           disableClose: true
       });
 
-      // subscribe to afterClosed observable to set apprenant-dialogs status and do process
+      // subscribe to afterClosed observable to set site-dialogs status and do process
       this._sitesDialog.afterClosed()
           .pipe(
               filter(_ => !!_),
               flatMap(_ => this._add(_))
           )
           .subscribe(
-              (sites: Site[]) => this._dataSource = sites,
+              (sites: Site[]) => this._sites = sites,
               _ => this._dialogStatus = 'inactive',
               () => this._dialogStatus = 'inactive'
           );
