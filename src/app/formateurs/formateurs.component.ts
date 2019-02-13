@@ -120,7 +120,7 @@ export class FormateursComponent implements OnInit {
             flatMap(_ => this._add(_))
         )
         .subscribe(
-            (formateurs: Formateur[]) => this._formateurs = formateurs,
+            (formateurs: Formateur[]) => this._dataSource = formateurs,
             _ => this._dialogStatus = 'inactive',
             () => this._dialogStatus = 'inactive'
         );
@@ -159,6 +159,7 @@ export class FormateursComponent implements OnInit {
   delete(id: number) {
     this._formateursService.delete(id).subscribe(null, null, () => this.ngOnInit());
   }
+
   get dataSource(): Formateur[] {
     return this._dataSource;
   }

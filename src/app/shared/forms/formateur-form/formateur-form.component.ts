@@ -62,10 +62,6 @@ export class FormateurFormComponent implements OnInit, OnChanges {
     return this._isUpdateMode;
   }
 
-  set isUpdateMode(value: boolean) {
-    this._isUpdateMode = value;
-  }
-
   get formateur(): Formateur {
     return this._formateur;
   }
