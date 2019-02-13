@@ -35,7 +35,7 @@ export class FormateursComponent implements OnInit {
   private _searchText: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  private dataSource: MatTableDataSource<Formateur>;
+  private _dataSource: MatTableDataSource<Formateur>;
 
   constructor(private _router: Router, private _formateursService: FormateursService, private _sitesService: SitesService,
               private _dialog: MatDialog, private _groupesService: GroupesService) {
@@ -50,8 +50,8 @@ export class FormateursComponent implements OnInit {
     // TODO : fetch with associated service formateur
     this._formateursService.fetch().subscribe((formateur: Formateur[]) => {
       this._formateurs = formateur;
-      this.dataSource = new MatTableDataSource<Formateur>(this._formateurs);
-      this.dataSource.paginator = this.paginator;
+      this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
+      this._dataSource.paginator = this.paginator;
     });
     this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => { this._groupes = groupes; this._groupesSite = this._groupes; });
@@ -88,16 +88,16 @@ export class FormateursComponent implements OnInit {
   changeFormateur(id: number) {
     this._formateursService.fetchBySite(id).subscribe((formateur: Formateur[]) => {
       this._formateurs = formateur;
-      this.dataSource = new MatTableDataSource<Formateur>(this._formateurs);
-      this.dataSource.paginator = this.paginator;
+      this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
+      this._dataSource.paginator = this.paginator;
     });
   }
 
     changeFormateurAll() {
       this._formateursService.fetch().subscribe((formateur: Formateur[]) => {
         this._formateurs = formateur;
-        this.dataSource = new MatTableDataSource<Formateur>(this._formateurs);
-        this.dataSource.paginator = this.paginator;
+        this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
+        this._dataSource.paginator = this.paginator;
       });
     }
 
@@ -124,8 +124,8 @@ export class FormateursComponent implements OnInit {
         .subscribe(
             (formateurs: Formateur[]) => {
               this._formateurs = formateurs;
-              this.dataSource = new MatTableDataSource<Formateur>(this._formateurs);
-              this.dataSource.paginator = this.paginator;
+              this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
+              this._dataSource.paginator = this.paginator;
             },
             _ => this._dialogStatus = 'inactive',
             () => this._dialogStatus = 'inactive'
@@ -169,6 +169,10 @@ export class FormateursComponent implements OnInit {
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
+    this._dataSource.filter = filterValue;
+  }
+
+  get dataSource(): MatTableDataSource<Formateur> {
+    return this._dataSource;
   }
 }
