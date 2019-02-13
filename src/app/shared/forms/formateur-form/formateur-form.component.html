@@ -89,15 +89,27 @@
             </mat-error>
           </mat-form-field>
         </p>
-        <div class="color">Salarié</div>
-        <br/>
-        <div>
-            <mat-radio-group placeholder="Salarié" class="full-width" formControlName="salarie">
-              <mat-radio-button class="full-width, color" *ngFor="let c of choices" [value]="c" [checked]="isSalarie() === c">
-                {{c}}
-              </mat-radio-button>
-            </mat-radio-group>
-        </div>
+
+        <p *ngIf="isUpdateMode">
+          <mat-label>Salarié : </mat-label>
+          <br>
+          <mat-radio-group class="full-width" formControlName="salarie">
+            <mat-radio-button class="full-width, color" *ngFor="let c of choices" [value]="c" [checked]="isSalarie() === c">
+              {{c}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </p>
+
+        <p *ngIf="!isUpdateMode">
+          <mat-label>Salarié : </mat-label>
+          <br>
+          <mat-radio-group class="full-width" formControlName="salarie">
+            <mat-radio-button class="full-width, color" *ngFor="let c of choices" [value]="c">
+              {{c}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </p>
+
       </mat-expansion-panel>
     </mat-accordion>
   </form>
