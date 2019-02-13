@@ -32,7 +32,6 @@ export class FormateursComponent implements OnInit {
   private _dialogStatus: string;
   private _formateursDialog: MatDialogRef<FormateurDialogComponent>;
 
-  private _searchText: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   private _dataSource: MatTableDataSource<Formateur>;
@@ -55,14 +54,6 @@ export class FormateursComponent implements OnInit {
     });
     this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => { this._groupes = groupes; this._groupesSite = this._groupes; });
-  }
-
-  get searchText(): string {
-    return this._searchText;
-  }
-
-  set searchText(value: string) {
-    this._searchText = value;
   }
 
   get formateurs(): Formateur[] {
@@ -148,7 +139,6 @@ export class FormateursComponent implements OnInit {
         );
   }
 
-
   @Input()
   set formateur(value: Formateur) {
     this._formateur = value;
@@ -166,6 +156,7 @@ export class FormateursComponent implements OnInit {
   get displayedColumns(): any {
     return this._displayedColumns;
   }
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
