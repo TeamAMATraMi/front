@@ -100,13 +100,7 @@
                 </mat-expansion-panel-header>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput type="date" placeholder="Date d'inscription" formControlName="dateInscription" required name="dateInscription" />
-                        <mat-error *ngIf="form.get('dateInscription').dirty && form.get('dateInscription').hasError('required')">
-                            dateInscription is <strong>required</strong>
-                        </mat-error>
-                        <mat-error *ngIf="form.get('dateInscription').dirty && form.get('dateInscription').hasError('pattern')">
-                            Date de type <strong>JJ/MM/YYYY</strong>
-                        </mat-error>
+                        <input matInput type="date" placeholder="Date d'inscription" formControlName="dateInscription" name="dateInscription" />
                     </mat-form-field>
                 </p>
                 <p>

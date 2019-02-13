@@ -7,6 +7,7 @@ import {QuartierPrioritaire} from '../../interfaces/quartier_prioritaire';
 import {QuartiersService} from '../../services/quartiers.service';
 import {GroupesService} from '../../services/groupes.service';
 import {Groupe} from '../../interfaces/groupe';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-form',
@@ -142,8 +143,7 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
       idGroupe: new FormControl('', Validators.compose([
         Validators.required
       ])),
-      dateInscription: new FormControl('', Validators.compose([
-        Validators.required
+      dateInscription: new FormControl({value: formatDate(new Date(), 'yyyy-MM-dd', 'en'), disabled: true}, Validators.compose([
       ])),
       auteurDossier: new FormControl('', Validators.compose([
         Validators.required
