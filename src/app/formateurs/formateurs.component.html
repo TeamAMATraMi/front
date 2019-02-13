@@ -3,6 +3,7 @@
     <span>Formateurs</span>
     <span class="flex"></span>
     <span>Site : </span>
+
       <mat-form-field>
           <mat-select>
               <mat-option matInput  value="all" (click)="changeFormateurAll()">Tous les sites</mat-option>
@@ -10,31 +11,29 @@
           </mat-select>
       </mat-form-field>
 
-
     <span class="flex"></span>
     <span>
           <mat-form-field>
               <mat-icon matPrefix></mat-icon>
-              <input matInput placeholder="Chercher" [(ngModel)]="searchText">
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Chercher" >
           </mat-form-field>
     </span>
-  </mat-toolbar-row>
 
+  </mat-toolbar-row>
 </mat-toolbar>
 
 <section>
         <mat-card class="mat-whiteframe-2dp">
             <mat-card-content>
                 <div class="example-container mat-elevation-z8">
-                    <mat-table #table [dataSource]="formateurs | search : ['nom','prenom'] : searchText">
+                    <mat-table [dataSource]="dataSource | search : ['nom','prenom'] : searchText">
+
                         <ng-container matColumnDef="NomPrenom">
                             <mat-header-cell *matHeaderCellDef> Nom</mat-header-cell>
-
-                            <mat-cell *matCellDef="let element">
+                                <mat-cell *matCellDef="let element">
                                 <a [routerLink]="['/formateur', element.id]">
                                     <span>{{element.nom}} {{element.prenom}}</span>
                                 </a>
-
                             </mat-cell>
                         </ng-container>
 
@@ -56,12 +55,13 @@
                                 <button mat-button title="Delete" (click)="delete(element.id)">
                                     <mat-icon svgIcon="icon-delete"></mat-icon>
                                 </button>
-
                             </mat-cell>
                         </ng-container>
+
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
                     </mat-table>
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
                 </div>
             </mat-card-content>
 

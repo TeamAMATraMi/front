@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Formateur} from '../shared/interfaces/formateur';
 import {Router} from '@angular/router';
 import {FormateursService} from '../shared/services/formateurs.service';
@@ -6,7 +6,7 @@ import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
 import {filter, flatMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {MatDialog, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogRef, MatPaginator, MatTableDataSource} from '@angular/material';
 import {Groupe} from '../shared/interfaces/groupe';
 import {GroupesService} from '../shared/services/groupes.service';
 import {FormateurDialogComponent} from '../shared/dialogs/formateur-dialog/formateur-dialog.component';
@@ -33,6 +33,9 @@ export class FormateursComponent implements OnInit {
   private _formateursDialog: MatDialogRef<FormateurDialogComponent>;
 
   private _searchText: string;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  private dataSource: MatTableDataSource<Formateur>;
 
   constructor(private _router: Router, private _formateursService: FormateursService, private _sitesService: SitesService,
               private _dialog: MatDialog, private _groupesService: GroupesService) {
@@ -45,7 +48,11 @@ export class FormateursComponent implements OnInit {
 
   ngOnInit() {
     // TODO : fetch with associated service formateur
-    this._formateursService.fetch().subscribe((formateur: Formateur[]) => this._formateurs = formateur);
+    this._formateursService.fetch().subscribe((formateur: Formateur[]) => {
+      this._formateurs = formateur;
+      this.dataSource = new MatTableDataSource<Formateur>(this._formateurs);
+      this.dataSource.paginator = this.paginator;
+    });
     this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => { this._groupes = groupes; this._groupesSite = this._groupes; });
   }
@@ -75,18 +82,23 @@ export class FormateursComponent implements OnInit {
   }
 
   set site(value: Site) {
-    console.log(value);
     this._site = value;
   }
 
   changeFormateur(id: number) {
-    // console.log(id);
-    this._formateursService.fetchBySite(id).subscribe((formateur: Formateur[]) => this._formateurs = formateur);
+    this._formateursService.fetchBySite(id).subscribe((formateur: Formateur[]) => {
+      this._formateurs = formateur;
+      this.dataSource = new MatTableDataSource<Formateur>(this._formateurs);
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
     changeFormateurAll() {
-      this._formateursService.fetch().subscribe((formateur: Formateur[]) => this._formateurs = formateur);
-
+      this._formateursService.fetch().subscribe((formateur: Formateur[]) => {
+        this._formateurs = formateur;
+        this.dataSource = new MatTableDataSource<Formateur>(this._formateurs);
+        this.dataSource.paginator = this.paginator;
+      });
     }
 
   get dialogStatus(): string {
@@ -110,7 +122,11 @@ export class FormateursComponent implements OnInit {
             flatMap(_ => this._add(_))
         )
         .subscribe(
-            (formateurs: Formateur[]) => this._formateurs = formateurs,
+            (formateurs: Formateur[]) => {
+              this._formateurs = formateurs;
+              this.dataSource = new MatTableDataSource<Formateur>(this._formateurs);
+              this.dataSource.paginator = this.paginator;
+            },
             _ => this._dialogStatus = 'inactive',
             () => this._dialogStatus = 'inactive'
         );
@@ -132,9 +148,6 @@ export class FormateursComponent implements OnInit {
         );
   }
 
-  get formateur(): Formateur {
-    return this._formateur;
-  }
 
   @Input()
   set formateur(value: Formateur) {
@@ -152,5 +165,10 @@ export class FormateursComponent implements OnInit {
 
   get displayedColumns(): any {
     return this._displayedColumns;
+  }
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Apprenant} from '../shared/interfaces/apprenant';
 import {ApprenantsService} from '../shared/services/apprenants.service';
 import {Router} from '@angular/router';
@@ -19,6 +19,7 @@ import {Observable} from 'rxjs';
 export class ApprenantsComponent implements OnInit {
 
   private _apprenants: Apprenant[];
+  private _apprenant: Apprenant;
   private _sites: Site[];
   private  _groupes: Groupe[];
   private _site: Site;
@@ -26,6 +27,8 @@ export class ApprenantsComponent implements OnInit {
 
   private _dialogStatus: string;
   private _apprenantsDialog: MatDialogRef<DialogComponent>;
+
+  private readonly _delete$: EventEmitter<Apprenant>;
 
   private _searchText: string;
   private _displayedColumns = ['NomPrenom', 'DateNaissance', 'PaysOrigine', 'Delete'];
@@ -87,11 +90,18 @@ export class ApprenantsComponent implements OnInit {
     this._groupesSite = groupe;
   }
 
+  @Input()
+  set apprenant(apprenant: Apprenant) {
+    this._apprenant = apprenant;
+  }
 
-  delete(apprenant: Apprenant) {
-    this._apprenantsService
-        .delete(apprenant.id)
-        .subscribe(_ => this._apprenants = this._apprenants.filter(__ => __.id !== _));
+  @Output('deleteApprenant')
+  get delete$(): EventEmitter<Apprenant> {
+    return this._delete$;
+  }
+
+  delete(id: number) {
+    this._apprenantsService.delete(id).subscribe(null, null, () => this.ngOnInit());
   }
 
   ngOnInit() {
