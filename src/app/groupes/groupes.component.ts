@@ -31,6 +31,7 @@ export class GroupesComponent implements OnInit {
               private _dialog: MatDialog, private _sitesService: SitesService) {
     this._groupes = [];
     this._dialogStatus = 'inactive';
+    this._sites = [];
   }
 
   get sites(): Site[] {
@@ -51,7 +52,7 @@ export class GroupesComponent implements OnInit {
 
   }
 
-  getVilleByIdGroup(id: number ): string {
+  getVilleByIdGroup(id: number): string {
     this.tmp = 'default';
     this._sites.forEach(s => {
       if (s.id === id) {
