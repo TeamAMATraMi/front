@@ -93,7 +93,7 @@ export class FormateursComponent implements OnInit {
     changeFormateurAll() {
       this._formateursService.fetch().subscribe((formateur: Formateur[]) => this._formateurs = formateur);
 
-    }
+    }1
 
   get dialogStatus(): string {
     return this._dialogStatus;
