@@ -35,7 +35,7 @@
                     <ng-container matColumnDef="formateur">
                         <mat-header-cell *matHeaderCellDef>Formateur</mat-header-cell>
                         <mat-cell
-                                *matCellDef="let element"> {{element.idFormateur}} </mat-cell>
+                                *matCellDef="let element"> {{getNomFormateur(element.idFormateur).nom}} {{getNomFormateur(element.idFormateur).prenom}} </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="horaire">
