@@ -678,7 +678,7 @@
                 <p>
                     <mat-form-field>
                         <mat-select placeholder="Statut du séjour" formControlName="statutSejour">
-                            <mat-option *ngFor="let c of statutSejour" [value]="c" (select)="statutSejourSelect = c">
+                            <mat-option *ngFor="let c of statutSejour" [value]="c" (onSelectionChange)="statutSejourSelect = c">
                                 {{ c }}
                             </mat-option>
                         </mat-select>
@@ -697,7 +697,7 @@
                 <p>
                     <mat-form-field *ngIf="statutSejourSelect === 'Régulier'">
                         <mat-select placeholder="Statut professionnel" formControlName="statutPro">
-                            <mat-option *ngFor="let c of statutPro" [value]="c" (select)="statutProSelect = c">
+                            <mat-option *ngFor="let c of statutPro" [value]="c" (onSelectionChange)="statutProSelect = c">
                                 {{ c }}
                             </mat-option>
                         </mat-select>
