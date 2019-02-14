@@ -18,8 +18,7 @@ import {Groupe} from '../shared/interfaces/groupe';
 })
 export class CoursComponent implements OnInit {
 
-  private _displayedColumns = ['matiere', 'horaire', 'formateur', 'Delete'];
-
+  private _displayedColumns = ['matiere', 'formateur', 'horaire', 'Delete'];
 
   private _cours: Cours[];
   private _searchText: string;
@@ -37,8 +36,8 @@ export class CoursComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._coursService.fetch().subscribe((cours: Cours[]) =>
-      this._cours = cours);
+    this._coursService.fetch().subscribe((cours: Cours[]) => this._cours = cours);
+    this._formateursService.fetch().subscribe((formateurs: Formateur[]) => this._formateurs = formateurs);
   }
 
   get searchText(): string {
@@ -119,4 +118,5 @@ export class CoursComponent implements OnInit {
   get displayedColumns(): any {
     return this._displayedColumns;
   }
+
 }
