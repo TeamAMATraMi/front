@@ -10,32 +10,14 @@
         </mat-menu>
 
         <span class="flex"></span>
-      <!--  <span>
+        <span>
           <mat-form-field>
-             <mat-icon matPrefix></mat-icon>
+              <mat-icon matPrefix></mat-icon>
               <input matInput placeholder="Chercher" [(ngModel)]="searchText">
-        </mat-form-field>
-
-      </span>
--->
+          </mat-form-field>
+        </span>
     </mat-toolbar-row>
 </mat-toolbar>
-
-<!--
-<mat-list *ngFor="let groupe of groupes | search : ['nom'] : searchText">
-        <mat-list-item class="mat-whiteframe-2dp mat-card">
-            <a [routerLink]="['/apprenantsG', groupe.id]">
-                <h3 matLine> {{groupe.nom}} </h3>
-            </a>
-            <mat-dialog-actions align="end">
-                <button mat-button type="button" [routerLink]="['/updateGroupe', groupe.id]">Modifier</button>
-            </mat-dialog-actions>
-            <button mat-button title="Delete" (click)="delete(groupe)">
-                <mat-icon svgIcon="icon-delete"></mat-icon>
-            </button>
-        </mat-list-item>
-</mat-list>
--->
 
 <section>
     <mat-card class="mat-whiteframe-2dp">
