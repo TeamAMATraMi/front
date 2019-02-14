@@ -35,7 +35,6 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
 
   private _statutSejourSelect: string;
   private _statutProSelect: string;
-  private _typeContratSelect: string;
 
   constructor(private _associationsService: AssociationsService, private _quartiersService: QuartiersService,
               private _groupesService: GroupesService) {
