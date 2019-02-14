@@ -15,7 +15,7 @@
     <span>
           <mat-form-field>
               <mat-icon matPrefix></mat-icon>
-              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Chercher" >
+              <input matInput (input)="applyFilter($event.target.value)" placeholder="Chercher" >
           </mat-form-field>
     </span>
 
