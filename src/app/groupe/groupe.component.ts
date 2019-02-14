@@ -7,7 +7,6 @@ import {Apprenant} from '../shared/interfaces/apprenant';
 import {ApprenantsService} from '../shared/services/apprenants.service';
 import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
-import {Formateur} from '../shared/interfaces/formateur';
 
 @Component({
   selector: 'app-groupe',
@@ -18,14 +17,14 @@ export class GroupeComponent implements OnInit {
 
   private _groupe: Groupe;
   private _apprenants: Apprenant[];
-  private _site: Site;
+  private _sites: Site[];
   private readonly _delete$: EventEmitter<Groupe>;
 
 
   constructor(private _apprenantsService: ApprenantsService, private _route: ActivatedRoute, private _sitesService: SitesService) {
     this._groupe = {} as Groupe;
     this._apprenants = [];
-    this._site = {} as Site;
+    this._sites = [];
     this._delete$ = new EventEmitter<Groupe>();
   }
 
@@ -40,31 +39,29 @@ export class GroupeComponent implements OnInit {
   @Input()
   set groupe(value: Groupe) {
     this._groupe = value;
-    if (this._groupe.idSite !== undefined) {
-      this._sitesService.fetchOne(this._groupe.idSite).subscribe((site: Site) => this._site = site);
-    }
+    this._sitesService.fetch().subscribe((sites: Site[]) => { this._sites = sites; });
   }
 
-  get site(): Site {
-    return this._site;
+  get sites(): Site[] {
+    return this._sites;
   }
 
   ngOnInit() {
     this._route.params.pipe(
         filter(params => !!params['id']),
-        flatMap(params => this._apprenantsService.fetchByGroup(params['id']))
+        flatMap(params => this._apprenantsService.fetchByGroup(params['id'])),
     )
         .subscribe((apprenants: Apprenant[]) => {
           this._apprenants = apprenants;
         });
   }
 
-    @Output('deleteGroupe')
-    get delete$(): EventEmitter<Groupe> {
-        return this._delete$;
-    }
+  @Output('deleteGroupe')
+  get delete$(): EventEmitter<Groupe> {
+    return this._delete$;
+  }
 
-    delete(groupe: Groupe) {
-        this._delete$.emit(groupe);
-    }
+  delete(groupe: Groupe) {
+    this._delete$.emit(groupe);
+  }
 }
