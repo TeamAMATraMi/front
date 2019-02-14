@@ -7,6 +7,8 @@ import {MatDialog, MatDialogRef} from '@angular/material';
 import {Observable} from 'rxjs';
 import {GroupeDialogComponent} from '../shared/dialogs/groupe-dialog/groupe-dialog.component';
 import {Formateur} from '../shared/interfaces/formateur';
+import {Site} from '../shared/interfaces/site';
+import {SitesService} from '../shared/services/sites.service';
 @Component({
   selector: 'app-groupes',
   templateUrl: './groupes.component.html',
@@ -21,10 +23,17 @@ export class GroupesComponent implements OnInit {
   private _groupesDialog: MatDialogRef<GroupeDialogComponent>;
   private _searchText: string;
   private readonly _delete$: EventEmitter<Groupe>;
+  private _sites: Site[];
 
-  constructor(private _router: Router, private _groupesService: GroupesService, private _dialog: MatDialog) {
+  constructor(private _router: Router, private _groupesService: GroupesService,
+              private _dialog: MatDialog, private _sitesService: SitesService) {
     this._groupes = [];
     this._dialogStatus = 'inactive';
+    this._sitesService.fetch().subscribe((sites: Site[]) => { this._sites = sites; });
+  }
+
+  get sites(): Site[] {
+    return this._sites;
   }
 
   get searchText(): string {
@@ -55,6 +64,16 @@ export class GroupesComponent implements OnInit {
 
   navigate(groupe: Groupe) {
     this._router.navigate(['/apprenantsG', groupe.id]);
+  }
+
+
+  getVilleByIdGroup(id: number ): string {
+      this._sites.forEach(s => {
+        if (s.id === id) {
+            return s.ville;
+        }
+      });
+      return 'tototottoo';
   }
 
   /**

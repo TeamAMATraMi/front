@@ -8,6 +8,8 @@ import {ApprenantsService} from '../shared/services/apprenants.service';
 import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
 import {Formateur} from '../shared/interfaces/formateur';
+import {forEach} from '@angular/router/src/utils/collection';
+import {ObservableInput} from 'rxjs';
 
 @Component({
   selector: 'app-groupe',
@@ -18,7 +20,7 @@ export class GroupeComponent implements OnInit {
 
   private _groupe: Groupe;
   private _apprenants: Apprenant[];
-  private _site: Site;
+  private _sites: Site[];
   private _ville: string;
   private readonly _delete$: EventEmitter<Groupe>;
 
@@ -26,7 +28,7 @@ export class GroupeComponent implements OnInit {
   constructor(private _apprenantsService: ApprenantsService, private _route: ActivatedRoute, private _sitesService: SitesService) {
     this._groupe = {} as Groupe;
     this._apprenants = [];
-    this._site = {} as Site;
+    this._sites = [];
     this._ville = 'default';
     this._delete$ = new EventEmitter<Groupe>();
   }
@@ -42,17 +44,11 @@ export class GroupeComponent implements OnInit {
   @Input()
   set groupe(value: Groupe) {
     this._groupe = value;
-    if (this._groupe.idSite !== undefined) {
-      this._sitesService.fetchOne(this._groupe.idSite).subscribe((site: Site) => {
-        this._site = site;
-        this._ville = site.ville;
-        console.log('La ville : ' + this._ville);
-      });
-    }
+    this._sitesService.fetch().subscribe((sites: Site[]) => { this._sites = sites; });
   }
 
-  get site(): Site {
-    return this._site;
+  get sites(): Site[] {
+    return this._sites;
   }
 
   get ville(): string {
@@ -62,13 +58,13 @@ export class GroupeComponent implements OnInit {
   ngOnInit() {
     this._route.params.pipe(
         filter(params => !!params['id']),
-        flatMap(params => this._apprenantsService.fetchByGroup(params['id']))
+        flatMap(params => this._apprenantsService.fetchByGroup(params['id'])),
     )
         .subscribe((apprenants: Apprenant[]) => {
           this._apprenants = apprenants;
-        }
-            );
+        });
   }
+
 
     @Output('deleteGroupe')
     get delete$(): EventEmitter<Groupe> {
