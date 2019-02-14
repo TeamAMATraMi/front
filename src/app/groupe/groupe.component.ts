@@ -7,9 +7,6 @@ import {Apprenant} from '../shared/interfaces/apprenant';
 import {ApprenantsService} from '../shared/services/apprenants.service';
 import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
-import {Formateur} from '../shared/interfaces/formateur';
-import {forEach} from '@angular/router/src/utils/collection';
-import {ObservableInput} from 'rxjs';
 
 @Component({
   selector: 'app-groupe',
@@ -21,7 +18,6 @@ export class GroupeComponent implements OnInit {
   private _groupe: Groupe;
   private _apprenants: Apprenant[];
   private _sites: Site[];
-  private _ville: string;
   private readonly _delete$: EventEmitter<Groupe>;
 
 
@@ -29,7 +25,6 @@ export class GroupeComponent implements OnInit {
     this._groupe = {} as Groupe;
     this._apprenants = [];
     this._sites = [];
-    this._ville = 'default';
     this._delete$ = new EventEmitter<Groupe>();
   }
 
@@ -51,10 +46,6 @@ export class GroupeComponent implements OnInit {
     return this._sites;
   }
 
-  get ville(): string {
-    return this._ville;
-  }
-
   ngOnInit() {
     this._route.params.pipe(
         filter(params => !!params['id']),
@@ -65,13 +56,12 @@ export class GroupeComponent implements OnInit {
         });
   }
 
+  @Output('deleteGroupe')
+  get delete$(): EventEmitter<Groupe> {
+    return this._delete$;
+  }
 
-    @Output('deleteGroupe')
-    get delete$(): EventEmitter<Groupe> {
-        return this._delete$;
-    }
-
-    delete(groupe: Groupe) {
-        this._delete$.emit(groupe);
-    }
+  delete(groupe: Groupe) {
+    this._delete$.emit(groupe);
+  }
 }

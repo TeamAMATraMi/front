@@ -6,9 +6,9 @@ import {filter, flatMap} from 'rxjs/operators';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {Observable} from 'rxjs';
 import {GroupeDialogComponent} from '../shared/dialogs/groupe-dialog/groupe-dialog.component';
-import {Formateur} from '../shared/interfaces/formateur';
 import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
+
 @Component({
   selector: 'app-groupes',
   templateUrl: './groupes.component.html',
@@ -18,16 +18,15 @@ export class GroupesComponent implements OnInit {
 
   private _displayedColumns = ['Nom', 'Site', 'Delete'];
   private _dataSource: Groupe[];
-  private _groupes: Groupe[];
   private _dialogStatus: string;
   private _groupesDialog: MatDialogRef<GroupeDialogComponent>;
   private _searchText: string;
   private readonly _delete$: EventEmitter<Groupe>;
   private _sites: Site[];
+  private tmp: string;
 
   constructor(private _router: Router, private _groupesService: GroupesService,
               private _dialog: MatDialog, private _sitesService: SitesService) {
-    this._groupes = [];
     this._dialogStatus = 'inactive';
     this._sitesService.fetch().subscribe((sites: Site[]) => { this._sites = sites; });
   }
@@ -44,10 +43,6 @@ export class GroupesComponent implements OnInit {
     this._searchText = value;
   }
 
-  get groupes(): Groupe[] {
-    return this._groupes;
-  }
-
   get dialogStatus(): string {
     return this._dialogStatus;
   }
@@ -57,23 +52,17 @@ export class GroupesComponent implements OnInit {
   }
 
   ngOnInit() {
-    // TODO : fetch with associated service
-    this._groupesService.fetch().subscribe((groupes: Groupe[]) => this._groupes = groupes);
     this._groupesService.fetch().subscribe((_) => this._dataSource = _);
   }
 
-  navigate(groupe: Groupe) {
-    this._router.navigate(['/apprenantsG', groupe.id]);
-  }
-
-
   getVilleByIdGroup(id: number ): string {
+    this.tmp = 'default';
       this._sites.forEach(s => {
         if (s.id === id) {
-            return s.ville;
+            this.tmp = s.ville;
         }
       });
-      return 'tototottoo';
+      return this.tmp;
   }
 
   /**
@@ -109,14 +98,6 @@ export class GroupesComponent implements OnInit {
             flatMap(_ => this._groupesService.fetch())
         );
   }
-
-  /*delete(groupe: Groupe) {
-    this._groupesService
-        .delete(groupe.id)
-        .subscribe(_ => {
-          return this._groupes = this._groupes.filter(__ => __.id !== _);
-        });
-  }*/
 
   @Output('deleteGroupe')
   get delete$(): EventEmitter<Groupe> {
