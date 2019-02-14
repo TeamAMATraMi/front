@@ -16,7 +16,14 @@ import {
   MatInputModule,
   MatListModule,
   MatToolbarModule,
-  MatMenuModule, MatSelectModule, MatExpansionModule, MatRadioModule, MatFormFieldModule, MatTableDataSource, MatTableModule
+  MatMenuModule,
+  MatSelectModule,
+  MatExpansionModule,
+  MatRadioModule,
+  MatFormFieldModule,
+  MatTableDataSource,
+  MatTableModule,
+  MatPaginatorModule
 } from '@angular/material';
 import {SitesComponent} from './sites/sites.component';
 import {ApprenantsComponent} from './apprenants/apprenants.component';
@@ -122,6 +129,7 @@ import { UpdateCoursComponent } from './update-cours/update-cours.component';
         MatExpansionModule,
         MatRadioModule,
         MatFormFieldModule,
+        MatPaginatorModule,
         MatTableModule
     ],
     providers: [],

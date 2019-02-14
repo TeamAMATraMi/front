@@ -37,10 +37,7 @@
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Adresse" formControlName="adresse" minlength="3" maxlength="255" required name="adresse" />
-                        <mat-error *ngIf="form.get('adresse').dirty && form.get('adresse').hasError('required')">
-                            adresse est <strong>requis</strong>
-                        </mat-error>
+                        <input matInput placeholder="Adresse" formControlName="adresse" minlength="3" maxlength="255" name="adresse" />
                         <mat-error *ngIf="form.get('adresse').dirty && form.get('adresse').hasError('minlength')">
                             min <strong>3 characteres</strong>
                         </mat-error>
@@ -48,10 +45,7 @@
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Code postal" formControlName="codePostal" required name="codePostal" />
-                        <mat-error *ngIf="form.get('codePostal').dirty && form.get('codePostal').hasError('required')">
-                            codePostal est <strong>required</strong>
-                        </mat-error>
+                        <input matInput placeholder="Code postal" formControlName="codePostal" name="codePostal" />
                         <mat-error *ngIf="form.get('codePostal').dirty && form.get('codePostal').hasError('pattern')">
                             nécessite <strong> 5 chiffres</strong>
                         </mat-error>
@@ -70,10 +64,7 @@
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Téléphone" formControlName="telephone" required name="telephone" />
-                        <mat-error *ngIf="form.get('telephone').dirty && form.get('telephone').hasError('required')">
-                            telephone est <strong>requis</strong>
-                        </mat-error>
+                        <input matInput placeholder="Téléphone" formControlName="telephone" name="telephone" />
                         <mat-error *ngIf="form.get('telephone').dirty && form.get('telephone').hasError('pattern')">
                             Ceci n'est pas un <strong>numéro français</strong>
                         </mat-error>
@@ -81,10 +72,7 @@
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput type="date" placeholder="Date de naissance" formControlName="dateNaissance" required name="dateNaissance" />
-                        <mat-error *ngIf="form.get('dateNaissance').dirty && form.get('dateNaissance').hasError('required')">
-                            dateNaissance is <strong>required</strong>
-                        </mat-error>
+                        <input matInput type="date" placeholder="Date de naissance" formControlName="dateNaissance" name="dateNaissance" />
                         <mat-error *ngIf="form.get('dateNaissance').dirty && form.get('dateNaissance').hasError('pattern')">
                             Date de type <strong>JJ/MM/YYYY</strong>
                         </mat-error>
@@ -92,14 +80,14 @@
                 </p>
                 <p>
                     <mat-label>Majeur : </mat-label>
-                    <mat-radio-group formControlName="majeur" required>
+                    <mat-radio-group formControlName="majeur">
                         <mat-radio-button class="radiobutton-width" [value]="true">Oui</mat-radio-button>
                         <mat-radio-button class="radiobutton-width" [value]="false">Non</mat-radio-button>
                     </mat-radio-group>
                 </p>
                 <p>
                     <mat-label>Genre : </mat-label>
-                    <mat-radio-group formControlName="genre" required>
+                    <mat-radio-group formControlName="genre">
                         <mat-radio-button class="radiobutton-width" value="M">Homme</mat-radio-button>
                         <mat-radio-button class="radiobutton-width" value="F">Femme</mat-radio-button>
                     </mat-radio-group>
@@ -112,13 +100,7 @@
                 </mat-expansion-panel-header>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput type="date" placeholder="Date d'inscription" formControlName="dateInscription" required name="dateInscription" />
-                        <mat-error *ngIf="form.get('dateInscription').dirty && form.get('dateInscription').hasError('required')">
-                            dateInscription is <strong>required</strong>
-                        </mat-error>
-                        <mat-error *ngIf="form.get('dateInscription').dirty && form.get('dateInscription').hasError('pattern')">
-                            Date de type <strong>JJ/MM/YYYY</strong>
-                        </mat-error>
+                        <input matInput type="date" placeholder="Date d'inscription" formControlName="dateInscription" name="dateInscription" />
                     </mat-form-field>
                 </p>
                 <p>
@@ -357,7 +339,7 @@
                 </p>
                 <p>
                 <mat-form-field>
-                    <mat-select placeholder="Nationalité" formControlName="nationalite" required>
+                    <mat-select placeholder="Nationalité" formControlName="nationalite">
                         <mat-option value="Afghane">Afghane (Afghanistan)</mat-option>
                         <mat-option value="Albanaise">Albanaise (Albanie)</mat-option>
                         <mat-option value="Algérienne">Algérienne (Algérie)</mat-option>
@@ -556,17 +538,11 @@
                         <mat-option value="Zambienne">Zambienne (Zambie)</mat-option>
                         <mat-option value="Zimbabwéenne">Zimbabwéenne (Zimbabwe)</mat-option>
                     </mat-select>
-                    <mat-error *ngIf="form.get('nationalite').dirty && form.get('nationalite').hasError('required')">
-                        nationalite is <strong>required</strong>
-                    </mat-error>
                 </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput type="date" placeholder="Date d'arrivée" formControlName="dateArrivee" required name="dateArrivee" />
-                        <mat-error *ngIf="form.get('dateArrivee').dirty && form.get('dateArrivee').hasError('required')">
-                            dateArrivee is <strong>required</strong>
-                        </mat-error>
+                        <input matInput type="date" placeholder="Date d'arrivée" formControlName="dateArrivee" name="dateArrivee" />
                         <mat-error *ngIf="form.get('dateArrivee').dirty && form.get('dateArrivee').hasError('pattern')">
                             Date de type <strong>JJ/MM/YYYY</strong>
                         </mat-error>
@@ -589,23 +565,17 @@
                 </mat-expansion-panel-header>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Temps de scolarisation" formControlName="tempsScolarisation" required name="tempsScolarisation" />
-                        <mat-error *ngIf="form.get('tempsScolarisation').dirty && form.get('tempsScolarisation').hasError('required')">
-                            tempsScolarisation is <strong>required</strong>
-                        </mat-error>
+                        <input matInput placeholder="Temps de scolarisation" formControlName="tempsScolarisation" name="tempsScolarisation" />
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Diplôme" formControlName="diplome" required name="diplome" />
-                        <mat-error *ngIf="form.get('diplome').dirty && form.get('diplome').hasError('required')">
-                            diplome is <strong>required</strong>
-                        </mat-error>
+                        <input matInput placeholder="Diplôme" formControlName="diplome" name="diplome" />
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-label>Milieu scolaire : </mat-label>
-                    <mat-radio-group formControlName="milieuScolaire" required>
+                    <mat-radio-group formControlName="milieuScolaire">
                         <mat-radio-button class="radiobutton-width" [value]="true">Urbain</mat-radio-button>
                         <mat-radio-button class="radiobutton-width" [value]="false">Rural</mat-radio-button>
                     </mat-radio-group>
@@ -624,28 +594,28 @@
                 </p>
                 <p>
                     <mat-label>Sait lire dans sa langue : </mat-label>
-                    <mat-radio-group formControlName="lireLangue" required>
+                    <mat-radio-group formControlName="lireLangue">
                         <mat-radio-button class="radiobutton-width" [value]="true">Oui</mat-radio-button>
                         <mat-radio-button class="radiobutton-width" [value]="false">Non</mat-radio-button>
                     </mat-radio-group>
                 </p>
                 <p>
                     <mat-label>Sait écrire dans sa langue : </mat-label>
-                    <mat-radio-group formControlName="ecrireLangue" required>
+                    <mat-radio-group formControlName="ecrireLangue">
                         <mat-radio-button class="radiobutton-width" [value]="true">Oui</mat-radio-button>
                         <mat-radio-button class="radiobutton-width" [value]="false">Non</mat-radio-button>
                     </mat-radio-group>
                 </p>
                 <p>
                     <mat-label>Sait lire l'alphabet latin : </mat-label>
-                    <mat-radio-group formControlName="lireAlphaLatin" required>
+                    <mat-radio-group formControlName="lireAlphaLatin">
                         <mat-radio-button class="radiobutton-width" [value]="true">Oui</mat-radio-button>
                         <mat-radio-button class="radiobutton-width" [value]="false">Non</mat-radio-button>
                     </mat-radio-group>
                 </p>
                 <p>
                     <mat-label>Sait écrire l'alphabet latin : </mat-label>
-                    <mat-radio-group formControlName="ecrireAlphaLatin" required>
+                    <mat-radio-group formControlName="ecrireAlphaLatin">
                         <mat-radio-button class="radiobutton-width" [value]="true">Oui</mat-radio-button>
                         <mat-radio-button class="radiobutton-width" [value]="false">Non</mat-radio-button>
                     </mat-radio-group>
@@ -658,7 +628,7 @@
                 </mat-expansion-panel-header>
                 <p>
                     <mat-form-field class="full-width">
-                        <mat-select placeholder="Groupe" formControlName="idGroupe">
+                        <mat-select placeholder="Groupe" formControlName="idGroupe" required>
                             <mat-option *ngFor="let c of groupes" [value]="c.id">
                                 {{ c.nom }}
                             </mat-option>
@@ -693,14 +663,14 @@
                 </p>
                 <p>
                     <mat-label>Bénéficiaire du RSA : </mat-label>
-                    <mat-radio-group formControlName="rsa" required>
+                    <mat-radio-group formControlName="rsa">
                         <mat-radio-button class="radiobutton-width" [value]="true">Oui</mat-radio-button>
                         <mat-radio-button class="radiobutton-width" [value]="false">Non</mat-radio-button>
                     </mat-radio-group>
                 </p>
                 <p>
                     <mat-label>Cotisation payée : </mat-label>
-                    <mat-radio-group formControlName="cotisationPayee" required>
+                    <mat-radio-group formControlName="cotisationPayee">
                         <mat-radio-button class="radiobutton-width" [value]="true">Oui</mat-radio-button>
                         <mat-radio-button class="radiobutton-width" [value]="false">Non</mat-radio-button>
                     </mat-radio-group>

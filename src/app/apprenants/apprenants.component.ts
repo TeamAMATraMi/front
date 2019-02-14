@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Apprenant} from '../shared/interfaces/apprenant';
 import {ApprenantsService} from '../shared/services/apprenants.service';
 import {Router} from '@angular/router';
@@ -7,7 +7,7 @@ import {SitesService} from '../shared/services/sites.service';
 import {GroupesService} from '../shared/services/groupes.service';
 import {Groupe} from '../shared/interfaces/groupe';
 import {DialogComponent} from '../shared/dialogs/apprenant-dialog/dialog.component';
-import {MatDialog, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogRef, MatPaginator, MatTableDataSource} from '@angular/material';
 import {filter, flatMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
@@ -19,6 +19,7 @@ import {Observable} from 'rxjs';
 export class ApprenantsComponent implements OnInit {
 
   private _apprenants: Apprenant[];
+  private _apprenant: Apprenant;
   private _sites: Site[];
   private  _groupes: Groupe[];
   private _site: Site;
@@ -27,7 +28,13 @@ export class ApprenantsComponent implements OnInit {
   private _dialogStatus: string;
   private _apprenantsDialog: MatDialogRef<DialogComponent>;
 
-  private _searchText: string;
+  private readonly _delete$: EventEmitter<Apprenant>;
+
+  private _displayedColumns = ['NomPrenom', 'DateNaissance', 'PaysOrigine', 'Delete'];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  private _dataSource: MatTableDataSource<Apprenant>;
+
 
   constructor(private _router: Router, private _apprenantsService: ApprenantsService, private _sitesService: SitesService,
               private _groupesService: GroupesService, private _dialog: MatDialog) {
@@ -39,12 +46,16 @@ export class ApprenantsComponent implements OnInit {
     this._dialogStatus = 'inactive';
   }
 
-  get searchText(): string {
-    return this._searchText;
-  }
 
-  set searchText(s: string) {
-    this._searchText = s;
+  ngOnInit() {
+    // TODO : fetch with associated service
+    this._apprenantsService.fetch().subscribe((apprenants: Apprenant[]) => {
+      this._apprenants = apprenants;
+      this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
+      this._dataSource.paginator = this.paginator;
+    });
+    this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
+    this._groupesService.fetch().subscribe((groupes: Groupe[]) => { this._groupes = groupes; this._groupesSite = this._groupes; });
   }
 
   get dialogStatus(): string {
@@ -68,10 +79,14 @@ export class ApprenantsComponent implements OnInit {
           }
         }
     );
+    this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
+    this._dataSource.paginator = this.paginator;
   }
 
   changeApprenants(groupe: Groupe) {
     this._apprenantsService.fetchByGroup(groupe.id).subscribe((apprenants: Apprenant[]) => this._apprenants = apprenants);
+    this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
+    this._dataSource.paginator = this.paginator;
   }
 
   get groupes(): Groupe[] {
@@ -84,21 +99,24 @@ export class ApprenantsComponent implements OnInit {
 
   set groupesSites(groupe: Groupe[]) {
     this._groupesSite = groupe;
+    this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
+    this._dataSource.paginator = this.paginator;
   }
 
-
-  delete(apprenant: Apprenant) {
-    this._apprenantsService
-        .delete(apprenant.id)
-        .subscribe(_ => this._apprenants = this._apprenants.filter(__ => __.id !== _));
+  @Input()
+  set apprenant(apprenant: Apprenant) {
+    this._apprenant = apprenant;
   }
 
-  ngOnInit() {
-      // TODO : fetch with associated service
-    this._apprenantsService.fetch().subscribe((apprenants: Apprenant[]) => this._apprenants = apprenants);
-    this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
-    this._groupesService.fetch().subscribe((groupes: Groupe[]) => { this._groupes = groupes; this._groupesSite = this._groupes; });
+  @Output('deleteApprenant')
+  get delete$(): EventEmitter<Apprenant> {
+    return this._delete$;
   }
+
+  delete(id: number) {
+    this._apprenantsService.delete(id).subscribe(null, null, () => this.ngOnInit());
+  }
+
 
   /**
    * Function to display modal
@@ -120,7 +138,11 @@ export class ApprenantsComponent implements OnInit {
             flatMap(_ => this._add(_))
         )
         .subscribe(
-            (apprenants: Apprenant[]) => this._apprenants = apprenants,
+            (apprenants: Apprenant[]) => {
+              this._apprenants = apprenants;
+              this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
+              this._dataSource.paginator = this.paginator;
+            },
             _ => this._dialogStatus = 'inactive',
             () => this._dialogStatus = 'inactive'
         );
@@ -132,6 +154,20 @@ export class ApprenantsComponent implements OnInit {
         .pipe(
             flatMap(_ => this._apprenantsService.fetch())
         );
+  }
+
+  get displayedColumns(): any {
+    return this._displayedColumns;
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this._dataSource.filter = filterValue;
+  }
+
+  get dataSource(): MatTableDataSource<Apprenant> {
+    return this._dataSource;
   }
 
 }
