@@ -29,4 +29,9 @@ export interface Apprenant {
   ecrireAlphaLatin: boolean;
   cotisationPayee: boolean;
   remarques: string;
+  statutSejour: string;
+  dateCarteSejour: number;
+  dateFinCarteSejour: number;
+  statutPro: string;
+  typeContrat: string;
 }

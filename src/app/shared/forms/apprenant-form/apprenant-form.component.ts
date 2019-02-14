@@ -27,6 +27,16 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   private _quartiersPrio: QuartierPrioritaire[];
   private _groupes: Groupe[];
 
+  private _statutSejour: string[] = ['Régulier', 'Irrégulier', 'CEE', 'Demandeur d\'asile', 'Mineur non accompagné', 'Autre'];
+  private _statutPro: string[] = ['Salarié(e)', 'Femme au foyer', 'Demandeur d\'emploi inscrit à PE',
+                                  'Demander d\'emploi non inscrit à PE', 'Retraité(e)', 'Autre'];
+  private _typeContrat: string[] = ['CDI', 'CDD', 'Apprentissage', 'IAE', 'Contrat de professionnalisation',
+                                    'Contrat aidé', 'Autre'];
+
+  private _statutSejourSelect: string;
+  private _statutProSelect: string;
+  private _typeContratSelect: string;
+
   constructor(private _associationsService: AssociationsService, private _quartiersService: QuartiersService,
               private _groupesService: GroupesService) {
     this._submit$ = new EventEmitter<Apprenant>();
@@ -105,7 +115,12 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
         lireAlphaLatin: false,
         ecrireAlphaLatin: false,
         cotisationPayee: false,
-        remarques: ''
+        remarques: '',
+        statutSejour: '',
+        dateCarteSejour: 0,
+        dateFinCarteSejour: 0,
+        statutPro: '',
+        typeContrat: ''
       };
       this._isUpdateMode = false;
     }
@@ -188,6 +203,16 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
       cotisationPayee: new FormControl('', Validators.compose([
       ])),
       remarques: new FormControl('', Validators.compose([
+      ])),
+      statutSejour: new FormControl('', Validators.compose([
+      ])),
+      dateCarteSejour: new FormControl('', Validators.compose([
+      ])),
+      dateFinCarteSejour: new FormControl('', Validators.compose([
+      ])),
+      statutPro: new FormControl('', Validators.compose([
+      ])),
+      typeContrat: new FormControl('', Validators.compose([
       ]))
     });
   }
@@ -207,4 +232,33 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   get groupes(): Groupe[] {
     return this._groupes;
   }
+
+  get statutSejour(): string[] {
+    return this._statutSejour;
+  }
+
+  get statutPro(): string[] {
+    return this._statutPro;
+  }
+
+  get typeContrat(): string[] {
+    return this._typeContrat;
+  }
+
+  get statutSejourSelect(): string {
+    return this._statutSejourSelect;
+  }
+
+  set statutSejourSelect(value: string) {
+    this._statutSejourSelect = value;
+  }
+
+  get statutProSelect(): string {
+    return this._statutProSelect;
+  }
+
+  set statutProSelect(value: string) {
+    this._statutProSelect = value;
+  }
+
 }

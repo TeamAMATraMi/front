@@ -676,6 +676,43 @@
                     </mat-radio-group>
                 </p>
                 <p>
+                    <mat-form-field>
+                        <mat-select placeholder="Statut du séjour" formControlName="statutSejour">
+                            <mat-option *ngFor="let c of statutSejour" [value]="c" (select)="statutSejourSelect = c">
+                                {{ c }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="full-width">
+                        <input matInput type="date" placeholder="Date de la carte de séjour" formControlName="dateCarteSejour"/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="full-width">
+                        <input matInput type="date" placeholder="Date de fin de la carte de séjour" formControlName="dateFinCarteSejour"/>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field *ngIf="statutSejourSelect === 'Régulier'">
+                        <mat-select placeholder="Statut professionnel" formControlName="statutPro">
+                            <mat-option *ngFor="let c of statutPro" [value]="c" (select)="statutProSelect = c">
+                                {{ c }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field *ngIf="statutProSelect === 'Salarié(e)'">
+                        <mat-select placeholder="Type de contrat" formControlName="typeContrat">
+                            <mat-option *ngFor="let c of typeContrat" [value]="c">
+                                {{ c }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </p>
+                <p>
                     <mat-form-field class="full-width">
                         <input matInput placeholder="Remarques" formControlName="remarques" name="remarques" />
                     </mat-form-field>
