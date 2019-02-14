@@ -19,6 +19,7 @@ export class GroupeComponent implements OnInit {
   private _groupe: Groupe;
   private _apprenants: Apprenant[];
   private _site: Site;
+  private _ville: string;
   private readonly _delete$: EventEmitter<Groupe>;
 
 
@@ -26,6 +27,7 @@ export class GroupeComponent implements OnInit {
     this._groupe = {} as Groupe;
     this._apprenants = [];
     this._site = {} as Site;
+    this._ville = 'default';
     this._delete$ = new EventEmitter<Groupe>();
   }
 
@@ -41,12 +43,20 @@ export class GroupeComponent implements OnInit {
   set groupe(value: Groupe) {
     this._groupe = value;
     if (this._groupe.idSite !== undefined) {
-      this._sitesService.fetchOne(this._groupe.idSite).subscribe((site: Site) => this._site = site);
+      this._sitesService.fetchOne(this._groupe.idSite).subscribe((site: Site) => {
+        this._site = site;
+        this._ville = site.ville;
+        console.log('La ville : ' + this._ville);
+      });
     }
   }
 
   get site(): Site {
     return this._site;
+  }
+
+  get ville(): string {
+    return this._ville;
   }
 
   ngOnInit() {
@@ -56,7 +66,8 @@ export class GroupeComponent implements OnInit {
     )
         .subscribe((apprenants: Apprenant[]) => {
           this._apprenants = apprenants;
-        });
+        }
+            );
   }
 
     @Output('deleteGroupe')
