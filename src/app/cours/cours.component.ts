@@ -27,7 +27,7 @@ export class CoursComponent implements OnInit {
   private _formateurs: Formateur[];
   private _groupes: Groupe[];
 
-  private _formateur: Formateur; //Variable temporaire
+  private _formateur: Formateur; // Variable temporaire
 
   constructor(private _router: Router, private _coursService: CoursService, private _formateursService: FormateursService,
               private _groupesService: GroupesService, private _dialog: MatDialog) {
@@ -121,13 +121,27 @@ export class CoursComponent implements OnInit {
     return this._displayedColumns;
   }
 
-  getNomFormateur(id: number): Formateur {
-    this._formateur = null;
+  getNomFormateur(id: number): string {
     this._formateurs.forEach(f => {
       if (f.id === id) {
         this._formateur = f;
       }
     });
-    return this._formateur;
+    if (this._formateur !== undefined) {
+      return this._formateur.nom;
+    }
+    return '';
+  }
+
+  getPrenomFormateur(id: number): string {
+    this._formateurs.forEach(f => {
+      if (f.id === id) {
+        this._formateur = f;
+      }
+    });
+    if (this._formateur !== undefined) {
+      return this._formateur.prenom;
+    }
+    return '';
   }
 }
