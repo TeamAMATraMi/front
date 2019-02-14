@@ -2,13 +2,6 @@ mat-toolbar .flex {
     flex: 1 1 auto;
 }
 
-section {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    justify-content: center;
-}
-
 .card {
     min-width: 80%;
 }
@@ -17,7 +10,7 @@ section {
     display: flex;
     flex-direction: column;
     max-height: 500px;
-    min-width: 175vh;
+    min-width: 100vh;
 }
 
 .mat-table {
