@@ -81,12 +81,16 @@ export class FormateursComponent implements OnInit {
   changeFormateur(id: number) {
     this._formateursService.fetchBySite(id).subscribe((formateur: Formateur[]) => {
       this._formateurs = formateur;
+      this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
       this._dataSource.paginator = this.paginator;
+      this._dataSource.paginator.firstPage();
     });
   }
 
     changeFormateurAll() {
       this._formateursService.fetch().subscribe((formateur: Formateur[]) => this._formateurs = formateur);
+      this.ngOnInit();
+      this._dataSource.paginator = this.paginator;
     }
 
   get dialogStatus(): string {
