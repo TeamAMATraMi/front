@@ -37,7 +37,9 @@ export const environment = {
                 oneQuartier: '/quartiersPrio/:id'
             },
             statistiques: {
-                sexeStatistiques: '/statistiques/sexe'
+                sexeStatistiques: '/sexe',
+                nationaliteStatistiques: '/nationalite',
+                ageStatistiques: '/age'
             }
         }
     }
