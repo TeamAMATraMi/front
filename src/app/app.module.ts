@@ -23,7 +23,7 @@ import {
   MatFormFieldModule,
   MatTableDataSource,
   MatTableModule,
-  MatPaginatorModule
+  MatPaginatorModule, MatSortModule
 } from '@angular/material';
 import {SitesComponent} from './sites/sites.component';
 import {ApprenantsComponent} from './apprenants/apprenants.component';
@@ -130,6 +130,7 @@ import { UpdateCoursComponent } from './update-cours/update-cours.component';
         MatRadioModule,
         MatFormFieldModule,
         MatPaginatorModule,
+        MatSortModule,
         MatTableModule
     ],
     providers: [],

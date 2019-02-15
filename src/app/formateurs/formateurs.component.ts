@@ -6,7 +6,7 @@ import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
 import {filter, flatMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {MatDialog, MatDialogRef, MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatDialogRef, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Groupe} from '../shared/interfaces/groupe';
 import {GroupesService} from '../shared/services/groupes.service';
 import {FormateurDialogComponent} from '../shared/dialogs/formateur-dialog/formateur-dialog.component';
@@ -32,6 +32,7 @@ export class FormateursComponent implements OnInit {
   private _dialogStatus: string;
   private _formateursDialog: MatDialogRef<FormateurDialogComponent>;
 
+  @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   private _dataSource: MatTableDataSource<Formateur>;
@@ -51,6 +52,7 @@ export class FormateursComponent implements OnInit {
       this._formateurs = formateur;
       this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
       this._dataSource.paginator = this.paginator;
+      this._dataSource.sort = this.sort;
     });
     this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => { this._groupes = groupes; this._groupesSite = this._groupes; });
@@ -79,7 +81,6 @@ export class FormateursComponent implements OnInit {
   changeFormateur(id: number) {
     this._formateursService.fetchBySite(id).subscribe((formateur: Formateur[]) => {
       this._formateurs = formateur;
-      this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
       this._dataSource.paginator = this.paginator;
     });
   }
@@ -111,7 +112,6 @@ export class FormateursComponent implements OnInit {
         .subscribe(
             (formateurs: Formateur[]) => {
               this._formateurs = formateurs;
-              this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
               this._dataSource.paginator = this.paginator;
             },
             _ => this._dialogStatus = 'inactive',
@@ -157,6 +157,7 @@ export class FormateursComponent implements OnInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this._dataSource.filter = filterValue;
+    this._dataSource.paginator.firstPage();
   }
 
   get dataSource(): MatTableDataSource<Formateur> {
