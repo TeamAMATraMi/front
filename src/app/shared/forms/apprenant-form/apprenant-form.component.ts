@@ -33,9 +33,6 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   private _typeContrat: string[] = ['CDI', 'CDD', 'Apprentissage', 'IAE', 'Contrat de professionnalisation',
                                     'Contrat aidé', 'Autre'];
 
-  private _statutSejourSelect: string;
-  private _statutProSelect: string;
-
   constructor(private _associationsService: AssociationsService, private _quartiersService: QuartiersService,
               private _groupesService: GroupesService) {
     this._submit$ = new EventEmitter<Apprenant>();
@@ -83,6 +80,13 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
     if (record.apprenant && record.apprenant.currentValue) {
       this._apprenant = record.apprenant.currentValue;
       this._isUpdateMode = true;
+      if (this._form.get('statutSejour').value !== 'Régulier') {
+        this._apprenant.statutPro = '';
+        this._apprenant.typeContrat = '';
+      }
+      if (this._form.get('statutPro').value !== 'Salarié(e)') {
+        this._apprenant.typeContrat = '';
+      }
       this._form.patchValue(this._apprenant);
     } else {
       this._apprenant = {
@@ -243,21 +247,4 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   get typeContrat(): string[] {
     return this._typeContrat;
   }
-
-  get statutSejourSelect(): string {
-    return this._statutSejourSelect;
-  }
-
-  set statutSejourSelect(value: string) {
-    this._statutSejourSelect = value;
-  }
-
-  get statutProSelect(): string {
-    return this._statutProSelect;
-  }
-
-  set statutProSelect(value: string) {
-    this._statutProSelect = value;
-  }
-
 }

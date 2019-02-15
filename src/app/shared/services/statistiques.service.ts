@@ -21,7 +21,7 @@ export class StatistiquesService {
         }
         // build all backend urls
         Object.keys(environment.backend.endpoints.statistiques)
-            .forEach(k => this._backendURL[ k ] = `${baseUrl}${environment.backend.endpoints.groupes[ k ]}`);
+            .forEach(k => this._backendURL[ k ] = `${baseUrl}${environment.backend.endpoints.statistiques[ k ]}`);
     }
 
     /**
@@ -34,4 +34,21 @@ export class StatistiquesService {
                 defaultIfEmpty(null)
             );
     }
+
+    fetchByNationalite(): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.nationaliteStatistiques)
+            .pipe(
+                filter(_ => !!_),
+                defaultIfEmpty(null)
+            );
+    }
+
+    fetchByAge(): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.ageStatistiques)
+            .pipe(
+                filter(_ => !!_),
+                defaultIfEmpty(null)
+            );
+    }
+
 }
