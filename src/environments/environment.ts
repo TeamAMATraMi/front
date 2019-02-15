@@ -40,7 +40,9 @@ export const environment = {
             oneQuartier: '/quartiers/:id'
         },
         statistiques: {
-            sexeStatistiques: '/statistiques/sexe'
+            sexeStatistiques: '/sexe',
+            nationaliteStatistiques: '/nationalite',
+            ageStatistiques: '/age'
         }
     }
   },
