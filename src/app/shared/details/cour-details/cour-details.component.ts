@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Cours} from '../../interfaces/cours';
+import {Presence} from '../../interfaces/presence';
 
 @Component({
   selector: 'app-cour-details',
@@ -9,11 +10,13 @@ import {Cours} from '../../interfaces/cours';
 export class CourDetailsComponent implements OnInit {
 
   private _cour: Cours;
+  private _presences: Presence[];
   private readonly _modifier$: EventEmitter<Cours>;
 
   constructor() {
     this._modifier$ = new EventEmitter<Cours>();
     this._cour = {} as Cours;
+    this._presences = [];
   }
 
   get cour(): Cours {
@@ -23,6 +26,14 @@ export class CourDetailsComponent implements OnInit {
   @Input()
   set cour(cour: Cours) {
     this._cour = cour;
+  }
+
+  get presences(): Presence[] {
+    return this._presences;
+  }
+
+  set presences(value: Presence[]) {
+    this._presences = value;
   }
 
   @Output('modifier')

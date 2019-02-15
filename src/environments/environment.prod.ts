@@ -35,6 +35,10 @@ export const environment = {
             quartiers: {
                 allQuartiers: '/quartiersPrio',
                 oneQuartier: '/quartiersPrio/:id'
+            },
+            presences: {
+                allPresences: '/presences',
+                onePresence: '/presence/:id'
             }
         }
     }

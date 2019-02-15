@@ -63,6 +63,12 @@ import {CoursFormComponent} from './shared/forms/cours-form/cours-form.component
 import {CoursDialogComponent} from './shared/dialogs/cours-dialog/cours-dialog.component';
 import { UpdateCoursComponent } from './update-cours/update-cours.component';
 
+import {PresencesComponent} from './presences/presences.component';
+import {PresenceComponent} from './presence/presence.component';
+import {PresenceFormComponent} from './shared/forms/presence-form/presence-form.component';
+import {PresenceDialogComponent} from './shared/dialogs/presence-dialog/presence-dialog.component';
+import {UpdatePresenceComponent} from './update-presence/update-presence.component';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -100,14 +106,20 @@ import { UpdateCoursComponent } from './update-cours/update-cours.component';
         SiteDialogComponent,
         SiteFormComponent,
         SiteComponent,
-        UpdateCoursComponent
+        UpdateCoursComponent,
+        PresenceComponent,
+        PresencesComponent,
+        PresenceFormComponent,
+        PresenceDialogComponent,
+        UpdatePresenceComponent
     ],
     entryComponents: [
         DialogComponent,
         FormateurDialogComponent,
         GroupeDialogComponent,
         CoursDialogComponent,
-        SiteDialogComponent
+        SiteDialogComponent,
+        PresenceDialogComponent
     ],
     imports: [
         BrowserModule,
