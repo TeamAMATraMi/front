@@ -87,6 +87,7 @@ export class ApprenantsComponent implements OnInit {
     this._apprenantsService.fetchByGroup(groupe.id).subscribe((apprenants: Apprenant[]) => this._apprenants = apprenants);
     this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
     this._dataSource.paginator = this.paginator;
+    this._dataSource.paginator.firstPage();
   }
 
   get groupes(): Groupe[] {
@@ -164,6 +165,7 @@ export class ApprenantsComponent implements OnInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this._dataSource.filter = filterValue;
+    this._dataSource.paginator.firstPage();
   }
 
   get dataSource(): MatTableDataSource<Apprenant> {

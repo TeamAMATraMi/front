@@ -155,5 +155,6 @@ export class CoursComponent implements OnInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this._dataSource.filter = filterValue;
+    this._dataSource.paginator.firstPage();
   }
 }
