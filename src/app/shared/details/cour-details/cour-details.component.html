@@ -16,3 +16,10 @@
   </mat-card>
 
 </section>
+
+<section>
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" [routerLink]="['/updatePresence', cour.id]">Presences</button>
+  </mat-dialog-actions>
+  <!-- <app-presences [presences]="presences" (modifier)="modifier($event)"> </app-presences> -->
+</section>

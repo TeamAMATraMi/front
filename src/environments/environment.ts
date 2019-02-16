@@ -43,6 +43,11 @@ export const environment = {
             sexeStatistiques: '/sexe',
             nationaliteStatistiques: '/nationalite',
             ageStatistiques: '/age'
+        },
+        presences: {
+            allPresences: '/presences',
+            onePresence: '/presence/:id',
+            idCoursPresence: '/presencesC/:id'
         }
     }
   },

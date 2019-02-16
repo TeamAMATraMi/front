@@ -15,6 +15,7 @@ import {UpdateGroupeComponent} from './update-groupe/update-groupe.component';
 import {CoursComponent} from './cours/cours.component';
 import {CourComponent} from './cour/cour.component';
 import {UpdateCoursComponent} from './update-cours/update-cours.component';
+import {UpdatePresenceComponent} from './update-presence/update-presence.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -34,7 +35,8 @@ const routes: Routes = [
     { path: 'groupes', component: GroupesComponent },
     { path: 'groupe', component: GroupeComponent },
     { path: 'updateGroupe/:id', component: UpdateGroupeComponent },
-    { path: 'statistiques', component: StatistiquesComponent},
+    { path: 'updatePresence/:id', component: UpdatePresenceComponent },
+    { path: 'statistiques', component: StatistiquesComponent}
 ];
 
 @NgModule({
