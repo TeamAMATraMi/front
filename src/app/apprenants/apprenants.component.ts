@@ -19,11 +19,13 @@ import {Observable} from 'rxjs';
 export class ApprenantsComponent implements OnInit {
 
   private _apprenants: Apprenant[];
+  private _apprenantsTemp: Apprenant[];
   private _apprenant: Apprenant;
   private _sites: Site[];
   private  _groupes: Groupe[];
   private _site: Site;
   private _groupesSite: Groupe[];
+  private _groupeTemp: Groupe;
 
   private _dialogStatus: string;
   private _apprenantsDialog: MatDialogRef<DialogComponent>;
@@ -39,6 +41,7 @@ export class ApprenantsComponent implements OnInit {
   constructor(private _router: Router, private _apprenantsService: ApprenantsService, private _sitesService: SitesService,
               private _groupesService: GroupesService, private _dialog: MatDialog) {
     this._apprenants = [];
+    this._apprenantsTemp = [];
     this._sites = [];
     this._groupes = [];
     this._groupesSite = [];
@@ -51,6 +54,7 @@ export class ApprenantsComponent implements OnInit {
     // TODO : fetch with associated service
     this._apprenantsService.fetch().subscribe((apprenants: Apprenant[]) => {
       this._apprenants = apprenants;
+      this._apprenantsTemp = apprenants;
       this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
       this._dataSource.paginator = this.paginator;
     });
@@ -79,12 +83,30 @@ export class ApprenantsComponent implements OnInit {
           }
         }
     );
+    this._apprenants = this._apprenantsTemp;
+    this._apprenants = this._apprenants.filter(e => {
+      this._groupes.forEach(g => {
+        if (g.id === e.idGroupe) {
+          this._groupeTemp = g;
+        }
+      });
+      return this._groupeTemp.idSite === site.id;
+    });
     this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
     this._dataSource.paginator = this.paginator;
+    this._dataSource.paginator.firstPage();
+  }
+
+  afficherApprenants() {
+    this._apprenants = this._apprenantsTemp;
+    this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
+    this._dataSource.paginator = this.paginator;
+    this._dataSource.paginator.firstPage();
   }
 
   changeApprenants(groupe: Groupe) {
-    this._apprenantsService.fetchByGroup(groupe.id).subscribe((apprenants: Apprenant[]) => this._apprenants = apprenants);
+    this._apprenants = this._apprenantsTemp;
+    this._apprenants = this._apprenants.filter(e => e.idGroupe === groupe.id);
     this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
     this._dataSource.paginator = this.paginator;
     this._dataSource.paginator.firstPage();
