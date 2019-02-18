@@ -26,6 +26,8 @@ export class ApprenantsComponent implements OnInit {
   private _site: Site;
   private _groupesSite: Groupe[];
   private _groupeTemp: Groupe;
+  private _selectedSite: string;
+  private _selectedGroupe: string;
 
   private _dialogStatus: string;
   private _apprenantsDialog: MatDialogRef<DialogComponent>;
@@ -47,6 +49,8 @@ export class ApprenantsComponent implements OnInit {
     this._groupesSite = [];
 
     this._dialogStatus = 'inactive';
+    this._selectedSite = 'allSites';
+    this._selectedGroupe = 'allGroupes';
   }
 
 
@@ -102,14 +106,20 @@ export class ApprenantsComponent implements OnInit {
     this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
     this._dataSource.paginator = this.paginator;
     this._dataSource.paginator.firstPage();
+
+    // TODO afficher les apprenants spécifiques à un site
   }
 
-  changeApprenants(groupe: Groupe) {
+  changerApprenants(groupe: Groupe) {
     this._apprenants = this._apprenantsTemp;
     this._apprenants = this._apprenants.filter(e => e.idGroupe === groupe.id);
     this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
     this._dataSource.paginator = this.paginator;
     this._dataSource.paginator.firstPage();
+  }
+
+  changerApprenantsSite() {
+
   }
 
   get groupes(): Groupe[] {
@@ -194,4 +204,11 @@ export class ApprenantsComponent implements OnInit {
     return this._dataSource;
   }
 
+  get selectedSite(): string {
+    return this._selectedSite;
+  }
+
+  get selectedGroupe(): string {
+    return this._selectedGroupe;
+  }
 }
