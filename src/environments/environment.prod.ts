@@ -6,7 +6,9 @@ export const environment = {
         host: '92.222.9.74',
         port: '8080',
         endpoints: {
-            login: '/login',
+            auth: {
+                login: '/login'
+            },
             apprenants: {
                 allApprenants: '/apprenants',
                 oneApprenant: '/apprenants/:id',
