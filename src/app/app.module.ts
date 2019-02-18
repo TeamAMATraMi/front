@@ -40,7 +40,7 @@ import {GroupeComponent} from './groupe/groupe.component';
 import {FormateursCardComponent} from './shared/cards/formateurs-card/formateurs-card.component';
 
 import {ApprenantFormComponent} from './shared/forms/apprenant-form/apprenant-form.component';
-import {UpdateComponent} from './update/update.component';
+import {UpdateApprenantComponent} from './update-apprenant/update-apprenant.component';
 import {FormateurComponent} from './formateur/formateur.component';
 import {FormateurDetailsComponent} from './shared/details/formateur-details/formateur-details.component';
 import {FormateurDialogComponent} from './shared/dialogs/formateur-dialog/formateur-dialog.component';
@@ -88,7 +88,7 @@ import {UpdatePresenceComponent} from './update-presence/update-presence.compone
         GroupeFormComponent,
         FormateursCardComponent,
         ApprenantFormComponent,
-        UpdateComponent,
+        UpdateApprenantComponent,
         FormateurComponent,
         FormateurDetailsComponent,
         FormateurDialogComponent,

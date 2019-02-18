@@ -10,7 +10,7 @@ import {Groupe} from '../../interfaces/groupe';
 import {formatDate} from '@angular/common';
 
 @Component({
-  selector: 'app-form',
+  selector: 'app-apprenant-form',
   templateUrl: './apprenant-form.component.html',
   styleUrls: ['./apprenant-form.component.css']
 })

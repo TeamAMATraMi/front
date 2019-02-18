@@ -8,10 +8,10 @@ import {DialogComponent} from '../shared/dialogs/apprenant-dialog/dialog.compone
 
 @Component({
   selector: 'app-update',
-  templateUrl: './update.component.html',
-  styleUrls: [ './update.component.css' ]
+  templateUrl: './update-apprenant.component.html',
+  styleUrls: [ './update-apprenant.component.css' ]
 })
-export class UpdateComponent implements OnInit {
+export class UpdateApprenantComponent implements OnInit {
   // private property to store apprenant-dialogs reference
   private _apprenantsDialog: MatDialogRef<DialogComponent>;
 

@@ -61,7 +61,7 @@ export class CoursService {
     }
 
     /**
-     * Function to update one Cours
+     * Function to update-apprenant one Cours
      */
     update(cours: Cours): Observable<any> {
         return this._http.put<Cours>(this._backendURL.oneCours.replace(':id', cours.id), cours, this._options());

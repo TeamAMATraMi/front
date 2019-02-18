@@ -72,7 +72,7 @@ export class ApprenantsService {
     }
 
     /**
-     * Function to update one Apprenant
+     * Function to update-apprenant one Apprenant
      */
     update(apprenant: Apprenant): Observable<any> {
         return this._http.put<Apprenant>(this._backendURL.allApprenants, apprenant, this._options());
