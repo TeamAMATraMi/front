@@ -55,6 +55,7 @@ import {SiteComponent} from './site/site.component';
 import {CoursFormComponent} from './shared/forms/cours-form/cours-form.component';
 import {CoursDialogComponent} from './shared/dialogs/cours-dialog/cours-dialog.component';
 import { UpdateCoursComponent } from './update-cours/update-cours.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
     declarations: [
@@ -93,7 +94,8 @@ import { UpdateCoursComponent } from './update-cours/update-cours.component';
         SiteDialogComponent,
         SiteFormComponent,
         SiteComponent,
-        UpdateCoursComponent
+        UpdateCoursComponent,
+        LoginComponent
     ],
     entryComponents: [
         DialogComponent,
