@@ -50,7 +50,6 @@ import {GroupeDialogComponent} from './shared/dialogs/groupe-dialog/groupe-dialo
 
 import {GroupeFormComponent} from './shared/forms/groupe-form/groupe-form.component';
 import {UpdateGroupeComponent} from './update-groupe/update-groupe.component';
-import {SearchPipe} from './shared/pipes/search.pipe';
 import {HomeComponent} from './home/home.component';
 import {CoursComponent} from './cours/cours.component';
 import {CoursCardComponent} from './shared/cards/cours-card/cours-card.component';
@@ -96,7 +95,6 @@ import {UpdatePresenceComponent} from './update-presence/update-presence.compone
         FormateurFormComponent,
         UpdateFormateurComponent,
         UpdateGroupeComponent,
-        SearchPipe,
         HomeComponent,
         CoursComponent,
         CoursCardComponent,
