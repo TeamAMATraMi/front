@@ -61,7 +61,7 @@ export class SitesService {
     }
 
     /**
-     * Function to update one Site
+     * Function to update-apprenant one Site
      */
     update(site: Site): Observable<any> {
         return this._http.put<Site>(this._backendURL.oneSite.replace(':id', site.id), site, this._options());

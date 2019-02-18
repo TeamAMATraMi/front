@@ -152,7 +152,7 @@ export class CoursFormComponent implements OnInit, OnChanges {
     this._submit$.emit(cours);
   }
 
-  ngOnChanges(record): void {
+  ngOnChanges(record) {
     if (record.cours && record.cours.currentValue) {
       this._cours = record.cours.currentValue;
       this._isUpdateMode = true;

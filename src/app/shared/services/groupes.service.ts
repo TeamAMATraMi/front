@@ -61,7 +61,7 @@ export class GroupesService {
   }
 
   /**
-   * Function to update one Groupe
+   * Function to update-apprenant one Groupe
    */
   update(groupe: Groupe): Observable<any> {
     return this._http.put<Groupe>(this._backendURL.oneGroupe.replace(':id', groupe.id), groupe, this._options());

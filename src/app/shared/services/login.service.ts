@@ -26,18 +26,8 @@ export class LoginService {
   }
 
   login(utilisateur: Utilisateur): Observable<any> {
-    console.log(this._backendURL);
-    return this._http.post<Observable<boolean>>(this._backendURL.login, utilisateur, this._options());
-  }
-
-
-  /**
-   * Function to return request options
-   */
-  private _options(headerList: Object = {}): any {
-    return { headers: new HttpHeaders(Object.assign({
-        'Content-Type': 'application/json'
-      }, headerList)) };
+    console.log(utilisateur);
+    return this._http.post(this._backendURL.login, utilisateur, {responseType: 'text'});
   }
 
 }

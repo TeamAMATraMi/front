@@ -17,10 +17,6 @@ export class LoginComponent implements OnInit, OnChanges {
   private readonly _form: FormGroup;
 
   constructor(private _loginsService: LoginService, private _route: ActivatedRoute, private _router: Router) {
-    this._utilisateur = {
-          'username': 'a',
-          'password': 'a'
-        };
     this._form = this._buildForm();
   }
 
@@ -37,14 +33,15 @@ export class LoginComponent implements OnInit, OnChanges {
     this._utilisateur = value;
   }
 
-  submit(formateur: Formateur) {
+  submit(utilisateur: Utilisateur) {
+    this._utilisateur = utilisateur;
     this._loginsService
         .login(this._utilisateur)
-        .subscribe( isValid => {
-          if (isValid) {
+        .subscribe( token => {
+          if (token !== '') {
             sessionStorage.setItem(
                 'token',
-                btoa(this._utilisateur.username + ':' + this._utilisateur.password)
+                token
             );
             this._router.navigate(['/']);
           } else {
@@ -59,13 +56,12 @@ export class LoginComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(record) {
-      this._utilisateur = record.formateur.currentValue;
-      this._form.patchValue(this._utilisateur);
+      this._utilisateur = record.utilisateur.currentValue;
     }
 
   private _buildForm(): FormGroup {
     return new FormGroup({
-      id: new FormControl(''),
+      id: new FormControl('0'),
       username: new FormControl('', Validators.compose([
         Validators.required, Validators.minLength(2)
       ])),

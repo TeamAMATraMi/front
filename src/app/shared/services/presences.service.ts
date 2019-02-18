@@ -73,7 +73,7 @@ export class PresencesService {
   }
 
   /**
-   * Function to update one Presence
+   * Function to update-apprenant one Presence
    */
   update(presence: Presence): Observable<any> {
     return this._http.put<Presence>(this._backendURL.onePresence.replace(':id', presence.id), presence, this._options());

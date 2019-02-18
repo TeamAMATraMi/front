@@ -7,7 +7,7 @@ import {StatistiquesComponent} from './statistiques/statistiques.component';
 import {ApprenantComponent} from './apprenant/apprenant.component';
 import {GroupesComponent} from './groupes/groupes.component';
 import {GroupeComponent} from './groupe/groupe.component';
-import {UpdateComponent} from './update/update.component';
+import {UpdateApprenantComponent} from './update-apprenant/update-apprenant.component';
 import {FormateurComponent} from './formateur/formateur.component';
 import {UpdateFormateurComponent} from './update-formateur/update-formateur.component';
 import {HomeComponent} from './home/home.component';
@@ -24,7 +24,7 @@ const routes: Routes = [
     { path: 'apprenants', component: ApprenantsComponent },
     { path: 'apprenant/:id', component: ApprenantComponent },
     { path: 'apprenantsG/:id', component: GroupeComponent },
-    { path: 'updateApprenant/:id', component: UpdateComponent },
+    { path: 'updateApprenant/:id', component: UpdateApprenantComponent },
     { path: 'formateurs', component: FormateursComponent},
     { path: 'cours', component: CoursComponent},
     { path: 'cours/:id', component: CourComponent},
