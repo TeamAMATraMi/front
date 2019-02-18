@@ -37,10 +37,7 @@
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Adresse" formControlName="adresse" minlength="3" maxlength="255" required name="adresse" />
-                        <mat-error *ngIf="form.get('adresse').dirty && form.get('adresse').hasError('required')">
-                            adresse est <strong>requis</strong>
-                        </mat-error>
+                        <input matInput placeholder="Adresse" formControlName="adresse" minlength="3" maxlength="255" name="adresse" />
                         <mat-error *ngIf="form.get('adresse').dirty && form.get('adresse').hasError('minlength')">
                             min <strong>3 characteres</strong>
                         </mat-error>
@@ -48,10 +45,7 @@
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Code postal" formControlName="codePostal" required name="codePostal" />
-                        <mat-error *ngIf="form.get('codePostal').dirty && form.get('codePostal').hasError('required')">
-                            codePostal est <strong>required</strong>
-                        </mat-error>
+                        <input matInput placeholder="Code postal" formControlName="codePostal" name="codePostal" />
                         <mat-error *ngIf="form.get('codePostal').dirty && form.get('codePostal').hasError('pattern')">
                             nécessite <strong> 5 chiffres</strong>
                         </mat-error>
@@ -70,10 +64,7 @@
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Téléphone" formControlName="telephone" required name="telephone" />
-                        <mat-error *ngIf="form.get('telephone').dirty && form.get('telephone').hasError('required')">
-                            telephone est <strong>requis</strong>
-                        </mat-error>
+                        <input matInput placeholder="Téléphone" formControlName="telephone" name="telephone" />
                         <mat-error *ngIf="form.get('telephone').dirty && form.get('telephone').hasError('pattern')">
                             Ceci n'est pas un <strong>numéro français</strong>
                         </mat-error>
@@ -81,10 +72,7 @@
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput type="date" placeholder="Date de naissance" formControlName="dateNaissance" required name="dateNaissance" />
-                        <mat-error *ngIf="form.get('dateNaissance').dirty && form.get('dateNaissance').hasError('required')">
-                            dateNaissance is <strong>required</strong>
-                        </mat-error>
+                        <input matInput type="date" placeholder="Date de naissance" formControlName="dateNaissance" name="dateNaissance" />
                         <mat-error *ngIf="form.get('dateNaissance').dirty && form.get('dateNaissance').hasError('pattern')">
                             Date de type <strong>JJ/MM/YYYY</strong>
                         </mat-error>
@@ -92,14 +80,14 @@
                 </p>
                 <p>
                     <mat-label>Majeur : </mat-label>
-                    <mat-radio-group formControlName="majeur" required>
+                    <mat-radio-group formControlName="majeur">
                         <mat-radio-button class="radiobutton-width" [value]="true">Oui</mat-radio-button>
                         <mat-radio-button class="radiobutton-width" [value]="false">Non</mat-radio-button>
                     </mat-radio-group>
                 </p>
                 <p>
                     <mat-label>Genre : </mat-label>
-                    <mat-radio-group formControlName="genre" required>
+                    <mat-radio-group formControlName="genre">
                         <mat-radio-button class="radiobutton-width" value="M">Homme</mat-radio-button>
                         <mat-radio-button class="radiobutton-width" value="F">Femme</mat-radio-button>
                     </mat-radio-group>
@@ -112,13 +100,7 @@
                 </mat-expansion-panel-header>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput type="date" placeholder="Date d'inscription" formControlName="dateInscription" required name="dateInscription" />
-                        <mat-error *ngIf="form.get('dateInscription').dirty && form.get('dateInscription').hasError('required')">
-                            dateInscription is <strong>required</strong>
-                        </mat-error>
-                        <mat-error *ngIf="form.get('dateInscription').dirty && form.get('dateInscription').hasError('pattern')">
-                            Date de type <strong>JJ/MM/YYYY</strong>
-                        </mat-error>
+                        <input matInput type="date" placeholder="Date d'inscription" formControlName="dateInscription" name="dateInscription" />
                     </mat-form-field>
                 </p>
                 <p>
@@ -152,7 +134,7 @@
                             <mat-option value="Botswana">Botswana </mat-option>
                             <mat-option value="Bhoutan">Bhoutan </mat-option>
                             <mat-option value="Boznie_Herzegovine">Boznie Herzegovine </mat-option>
-                            <mat-option value="Bresil">Bresil </mat-option>
+                            <mat-option value="Brésil">Brésil </mat-option>
                             <mat-option value="Brunei">Brunei </mat-option>
                             <mat-option value="Bulgarie">Bulgarie </mat-option>
                             <mat-option value="Burkina_Faso">Burkina Faso </mat-option>
@@ -357,216 +339,210 @@
                 </p>
                 <p>
                 <mat-form-field>
-                    <mat-select placeholder="Nationalité" formControlName="nationalite" required>
-                        <mat-option value="AFG">Afghane (Afghanistan)</mat-option>
-                        <mat-option value="ALB">Albanaise (Albanie)</mat-option>
-                        <mat-option value="DZA">Algérienne (Algérie)</mat-option>
-                        <mat-option value="DEU">Allemande (Allemagne)</mat-option>
-                        <mat-option value="USA">Americaine (États-Unis)</mat-option>
-                        <mat-option value="AND">Andorrane (Andorre)</mat-option>
-                        <mat-option value="AGO">Angolaise (Angola)</mat-option>
-                        <mat-option value="ATG">Antiguaise-et-Barbudienne (Antigua-et-Barbuda)</mat-option>
-                        <mat-option value="ARG">Argentine (Argentine)</mat-option>
-                        <mat-option value="ARM">Armenienne (Arménie)</mat-option>
-                        <mat-option value="AUS">Australienne (Australie)</mat-option>
-                        <mat-option value="AUT">Autrichienne (Autriche)</mat-option>
-                        <mat-option value="AZE">Azerbaïdjanaise (Azerbaïdjan)</mat-option>
-                        <mat-option value="BHS">Bahamienne (Bahamas)</mat-option>
-                        <mat-option value="BHR">Bahreinienne (Bahreïn)</mat-option>
-                        <mat-option value="BGD">Bangladaise (Bangladesh)</mat-option>
-                        <mat-option value="BRB">Barbadienne (Barbade)</mat-option>
-                        <mat-option value="BEL">Belge (Belgique)</mat-option>
-                        <mat-option value="BLZ">Belizienne (Belize)</mat-option>
-                        <mat-option value="BEN">Béninoise (Bénin)</mat-option>
-                        <mat-option value="BTN">Bhoutanaise (Bhoutan)</mat-option>
-                        <mat-option value="BLR">Biélorusse (Biélorussie)</mat-option>
-                        <mat-option value="MMR">Birmane (Birmanie)</mat-option>
-                        <mat-option value="GNB">Bissau-Guinéenne (Guinée-Bissau)</mat-option>
-                        <mat-option value="BOL">Bolivienne (Bolivie)</mat-option>
-                        <mat-option value="BIH">Bosnienne (Bosnie-Herzégovine)</mat-option>
-                        <mat-option value="BWA">Botswanaise (Botswana)</mat-option>
-                        <mat-option value="BRA">Brésilienne (Brésil)</mat-option>
-                        <mat-option value="GBR">Britannique (Royaume-Uni)</mat-option>
-                        <mat-option value="BRN">Brunéienne (Brunéi)</mat-option>
-                        <mat-option value="BGR">Bulgare (Bulgarie)</mat-option>
-                        <mat-option value="BFA">Burkinabée (Burkina)</mat-option>
-                        <mat-option value="BDI">Burundaise (Burundi)</mat-option>
-                        <mat-option value="KHM">Cambodgienne (Cambodge)</mat-option>
-                        <mat-option value="CMR">Camerounaise (Cameroun)</mat-option>
-                        <mat-option value="CAN">Canadienne (Canada)</mat-option>
-                        <mat-option value="CPV">Cap-verdienne (Cap-Vert)</mat-option>
-                        <mat-option value="CAF">Centrafricaine (Centrafrique)</mat-option>
-                        <mat-option value="CHL">Chilienne (Chili)</mat-option>
-                        <mat-option value="CHN">Chinoise (Chine)</mat-option>
-                        <mat-option value="CYP">Chypriote (Chypre)</mat-option>
-                        <mat-option value="COL">Colombienne (Colombie)</mat-option>
-                        <mat-option value="COM">Comorienne (Comores)</mat-option>
-                        <mat-option value="COG">Congolaise (Congo-Brazzaville)</mat-option>
-                        <mat-option value="COD">Congolaise (Congo-Kinshasa)</mat-option>
-                        <mat-option value="COK">Cookienne (Îles Cook)</mat-option>
-                        <mat-option value="CRI">Costaricaine (Costa Rica)</mat-option>
-                        <mat-option value="HRV">Croate (Croatie)</mat-option>
-                        <mat-option value="CUB">Cubaine (Cuba)</mat-option>
-                        <mat-option value="DNK">Danoise (Danemark)</mat-option>
-                        <mat-option value="DJI">Djiboutienne (Djibouti)</mat-option>
-                        <mat-option value="DOM">Dominicaine (République dominicaine)</mat-option>
-                        <mat-option value="DMA">Dominiquaise (Dominique)</mat-option>
-                        <mat-option value="EGY">Égyptienne (Égypte)</mat-option>
-                        <mat-option value="ARE">Émirienne (Émirats arabes unis)</mat-option>
-                        <mat-option value="GNQ">Équato-guineenne (Guinée équatoriale)</mat-option>
-                        <mat-option value="ECU">Équatorienne (Équateur)</mat-option>
-                        <mat-option value="ERI">Érythréenne (Érythrée)</mat-option>
-                        <mat-option value="ESP">Espagnole (Espagne)</mat-option>
-                        <mat-option value="TLS">Est-timoraise (Timor-Leste)</mat-option>
-                        <mat-option value="EST">Estonienne (Estonie)</mat-option>
-                        <mat-option value="ETH">Éthiopienne (Éthiopie)</mat-option>
-                        <mat-option value="FJI">Fidjienne (Fidji)</mat-option>
-                        <mat-option value="FIN">Finlandaise (Finlande)</mat-option>
-                        <mat-option value="FRA">Française (France)</mat-option>
-                        <mat-option value="GAB">Gabonaise (Gabon)</mat-option>
-                        <mat-option value="GMB">Gambienne (Gambie)</mat-option>
-                        <mat-option value="GEO">Georgienne (Géorgie)</mat-option>
-                        <mat-option value="GHA">Ghanéenne (Ghana)</mat-option>
-                        <mat-option value="GRD">Grenadienne (Grenade)</mat-option>
-                        <mat-option value="GTM">Guatémaltèque (Guatemala)</mat-option>
-                        <mat-option value="GIN">Guinéenne (Guinée)</mat-option>
-                        <mat-option value="GUY">Guyanienne (Guyana)</mat-option>
-                        <mat-option value="HTI">Haïtienne (Haïti)</mat-option>
-                        <mat-option value="GRC">Hellénique (Grèce)</mat-option>
-                        <mat-option value="HND">Hondurienne (Honduras)</mat-option>
-                        <mat-option value="HUN">Hongroise (Hongrie)</mat-option>
-                        <mat-option value="IND">Indienne (Inde)</mat-option>
-                        <mat-option value="IDN">Indonésienne (Indonésie)</mat-option>
-                        <mat-option value="IRQ">Irakienne (Iraq)</mat-option>
-                        <mat-option value="IRN">Iranienne (Iran)</mat-option>
-                        <mat-option value="IRL">Irlandaise (Irlande)</mat-option>
-                        <mat-option value="ISL">Islandaise (Islande)</mat-option>
-                        <mat-option value="ISR">Israélienne (Israël)</mat-option>
-                        <mat-option value="ITA">Italienne (Italie)</mat-option>
-                        <mat-option value="CIV">Ivoirienne (Côte d'Ivoire)</mat-option>
-                        <mat-option value="JAM">Jamaïcaine (Jamaïque)</mat-option>
-                        <mat-option value="JPN">Japonaise (Japon)</mat-option>
-                        <mat-option value="JOR">Jordanienne (Jordanie)</mat-option>
-                        <mat-option value="KAZ">Kazakhstanaise (Kazakhstan)</mat-option>
-                        <mat-option value="KEN">Kenyane (Kenya)</mat-option>
-                        <mat-option value="KGZ">Kirghize (Kirghizistan)</mat-option>
-                        <mat-option value="KIR">Kiribatienne (Kiribati)</mat-option>
-                        <mat-option value="KNA">Kittitienne et Névicienne (Saint-Christophe-et-Niévès)</mat-option>
-                        <mat-option value="KWT">Koweïtienne (Koweït)</mat-option>
-                        <mat-option value="LAO">Laotienne (Laos)</mat-option>
-                        <mat-option value="LSO">Lesothane (Lesotho)</mat-option>
-                        <mat-option value="LVA">Lettone (Lettonie)</mat-option>
-                        <mat-option value="LBN">Libanaise (Liban)</mat-option>
-                        <mat-option value="LBR">Libérienne (Libéria)</mat-option>
-                        <mat-option value="LBY">Libyenne (Libye)</mat-option>
-                        <mat-option value="LIE">Liechtensteinoise (Liechtenstein)</mat-option>
-                        <mat-option value="LTU">Lituanienne (Lituanie)</mat-option>
-                        <mat-option value="LUX">Luxembourgeoise (Luxembourg)</mat-option>
-                        <mat-option value="MKD">Macédonienne (Macédoine)</mat-option>
-                        <mat-option value="MYS">Malaisienne (Malaisie)</mat-option>
-                        <mat-option value="MWI">Malawienne (Malawi)</mat-option>
-                        <mat-option value="MDV">Maldivienne (Maldives)</mat-option>
-                        <mat-option value="MDG">Malgache (Madagascar)</mat-option>
-                        <mat-option value="MLI">Maliennes (Mali)</mat-option>
-                        <mat-option value="MLT">Maltaise (Malte)</mat-option>
-                        <mat-option value="MAR">Marocaine (Maroc)</mat-option>
-                        <mat-option value="MHL">Marshallaise (Îles Marshall)</mat-option>
-                        <mat-option value="MUS">Mauricienne (Maurice)</mat-option>
-                        <mat-option value="MRT">Mauritanienne (Mauritanie)</mat-option>
-                        <mat-option value="MEX">Mexicaine (Mexique)</mat-option>
-                        <mat-option value="FSM">Micronésienne (Micronésie)</mat-option>
-                        <mat-option value="MDA">Moldave (Moldovie)</mat-option>
-                        <mat-option value="MCO">Monegasque (Monaco)</mat-option>
-                        <mat-option value="MNG">Mongole (Mongolie)</mat-option>
-                        <mat-option value="MNE">Monténégrine (Monténégro)</mat-option>
-                        <mat-option value="MOZ">Mozambicaine (Mozambique)</mat-option>
-                        <mat-option value="NAM">Namibienne (Namibie)</mat-option>
-                        <mat-option value="NRU">Nauruane (Nauru)</mat-option>
-                        <mat-option value="NLD">Néerlandaise (Pays-Bas)</mat-option>
-                        <mat-option value="NZL">Néo-Zélandaise (Nouvelle-Zélande)</mat-option>
-                        <mat-option value="NPL">Népalaise (Népal)</mat-option>
-                        <mat-option value="NIC">Nicaraguayenne (Nicaragua)</mat-option>
-                        <mat-option value="NGA">Nigériane (Nigéria)</mat-option>
-                        <mat-option value="NER">Nigérienne (Niger)</mat-option>
-                        <mat-option value="NIU">Niuéenne (Niue)</mat-option>
-                        <mat-option value="PRK">Nord-coréenne (Corée du Nord)</mat-option>
-                        <mat-option value="NOR">Norvégienne (Norvège)</mat-option>
-                        <mat-option value="OMN">Omanaise (Oman)</mat-option>
-                        <mat-option value="UGA">Ougandaise (Ouganda)</mat-option>
-                        <mat-option value="UZB">Ouzbéke (Ouzbékistan)</mat-option>
-                        <mat-option value="PAK">Pakistanaise (Pakistan)</mat-option>
-                        <mat-option value="PLW">Palaosienne (Palaos)</mat-option>
-                        <mat-option value="PSE">Palestinienne (Palestine)</mat-option>
-                        <mat-option value="PAN">Panaméenne (Panama)</mat-option>
-                        <mat-option value="PNG">Papouane-Néo-Guinéenne (Papouasie-Nouvelle-Guinée)</mat-option>
-                        <mat-option value="PRY">Paraguayenne (Paraguay)</mat-option>
-                        <mat-option value="PER">Péruvienne (Pérou)</mat-option>
-                        <mat-option value="PHL">Philippine (Philippines)</mat-option>
-                        <mat-option value="POL">Polonaise (Pologne)</mat-option>
-                        <mat-option value="PRT">Portugaise (Portugal)</mat-option>
-                        <mat-option value="QAT">Qatarienne (Qatar)</mat-option>
-                        <mat-option value="ROU">Roumaine (Roumanie)</mat-option>
-                        <mat-option value="RUS">Russe (Russie)</mat-option>
-                        <mat-option value="RWA">Rwandaise (Rwanda)</mat-option>
-                        <mat-option value="LCA">Saint-Lucienne (Sainte-Lucie)</mat-option>
-                        <mat-option value="SMR">Saint-Marinaise (Saint-Marin)</mat-option>
-                        <mat-option value="VCT">Saint-Vincentaise et Grenadine (Saint-Vincent-et-les Grenadines)</mat-option>
-                        <mat-option value="SLB">Salomonaise (Îles Salomon)</mat-option>
-                        <mat-option value="SLV">Salvadorienne (Salvador)</mat-option>
-                        <mat-option value="WSM">Samoane (Samoa)</mat-option>
-                        <mat-option value="STP">Santoméenne (Sao Tomé-et-Principe)</mat-option>
-                        <mat-option value="SAU">Saoudienne (Arabie saoudite)</mat-option>
-                        <mat-option value="SEN">Sénégalaise (Sénégal)</mat-option>
-                        <mat-option value="SRB">Serbe (Serbie)</mat-option>
-                        <mat-option value="SYC">Seychelloise (Seychelles)</mat-option>
-                        <mat-option value="SLE">Sierra-Léonaise (Sierra Leone)</mat-option>
-                        <mat-option value="SGP">Singapourienne (Singapour)</mat-option>
-                        <mat-option value="SVK">Slovaque (Slovaquie)</mat-option>
-                        <mat-option value="SVN">Slovène (Slovénie)</mat-option>
-                        <mat-option value="SOM">Somalienne (Somalie)</mat-option>
-                        <mat-option value="SDN">Soudanaise (Soudan)</mat-option>
-                        <mat-option value="LKA">Sri-Lankaise (Sri Lanka)</mat-option>
-                        <mat-option value="ZAF">Sud-Africaine (Afrique du Sud)</mat-option>
-                        <mat-option value="KOR">Sud-Coréenne (Corée du Sud)</mat-option>
-                        <mat-option value="SSD">Sud-Soudanaise (Soudan du Sud)</mat-option>
-                        <mat-option value="SWE">Suédoise (Suède)</mat-option>
-                        <mat-option value="CHE">Suisse (Suisse)</mat-option>
-                        <mat-option value="SUR">Surinamaise (Suriname)</mat-option>
-                        <mat-option value="SWZ">Swazie (Swaziland)</mat-option>
-                        <mat-option value="SYR">Syrienne (Syrie)</mat-option>
-                        <mat-option value="TJK">Tadjike (Tadjikistan)</mat-option>
-                        <mat-option value="TZA">Tanzanienne (Tanzanie)</mat-option>
-                        <mat-option value="TCD">Tchadienne (Tchad)</mat-option>
-                        <mat-option value="CZE">Tchèque (Tchéquie)</mat-option>
-                        <mat-option value="THA">Thaïlandaise (Thaïlande)</mat-option>
-                        <mat-option value="TGO">Togolaise (Togo)</mat-option>
-                        <mat-option value="TON">Tonguienne (Tonga)</mat-option>
-                        <mat-option value="TTO">Trinidadienne (Trinité-et-Tobago)</mat-option>
-                        <mat-option value="TUN">Tunisienne (Tunisie)</mat-option>
-                        <mat-option value="TKM">Turkmène (Turkménistan)</mat-option>
-                        <mat-option value="TUR">Turque (Turquie)</mat-option>
-                        <mat-option value="TUV">Tuvaluane (Tuvalu)</mat-option>
-                        <mat-option value="UKR">Ukrainienne (Ukraine)</mat-option>
-                        <mat-option value="URY">Uruguayenne (Uruguay)</mat-option>
-                        <mat-option value="VUT">Vanuatuane (Vanuatu)</mat-option>
-                        <mat-option value="VAT">Vaticane (Vatican)</mat-option>
-                        <mat-option value="VEN">Vénézuélienne (Venezuela)</mat-option>
-                        <mat-option value="VNM">Vietnamienne (Viêt Nam)</mat-option>
-                        <mat-option value="YEM">Yéménite (Yémen)</mat-option>
-                        <mat-option value="ZMB">Zambienne (Zambie)</mat-option>
-                        <mat-option value="ZWE">Zimbabwéenne (Zimbabwe)</mat-option>
+                    <mat-select placeholder="Nationalité" formControlName="nationalite">
+                        <mat-option value="Afghane">Afghane (Afghanistan)</mat-option>
+                        <mat-option value="Albanaise">Albanaise (Albanie)</mat-option>
+                        <mat-option value="Algérienne">Algérienne (Algérie)</mat-option>
+                        <mat-option value="Allemande">Allemande (Allemagne)</mat-option>
+                        <mat-option value="Américaine">Américaine (États-Unis)</mat-option>
+                        <mat-option value="Andorrane">Andorrane (Andorre)</mat-option>
+                        <mat-option value="Angolaise">Angolaise (Angola)</mat-option>
+                        <mat-option value="Antiguaise-et-Barbudienne">Antiguaise-et-Barbudienne (Antigua-et-Barbuda)</mat-option>
+                        <mat-option value="Argentine">Argentine (Argentine)</mat-option>
+                        <mat-option value="Armenienne">Armenienne (Arménie)</mat-option>
+                        <mat-option value="Australienne">Australienne (Australie)</mat-option>
+                        <mat-option value="Autrichienne">Autrichienne (Autriche)</mat-option>
+                        <mat-option value="Azerbaïdjanaise">Azerbaïdjanaise (Azerbaïdjan)</mat-option>
+                        <mat-option value="Bahamienne">Bahamienne (Bahamas)</mat-option>
+                        <mat-option value="Bahreinienne">Bahreinienne (Bahreïn)</mat-option>
+                        <mat-option value="Bangladaise">Bangladaise (Bangladesh)</mat-option>
+                        <mat-option value="Barbadienne">Barbadienne (Barbade)</mat-option>
+                        <mat-option value="Belge">Belge (Belgique)</mat-option>
+                        <mat-option value="Belizienne">Belizienne (Belize)</mat-option>
+                        <mat-option value="Béninoise">Béninoise (Bénin)</mat-option>
+                        <mat-option value="Bhoutanaise">Bhoutanaise (Bhoutan)</mat-option>
+                        <mat-option value="Biélorusse">Biélorusse (Biélorussie)</mat-option>
+                        <mat-option value="Birmane">Birmane (Birmanie)</mat-option>
+                        <mat-option value="Bissau-Guinéenne">Bissau-Guinéenne (Guinée-Bissau)</mat-option>
+                        <mat-option value="Bolivienne">Bolivienne (Bolivie)</mat-option>
+                        <mat-option value="Bosnienne">Bosnienne (Bosnie-Herzégovine)</mat-option>
+                        <mat-option value="Botswanaise">Botswanaise (Botswana)</mat-option>
+                        <mat-option value="Brésilienne">Brésilienne (Brésil)</mat-option>
+                        <mat-option value="Britannique">Britannique (Royaume-Uni)</mat-option>
+                        <mat-option value="Brunéienne">Brunéienne (Brunéi)</mat-option>
+                        <mat-option value="Bulgare">Bulgare (Bulgarie)</mat-option>
+                        <mat-option value="Burkinabée">Burkinabée (Burkina)</mat-option>
+                        <mat-option value="Burundaise">Burundaise (Burundi)</mat-option>
+                        <mat-option value="Cambodgienne">Cambodgienne (Cambodge)</mat-option>
+                        <mat-option value="Camerounaise">Camerounaise (Cameroun)</mat-option>
+                        <mat-option value="Canadienne">Canadienne (Canada)</mat-option>
+                        <mat-option value="Cap-verdienne">Cap-verdienne (Cap-Vert)</mat-option>
+                        <mat-option value="Centrafricaine">Centrafricaine (Centrafrique)</mat-option>
+                        <mat-option value="Chilienne">Chilienne (Chili)</mat-option>
+                        <mat-option value="Chinoise">Chinoise (Chine)</mat-option>
+                        <mat-option value="Chypriote">Chypriote (Chypre)</mat-option>
+                        <mat-option value="Colombienne">Colombienne (Colombie)</mat-option>
+                        <mat-option value="Comorienne">Comorienne (Comores)</mat-option>
+                        <mat-option value="Congolaise">Congolaise (Congo)</mat-option>
+                        <mat-option value="Cookienne">Cookienne (Îles Cook)</mat-option>
+                        <mat-option value="Costaricaine">Costaricaine (Costa Rica)</mat-option>
+                        <mat-option value="Croate">Croate (Croatie)</mat-option>
+                        <mat-option value="Cubaine">Cubaine (Cuba)</mat-option>
+                        <mat-option value="Danoise">Danoise (Danemark)</mat-option>
+                        <mat-option value="Djiboutienne">Djiboutienne (Djibouti)</mat-option>
+                        <mat-option value="Dominicaine">Dominicaine (République dominicaine)</mat-option>
+                        <mat-option value="Dominiquaise">Dominiquaise (Dominique)</mat-option>
+                        <mat-option value="Égyptienne">Égyptienne (Égypte)</mat-option>
+                        <mat-option value="Émirienne">Émirienne (Émirats arabes unis)</mat-option>
+                        <mat-option value="Équato-guineenne">Équato-guineenne (Guinée équatoriale)</mat-option>
+                        <mat-option value="Équatorienne">Équatorienne (Équateur)</mat-option>
+                        <mat-option value="Érythréenne">Érythréenne (Érythrée)</mat-option>
+                        <mat-option value="Espagnole">Espagnole (Espagne)</mat-option>
+                        <mat-option value="Est-timoraise">Est-timoraise (Timor-Leste)</mat-option>
+                        <mat-option value="Estonienne">Estonienne (Estonie)</mat-option>
+                        <mat-option value="Éthiopienne">Éthiopienne (Éthiopie)</mat-option>
+                        <mat-option value="Fidjienne">Fidjienne (Fidji)</mat-option>
+                        <mat-option value="Finlandaise">Finlandaise (Finlande)</mat-option>
+                        <mat-option value="Française">Française (France)</mat-option>
+                        <mat-option value="Gabonaise">Gabonaise (Gabon)</mat-option>
+                        <mat-option value="Gambienne">Gambienne (Gambie)</mat-option>
+                        <mat-option value="Georgienne">Georgienne (Géorgie)</mat-option>
+                        <mat-option value="Ghanéenne">Ghanéenne (Ghana)</mat-option>
+                        <mat-option value="Grenadienne">Grenadienne (Grenade)</mat-option>
+                        <mat-option value="Guatémaltèque">Guatémaltèque (Guatemala)</mat-option>
+                        <mat-option value="Guinéenne">Guinéenne (Guinée)</mat-option>
+                        <mat-option value="Guyanienne">Guyanienne (Guyana)</mat-option>
+                        <mat-option value="Haïtienne">Haïtienne (Haïti)</mat-option>
+                        <mat-option value="Hellénique">Hellénique (Grèce)</mat-option>
+                        <mat-option value="Hondurienne">Hondurienne (Honduras)</mat-option>
+                        <mat-option value="Hongroise">Hongroise (Hongrie)</mat-option>
+                        <mat-option value="Indienne">Indienne (Inde)</mat-option>
+                        <mat-option value="Indonésienne">Indonésienne (Indonésie)</mat-option>
+                        <mat-option value="Irakienne">Irakienne (Iraq)</mat-option>
+                        <mat-option value="Iranienne">Iranienne (Iran)</mat-option>
+                        <mat-option value="Irlandaise">Irlandaise (Irlande)</mat-option>
+                        <mat-option value="Islandaise">Islandaise (Islande)</mat-option>
+                        <mat-option value="Israélienne">Israélienne (Israël)</mat-option>
+                        <mat-option value="Italienne">Italienne (Italie)</mat-option>
+                        <mat-option value="Ivoirienne">Ivoirienne (Côte d'Ivoire)</mat-option>
+                        <mat-option value="Jamaïcaine">Jamaïcaine (Jamaïque)</mat-option>
+                        <mat-option value="Japonaise">Japonaise (Japon)</mat-option>
+                        <mat-option value="Jordanienne">Jordanienne (Jordanie)</mat-option>
+                        <mat-option value="Kazakhstanaise">Kazakhstanaise (Kazakhstan)</mat-option>
+                        <mat-option value="Kenyane">Kenyane (Kenya)</mat-option>
+                        <mat-option value="Kirghize">Kirghize (Kirghizistan)</mat-option>
+                        <mat-option value="Kiribatienne">Kiribatienne (Kiribati)</mat-option>
+                        <mat-option value="Kittitienne-et-Névicienne">Kittitienne et Névicienne (Saint-Christophe-et-Niévès)</mat-option>
+                        <mat-option value="Koweïtienne">Koweïtienne (Koweït)</mat-option>
+                        <mat-option value="Laotienne">Laotienne (Laos)</mat-option>
+                        <mat-option value="Lesothane">Lesothane (Lesotho)</mat-option>
+                        <mat-option value="Lettone">Lettone (Lettonie)</mat-option>
+                        <mat-option value="Libanaise">Libanaise (Liban)</mat-option>
+                        <mat-option value="Libérienne">Libérienne (Libéria)</mat-option>
+                        <mat-option value="Libyenne">Libyenne (Libye)</mat-option>
+                        <mat-option value="Liechtensteinoise">Liechtensteinoise (Liechtenstein)</mat-option>
+                        <mat-option value="Lituanienne">Lituanienne (Lituanie)</mat-option>
+                        <mat-option value="Luxembourgeoise">Luxembourgeoise (Luxembourg)</mat-option>
+                        <mat-option value="Macédonienne">Macédonienne (Macédoine)</mat-option>
+                        <mat-option value="Malaisienne">Malaisienne (Malaisie)</mat-option>
+                        <mat-option value="Malawienne">Malawienne (Malawi)</mat-option>
+                        <mat-option value="Maldivienne">Maldivienne (Maldives)</mat-option>
+                        <mat-option value="Malgache">Malgache (Madagascar)</mat-option>
+                        <mat-option value="Maliennes">Maliennes (Mali)</mat-option>
+                        <mat-option value="Maltaise">Maltaise (Malte)</mat-option>
+                        <mat-option value="Marocaine">Marocaine (Maroc)</mat-option>
+                        <mat-option value="Marshallaise">Marshallaise (Îles Marshall)</mat-option>
+                        <mat-option value="Mauricienne">Mauricienne (Maurice)</mat-option>
+                        <mat-option value="Mauritanienne">Mauritanienne (Mauritanie)</mat-option>
+                        <mat-option value="Mexicaine">Mexicaine (Mexique)</mat-option>
+                        <mat-option value="Micronésienne">Micronésienne (Micronésie)</mat-option>
+                        <mat-option value="Moldave">Moldave (Moldovie)</mat-option>
+                        <mat-option value="Monégasque">Monégasque (Monaco)</mat-option>
+                        <mat-option value="Mongole">Mongole (Mongolie)</mat-option>
+                        <mat-option value="Monténégrine">Monténégrine (Monténégro)</mat-option>
+                        <mat-option value="Mozambicaine">Mozambicaine (Mozambique)</mat-option>
+                        <mat-option value="Namibienne">Namibienne (Namibie)</mat-option>
+                        <mat-option value="Nauruane">Nauruane (Nauru)</mat-option>
+                        <mat-option value="Néerlandaise">Néerlandaise (Pays-Bas)</mat-option>
+                        <mat-option value="Néo-Zélandaise">Néo-Zélandaise (Nouvelle-Zélande)</mat-option>
+                        <mat-option value="Népalaise">Népalaise (Népal)</mat-option>
+                        <mat-option value="Nicaraguayenne">Nicaraguayenne (Nicaragua)</mat-option>
+                        <mat-option value="Nigériane">Nigériane (Nigéria)</mat-option>
+                        <mat-option value="Nigérienne">Nigérienne (Niger)</mat-option>
+                        <mat-option value="Niuéenne">Niuéenne (Niue)</mat-option>
+                        <mat-option value="Nord-coréenne">Nord-coréenne (Corée du Nord)</mat-option>
+                        <mat-option value="Norvégienne">Norvégienne (Norvège)</mat-option>
+                        <mat-option value="Omanaise">Omanaise (Oman)</mat-option>
+                        <mat-option value="Ougandaise">Ougandaise (Ouganda)</mat-option>
+                        <mat-option value="Ouzbéke">Ouzbéke (Ouzbékistan)</mat-option>
+                        <mat-option value="Pakistanaise">Pakistanaise (Pakistan)</mat-option>
+                        <mat-option value="Palaosienne">Palaosienne (Palaos)</mat-option>
+                        <mat-option value="Palestinienne">Palestinienne (Palestine)</mat-option>
+                        <mat-option value="Panaméenne">Panaméenne (Panama)</mat-option>
+                        <mat-option value="Papouane-Néo-Guinéenne">Papouane-Néo-Guinéenne (Papouasie-Nouvelle-Guinée)</mat-option>
+                        <mat-option value="Paraguayenne">Paraguayenne (Paraguay)</mat-option>
+                        <mat-option value="Péruvienne">Péruvienne (Pérou)</mat-option>
+                        <mat-option value="Philippine">Philippine (Philippines)</mat-option>
+                        <mat-option value="Polonaise">Polonaise (Pologne)</mat-option>
+                        <mat-option value="Portugaise">Portugaise (Portugal)</mat-option>
+                        <mat-option value="Qatarienne">Qatarienne (Qatar)</mat-option>
+                        <mat-option value="Roumaine">Roumaine (Roumanie)</mat-option>
+                        <mat-option value="Anglaise">Anglaise (Royaume-Uni)</mat-option>
+                        <mat-option value="Russe">Russe (Russie)</mat-option>
+                        <mat-option value="Rwandaise">Rwandaise (Rwanda)</mat-option>
+                        <mat-option value="Saint-Lucienne">Saint-Lucienne (Sainte-Lucie)</mat-option>
+                        <mat-option value="Saint-Marinaise">Saint-Marinaise (Saint-Marin)</mat-option>
+                        <mat-option value="Saint-Vincentaise-et-Grenadine">Saint-Vincentaise et Grenadine (Saint-Vincent-et-les Grenadines)</mat-option>
+                        <mat-option value="Salomonaise">Salomonaise (Îles Salomon)</mat-option>
+                        <mat-option value="Salvadorienne">Salvadorienne (Salvador)</mat-option>
+                        <mat-option value="Samoane">Samoane (Samoa)</mat-option>
+                        <mat-option value="Santoméenne">Santoméenne (Sao Tomé-et-Principe)</mat-option>
+                        <mat-option value="Saoudienne">Saoudienne (Arabie saoudite)</mat-option>
+                        <mat-option value="Sénégalaise">Sénégalaise (Sénégal)</mat-option>
+                        <mat-option value="Serbe">Serbe (Serbie)</mat-option>
+                        <mat-option value="Seychelloise">Seychelloise (Seychelles)</mat-option>
+                        <mat-option value="Sierra-Léonaise">Sierra-Léonaise (Sierra Leone)</mat-option>
+                        <mat-option value="Singapourienne">Singapourienne (Singapour)</mat-option>
+                        <mat-option value="Slovaque">Slovaque (Slovaquie)</mat-option>
+                        <mat-option value="Slovène">Slovène (Slovénie)</mat-option>
+                        <mat-option value="Somalienne">Somalienne (Somalie)</mat-option>
+                        <mat-option value="Soudanaise">Soudanaise (Soudan)</mat-option>
+                        <mat-option value="Sri-Lankaise">Sri-Lankaise (Sri Lanka)</mat-option>
+                        <mat-option value="Sud-Africaine">Sud-Africaine (Afrique du Sud)</mat-option>
+                        <mat-option value="Sud-Coréenne">Sud-Coréenne (Corée du Sud)</mat-option>
+                        <mat-option value="Sud-Soudanaise">Sud-Soudanaise (Soudan du Sud)</mat-option>
+                        <mat-option value="Suédoise">Suédoise (Suède)</mat-option>
+                        <mat-option value="Suisse">Suisse (Suisse)</mat-option>
+                        <mat-option value="Surinamaise">Surinamaise (Suriname)</mat-option>
+                        <mat-option value="Swazie">Swazie (Swaziland)</mat-option>
+                        <mat-option value="Syrienne">Syrienne (Syrie)</mat-option>
+                        <mat-option value="Tadjike">Tadjike (Tadjikistan)</mat-option>
+                        <mat-option value="Tanzanienne">Tanzanienne (Tanzanie)</mat-option>
+                        <mat-option value="Tchadienne">Tchadienne (Tchad)</mat-option>
+                        <mat-option value="Tchèque">Tchèque (Tchéquie)</mat-option>
+                        <mat-option value="Thaïlandaise">Thaïlandaise (Thaïlande)</mat-option>
+                        <mat-option value="Togolaise">Togolaise (Togo)</mat-option>
+                        <mat-option value="Tonguienne">Tonguienne (Tonga)</mat-option>
+                        <mat-option value="Trinidadienne">Trinidadienne (Trinité-et-Tobago)</mat-option>
+                        <mat-option value="Tunisienne">Tunisienne (Tunisie)</mat-option>
+                        <mat-option value="Turkmène">Turkmène (Turkménistan)</mat-option>
+                        <mat-option value="Turque">Turque (Turquie)</mat-option>
+                        <mat-option value="Tuvaluane">Tuvaluane (Tuvalu)</mat-option>
+                        <mat-option value="Ukrainienne">Ukrainienne (Ukraine)</mat-option>
+                        <mat-option value="Uruguayenne">Uruguayenne (Uruguay)</mat-option>
+                        <mat-option value="Vanuatuane">Vanuatuane (Vanuatu)</mat-option>
+                        <mat-option value="Vaticane">Vaticane (Vatican)</mat-option>
+                        <mat-option value="Vénézuélienne">Vénézuélienne (Venezuela)</mat-option>
+                        <mat-option value="Vietnamienne">Vietnamienne (Viêt Nam)</mat-option>
+                        <mat-option value="Yéménite">Yéménite (Yémen)</mat-option>
+                        <mat-option value="Zambienne">Zambienne (Zambie)</mat-option>
+                        <mat-option value="Zimbabwéenne">Zimbabwéenne (Zimbabwe)</mat-option>
                     </mat-select>
-                    <mat-error *ngIf="form.get('nationalite').dirty && form.get('nationalite').hasError('required')">
-                        nationalite is <strong>required</strong>
-                    </mat-error>
                 </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput type="date" placeholder="Date d'arrivée" formControlName="dateArrivee" required name="dateArrivee" />
-                        <mat-error *ngIf="form.get('dateArrivee').dirty && form.get('dateArrivee').hasError('required')">
-                            dateArrivee is <strong>required</strong>
-                        </mat-error>
+                        <input matInput type="date" placeholder="Date d'arrivée" formControlName="dateArrivee" name="dateArrivee" />
                         <mat-error *ngIf="form.get('dateArrivee').dirty && form.get('dateArrivee').hasError('pattern')">
                             Date de type <strong>JJ/MM/YYYY</strong>
                         </mat-error>
@@ -589,23 +565,17 @@
                 </mat-expansion-panel-header>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Temps de scolarisation" formControlName="tempsScolarisation" required name="tempsScolarisation" />
-                        <mat-error *ngIf="form.get('tempsScolarisation').dirty && form.get('tempsScolarisation').hasError('required')">
-                            tempsScolarisation is <strong>required</strong>
-                        </mat-error>
+                        <input matInput placeholder="Temps de scolarisation" formControlName="tempsScolarisation" name="tempsScolarisation" />
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Diplôme" formControlName="diplome" required name="diplome" />
-                        <mat-error *ngIf="form.get('diplome').dirty && form.get('diplome').hasError('required')">
-                            diplome is <strong>required</strong>
-                        </mat-error>
+                        <input matInput placeholder="Diplôme" formControlName="diplome" name="diplome" />
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-label>Milieu scolaire : </mat-label>
-                    <mat-radio-group formControlName="milieuScolaire" required>
+                    <mat-radio-group formControlName="milieuScolaire">
                         <mat-radio-button class="radiobutton-width" [value]="true">Urbain</mat-radio-button>
                         <mat-radio-button class="radiobutton-width" [value]="false">Rural</mat-radio-button>
                     </mat-radio-group>
@@ -624,28 +594,28 @@
                 </p>
                 <p>
                     <mat-label>Sait lire dans sa langue : </mat-label>
-                    <mat-radio-group formControlName="lireLangue" required>
+                    <mat-radio-group formControlName="lireLangue">
                         <mat-radio-button class="radiobutton-width" [value]="true">Oui</mat-radio-button>
                         <mat-radio-button class="radiobutton-width" [value]="false">Non</mat-radio-button>
                     </mat-radio-group>
                 </p>
                 <p>
                     <mat-label>Sait écrire dans sa langue : </mat-label>
-                    <mat-radio-group formControlName="ecrireLangue" required>
+                    <mat-radio-group formControlName="ecrireLangue">
                         <mat-radio-button class="radiobutton-width" [value]="true">Oui</mat-radio-button>
                         <mat-radio-button class="radiobutton-width" [value]="false">Non</mat-radio-button>
                     </mat-radio-group>
                 </p>
                 <p>
                     <mat-label>Sait lire l'alphabet latin : </mat-label>
-                    <mat-radio-group formControlName="lireAlphaLatin" required>
+                    <mat-radio-group formControlName="lireAlphaLatin">
                         <mat-radio-button class="radiobutton-width" [value]="true">Oui</mat-radio-button>
                         <mat-radio-button class="radiobutton-width" [value]="false">Non</mat-radio-button>
                     </mat-radio-group>
                 </p>
                 <p>
                     <mat-label>Sait écrire l'alphabet latin : </mat-label>
-                    <mat-radio-group formControlName="ecrireAlphaLatin" required>
+                    <mat-radio-group formControlName="ecrireAlphaLatin">
                         <mat-radio-button class="radiobutton-width" [value]="true">Oui</mat-radio-button>
                         <mat-radio-button class="radiobutton-width" [value]="false">Non</mat-radio-button>
                     </mat-radio-group>
@@ -658,7 +628,7 @@
                 </mat-expansion-panel-header>
                 <p>
                     <mat-form-field class="full-width">
-                        <mat-select placeholder="Groupe" formControlName="idGroupe">
+                        <mat-select placeholder="Groupe" formControlName="idGroupe" required>
                             <mat-option *ngFor="let c of groupes" [value]="c.id">
                                 {{ c.nom }}
                             </mat-option>
@@ -693,17 +663,56 @@
                 </p>
                 <p>
                     <mat-label>Bénéficiaire du RSA : </mat-label>
-                    <mat-radio-group formControlName="rsa" required>
+                    <mat-radio-group formControlName="rsa">
                         <mat-radio-button class="radiobutton-width" [value]="true">Oui</mat-radio-button>
                         <mat-radio-button class="radiobutton-width" [value]="false">Non</mat-radio-button>
                     </mat-radio-group>
                 </p>
                 <p>
                     <mat-label>Cotisation payée : </mat-label>
-                    <mat-radio-group formControlName="cotisationPayee" required>
+                    <mat-radio-group formControlName="cotisationPayee">
                         <mat-radio-button class="radiobutton-width" [value]="true">Oui</mat-radio-button>
                         <mat-radio-button class="radiobutton-width" [value]="false">Non</mat-radio-button>
                     </mat-radio-group>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <mat-select placeholder="Statut du séjour" formControlName="statutSejour">
+                            <mat-option *ngFor="let c of statutSejour" [value]="c">
+                                {{ c }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </p>
+                <div *ngIf="form.get('statutSejour').value === 'Régulier'">
+                    <p>
+                        <mat-form-field class="full-width">
+                            <input matInput type="date" placeholder="Date de la carte de séjour" formControlName="dateCarteSejour"/>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field class="full-width">
+                            <input matInput type="date" placeholder="Date de fin de la carte de séjour" formControlName="dateFinCarteSejour"/>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field>
+                            <mat-select placeholder="Statut professionnel" formControlName="statutPro">
+                                <mat-option *ngFor="let c of statutPro" [value]="c">
+                                    {{ c }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </p>
+                </div>
+                <p>
+                    <mat-form-field *ngIf="form.get('statutPro').value === 'Salarié(e)'">
+                        <mat-select placeholder="Type de contrat" formControlName="typeContrat">
+                            <mat-option *ngFor="let c of typeContrat" [value]="c">
+                                {{ c }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field class="full-width">

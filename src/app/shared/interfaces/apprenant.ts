@@ -8,7 +8,7 @@ export interface Apprenant {
   commune: string;
   idGroupe: number;
   dateInscription: number;
-  auteurDossier: number;
+  auteurDossier: string;
   majeur: boolean;
   dateNaissance: number;
   genre: string;
@@ -29,4 +29,9 @@ export interface Apprenant {
   ecrireAlphaLatin: boolean;
   cotisationPayee: boolean;
   remarques: string;
+  statutSejour: string;
+  dateCarteSejour: number;
+  dateFinCarteSejour: number;
+  statutPro: string;
+  typeContrat: string;
 }

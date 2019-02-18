@@ -1,0 +1,33 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+        <span>Presences</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<section>
+    <mat-card class="mat-whiteframe-2dp">
+        <mat-card-content>
+            <div class="example-container mat-elevation-z8">
+                <mat-table #table [dataSource]="dataSource">
+                    <ng-container matColumnDef="NomApprenant">
+                        <mat-header-cell *matHeaderCellDef> Nom de l'apprenant</mat-header-cell>
+                        <mat-cell
+                                *matCellDef="let element"> {{ getNomApprenantById(element.idApprenant) }} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Present">
+                        <mat-header-cell *matHeaderCellDef> Present</mat-header-cell>
+
+                        <mat-cell *matCellDef="let element">
+                                <span>{{element.present}}</span>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            </div>
+        </mat-card-content>
+
+    </mat-card>
+</section>

@@ -12,7 +12,7 @@ export const environment = {
       auth: {
           login: '/login'
       },
-      apprenants: {
+        apprenants: {
             allApprenants: '/apprenants',
             oneApprenant: '/apprenants/:id',
             grpApprenant: '/apprenantsG/:idGroupe'
@@ -41,6 +41,16 @@ export const environment = {
         quartiers: {
             allQuartiers: '/quartiers',
             oneQuartier: '/quartiers/:id'
+        },
+        statistiques: {
+            sexeStatistiques: '/sexe',
+            nationaliteStatistiques: '/nationalite',
+            ageStatistiques: '/age'
+        },
+        presences: {
+            allPresences: '/presences',
+            onePresence: '/presence/:id',
+            idCoursPresence: '/presencesC/:id'
         }
     }
   },

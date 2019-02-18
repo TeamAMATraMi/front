@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
 import {Router} from '@angular/router';
 import {filter, flatMap} from 'rxjs/operators';
-import {MatDialog, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogRef, MatPaginator, MatTableDataSource} from '@angular/material';
 import {Observable} from 'rxjs';
 import {SiteDialogComponent} from '../shared/dialogs/site-dialog/site-dialog.component';
 
@@ -17,6 +17,10 @@ export class SitesComponent implements OnInit {
   private _sites: Site[];
   private _dialogStatus: string;
   private _sitesDialog: MatDialogRef<SiteDialogComponent>;
+  private _displayedColumns = ['id', 'ville', 'Delete'];
+
+  private _dataSource: MatTableDataSource<Site>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private _router: Router, private _sitesService: SitesService, private _dialog: MatDialog) {
     this._sites = [];
@@ -24,7 +28,19 @@ export class SitesComponent implements OnInit {
   }
 
   ngOnInit() {
-      this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
+      this._sitesService.fetch().subscribe((sites: Site[]) => {
+          this._sites = sites;
+          this._dataSource = new MatTableDataSource<Site>(this._sites);
+          this._dataSource.paginator = this.paginator;
+      });
+  }
+
+  get dataSource(): MatTableDataSource<Site> {
+      return this._dataSource;
+  }
+
+  get displayedColumns(): any {
+      return this._displayedColumns;
   }
 
   get sites(): Site[] {
@@ -33,10 +49,6 @@ export class SitesComponent implements OnInit {
 
   get dialogStatus(): string {
       return this._dialogStatus;
-  }
-
-  set dialogStatus(value: string) {
-      this._dialogStatus = value;
   }
 
   showDialog() {
@@ -48,14 +60,18 @@ export class SitesComponent implements OnInit {
           disableClose: true
       });
 
-      // subscribe to afterClosed observable to set apprenant-dialogs status and do process
+      // subscribe to afterClosed observable to set site-dialogs status and do process
       this._sitesDialog.afterClosed()
           .pipe(
               filter(_ => !!_),
               flatMap(_ => this._add(_))
           )
           .subscribe(
-              (sites: Site[]) => this._sites = sites,
+              (sites: Site[]) => {
+                  this._sites = sites;
+                  this._dataSource = new MatTableDataSource<Site>(this._sites);
+                  this._dataSource.paginator = this.paginator;
+              },
               _ => this._dialogStatus = 'inactive',
               () => this._dialogStatus = 'inactive'
           );
@@ -69,12 +85,17 @@ export class SitesComponent implements OnInit {
           );
   }
 
-  delete(site: Site) {
+  delete(id: number) {
       this._sitesService
-          .delete(site.id)
-          .subscribe(_ => {
-              return this._sites = this._sites.filter(__ => __.id !== _);
-          });
+          .delete(id)
+          .subscribe(null, null, () => this.ngOnInit());
+  }
+
+  applyFilter(filterValue: string) {
+      filterValue = filterValue.trim(); // Remove whitespace
+      filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+      this._dataSource.filter = filterValue;
+    this._dataSource.paginator.firstPage();
   }
 
 }

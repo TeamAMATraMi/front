@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {CoursService} from '../shared/services/cours.service';
 import {Cours} from '../shared/interfaces/cours';
 import {Observable} from 'rxjs';
 import {filter, flatMap} from 'rxjs/operators';
-import {FormateurDialogComponent} from '../shared/dialogs/formateur-dialog/formateur-dialog.component';
 import {Formateur} from '../shared/interfaces/formateur';
-import {MatDialog, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogRef, MatPaginator, MatTableDataSource} from '@angular/material';
 import {CoursDialogComponent} from '../shared/dialogs/cours-dialog/cours-dialog.component';
 import {FormateursService} from '../shared/services/formateurs.service';
-import {SitesService} from '../shared/services/sites.service';
 import {GroupesService} from '../shared/services/groupes.service';
 import {Groupe} from '../shared/interfaces/groupe';
 
@@ -20,12 +18,18 @@ import {Groupe} from '../shared/interfaces/groupe';
 })
 export class CoursComponent implements OnInit {
 
+  private _displayedColumns = ['matiere', 'formateur', 'horaire', 'Delete'];
+
   private _cours: Cours[];
-  private _searchText: string;
   private _dialogStatus: string;
   private _coursDialog: MatDialogRef<CoursDialogComponent>;
   private _formateurs: Formateur[];
   private _groupes: Groupe[];
+
+  private _formateur: Formateur; // Variable temporaire
+
+  private _dataSource: MatTableDataSource<Cours>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private _router: Router, private _coursService: CoursService, private _formateursService: FormateursService,
               private _groupesService: GroupesService, private _dialog: MatDialog) {
@@ -36,16 +40,16 @@ export class CoursComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._coursService.fetch().subscribe((cours: Cours[]) =>
-      this._cours = cours);
+    this._coursService.fetch().subscribe((cours: Cours[]) => {
+      this._cours = cours;
+      this._dataSource = new MatTableDataSource<Cours>(this._cours);
+      this._dataSource.paginator = this.paginator;
+    });
+    this._formateursService.fetch().subscribe((formateurs: Formateur[]) => this._formateurs = formateurs);
   }
 
-  get searchText(): string {
-    return this._searchText;
-  }
-
-  set searchText(value: string) {
-    this._searchText = value;
+  get dataSource(): MatTableDataSource<Cours> {
+    return this._dataSource;
   }
 
   get cours(): Cours[] {
@@ -58,18 +62,6 @@ export class CoursComponent implements OnInit {
 
   get dialogStatus(): string {
     return this._dialogStatus;
-  }
-
-  set dialogStatus(value: string) {
-    this._dialogStatus = value;
-  }
-
-  get coursDialog(): MatDialogRef<CoursDialogComponent> {
-    return this._coursDialog;
-  }
-
-  set coursDialog(value: MatDialogRef<CoursDialogComponent>) {
-    this._coursDialog = value;
   }
 
   get formateurs(): Formateur[] {
@@ -105,7 +97,7 @@ export class CoursComponent implements OnInit {
   }
 
   showDialog() {
-    // set apprenant-dialogs status
+    // set cours-dialogs status
     this._dialogStatus = 'active';
 
     // open modal
@@ -121,9 +113,48 @@ export class CoursComponent implements OnInit {
             flatMap(_ => this._add(_))
         )
         .subscribe(
-            (cours: Cours[]) => this.cours = cours,
+            (cours: Cours[]) => {
+              this._cours = cours;
+              this._dataSource = new MatTableDataSource<Cours>(this._cours);
+              this._dataSource.paginator = this.paginator;
+            },
             _ => this._dialogStatus = 'inactive',
             () => this._dialogStatus = 'inactive'
         );
+  }
+
+  get displayedColumns(): any {
+    return this._displayedColumns;
+  }
+
+  getNomFormateur(id: number): string {
+    this._formateurs.forEach(f => {
+      if (f.id === id) {
+        this._formateur = f;
+      }
+    });
+    if (this._formateur !== undefined) {
+      return this._formateur.nom;
+    }
+    return '';
+  }
+
+  getPrenomFormateur(id: number): string {
+    this._formateurs.forEach(f => {
+      if (f.id === id) {
+        this._formateur = f;
+      }
+    });
+    if (this._formateur !== undefined) {
+      return this._formateur.prenom;
+    }
+    return '';
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this._dataSource.filter = filterValue;
+    this._dataSource.paginator.firstPage();
   }
 }

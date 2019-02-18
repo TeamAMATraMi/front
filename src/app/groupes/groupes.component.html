@@ -10,30 +10,56 @@
         </mat-menu>
 
         <span class="flex"></span>
-      <!--  <span>
+        <span>
           <mat-form-field>
-             <mat-icon matPrefix></mat-icon>
-              <input matInput placeholder="Chercher" [(ngModel)]="searchText">
-        </mat-form-field>
-
-      </span>
--->
+              <mat-icon matPrefix></mat-icon>
+              <input matInput (input)="applyFilter($event.target.value)" placeholder="Chercher">
+          </mat-form-field>
+        </span>
     </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-list *ngFor="let groupe of groupes | search : ['nom'] : searchText">
-        <mat-list-item class="mat-whiteframe-2dp mat-card">
-            <a [routerLink]="['/apprenantsG', groupe.id]">
-                <h3 matLine> {{groupe.nom}} </h3>
-            </a>
-            <mat-dialog-actions align="end">
-                <button mat-button type="button" [routerLink]="['/updateGroupe', groupe.id]">Modifier</button>
-            </mat-dialog-actions>
-            <button mat-button title="Delete" (click)="delete(groupe)">
-                <mat-icon svgIcon="icon-delete"></mat-icon>
-            </button>
-        </mat-list-item>
-</mat-list>
+<section>
+    <mat-card class="mat-whiteframe-2dp">
+        <mat-card-content>
+            <div class="example-container mat-elevation-z8">
+                <mat-table #table [dataSource]="dataSource">
+                    <ng-container matColumnDef="Nom">
+                        <mat-header-cell *matHeaderCellDef> Nom du Groupe</mat-header-cell>
+
+                        <mat-cell *matCellDef="let element">
+                            <a [routerLink]="['/apprenantsG', element.id]">
+                                <span>{{element.nom}}</span>
+                            </a>
+
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Site">
+                        <mat-header-cell *matHeaderCellDef> Site</mat-header-cell>
+                        <mat-cell
+                                *matCellDef="let element"> {{ getVilleByIdGroup(element.idSite) }} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Delete">
+                        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                        <mat-cell
+                                *matCellDef="let element">
+                            <button mat-button title="Delete" (click)="delete(element.id)">
+                                <mat-icon svgIcon="icon-delete"></mat-icon>
+                            </button>
+
+                        </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+            </div>
+        </mat-card-content>
+
+    </mat-card>
+</section>
 
 <section class="buttons-fab" *ngIf="dialogStatus === 'inactive'">
     <button (click)="showDialog()" mat-fab color="primary" class="button-add">

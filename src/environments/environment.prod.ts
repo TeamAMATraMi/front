@@ -33,9 +33,19 @@ export const environment = {
                 allAssociations: '/associations',
                 oneAssociation: '/associations/:id'
             },
-            quartiersPrio: {
-                allQuartiersPrio: '/quartiersPrio',
-                oneQuartierPrio: '/quartiersPrio/:id'
+            quartiers: {
+                allQuartiers: '/quartiersPrio',
+                oneQuartier: '/quartiersPrio/:id'
+            },
+            statistiques: {
+                sexeStatistiques: '/sexe',
+                nationaliteStatistiques: '/nationalite',
+                ageStatistiques: '/age'
+            },
+            presences: {
+                allPresences: '/presences',
+                onePresence: '/presence/:id',
+                idCoursPresence: '/presencesC/:id'
             }
         }
     }

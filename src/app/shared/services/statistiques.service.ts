@@ -1,0 +1,54 @@
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {Observable} from 'rxjs';
+import {defaultIfEmpty, filter} from 'rxjs/operators';
+
+@Injectable({
+    providedIn: 'root'
+})
+export class StatistiquesService {
+
+    private readonly _backendURL: any;
+
+    constructor(private _http: HttpClient) {
+        this._backendURL = {};
+
+        // build backend base url
+        let baseUrl = `${environment.backend.protocol}://${environment.backend.host}`;
+        if (environment.backend.port) {
+            baseUrl += `:${environment.backend.port}`;
+        }
+        // build all backend urls
+        Object.keys(environment.backend.endpoints.statistiques)
+            .forEach(k => this._backendURL[ k ] = `${baseUrl}${environment.backend.endpoints.statistiques[ k ]}`);
+    }
+
+    /**
+     * Function to get statistiques by sexe
+     */
+    fetchBySexe(): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.sexeStatistiques)
+            .pipe(
+                filter(_ => !!_),
+                defaultIfEmpty(null)
+            );
+    }
+
+    fetchByNationalite(): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.nationaliteStatistiques)
+            .pipe(
+                filter(_ => !!_),
+                defaultIfEmpty(null)
+            );
+    }
+
+    fetchByAge(): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.ageStatistiques)
+            .pipe(
+                filter(_ => !!_),
+                defaultIfEmpty(null)
+            );
+    }
+
+}

@@ -16,7 +16,14 @@ import {
   MatInputModule,
   MatListModule,
   MatToolbarModule,
-  MatMenuModule, MatSelectModule, MatExpansionModule, MatRadioModule, MatFormFieldModule, MatTableDataSource, MatTableModule
+  MatMenuModule,
+  MatSelectModule,
+  MatExpansionModule,
+  MatRadioModule,
+  MatFormFieldModule,
+  MatTableDataSource,
+  MatTableModule,
+  MatPaginatorModule, MatSortModule
 } from '@angular/material';
 import {SitesComponent} from './sites/sites.component';
 import {ApprenantsComponent} from './apprenants/apprenants.component';
@@ -57,6 +64,12 @@ import {CoursDialogComponent} from './shared/dialogs/cours-dialog/cours-dialog.c
 import { UpdateCoursComponent } from './update-cours/update-cours.component';
 import { LoginComponent } from './login/login.component';
 
+import {PresencesComponent} from './presences/presences.component';
+import {PresenceComponent} from './presence/presence.component';
+import {PresenceFormComponent} from './shared/forms/presence-form/presence-form.component';
+import {PresenceDialogComponent} from './shared/dialogs/presence-dialog/presence-dialog.component';
+import {UpdatePresenceComponent} from './update-presence/update-presence.component';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -95,13 +108,20 @@ import { LoginComponent } from './login/login.component';
         SiteFormComponent,
         SiteComponent,
         UpdateCoursComponent,
-        LoginComponent
+        LoginComponent,
+        PresenceComponent,
+        PresencesComponent,
+        PresenceFormComponent,
+        PresenceDialogComponent,
+        UpdatePresenceComponent
     ],
     entryComponents: [
         DialogComponent,
         FormateurDialogComponent,
         GroupeDialogComponent,
-        CoursDialogComponent
+        CoursDialogComponent,
+        SiteDialogComponent,
+        PresenceDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -123,6 +143,8 @@ import { LoginComponent } from './login/login.component';
         MatExpansionModule,
         MatRadioModule,
         MatFormFieldModule,
+        MatPaginatorModule,
+        MatSortModule,
         MatTableModule
     ],
     providers: [],

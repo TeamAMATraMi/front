@@ -1,3 +1,13 @@
-<p>
-  statistiques works!
-</p>
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span>Statistiques</span>
+    <span class="flex"></span>
+    <span>Site : </span>
+    <button mat-button [matMenuTriggerFor]="menuSite">Menu</button>
+    <mat-menu #menuSite="matMenu">
+      <button mat-menu-item>Item 1</button>
+      <button mat-menu-item>Item 2</button>
+    </mat-menu>
+    <span class="flex"></span>
+  </mat-toolbar-row>
+</mat-toolbar>

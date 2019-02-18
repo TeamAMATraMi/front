@@ -16,6 +16,7 @@ import {CoursComponent} from './cours/cours.component';
 import {CourComponent} from './cour/cour.component';
 import {UpdateCoursComponent} from './update-cours/update-cours.component';
 import {LoginComponent} from './login/login.component';
+import {UpdatePresenceComponent} from './update-presence/update-presence.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -37,6 +38,8 @@ const routes: Routes = [
     { path: 'updateGroupe/:id', component: UpdateGroupeComponent },
     { path: 'statistiques', component: StatistiquesComponent},
     { path: 'login', component: LoginComponent},
+    { path: 'updatePresence/:id', component: UpdatePresenceComponent },
+    { path: 'statistiques', component: StatistiquesComponent}
 ];
 
 @NgModule({

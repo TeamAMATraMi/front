@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Cours} from '../../interfaces/cours';
 import {GroupesService} from '../../services/groupes.service';
@@ -11,7 +11,7 @@ import {FormateursService} from '../../services/formateurs.service';
   templateUrl: './cours-form.component.html',
   styleUrls: ['./cours-form.component.css']
 })
-export class CoursFormComponent implements OnInit {
+export class CoursFormComponent implements OnInit, OnChanges {
 
   private _formateur: string;
   private _groupe: string;
@@ -150,5 +150,22 @@ export class CoursFormComponent implements OnInit {
       }
     }
     this._submit$.emit(cours);
+  }
+
+  ngOnChanges(record): void {
+    if (record.cours && record.cours.currentValue) {
+      this._cours = record.cours.currentValue;
+      this._isUpdateMode = true;
+      this._form.patchValue(this._cours);
+    } else {
+      this._cours = {
+        duree: 0,
+        horaire: 0,
+        idFormateur: 0,
+        idGroupe: 0,
+        matiere: ''
+      };
+      this._isUpdateMode = false;
+    }
   }
 }

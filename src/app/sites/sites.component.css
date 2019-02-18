@@ -2,9 +2,40 @@ mat-toolbar .flex {
     flex: 1 1 auto;
 }
 
-section {
+.card {
+    min-width: 80%;
+}
+
+.example-container {
     display: flex;
-    flex-flow: row wrap;
+    flex-direction: column;
+    max-height: 500px;
+    min-width: 100vh;
+}
+
+.mat-table {
+    overflow: auto;
+    max-height: 500px;
+}
+
+a {
+    cursor: pointer;
+}
+
+mat-cell{
+    position: relative;
+}
+
+mat-header-cell{
+    position: relative;
+}
+
+.content-page {
+    display:flex;
     align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
     justify-content: center;
+    height:calc(100vh - 130px);
+    top:130px;
 }
