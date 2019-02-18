@@ -20,12 +20,13 @@ export class LoginService {
       baseUrl += `:${environment.backend.port}`;
     }
     // build all backend urls
-    Object.keys(environment.backend.endpoints)
+    Object.keys(environment.backend.endpoints.auth)
         .forEach(k => this._backendURL[ k ] = `${baseUrl}${environment.backend.endpoints.auth[ k ]}`);
 
   }
 
   login(utilisateur: Utilisateur): Observable<any> {
+    console.log(this._backendURL);
     return this._http.post<Observable<boolean>>(this._backendURL.login, utilisateur, this._options());
   }
 
