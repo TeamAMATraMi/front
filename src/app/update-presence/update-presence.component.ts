@@ -25,13 +25,13 @@ export class UpdatePresenceComponent implements OnInit {
     this._route.params
         .pipe(
             map((params: any) => params.id),
-            flatMap((id: string) => this._presencesService.fetchOne(id))
+            flatMap((id: number) => this._presencesService.fetchByIdCours(id))
         )
-        .subscribe((presence: Presence) => {
+        .subscribe((presences: Presence[]) => {
           this._presenceDialog = this._dialog.open(PresenceDialogComponent, {
             width: '500px',
             disableClose: true,
-            data: presence
+            data: presences
           });
 
           // subscribe to afterClosed observable to set dialogs status and do process

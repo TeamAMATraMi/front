@@ -132,4 +132,10 @@ export class GroupesComponent implements OnInit {
     this._dataSource.paginator.firstPage();
   }
 
+  deleteConfirmation(id: number) {
+    if (confirm('Voulez vous vraiment supprimer ce groupe ?')) {
+      this.delete(id);
+    }
+  }
+
 }

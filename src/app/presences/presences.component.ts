@@ -107,7 +107,6 @@ export class PresencesComponent implements OnInit {
         );
   }
 
-
   get presences(): Presence[] {
     return this._presences;
   }
@@ -122,6 +121,12 @@ export class PresencesComponent implements OnInit {
 
   get displayedColumns(): any {
     return this._displayedColumns;
+  }
+
+  modifier(presences: Presence[]) {
+      this._presencesService
+          .update(presences)
+          .subscribe( _ => this._presences = _);
   }
 
 }

@@ -35,10 +35,10 @@ export class PresenceComponent implements OnInit {
     this._presence = value;
   }
 
-  modifier(presence: Presence) {
+ /* modifier(presence: Presence) {
     this._presenceService
         .update(presence)
         .subscribe( _ => this._presence = _);
-  }
+  }*/
 
 }

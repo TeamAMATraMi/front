@@ -41,8 +41,11 @@ export const environment = {
             },
             statistiques: {
                 sexeStatistiques: '/sexe',
-                nationaliteStatistiques: '/nationalite',
-                ageStatistiques: '/age'
+                ageStatistiques: '/age',
+                siteStatistiques: '/site',
+                nationaliteStatistiques: '/nationalite/:nom',
+                titreSejourStatistiques: '/titreSejour/:nom',
+                quartierPrioStatistiques: '/quartierPrio/:nom'
             },
             presences: {
                 allPresences: '/presences',
