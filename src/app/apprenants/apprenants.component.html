@@ -5,9 +5,9 @@
 
         <span>Site : </span>
         <mat-form-field>
-            <mat-select [(value)]="selectedSite">
-                <mat-option matInput value="allSites" (click)="groupesSites = groupes; afficherApprenants()">Tous les sites</mat-option>
-                <mat-option matInput *ngFor="let site of sites" value="option" (click)="setSite(site)">{{site.ville}}</mat-option>
+            <mat-select [(value)]="selectedSiteId">
+                <mat-option matInput value='allSites' (click)="groupesSites = groupes; afficherApprenants()">Tous les sites</mat-option>
+                <mat-option matInput *ngFor="let site of sites" value="{{site.id}}" (click)="afficherApprenants()">{{site.ville}}</mat-option>
             </mat-select>
         </mat-form-field>
 
@@ -15,9 +15,9 @@
 
         <span>Groupe : </span>
         <mat-form-field>
-            <mat-select [(value)]="selectedGroupe">
-                <mat-option matInput value="allGroupes" (click)="afficherApprenants()">Tous les groupes</mat-option>
-                <mat-option matInput *ngFor="let groupe of groupesSites" value="option" (click)="changerApprenants(groupe)">{{groupe.nom}}</mat-option>
+            <mat-select [(value)]="selectedGroupeId">
+                <mat-option matInput value='allGroupes' (click)="afficherApprenants()">Tous les groupes</mat-option>
+                <mat-option matInput *ngFor="let groupe of groupesSites" value="{{groupe.id}}" (click)="afficherApprenants()">{{groupe.nom}}</mat-option>
             </mat-select>
         </mat-form-field>
 
