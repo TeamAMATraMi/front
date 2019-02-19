@@ -74,4 +74,36 @@ export class StatistiquesService {
                 defaultIfEmpty(null)
             );
     }
+
+    fetchByNiveauScol(site: string): Observable<Map<number, number>> {
+        return this._http.get<Map<number, number>>(this._backendURL.niveauScolStatistiques.replace(':nom', site))
+            .pipe(
+                filter(_ => !!_),
+                defaultIfEmpty(null)
+            );
+    }
+
+    fetchByStatutPro(site: string): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.statutProStatistiques.replace(':nom', site))
+            .pipe(
+                filter(_ => !!_),
+                defaultIfEmpty(null)
+            );
+    }
+
+    fetchByPriseCharge(site: string): Observable<Map<number, number>> {
+        return this._http.get<Map<number, number>>(this._backendURL.priseChargeStatistiques.replace(':nom', site))
+            .pipe(
+                filter(_ => !!_),
+                defaultIfEmpty(null)
+            );
+    }
+
+    fetchByNiveauLangue(site: string): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.niveauLangueStatistiques.replace(':nom', site))
+            .pipe(
+                filter(_ => !!_),
+                defaultIfEmpty(null)
+            );
+    }
 }

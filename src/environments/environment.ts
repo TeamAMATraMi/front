@@ -48,7 +48,11 @@ export const environment = {
             siteStatistiques: '/site',
             nationaliteStatistiques: '/nationalite/:nom',
             titreSejourStatistiques: '/titreSejour/:nom',
-            quartierPrioStatistiques: '/quartierPrio/:nom'
+            quartierPrioStatistiques: '/quartierPrio/:nom',
+            niveauScolStatistiques: '/niveauScol/:nom',
+            statutProStatistiques: '/statutPro/:nom',
+            priseChargeStatistiques: '/priseCharge/:nom',
+            niveauLangueStatistiques: '/niveauLangue/:nom'
         },
         presences: {
             allPresences: '/presences',

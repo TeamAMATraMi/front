@@ -35,6 +35,22 @@ export class StatistiquesComponent implements OnInit {
     this._statistiquesService.fetchByQuartierPrio('all').subscribe((stat: Map<String, number>) => {
       console.log(stat);
     });
+
+    this._statistiquesService.fetchByNiveauScol('all').subscribe((stat: Map<number, number>) => {
+        console.log(stat);
+    });
+
+    this._statistiquesService.fetchByStatutPro('all').subscribe((stat: Map<String, number>) => {
+        console.log(stat);
+    });
+
+    this._statistiquesService.fetchByPriseCharge('Stenay').subscribe((stat: Map<number, number>) => {
+        console.log(stat);
+    });
+
+    this._statistiquesService.fetchByNiveauLangue('all').subscribe((stat: Map<String, number>) => {
+        console.log(stat);
+    });
   }
 
 }
