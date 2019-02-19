@@ -8,22 +8,22 @@ import {HeaderComponent} from './header/header.component';
 import {DialogComponent} from './shared/dialogs/apprenant-dialog/dialog.component';
 
 import {
-  MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatDialogModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatToolbarModule,
-  MatMenuModule,
-  MatSelectModule,
-  MatExpansionModule,
-  MatRadioModule,
-  MatFormFieldModule,
-  MatTableDataSource,
-  MatTableModule,
-  MatPaginatorModule, MatSortModule
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatSelectModule,
+    MatExpansionModule,
+    MatRadioModule,
+    MatFormFieldModule,
+    MatTableDataSource,
+    MatTableModule,
+    MatPaginatorModule, MatSortModule, MatTabsModule, MatDividerModule, MatGridListModule
 } from '@angular/material';
 import {SitesComponent} from './sites/sites.component';
 import {ApprenantsComponent} from './apprenants/apprenants.component';
@@ -143,7 +143,9 @@ import {UpdatePresenceComponent} from './update-presence/update-presence.compone
         MatFormFieldModule,
         MatPaginatorModule,
         MatSortModule,
-        MatTableModule
+        MatTableModule,
+        MatTabsModule,
+        MatGridListModule
     ],
     providers: [],
     bootstrap: [AppComponent]
