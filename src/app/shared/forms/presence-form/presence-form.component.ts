@@ -4,6 +4,7 @@ import {Groupe} from '../../interfaces/groupe';
 import {Presence} from '../../interfaces/presence';
 import {Apprenant} from '../../interfaces/apprenant';
 import {ApprenantsService} from '../../services/apprenants.service';
+import {PresencesService} from '../../services/presences.service';
 
 @Component({
   selector: 'app-presence-form',
@@ -15,17 +16,18 @@ export class PresenceFormComponent implements OnInit, OnChanges {
   private _nomApprenant: string;
   private _present: boolean;
   private _isUpdateMode: boolean;
-  private _presence: Presence;
+  private _presences: Presence[];
   private _apprenants: Apprenant[];
   private readonly _cancel$: EventEmitter<void>;
   private readonly _submit$: EventEmitter<Presence>;
   private readonly _form: FormGroup;
 
-  constructor(private _apprenantsService: ApprenantsService) {
+  constructor(private _apprenantsService: ApprenantsService, private _presencesService: PresencesService) {
     this._submit$ = new EventEmitter<Presence>();
     this._cancel$ = new EventEmitter<void>();
     this._form = this._buildForm();
     this._apprenants = [];
+    this._presences = [];
   }
 
   ngOnInit() {
@@ -35,6 +37,9 @@ export class PresenceFormComponent implements OnInit, OnChanges {
                 this._apprenants[0].nom + ' ' + this._apprenants[0].prenom : '' });
         }
     );
+    this._presencesService.fetch().subscribe((presences: Presence[]) => {
+      this._presences = presences;
+    });
   }
 
   get form(): FormGroup {
@@ -65,13 +70,13 @@ export class PresenceFormComponent implements OnInit, OnChanges {
     this._isUpdateMode = value;
   }
 
-  get presence(): Presence {
-    return this._presence;
+  get presences(): Presence[] {
+    return this._presences;
   }
 
   @Input()
-  set presence(value: Presence) {
-    this._presence = value;
+  set presences(value: Presence[]) {
+    this._presences = value;
   }
 
   cancel() {
@@ -103,7 +108,7 @@ export class PresenceFormComponent implements OnInit, OnChanges {
 
   ngOnChanges(record) {
     if (record.presence && record.presence.currentValue) {
-      this._presence = record.presence.currentValue;
+      this._presences = record.presences.currentValue;
       this._isUpdateMode = true;
 
       for (let i = 0; i < this.apprenants.length; i++) {

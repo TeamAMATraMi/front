@@ -107,7 +107,6 @@ export class PresencesComponent implements OnInit {
         );
   }
 
-
   get presences(): Presence[] {
     return this._presences;
   }
