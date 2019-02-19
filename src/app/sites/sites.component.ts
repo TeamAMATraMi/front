@@ -98,4 +98,9 @@ export class SitesComponent implements OnInit {
     this._dataSource.paginator.firstPage();
   }
 
+    deleteConfirmation(id: number) {
+        if (confirm('Voulez vous vraiment supprimer ce site ?')) {
+            this.delete(id);
+        }
+    }
 }

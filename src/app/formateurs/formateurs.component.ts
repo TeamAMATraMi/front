@@ -167,4 +167,9 @@ export class FormateursComponent implements OnInit {
   get dataSource(): MatTableDataSource<Formateur> {
     return this._dataSource;
   }
+  deleteConfirmation(id: number) {
+    if (confirm('Voulez vous vraiment supprimer ce formateur ?')) {
+      this.delete(id);
+    }
+  }
 }
