@@ -123,4 +123,10 @@ export class PresencesComponent implements OnInit {
     return this._displayedColumns;
   }
 
+  modifier(presences: Presence[]) {
+      this._presencesService
+          .update(presences)
+          .subscribe( _ => this._presences = _);
+  }
+
 }

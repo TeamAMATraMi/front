@@ -1,16 +1,13 @@
-<h2 mat-dialog-title *ngIf="isUpdateMode">Modifier la fiche de présence</h2>
+<h2 mat-dialog-title> Modifier la fiche de présence</h2>
 
 <mat-dialog-content>
   <form novalidate [formGroup]="form">
-    <mat-accordion>
+    <mat-accordion *ngFor="let presence of presences">
         <p>
-          <span style="width:100%">{{ form.get('nomApprenant').value }}</span>
-        </p>
-        <p>
-          <mat-label>Presence : </mat-label>
-          <mat-radio-group>
-            <mat-radio-button class="radiobutton-width" [value]="true">Present</mat-radio-button>
-            <mat-radio-button class="radiobutton-width" [value]="false">Absent</mat-radio-button>
+          <span style="width:100%">{{ presence.idApprenant }}</span>
+          <mat-radio-group formControlName="present">
+            <mat-radio-button class="radiobutton-width" [value]="true"> Present </mat-radio-button>
+            <mat-radio-button class="radiobutton-width" [value]="false"> Absent </mat-radio-button>
           </mat-radio-group>
         </p>
     </mat-accordion>
