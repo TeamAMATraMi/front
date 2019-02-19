@@ -16,10 +16,6 @@ export class StatistiquesComponent implements OnInit {
         console.log(stat);
     });
 
-    this._statistiquesService.fetchByNationalite().subscribe((stat: Map<String, number>) => {
-        console.log(stat);
-    });
-
     this._statistiquesService.fetchByAge().subscribe((stat: Map<String, number>) => {
       console.log(stat);
     });
@@ -28,7 +24,15 @@ export class StatistiquesComponent implements OnInit {
       console.log(stat);
     });
 
+    this._statistiquesService.fetchByNationalite('all').subscribe((stat: Map<String, number>) => {
+      console.log(stat);
+    });
+
     this._statistiquesService.fetchBySejour('Stenay').subscribe((stat: Map<String, number>) => {
+      console.log(stat);
+    });
+
+    this._statistiquesService.fetchByQuartierPrio('all').subscribe((stat: Map<String, number>) => {
       console.log(stat);
     });
   }

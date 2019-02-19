@@ -35,14 +35,6 @@ export class StatistiquesService {
             );
     }
 
-    fetchByNationalite(): Observable<Map<String, number>> {
-        return this._http.get<Map<String, number>>(this._backendURL.nationaliteStatistiques)
-            .pipe(
-                filter(_ => !!_),
-                defaultIfEmpty(null)
-            );
-    }
-
     fetchByAge(): Observable<Map<String, number>> {
         return this._http.get<Map<String, number>>(this._backendURL.ageStatistiques)
             .pipe(
@@ -59,8 +51,24 @@ export class StatistiquesService {
             );
     }
 
+    fetchByNationalite(site: string): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.nationaliteStatistiques.replace(':nom', site))
+            .pipe(
+                filter(_ => !!_),
+                defaultIfEmpty(null)
+            );
+    }
+
     fetchBySejour(site: string): Observable<Map<String, number>> {
         return this._http.get<Map<String, number>>(this._backendURL.titreSejourStatistiques.replace(':nom', site))
+            .pipe(
+                filter(_ => !!_),
+                defaultIfEmpty(null)
+            );
+    }
+
+    fetchByQuartierPrio(site: string): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.quartierPrioStatistiques.replace(':nom', site))
             .pipe(
                 filter(_ => !!_),
                 defaultIfEmpty(null)
