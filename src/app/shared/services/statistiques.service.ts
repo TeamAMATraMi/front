@@ -51,4 +51,19 @@ export class StatistiquesService {
             );
     }
 
+    fetchBySite(): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.siteStatistiques)
+            .pipe(
+                filter(_ => !!_),
+                defaultIfEmpty(null)
+            );
+    }
+
+    fetchBySejour(site: string): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.titreSejourStatistiques.replace(':nom', site))
+            .pipe(
+                filter(_ => !!_),
+                defaultIfEmpty(null)
+            );
+    }
 }

@@ -23,6 +23,14 @@ export class StatistiquesComponent implements OnInit {
     this._statistiquesService.fetchByAge().subscribe((stat: Map<String, number>) => {
       console.log(stat);
     });
+
+    this._statistiquesService.fetchBySite().subscribe((stat: Map<String, number>) => {
+      console.log(stat);
+    });
+
+    this._statistiquesService.fetchBySejour('Stenay').subscribe((stat: Map<String, number>) => {
+      console.log(stat);
+    });
   }
 
 }
