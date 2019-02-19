@@ -208,7 +208,15 @@ export class ApprenantsComponent implements OnInit {
     return this._selectedSite;
   }
 
+  set selectedSite(value: string) {
+    this._selectedSite = value;
+  }
+
   get selectedGroupe(): string {
     return this._selectedGroupe;
+  }
+
+  set selectedGroupe(value: string) {
+    this._selectedGroupe = value;
   }
 }
