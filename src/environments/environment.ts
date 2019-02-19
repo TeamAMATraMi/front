@@ -45,7 +45,9 @@ export const environment = {
         statistiques: {
             sexeStatistiques: '/sexe',
             nationaliteStatistiques: '/nationalite',
-            ageStatistiques: '/age'
+            ageStatistiques: '/age',
+            siteStatistiques: '/site',
+            titreSejourStatistiques: '/titreSejour/:nom'
         },
         presences: {
             allPresences: '/presences',
