@@ -23,7 +23,6 @@ export class ApprenantsComponent implements OnInit {
   private _apprenant: Apprenant;
   private _sites: Site[];
   private  _groupes: Groupe[];
-  private _site: Site;
   private _groupesSite: Groupe[];
   private _groupeTemp: Groupe;
   private _selectedSiteId: number | string;
@@ -78,58 +77,19 @@ export class ApprenantsComponent implements OnInit {
     return this._sites;
   }
 
-  setSite(site: Site) {
-    this._site = site;
+  afficherApprenants() {
     this._groupesSite = [];
     this._groupes.forEach(e => {
-          if (e.idSite === this._site.id) {
-            this._groupesSite.push(e);
-          }
-        }
-    );
-    this._apprenants = this._apprenantsTemp;
-    this._apprenants = this._apprenants.filter(e => {
-      this._groupes.forEach(g => {
-        if (g.id === e.idGroupe) {
-          this._groupeTemp = g;
-        }
-      });
-      return this._groupeTemp.idSite === site.id;
-    });
-    this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
-    this._dataSource.paginator = this.paginator;
-    this._dataSource.paginator.firstPage();
-  }
-
-  afficherApprenants() {
-    // On récupère le site ayant pour ville this._selectedSite
-    /* var siteTemps;
-    this._sites.forEach(s => {
-      if (s.ville === this._selectedSite) {
-        siteTemp = s;
+      if (e.idSite === this._selectedSiteId) {
+        this._groupesSite.push(e);
       }
-    })*/
-    console.log('site : ' + this._selectedSiteId);
-    console.log('groupe : ' + this._selectedGroupeId);
+    });
+    // On affiche tous les apprenants
     if ((this._selectedSiteId === 'allSites') && (this._selectedGroupeId === 'allGroupes')) {
-      console.log('test premier if');
       this._apprenants = this._apprenantsTemp;
     } else {
+      // On affiche tous les apprenants spécifiques à un site
       if (this._selectedGroupeId === 'allGroupes') {
-        /* this._sites.forEach(s => {
-          if (s.id === this._selectedSiteId) {
-            this._site = s;
-          }
-        });*/
-        console.log('test deuxieme if');
-        this._groupesSite = [];
-        this._groupes.forEach(e => {
-              if (e.idSite === this._selectedSiteId) {
-                this._groupesSite.push(e);
-              }
-            }
-        );
-        console.log('taille : ' + this._groupesSite.length);
         this._apprenants = this._apprenantsTemp;
         this._apprenants = this._apprenants.filter(e => {
           this._groupes.forEach(g => {
@@ -140,26 +100,13 @@ export class ApprenantsComponent implements OnInit {
           return this._groupeTemp.idSite === this._selectedSiteId;
         });
       } else {
-        console.log('test troisieme if');
+        // On affiche tous les apprenants spécifiques à un groupe
         this._apprenants = this._apprenantsTemp;
         this._apprenants = this._apprenants.filter(e => {
-          this._groupes.forEach(g => {
-            if (g.id === e.idGroupe) {
-              this._groupeTemp = g;
-            }
-          });
-          return this._groupeTemp.id === this._selectedGroupeId;
+          return e.idGroupe === this._selectedGroupeId;
         });
       }
     }
-    this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
-    this._dataSource.paginator = this.paginator;
-    this._dataSource.paginator.firstPage();
-  }
-
-  changerApprenants(groupe: Groupe) {
-    this._apprenants = this._apprenantsTemp;
-    this._apprenants = this._apprenants.filter(e => e.idGroupe === groupe.id);
     this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
     this._dataSource.paginator = this.paginator;
     this._dataSource.paginator.firstPage();
