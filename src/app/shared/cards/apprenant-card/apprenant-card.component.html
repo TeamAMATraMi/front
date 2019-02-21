@@ -3,7 +3,10 @@
     <mat-card-title-group>
       <mat-card-title>
         <a [routerLink]="['/apprenant', apprenant.id]">
-          <span>{{ apprenant.nom }} {{ apprenant.prenom }}</span>
+          <span>{{ apprenant.nom }} {{ apprenant.prenom }}
+            <mat-icon style="color: blue" svgIcon="gender-male" *ngIf="apprenant.genre=='M'"></mat-icon>
+            <mat-icon style="color: pink" svgIcon="gender-female" *ngIf="apprenant.genre=='F'"></mat-icon>
+          </span>
         </a>
       </mat-card-title>
       <mat-card-subtitle>
@@ -12,19 +15,13 @@
 
     </mat-card-title-group>
     <mat-card-content>
-      Telephone : {{ apprenant.telephone}}
+      <mat-icon svgIcon="phone" ></mat-icon>{{ apprenant.telephone}}
     </mat-card-content>
     <mat-card-content>
-      Adresse : {{ apprenant.adresse}}
+      <mat-icon svgIcon="address" ></mat-icon>{{ apprenant.adresse}} , {{ apprenant.codePostal }}  {{ apprenant.commune }}
     </mat-card-content>
     <mat-card-content>
-      Code postal : {{ apprenant.codePostal }}
-    </mat-card-content>
-    <mat-card-content>
-      Commune : {{ apprenant.commune}}
-    </mat-card-content>
-    <mat-card-content>
-      <button mat-button title="Delete" (click)="delete(apprenant)">
+      <button style="left: 90%;margin: 0;" mat-button title="Delete" (click)="delete(apprenant)">
         <mat-icon svgIcon="icon-delete"></mat-icon>
       </button>
     </mat-card-content>
