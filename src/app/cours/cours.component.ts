@@ -10,6 +10,8 @@ import {CoursDialogComponent} from '../shared/dialogs/cours-dialog/cours-dialog.
 import {FormateursService} from '../shared/services/formateurs.service';
 import {GroupesService} from '../shared/services/groupes.service';
 import {Groupe} from '../shared/interfaces/groupe';
+import {PresencesService} from '../shared/services/presences.service';
+import {ApprenantsService} from '../shared/services/apprenants.service';
 
 @Component({
   selector: 'app-cours',
@@ -32,7 +34,8 @@ export class CoursComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private _router: Router, private _coursService: CoursService, private _formateursService: FormateursService,
-              private _groupesService: GroupesService, private _dialog: MatDialog) {
+              private _groupesService: GroupesService, private _presencesService: PresencesService,
+              private _apprenantsService: ApprenantsService, private _dialog: MatDialog) {
     this._cours = [];
     this._formateurs = [];
     this._dialogStatus = 'inactive';
@@ -80,13 +83,14 @@ export class CoursComponent implements OnInit {
     this._groupes = value;
   }
 
-  private _add(cour: Cours): Observable<Cours[]> {
+  private _add(cours: Cours): Observable<Cours[]> {
     return this._coursService
-      .create(cour)
+      .create(cours)
       .pipe(
         flatMap(_ => this._coursService.fetch())
       );
   }
+
 
   delete(cour: Cours) {
     this._coursService
