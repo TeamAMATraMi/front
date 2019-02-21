@@ -209,4 +209,9 @@ export class ApprenantsComponent implements OnInit {
   set selectedGroupeId(value: number | string) {
     this._selectedGroupeId = value;
   }
+  deleteConfirmation(id: number) {
+    if (confirm('Voulez vous vraiment supprimer cet apprenant ?')) {
+      this.delete(id);
+    }
+  }
 }
