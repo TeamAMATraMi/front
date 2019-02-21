@@ -36,8 +36,8 @@ export const environment = {
                 oneAssociation: '/associations/:id'
             },
             quartiers: {
-                allQuartiers: '/quartiersPrio',
-                oneQuartier: '/quartiersPrio/:id'
+                allQuartiers: '/quartiers',
+                oneQuartier: '/quartiers/:id'
             },
             statistiques: {
                 sexeStatistiques: '/sexe',

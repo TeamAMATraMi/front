@@ -161,7 +161,7 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
       idGroupe: new FormControl('', Validators.compose([
         Validators.required
       ])),
-      dateInscription: new FormControl({value: formatDate(new Date(), 'yyyy-MM-dd', 'en')}, Validators.compose([
+      dateInscription: new FormControl(formatDate(new Date(), 'yyyy-MM-dd', 'en'), Validators.compose([
       ])),
       auteurDossier: new FormControl('', Validators.compose([
         Validators.required
