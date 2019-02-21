@@ -18,11 +18,13 @@ export class GroupesComponent implements OnInit {
 
   private _displayedColumns = ['Nom', 'Site', 'Delete'];
   private _groupes: Groupe[];
+  private _groupesTemp: Groupe[];
   private _dialogStatus: string;
   private _groupesDialog: MatDialogRef<GroupeDialogComponent>;
   private readonly _delete$: EventEmitter<Groupe>;
   private _sites: Site[];
   private tmp: string;
+  private _selectedSiteId: number | string;
 
   private _dataSource: MatTableDataSource<Groupe>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -30,8 +32,10 @@ export class GroupesComponent implements OnInit {
   constructor(private _router: Router, private _groupesService: GroupesService,
               private _dialog: MatDialog, private _sitesService: SitesService) {
     this._groupes = [];
+    this._groupesTemp = [];
     this._dialogStatus = 'inactive';
     this._sites = [];
+    this._selectedSiteId = 'allSites';
   }
 
   get sites(): Site[] {
@@ -45,6 +49,7 @@ export class GroupesComponent implements OnInit {
   ngOnInit() {
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => {
       this._groupes = groupes;
+      this._groupesTemp = groupes;
       this._dataSource = new MatTableDataSource<Groupe>(this._groupes);
       this._dataSource.paginator = this.paginator;
     });
@@ -125,6 +130,18 @@ export class GroupesComponent implements OnInit {
     return this._displayedColumns;
   }
 
+  afficherGroupes() {
+    if (this._selectedSiteId === 'allSites') {
+      this._groupes = this._groupesTemp;
+    } else {
+      this._groupes = this._groupesTemp;
+      this._groupes = this._groupes.filter(e => e.idSite === this._selectedSiteId);
+    }
+    this._dataSource = new MatTableDataSource<Groupe>(this._groupes);
+    this._dataSource.paginator = this.paginator;
+    this._dataSource.paginator.firstPage();
+  }
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
@@ -132,4 +149,17 @@ export class GroupesComponent implements OnInit {
     this._dataSource.paginator.firstPage();
   }
 
+  deleteConfirmation(id: number) {
+    if (confirm('Voulez vous vraiment supprimer ce groupe ?')) {
+      this.delete(id);
+    }
+  }
+
+  get selectedSiteId(): number | string {
+    return this._selectedSiteId;
+  }
+
+  set selectedSiteId(value: number | string) {
+    this._selectedSiteId = value;
+  }
 }

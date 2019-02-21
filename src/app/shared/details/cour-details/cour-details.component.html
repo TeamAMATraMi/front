@@ -1,9 +1,10 @@
 <section>
   <mat-card class="mat-whiteframe-2dp">
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [routerLink]="['/updateCours', cour.id]">Modifier</button>
+      <button color="primary" mat-raised-button style="position: absolute;left: 20px;margin: 0;" mat-button type="button" [routerLink]="['/updateCours', cour.id]">Modifier</button>
     </mat-dialog-actions>
 
+    <br/><br/><br/>
     <mat-card-content>
       horaire : {{ cour.horaire}}
     </mat-card-content>
@@ -19,7 +20,7 @@
 
 <section>
   <mat-dialog-actions align="end">
-    <button mat-button type="button" [routerLink]="['/updatePresence', cour.id]">Presences</button>
+    <button color="primary" mat-raised-button mat-button type="button" [routerLink]="['/updatePresence', cour.id]">Presences</button>
   </mat-dialog-actions>
   <!-- <app-presences [presences]="presences" (modifier)="modifier($event)"> </app-presences> -->
 </section>

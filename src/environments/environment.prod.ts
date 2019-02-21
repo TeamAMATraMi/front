@@ -10,44 +10,51 @@ export const environment = {
                 login: '/login'
             },
             apprenants: {
-                allApprenants: '/apprenants',
-                oneApprenant: '/apprenants/:id',
-                grpApprenant: '/apprenantsG/:idGroupe'
+                allApprenants: '/api/apprenants',
+                oneApprenant: '/api/apprenants/:id',
+                grpApprenant: '/api/apprenantsG/:idGroupe'
             },
             formateurs: {
-                allFormateurs: '/formateurs',
-                oneFormateur: '/formateurs/:id',
-                siteFormateur: '/formateursSite/:id'
+                allFormateurs: '/api/formateurs',
+                oneFormateur: '/api/formateurs/:id',
+                siteFormateur: '/api/formateursSite/:id'
             },
             cours: {
-                allCours: '/cours',
-                oneCours: '/cours/:id',
+                allCours: '/api/cours',
+                oneCours: '/api/cours/:id',
             },
             sites: {
-                allSites: '/sites',
-                oneSite: '/sites/:id'
+                allSites: '/api/sites',
+                oneSite: '/api/sites/:id'
             },
             groupes: {
-                allGroupes: '/groupes',
-                oneGroupe: '/groupes/:id'
+                allGroupes: '/api/groupes',
+                oneGroupe: '/api/groupes/:id'
             },
             associations: {
-                allAssociations: '/associations',
-                oneAssociation: '/associations/:id'
+                allAssociations: '/api/associations',
+                oneAssociation: '/api/associations/:id'
             },
             quartiers: {
-                allQuartiers: '/quartiersPrio',
-                oneQuartier: '/quartiersPrio/:id'
+                allQuartiers: '/api/quartiers',
+                oneQuartier: '/api/quartiers/:id'
             },
             statistiques: {
-                sexeStatistiques: '/sexe',
-                nationaliteStatistiques: '/nationalite',
-                ageStatistiques: '/age'
+                sexeStatistiques: '/api/sexe',
+                ageStatistiques: '/api/age',
+                siteStatistiques: '/api/site',
+                nationaliteStatistiques: '/api/nationalite/:nom',
+                titreSejourStatistiques: '/api/titreSejour/:nom',
+                quartierPrioStatistiques: '/api/quartierPrio/:nom',
+                niveauScolStatistiques: '/api/niveauScol/:nom',
+                statutProStatistiques: '/api/statutPro/:nom',
+                priseChargeStatistiques: '/api/priseCharge/:nom',
+                niveauLangueStatistiques: '/api/niveauLangue/:nom'
             },
             presences: {
-                allPresences: '/presences',
-                onePresence: '/presence/:id',
-                idCoursPresence: '/presencesC/:id'
+                allPresences: '/api/presences',
+                onePresence: '/api/presence/:id',
+                idCoursPresence: '/api/presencesC/:id'
             }
         }
     }

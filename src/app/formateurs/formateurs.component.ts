@@ -24,10 +24,12 @@ export class FormateursComponent implements OnInit {
   private readonly _delete$: EventEmitter<Formateur>;
 
   private _formateurs: Formateur[];
+  private _formateursTemp: Formateur[];
   private _sites: Site[];
   private _site: Site;
   private _groupesSite: Groupe[];
   private _groupes: Groupe[];
+  private _selectedSiteId: number | string;
 
   private _dialogStatus: string;
   private _formateursDialog: MatDialogRef<FormateurDialogComponent>;
@@ -40,16 +42,19 @@ export class FormateursComponent implements OnInit {
   constructor(private _router: Router, private _formateursService: FormateursService, private _sitesService: SitesService,
               private _dialog: MatDialog, private _groupesService: GroupesService) {
     this._formateurs = [];
+    this._formateursTemp = [];
     this._sites = [];
     this._dialogStatus = 'inactive';
     this._groupesSite = [];
     this._groupes = [];
+    this._selectedSiteId = 'allSites';
   }
 
   ngOnInit() {
     // TODO : fetch with associated service formateur
     this._formateursService.fetch().subscribe((formateur: Formateur[]) => {
       this._formateurs = formateur;
+      this._formateursTemp = formateur;
       this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
       this._dataSource.paginator = this.paginator;
       this._dataSource.sort = this.sort;
@@ -78,20 +83,17 @@ export class FormateursComponent implements OnInit {
     this._site = value;
   }
 
-  changeFormateur(id: number) {
-    this._formateursService.fetchBySite(id).subscribe((formateur: Formateur[]) => {
-      this._formateurs = formateur;
-      this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
-      this._dataSource.paginator = this.paginator;
-      this._dataSource.paginator.firstPage();
-    });
-  }
-
-    changeFormateurAll() {
-      this._formateursService.fetch().subscribe((formateur: Formateur[]) => this._formateurs = formateur);
-      this.ngOnInit();
-      this._dataSource.paginator = this.paginator;
+  afficherFormateurs() {
+    if (this._selectedSiteId === 'allSites') {
+      this._formateurs = this._formateursTemp;
+    } else {
+      this._formateurs = this._formateursTemp;
+      this._formateurs = this._formateurs.filter(e => e.idSite === this._selectedSiteId);
     }
+    this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
+    this._dataSource.paginator = this.paginator;
+    this._dataSource.paginator.firstPage();
+  }
 
   get dialogStatus(): string {
     return this._dialogStatus;
@@ -166,5 +168,18 @@ export class FormateursComponent implements OnInit {
 
   get dataSource(): MatTableDataSource<Formateur> {
     return this._dataSource;
+  }
+  deleteConfirmation(id: number) {
+    if (confirm('Voulez vous vraiment supprimer ce formateur ?')) {
+      this.delete(id);
+    }
+  }
+
+  get selectedSiteId(): number | string {
+    return this._selectedSiteId;
+  }
+
+  set selectedSiteId(value: number | string) {
+    this._selectedSiteId = value;
   }
 }

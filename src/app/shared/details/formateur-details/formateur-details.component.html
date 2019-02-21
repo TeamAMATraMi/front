@@ -1,31 +1,27 @@
 <section>
   <mat-card class="mat-whiteframe-2dp">
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [routerLink]="['/updateFormateur', formateur.id]">Modifier</button>
+      <button color="primary" mat-raised-button style="position: absolute;left: 20px;margin: 0;" mat-button type="button" [routerLink]="['/updateFormateur', formateur.id]">Modifier</button>
     </mat-dialog-actions>
-
+    <br/><br/><br/>
     <mat-card-title-group>
       <mat-card-title>
         <span>{{ formateur.nom }} {{ formateur.prenom }}</span>
       </mat-card-title>
     </mat-card-title-group>
     <mat-card-content>
-      Telephone : {{ formateur.telephone}}
+      <mat-icon svgIcon="phone" ></mat-icon>{{ formateur.telephone}}
     </mat-card-content>
     <mat-card-content>
-      Adresse : {{ formateur.adresse}}
-    </mat-card-content>
-    <mat-card-content>
-      Code postal : {{ formateur.codePostal }}
-    </mat-card-content>
-    <mat-card-content>
-      Commune : {{ formateur.commune }}
+      <mat-icon svgIcon="address" ></mat-icon>{{ formateur.adresse}} , {{ formateur.codePostal }}  {{ formateur.commune }}
     </mat-card-content>
     <mat-card-content>
       Site : {{ site.ville}}
     </mat-card-content>
     <mat-card-content>
-      Salarié : {{ formateur.salarie }}
+      Salarié
+      <mat-icon style="color: green" svgIcon="check" *ngIf="formateur.salarie==true"></mat-icon>
+      <mat-icon style="color: red" svgIcon="not-check" *ngIf="formateur.salarie==false"></mat-icon>
     </mat-card-content>
   </mat-card>
 

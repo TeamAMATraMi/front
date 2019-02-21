@@ -5,9 +5,9 @@
     <span>Site : </span>
 
       <mat-form-field>
-          <mat-select>
-              <mat-option value="all" (click)="changeFormateurAll()">Tous les sites</mat-option>
-              <mat-option *ngFor="let s of sites" (click)="changeFormateur(s.id)" value="{{s.ville}}">{{s.ville}}</mat-option>
+          <mat-select [(value)]="selectedSiteId">
+              <mat-option value="allSites" (click)="afficherFormateurs()">Tous les sites</mat-option>
+              <mat-option *ngFor="let s of sites" (click)="afficherFormateurs()" [value]="s.id">{{s.ville}}</mat-option>
           </mat-select>
       </mat-form-field>
 
@@ -51,7 +51,7 @@
                             <mat-header-cell *matHeaderCellDef ></mat-header-cell>
                             <mat-cell
                                     *matCellDef="let element">
-                                <button mat-button title="Delete" (click)="delete(element.id)">
+                                <button mat-button title="Delete" (click)="deleteConfirmation(element.id)">
                                     <mat-icon svgIcon="icon-delete"></mat-icon>
                                 </button>
                             </mat-cell>

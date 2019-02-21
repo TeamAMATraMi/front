@@ -44,8 +44,15 @@ export const environment = {
         },
         statistiques: {
             sexeStatistiques: '/api/sexe',
-            nationaliteStatistiques: '/api/nationalite',
-            ageStatistiques: '/api/age'
+            ageStatistiques: '/api/age',
+            siteStatistiques: '/api/site',
+            nationaliteStatistiques: '/api/nationalite/:nom',
+            titreSejourStatistiques: '/api/titreSejour/:nom',
+            quartierPrioStatistiques: '/api/quartierPrio/:nom',
+            niveauScolStatistiques: '/api/niveauScol/:nom',
+            statutProStatistiques: '/api/statutPro/:nom',
+            priseChargeStatistiques: '/api/priseCharge/:nom',
+            niveauLangueStatistiques: '/api/niveauLangue/:nom'
         },
         presences: {
             allPresences: '/api/presences',
@@ -53,7 +60,7 @@ export const environment = {
             idCoursPresence: '/api/presencesC/:id'
         }
     }
-  },
+  }
 
 };
 /*

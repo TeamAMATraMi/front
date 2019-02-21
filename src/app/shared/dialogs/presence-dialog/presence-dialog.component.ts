@@ -10,20 +10,20 @@ import {Presence} from '../../interfaces/presence';
 })
 export class PresenceDialogComponent implements OnInit {
 
-  constructor(private _dialogRef: MatDialogRef<PresenceDialogComponent>, @Inject(MAT_DIALOG_DATA) private _presence: Presence) { }
+  constructor(private _dialogRef: MatDialogRef<PresenceDialogComponent>, @Inject(MAT_DIALOG_DATA) private _presences: Presence[]) { }
 
   ngOnInit() {
   }
 
-  get presence(): Presence {
-    return this._presence;
+  get presences(): Presence[] {
+    return this._presences;
   }
 
   onCancel() {
     this._dialogRef.close();
   }
 
-  onSave(presence: Presence) {
-    this._dialogRef.close(presence);
+  onSave(presences: Presence[]) {
+    this._dialogRef.close(presences);
   }
 }

@@ -18,6 +18,8 @@ import {UpdateCoursComponent} from './update-cours/update-cours.component';
 import {LoginComponent} from './login/login.component';
 import {UpdatePresenceComponent} from './update-presence/update-presence.component';
 import {AuthGuard} from './guard/auth.guard';
+import {PresenceComponent} from './presence/presence.component';
+import {PresencesComponent} from './presences/presences.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', canActivate: [AuthGuard], pathMatch: 'full'},
@@ -40,7 +42,9 @@ const routes: Routes = [
     { path: 'statistiques', component: StatistiquesComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent},
     { path: 'updatePresence/:id', component: UpdatePresenceComponent, canActivate: [AuthGuard] },
-    { path: 'statistiques', component: StatistiquesComponent, canActivate: [AuthGuard]}
+    { path: 'statistiques', component: StatistiquesComponent, canActivate: [AuthGuard]},
+    { path: 'presences', component: PresencesComponent},
+    { path: 'presence/:id', component: PresenceComponent},
 ];
 
 @NgModule({

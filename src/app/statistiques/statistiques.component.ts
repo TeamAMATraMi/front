@@ -16,12 +16,40 @@ export class StatistiquesComponent implements OnInit {
         console.log(stat);
     });
 
-    this._statistiquesService.fetchByNationalite().subscribe((stat: Map<String, number>) => {
+    this._statistiquesService.fetchByAge().subscribe((stat: Map<String, number>) => {
+      console.log(stat);
+    });
+
+    this._statistiquesService.fetchBySite().subscribe((stat: Map<String, number>) => {
+      console.log(stat);
+    });
+
+    this._statistiquesService.fetchByNationalite('all').subscribe((stat: Map<String, number>) => {
+      console.log(stat);
+    });
+
+    this._statistiquesService.fetchBySejour('Stenay').subscribe((stat: Map<String, number>) => {
+      console.log(stat);
+    });
+
+    this._statistiquesService.fetchByQuartierPrio('all').subscribe((stat: Map<String, number>) => {
+      console.log(stat);
+    });
+
+    this._statistiquesService.fetchByNiveauScol('all').subscribe((stat: Map<number, number>) => {
         console.log(stat);
     });
 
-    this._statistiquesService.fetchByAge().subscribe((stat: Map<String, number>) => {
-      console.log(stat);
+    this._statistiquesService.fetchByStatutPro('all').subscribe((stat: Map<String, number>) => {
+        console.log(stat);
+    });
+
+    this._statistiquesService.fetchByPriseCharge('Stenay').subscribe((stat: Map<number, number>) => {
+        console.log(stat);
+    });
+
+    this._statistiquesService.fetchByNiveauLangue('all').subscribe((stat: Map<String, number>) => {
+        console.log(stat);
     });
   }
 

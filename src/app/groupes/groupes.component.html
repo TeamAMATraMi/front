@@ -1,13 +1,15 @@
 <mat-toolbar>
     <mat-toolbar-row>
         <span>Groupes</span>
+
         <span class="flex"></span>
         <span>Site : </span>
-        <button mat-button [matMenuTriggerFor]="menuSite">Menu</button>
-        <mat-menu #menuSite="matMenu">
-            <button mat-menu-item>Item 1</button>
-            <button mat-menu-item>Item 2</button>
-        </mat-menu>
+        <mat-form-field>
+            <mat-select [(value)]="selectedSiteId">
+                <mat-option value="allSites" (click)="afficherGroupes()">Tous les sites</mat-option>
+                <mat-option *ngFor="let s of sites" (click)="afficherGroupes()" [value]="s.id">{{s.ville}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
         <span class="flex"></span>
         <span>
@@ -45,7 +47,7 @@
                         <mat-header-cell *matHeaderCellDef></mat-header-cell>
                         <mat-cell
                                 *matCellDef="let element">
-                            <button mat-button title="Delete" (click)="delete(element.id)">
+                            <button mat-button title="Delete" (click)="deleteConfirmation(element.id)">
                                 <mat-icon svgIcon="icon-delete"></mat-icon>
                             </button>
 

@@ -19,11 +19,14 @@ import {Observable} from 'rxjs';
 export class ApprenantsComponent implements OnInit {
 
   private _apprenants: Apprenant[];
+  private _apprenantsTemp: Apprenant[];
   private _apprenant: Apprenant;
   private _sites: Site[];
   private  _groupes: Groupe[];
-  private _site: Site;
   private _groupesSite: Groupe[];
+  private _groupeTemp: Groupe;
+  private _selectedSiteId: number | string;
+  private _selectedGroupeId: number | string;
 
   private _dialogStatus: string;
   private _apprenantsDialog: MatDialogRef<DialogComponent>;
@@ -39,11 +42,14 @@ export class ApprenantsComponent implements OnInit {
   constructor(private _router: Router, private _apprenantsService: ApprenantsService, private _sitesService: SitesService,
               private _groupesService: GroupesService, private _dialog: MatDialog) {
     this._apprenants = [];
+    this._apprenantsTemp = [];
     this._sites = [];
     this._groupes = [];
     this._groupesSite = [];
 
     this._dialogStatus = 'inactive';
+    this._selectedSiteId = 'allSites';
+    this._selectedGroupeId = 'allGroupes';
   }
 
 
@@ -51,6 +57,7 @@ export class ApprenantsComponent implements OnInit {
     // TODO : fetch with associated service
     this._apprenantsService.fetch().subscribe((apprenants: Apprenant[]) => {
       this._apprenants = apprenants;
+      this._apprenantsTemp = apprenants;
       this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
       this._dataSource.paginator = this.paginator;
     });
@@ -70,21 +77,36 @@ export class ApprenantsComponent implements OnInit {
     return this._sites;
   }
 
-  setSite(site: Site) {
-    this._site = site;
+  afficherApprenants() {
     this._groupesSite = [];
     this._groupes.forEach(e => {
-          if (e.idSite === this._site.id) {
-            this._groupesSite.push(e);
-          }
-        }
-    );
-    this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
-    this._dataSource.paginator = this.paginator;
-  }
-
-  changeApprenants(groupe: Groupe) {
-    this._apprenantsService.fetchByGroup(groupe.id).subscribe((apprenants: Apprenant[]) => this._apprenants = apprenants);
+      if (e.idSite === this._selectedSiteId) {
+        this._groupesSite.push(e);
+      }
+    });
+    // On affiche tous les apprenants
+    if ((this._selectedSiteId === 'allSites') && (this._selectedGroupeId === 'allGroupes')) {
+      this._apprenants = this._apprenantsTemp;
+    } else {
+      // On affiche tous les apprenants spécifiques à un site
+      if (this._selectedGroupeId === 'allGroupes') {
+        this._apprenants = this._apprenantsTemp;
+        this._apprenants = this._apprenants.filter(e => {
+          this._groupes.forEach(g => {
+            if (g.id === e.idGroupe) {
+              this._groupeTemp = g;
+            }
+          });
+          return this._groupeTemp.idSite === this._selectedSiteId;
+        });
+      } else {
+        // On affiche tous les apprenants spécifiques à un groupe
+        this._apprenants = this._apprenantsTemp;
+        this._apprenants = this._apprenants.filter(e => {
+          return e.idGroupe === this._selectedGroupeId;
+        });
+      }
+    }
     this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
     this._dataSource.paginator = this.paginator;
     this._dataSource.paginator.firstPage();
@@ -172,4 +194,24 @@ export class ApprenantsComponent implements OnInit {
     return this._dataSource;
   }
 
+  get selectedSiteId(): number | string {
+    return this._selectedSiteId;
+  }
+
+  set selectedSiteId(value: number | string) {
+    this._selectedSiteId = value;
+  }
+
+  get selectedGroupeId(): number | string {
+    return this._selectedGroupeId;
+  }
+
+  set selectedGroupeId(value: number | string) {
+    this._selectedGroupeId = value;
+  }
+  deleteConfirmation(id: number) {
+    if (confirm('Voulez vous vraiment supprimer cet apprenant ?')) {
+      this.delete(id);
+    }
+  }
 }

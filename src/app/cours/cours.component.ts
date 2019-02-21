@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {CoursService} from '../shared/services/cours.service';
 import {Cours} from '../shared/interfaces/cours';
@@ -10,6 +10,8 @@ import {CoursDialogComponent} from '../shared/dialogs/cours-dialog/cours-dialog.
 import {FormateursService} from '../shared/services/formateurs.service';
 import {GroupesService} from '../shared/services/groupes.service';
 import {Groupe} from '../shared/interfaces/groupe';
+import {PresencesService} from '../shared/services/presences.service';
+import {ApprenantsService} from '../shared/services/apprenants.service';
 
 @Component({
   selector: 'app-cours',
@@ -26,13 +28,15 @@ export class CoursComponent implements OnInit {
   private _formateurs: Formateur[];
   private _groupes: Groupe[];
 
+  private readonly _delete$: EventEmitter<Cours>;
   private _formateur: Formateur; // Variable temporaire
 
   private _dataSource: MatTableDataSource<Cours>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private _router: Router, private _coursService: CoursService, private _formateursService: FormateursService,
-              private _groupesService: GroupesService, private _dialog: MatDialog) {
+              private _groupesService: GroupesService, private _presencesService: PresencesService,
+              private _apprenantsService: ApprenantsService, private _dialog: MatDialog) {
     this._cours = [];
     this._formateurs = [];
     this._dialogStatus = 'inactive';
@@ -80,20 +84,21 @@ export class CoursComponent implements OnInit {
     this._groupes = value;
   }
 
-  private _add(cour: Cours): Observable<Cours[]> {
+  private _add(cours: Cours): Observable<Cours[]> {
     return this._coursService
-      .create(cour)
+      .create(cours)
       .pipe(
         flatMap(_ => this._coursService.fetch())
       );
   }
 
-  delete(cour: Cours) {
-    this._coursService
-      .delete(cour.id)
-      .subscribe(_ => {
-        return this._cours = this._cours.filter(__ => __.id !== _);
-      });
+  @Output('deleteCours')
+  get delete$(): EventEmitter<Cours> {
+    return this._delete$;
+  }
+
+  delete(id: number) {
+    this._coursService.delete(id).subscribe(null, null, () => this.ngOnInit());
   }
 
   showDialog() {
@@ -156,5 +161,11 @@ export class CoursComponent implements OnInit {
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this._dataSource.filter = filterValue;
     this._dataSource.paginator.firstPage();
+  }
+
+  deleteConfirmation(id: number) {
+    if (confirm('Voulez vous vraiment supprimer ce formateur ?')) {
+      this.delete(id);
+    }
   }
 }

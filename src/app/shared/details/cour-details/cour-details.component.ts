@@ -1,6 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Cours} from '../../interfaces/cours';
 import {Presence} from '../../interfaces/presence';
+import {filter, flatMap} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
+import {PresencesService} from '../../services/presences.service';
 
 @Component({
   selector: 'app-cour-details',
@@ -13,7 +16,7 @@ export class CourDetailsComponent implements OnInit {
   private _presences: Presence[];
   private readonly _modifier$: EventEmitter<Cours>;
 
-  constructor() {
+  constructor(private _presencesService: PresencesService, private _route: ActivatedRoute) {
     this._modifier$ = new EventEmitter<Cours>();
     this._cour = {} as Cours;
     this._presences = [];
@@ -40,7 +43,13 @@ export class CourDetailsComponent implements OnInit {
   get modifier$(): EventEmitter<Cours> {
     return this._modifier$;
   }
+
   ngOnInit() {
+    this._route.params.pipe(
+        filter(params => !!params['id']),
+        flatMap(params => this._presencesService.fetchByIdCours(params['id']))
+    )
+        .subscribe((presences: Presence[]) => this._presences = presences);
   }
 
   modifier() {

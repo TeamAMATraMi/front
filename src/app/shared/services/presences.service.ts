@@ -72,12 +72,11 @@ export class PresencesService {
         );
   }
 
-  /**
-   * Function to update-apprenant one Presence
-   */
-  update(presence: Presence): Observable<any> {
-    return this._http.put<Presence>(this._backendURL.onePresence.replace(':id', presence.id), presence, this._options());
+
+  update(presences: Presence[]): Observable<any> {
+    return this._http.put<Presence[]>(this._backendURL.allPresences, presences, this._options());
   }
+
 
   /**
    * Function to return request options
