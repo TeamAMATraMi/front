@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angula
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Presence} from '../../interfaces/presence';
 import {PresencesService} from '../../services/presences.service';
+import {Cours} from '../../interfaces/cours';
 
 @Component({
   selector: 'app-presence-form',
@@ -10,6 +11,7 @@ import {PresencesService} from '../../services/presences.service';
 })
 export class PresenceFormComponent implements OnInit, OnChanges {
   private _presences: Presence[];
+  private _cours: Cours;
   private readonly _cancel$: EventEmitter<void>;
   private readonly _submit$: EventEmitter<Presence[]>;
   private readonly _form: FormGroup;
@@ -19,10 +21,11 @@ export class PresenceFormComponent implements OnInit, OnChanges {
     this._cancel$ = new EventEmitter<void>();
     this._form = this._buildForm();
     this._presences = [];
+    this._cours = {} as Cours;
   }
 
   ngOnInit() {
-    this._presencesService.fetch().subscribe((presences: Presence[]) => {
+    this._presencesService.fetchByIdCours(this._cours.id).subscribe((presences: Presence[]) => {
       this._presences = presences;
     });
   }
@@ -38,6 +41,15 @@ export class PresenceFormComponent implements OnInit, OnChanges {
   @Input()
   set presences(value: Presence[]) {
     this._presences = value;
+  }
+
+  get cours() {
+    return this._cours;
+  }
+
+  @Input()
+  set cours(value: Cours) {
+    this._cours = value;
   }
 
   cancel() {

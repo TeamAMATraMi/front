@@ -4,7 +4,6 @@ import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
 import {defaultIfEmpty, filter, map} from 'rxjs/operators';
 import {Presence} from '../interfaces/presence';
-import {Formateur} from '../interfaces/formateur';
 
 @Injectable({
   providedIn: 'root'
