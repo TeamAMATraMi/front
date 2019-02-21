@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {CoursService} from '../shared/services/cours.service';
 import {Cours} from '../shared/interfaces/cours';
@@ -26,6 +26,7 @@ export class CoursComponent implements OnInit {
   private _formateurs: Formateur[];
   private _groupes: Groupe[];
 
+  private readonly _delete$: EventEmitter<Cours>;
   private _formateur: Formateur; // Variable temporaire
 
   private _dataSource: MatTableDataSource<Cours>;
@@ -88,12 +89,13 @@ export class CoursComponent implements OnInit {
       );
   }
 
-  delete(cour: Cours) {
-    this._coursService
-      .delete(cour.id)
-      .subscribe(_ => {
-        return this._cours = this._cours.filter(__ => __.id !== _);
-      });
+  @Output('deleteCours')
+  get delete$(): EventEmitter<Cours> {
+    return this._delete$;
+  }
+
+  delete(id: number) {
+    this._coursService.delete(id).subscribe(null, null, () => this.ngOnInit());
   }
 
   showDialog() {
@@ -156,5 +158,11 @@ export class CoursComponent implements OnInit {
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this._dataSource.filter = filterValue;
     this._dataSource.paginator.firstPage();
+  }
+
+  deleteConfirmation(id: number) {
+    if (confirm('Voulez vous vraiment supprimer ce formateur ?')) {
+      this.delete(id);
+    }
   }
 }
