@@ -36,19 +36,7 @@ export class LoginComponent implements OnInit, OnChanges {
   submit(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
     this._loginsService
-        .login(this._utilisateur)
-        .subscribe( token => {
-          if (token !== '') {
-            sessionStorage.setItem(
-                'token',
-                token
-            );
-            this._router.navigate(['/']);
-          } else {
-            console.log('Authentification failed');
-            // alert('failed');
-          }
-        });
+        .login(this._utilisateur);
   }
 
   ngOnInit() {

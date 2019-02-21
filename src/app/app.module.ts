@@ -31,7 +31,7 @@ import {FormateursComponent} from './formateurs/formateurs.component';
 import {StatistiquesComponent} from './statistiques/statistiques.component';
 import {ApprenantCardComponent} from './shared/cards/apprenant-card/apprenant-card.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {SitesCardComponent} from './shared/cards/sites-card/sites-card.component';
 import {ApprenantComponent} from './apprenant/apprenant.component';
 import {ApprenantDetailsComponent} from './shared/details/apprenant-details/apprenant-details.component';
@@ -68,6 +68,8 @@ import {PresenceComponent} from './presence/presence.component';
 import {PresenceFormComponent} from './shared/forms/presence-form/presence-form.component';
 import {PresenceDialogComponent} from './shared/dialogs/presence-dialog/presence-dialog.component';
 import {UpdatePresenceComponent} from './update-presence/update-presence.component';
+import {JwtInterceptor} from './shared/interceptors/jwt.interceptor';
+import {ErrorInterceptor} from './shared/interceptors/error.interceptor';
 
 @NgModule({
     declarations: [
@@ -145,7 +147,10 @@ import {UpdatePresenceComponent} from './update-presence/update-presence.compone
         MatSortModule,
         MatTableModule
     ],
-    providers: [],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

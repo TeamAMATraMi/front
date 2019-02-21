@@ -17,29 +17,30 @@ import {CourComponent} from './cour/cour.component';
 import {UpdateCoursComponent} from './update-cours/update-cours.component';
 import {LoginComponent} from './login/login.component';
 import {UpdatePresenceComponent} from './update-presence/update-presence.component';
+import {AuthGuard} from './guard/auth.guard';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent },
-    { path: 'apprenants', component: ApprenantsComponent },
-    { path: 'apprenant/:id', component: ApprenantComponent },
-    { path: 'apprenantsG/:id', component: GroupeComponent },
-    { path: 'updateApprenant/:id', component: UpdateApprenantComponent },
-    { path: 'formateurs', component: FormateursComponent},
-    { path: 'cours', component: CoursComponent},
-    { path: 'cours/:id', component: CourComponent},
-    { path: 'updateCours/:id', component: UpdateCoursComponent},
-    { path: 'formateur/:id', component: FormateurComponent },
-    { path: 'formateurG/:id', component: GroupeComponent },
-    { path: 'updateFormateur/:id', component: UpdateFormateurComponent },
-    { path: 'sites', component: SitesComponent },
-    { path: 'groupes', component: GroupesComponent },
-    { path: 'groupe', component: GroupeComponent },
-    { path: 'updateGroupe/:id', component: UpdateGroupeComponent },
-    { path: 'statistiques', component: StatistiquesComponent},
+    { path: '', redirectTo: 'home', canActivate: [AuthGuard], pathMatch: 'full'},
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'apprenants', component: ApprenantsComponent, canActivate: [AuthGuard] },
+    { path: 'apprenant/:id', component: ApprenantComponent, canActivate: [AuthGuard] },
+    { path: 'apprenantsG/:id', component: GroupeComponent, canActivate: [AuthGuard] },
+    { path: 'updateApprenant/:id', component: UpdateApprenantComponent, canActivate: [AuthGuard] },
+    { path: 'formateurs', component: FormateursComponent, canActivate: [AuthGuard]},
+    { path: 'cours', component: CoursComponent, canActivate: [AuthGuard]},
+    { path: 'cours/:id', component: CourComponent, canActivate: [AuthGuard]},
+    { path: 'updateCours/:id', component: UpdateCoursComponent, canActivate: [AuthGuard]},
+    { path: 'formateur/:id', component: FormateurComponent, canActivate: [AuthGuard] },
+    { path: 'formateurG/:id', component: GroupeComponent, canActivate: [AuthGuard] },
+    { path: 'updateFormateur/:id', component: UpdateFormateurComponent, canActivate: [AuthGuard] },
+    { path: 'sites', component: SitesComponent, canActivate: [AuthGuard] },
+    { path: 'groupes', component: GroupesComponent, canActivate: [AuthGuard] },
+    { path: 'groupe', component: GroupeComponent, canActivate: [AuthGuard] },
+    { path: 'updateGroupe/:id', component: UpdateGroupeComponent, canActivate: [AuthGuard] },
+    { path: 'statistiques', component: StatistiquesComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent},
-    { path: 'updatePresence/:id', component: UpdatePresenceComponent },
-    { path: 'statistiques', component: StatistiquesComponent}
+    { path: 'updatePresence/:id', component: UpdatePresenceComponent, canActivate: [AuthGuard] },
+    { path: 'statistiques', component: StatistiquesComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
