@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Presence} from '../../interfaces/presence';
 import {PresencesService} from '../../services/presences.service';
 import {Cours} from '../../interfaces/cours';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-presence-form',
@@ -73,7 +74,9 @@ export class PresenceFormComponent implements OnInit, OnChanges {
   private _buildForm(): FormGroup {
     return new FormGroup({
       id: new FormControl('0'),
+      date: new FormControl(formatDate(new Date(), 'yyyy-MM-dd', 'en'), Validators.compose([])),
       idApprenant: new FormControl('0'),
+      idcours: new FormControl('0'),
       present: new FormControl('')
     });
   }
