@@ -48,8 +48,8 @@ export class PresencesComponent implements OnInit {
 
   ngOnInit() {
     this._route.params.pipe(
-        filter(params => !!params['id']),
-        flatMap(params => this._presencesService.fetchByIdCours(params['id']))
+        filter(params => !!params['idCours']),
+        flatMap(params => this._presencesService.fetchByIdCours(params['idCours']))
     )
         .subscribe((presences: Presence[]) => {
           this._presences = presences;
