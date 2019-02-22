@@ -23,47 +23,44 @@
 </mat-toolbar>
 
 <section>
-        <mat-card class="mat-whiteframe-2dp">
-                <div class="example-container mat-elevation-z8">
-                    <mat-table [dataSource]="dataSource" matSort>
+    <div class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource" matSort>
 
-                        <ng-container matColumnDef="NomPrenom">
-                            <mat-header-cell *matHeaderCellDef > Nom</mat-header-cell>
-                                <mat-cell *matCellDef="let element">
-                                <a [routerLink]="['/formateur', element.id]">
-                                    <span>{{element.nom}} {{element.prenom}}</span>
-                                </a>
-                            </mat-cell>
-                        </ng-container>
+            <ng-container matColumnDef="NomPrenom">
+                <mat-header-cell *matHeaderCellDef > Nom</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                    <a [routerLink]="['/formateur', element.id]">
+                        <span>{{element.nom}} {{element.prenom}}</span>
+                    </a>
+                </mat-cell>
+            </ng-container>
 
-                        <ng-container matColumnDef="Tel">
-                            <mat-header-cell *matHeaderCellDef> Tél</mat-header-cell>
-                            <mat-cell *matCellDef="let element"> {{element.telephone}} </mat-cell>
-                        </ng-container>
+            <ng-container matColumnDef="Tel">
+                <mat-header-cell *matHeaderCellDef> Tél</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.telephone}} </mat-cell>
+            </ng-container>
 
-                        <ng-container matColumnDef="Adresse">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header> Adresse</mat-header-cell>
-                            <mat-cell
-                                    *matCellDef="let element"> {{element.adresse}} {{element.code_postal}} </mat-cell>
-                        </ng-container>
+            <ng-container matColumnDef="Adresse">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Adresse</mat-header-cell>
+                <mat-cell
+                        *matCellDef="let element"> {{element.adresse}} {{element.code_postal}} </mat-cell>
+            </ng-container>
 
-                        <ng-container matColumnDef="Delete">
-                            <mat-header-cell *matHeaderCellDef ></mat-header-cell>
-                            <mat-cell
-                                    *matCellDef="let element">
-                                <button mat-button title="Delete" (click)="deleteConfirmation(element.id)">
-                                    <mat-icon svgIcon="icon-delete"></mat-icon>
-                                </button>
-                            </mat-cell>
-                        </ng-container>
+            <ng-container matColumnDef="Delete">
+                <mat-header-cell *matHeaderCellDef ></mat-header-cell>
+                <mat-cell
+                        *matCellDef="let element">
+                    <button mat-button title="Delete" (click)="deleteConfirmation(element.id)">
+                        <mat-icon svgIcon="icon-delete"></mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
 
-                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-                    </mat-table>
-                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
-                </div>
-
-        </mat-card>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    </div>
 </section>
 
 <section class="buttons-fab" *ngIf="dialogStatus === 'inactive'">
