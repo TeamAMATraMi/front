@@ -11,3 +11,39 @@
     <span class="flex"></span>
   </mat-toolbar-row>
 </mat-toolbar>
+<br/><br/><br/>
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>Répartition hommes/femmes</mat-card-title>
+      <mat-card-content>
+        <div style="display: block">
+          <canvas baseChart
+                  [datasets]="sexeData"
+                  [labels]="sexeLabels"
+                  [options]="barChartOptions"
+                  [legend]="sexeLegend"
+                  [chartType]="sexeType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>Répartition hommes/femmes</mat-card-title>
+      <mat-card-content>
+        <div style="display: block">
+          <canvas baseChart
+                  [data]="ageData"
+                  [labels]="ageLabels"
+                  [chartType]="ageType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+

@@ -6,6 +6,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {DialogComponent} from './shared/dialogs/apprenant-dialog/dialog.component';
+import { ChartsModule } from 'ng2-charts';
 
 import {
     MatButtonModule,
@@ -147,7 +148,8 @@ import {ErrorInterceptor} from './shared/interceptors/error.interceptor';
         MatSortModule,
         MatTableModule,
         MatTabsModule,
-        MatGridListModule
+        MatGridListModule,
+        ChartsModule
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
