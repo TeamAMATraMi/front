@@ -24,7 +24,7 @@ export class UpdateCoursComponent implements OnInit {
     this._route.params
         .pipe(
             map((params: any) => params.id),
-            flatMap((id: string) => this._coursService.fetchOne(id))
+            flatMap((id: number) => this._coursService.fetchOne(id))
         )
         .subscribe((cours: Cours) => {
           this._coursDialog = this._dialog.open(CoursDialogComponent, {

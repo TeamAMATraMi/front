@@ -10,13 +10,16 @@
             <div class="example-container mat-elevation-z8">
                 <mat-table #table [dataSource]="dataSource">
                     <ng-container matColumnDef="NomApprenant">
-                        <mat-header-cell *matHeaderCellDef> Nom de l'apprenant</mat-header-cell>
-                        <mat-cell
-                                *matCellDef="let element"> {{ getNomApprenantById(element.idApprenant) }} </mat-cell>
+                        <mat-header-cell *matHeaderCellDef> Date du cours</mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <a [routerLink]="['/updatePresence', idCours]">
+                                {{ element }}
+                            </a>
+                        </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="Present">
-                        <mat-header-cell *matHeaderCellDef> Present</mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> Télécharger</mat-header-cell>
 
                         <mat-cell *matCellDef="let element">
                                 <span>{{element.present}}</span>

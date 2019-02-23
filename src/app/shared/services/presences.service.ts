@@ -39,7 +39,7 @@ export class PresencesService {
   /**
    * Function to return one Presence for current id
    */
-  fetchOne(id: string): Observable<Presence> {
+  fetchOne(id: number): Observable<Presence> {
     return this._http.get<Presence>(this._backendURL.onePresence.replace(':id', id));
   }
 

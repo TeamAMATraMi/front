@@ -39,7 +39,7 @@ export class CoursService {
     /**
      * Function to return one Cours for current id
      */
-    fetchOne(id: string): Observable<Cours> {
+    fetchOne(id: number): Observable<Cours> {
         return this._http.get<Cours>(this._backendURL.oneCours.replace(':id', id));
     }
 

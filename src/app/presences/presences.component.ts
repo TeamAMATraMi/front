@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {filter, flatMap} from 'rxjs/operators';
 import {MatDialog, MatDialogRef, MatPaginator, MatTableDataSource} from '@angular/material';
@@ -8,6 +8,8 @@ import {Apprenant} from '../shared/interfaces/apprenant';
 import {ApprenantsService} from '../shared/services/apprenants.service';
 import {PresencesService} from '../shared/services/presences.service';
 import {PresenceDialogComponent} from '../shared/dialogs/presence-dialog/presence-dialog.component';
+import {CoursService} from '../shared/services/cours.service';
+import {Cours} from '../shared/interfaces/cours';
 
 @Component({
   selector: 'app-presences',
@@ -22,15 +24,20 @@ export class PresencesComponent implements OnInit {
   private _presencesDialog: MatDialogRef<PresenceDialogComponent>;
   private _apprenants: Apprenant[];
   private tmp: string;
-
-  private _dataSource: MatTableDataSource<Presence>;
+  // private _dataSource: MatTableDataSource<Presence>;
+  private datetab: Array<number>;
+  private _nomCours: string;
+  private _idCours: number;
+  private _dataSource: MatTableDataSource<number>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private _route: ActivatedRoute, private _presencesService: PresencesService,
-              private _dialog: MatDialog, private _apprenantsService: ApprenantsService) {
+              private _dialog: MatDialog, private _apprenantsService: ApprenantsService,
+              private _coursService: CoursService) {
     this._presences = [];
     this._dialogStatus = 'inactive';
     this._apprenants = [];
+    this.datetab = [];
   }
 
   get apprenants(): Apprenant[] {
@@ -48,17 +55,18 @@ export class PresencesComponent implements OnInit {
     )
         .subscribe((presences: Presence[]) => {
           this._presences = presences;
-          this._dataSource = new MatTableDataSource<Presence>(this._presences);
-          console.log('BBBBBBBBBBBBB ' + this._presences.length);
-
           for (let i = 0; i < this._presences.length; i++) {
-            console.log('AAAAAAAAAAAAAAA ' + this._presences[i].date);
+            if (!this.datetab.includes(this._presences[i].date, 0)) {
+              this.datetab.push(this._presences[i].date);
+            }
           }
-
+          this._idCours = this._presences[0].id;
+          this._dataSource = new MatTableDataSource<number>(this.datetab);
         });
 
+    console.log('AAAAAAAAAAA ' + this._idCours);
     this._apprenantsService.fetch().subscribe((apprenants: Apprenant[]) => { this._apprenants = apprenants; });
-
+    this._coursService.fetchOne(this._idCours).subscribe((c: Cours) => this._nomCours = c.matiere);
   }
 
   getNomApprenantById(id: number): string {
@@ -93,7 +101,6 @@ export class PresencesComponent implements OnInit {
         .subscribe(
             (presences: Presence[]) => {
               this._presences = presences;
-              // this._dataSource = new MatTableDataSource<Presence>(this._presences);
             },
             _ => this._dialogStatus = 'inactive',
             () => this._dialogStatus = 'inactive'
@@ -108,6 +115,14 @@ export class PresencesComponent implements OnInit {
         );
   }
 
+  get idCours(): number {
+    return this._idCours;
+  }
+
+  set idCours(value: number) {
+    this._idCours = value;
+  }
+
   get presences(): Presence[] {
     return this._presences;
   }
@@ -116,7 +131,7 @@ export class PresencesComponent implements OnInit {
     this._presences = value;
   }
 
-  get dataSource(): MatTableDataSource<Presence> {
+  get dataSource(): MatTableDataSource<number> {
     return this._dataSource;
   }
 
