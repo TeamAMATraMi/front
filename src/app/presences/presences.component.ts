@@ -1,13 +1,8 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Groupe} from '../shared/interfaces/groupe';
-import {GroupesService} from '../shared/services/groupes.service';
 import {filter, flatMap} from 'rxjs/operators';
 import {MatDialog, MatDialogRef, MatPaginator, MatTableDataSource} from '@angular/material';
 import {Observable} from 'rxjs';
-import {GroupeDialogComponent} from '../shared/dialogs/groupe-dialog/groupe-dialog.component';
-import {Site} from '../shared/interfaces/site';
-import {SitesService} from '../shared/services/sites.service';
 import {Presence} from '../shared/interfaces/presence';
 import {Apprenant} from '../shared/interfaces/apprenant';
 import {ApprenantsService} from '../shared/services/apprenants.service';
@@ -48,12 +43,18 @@ export class PresencesComponent implements OnInit {
 
   ngOnInit() {
     this._route.params.pipe(
-        filter(params => !!params['idCours']),
-        flatMap(params => this._presencesService.fetchByIdCours(params['idCours']))
+        filter(params => !!params['id']),
+        flatMap(params => this._presencesService.fetchByIdCours(params['id']))
     )
         .subscribe((presences: Presence[]) => {
           this._presences = presences;
           this._dataSource = new MatTableDataSource<Presence>(this._presences);
+          console.log('BBBBBBBBBBBBB ' + this._presences.length);
+
+          for (let i = 0; i < this._presences.length; i++) {
+            console.log('AAAAAAAAAAAAAAA ' + this._presences[i].date);
+          }
+
         });
 
     this._apprenantsService.fetch().subscribe((apprenants: Apprenant[]) => { this._apprenants = apprenants; });
