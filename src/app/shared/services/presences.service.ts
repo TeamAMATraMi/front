@@ -73,7 +73,7 @@ export class PresencesService {
 
 
   update(presences: Presence[]): Observable<any> {
-    return this._http.put<Presence[]>(this._backendURL.allPresences, presences, this._options());
+    return this._http.put<Presence[]>(this._backendURL.fichePresences, presences, this._options());
   }
 
 

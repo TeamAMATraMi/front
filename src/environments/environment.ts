@@ -57,7 +57,8 @@ export const environment = {
         presences: {
             allPresences: '/api/presences',
             onePresence: '/api/presence/:id',
-            idCoursPresence: '/api/presencesC/:id'
+            idCoursPresence: '/api/presencesC/:id',
+            fichePresences: '/api/presencesF'
         }
     }
   }
