@@ -1,24 +1,13 @@
-img {
-    border-radius: 50%;
-    margin-right: 18px;
-    -webkit-filter: grayscale(100%);
-}
-
 .align-right {
     text-align: right;
 }
 
 .full-width {
-    width: 50%;
+    width: 80%;
 }
 
 .mgb15{
     margin-bottom: 15px;
-}
-
-.color{
-    color: gray;
-    width: 50%;
 }
 
 .radiobutton-width {

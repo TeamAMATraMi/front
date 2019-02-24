@@ -164,7 +164,7 @@ export class CoursComponent implements OnInit {
   }
 
   deleteConfirmation(id: number) {
-    if (confirm('Voulez vous vraiment supprimer ce formateur ?')) {
+    if (confirm('Voulez vous vraiment supprimer ce cours ?')) {
       this.delete(id);
     }
   }

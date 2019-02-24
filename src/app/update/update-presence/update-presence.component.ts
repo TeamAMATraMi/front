@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {filter, flatMap, map} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
-import {PresenceDialogComponent} from '../shared/dialogs/presence-dialog/presence-dialog.component';
-import {PresencesService} from '../shared/services/presences.service';
-import {Presence} from '../shared/interfaces/presence';
+import {PresenceDialogComponent} from '../../shared/dialogs/presence-dialog/presence-dialog.component';
+import {PresencesService} from '../../shared/services/presences.service';
+import {Presence} from '../../shared/interfaces/presence';
 
 @Component({
   selector: 'app-update-presence',

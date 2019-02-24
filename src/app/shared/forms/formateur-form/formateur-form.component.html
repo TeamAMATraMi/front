@@ -4,7 +4,11 @@
 <mat-dialog-content>
   <form novalidate [formGroup]="form">
     <p *ngIf="isUpdateMode">
-      <span style="width:100%">{{ form.get('nom').value }} {{ form.get('prenom').value }}</span>
+      <span style="width:100%">
+        <h3>
+          {{ form.get('nom').value }} {{ form.get('prenom').value }}
+        </h3>
+      </span>
     </p>
     <mat-accordion>
       <mat-expansion-panel expanded>
@@ -22,6 +26,7 @@
             </mat-error>
           </mat-form-field>
         </p>
+
         <p>
           <mat-form-field class="full-width">
             <input matInput placeholder="Prénom" formControlName="prenom" minlength="2" required name="prenom" />
@@ -33,6 +38,7 @@
             </mat-error>
           </mat-form-field>
         </p>
+
         <p>
           <mat-form-field class="full-width">
             <input matInput placeholder="Adresse" formControlName="adresse" minlength="3" maxlength="255" name="adresse" />
@@ -41,6 +47,7 @@
             </mat-error>
           </mat-form-field>
         </p>
+
         <p>
           <mat-form-field class="full-width">
             <input matInput placeholder="Code postal" formControlName="codePostal" name="codePostal" />
@@ -49,6 +56,7 @@
             </mat-error>
           </mat-form-field>
         </p>
+
         <p>
           <mat-form-field class="full-width">
                 <mat-select placeholder="Site" formControlName="idSite">
@@ -58,6 +66,7 @@
                 </mat-select>
           </mat-form-field>
         </p>
+
         <p>
           <mat-form-field class="full-width">
             <input matInput placeholder="Commune" formControlName="commune" minlength="2" required name="commune" />
@@ -69,6 +78,7 @@
             </mat-error>
           </mat-form-field>
         </p>
+
         <p>
           <mat-form-field class="full-width">
             <input matInput placeholder="Téléphone" formControlName="telephone" name="telephone" />
@@ -77,6 +87,7 @@
             </mat-error>
           </mat-form-field>
         </p>
+
         <p>
           <mat-label>Salarié : </mat-label>
           <mat-radio-group formControlName="salarie">

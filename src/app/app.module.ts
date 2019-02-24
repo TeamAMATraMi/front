@@ -41,16 +41,16 @@ import {GroupeComponent} from './groupe/groupe.component';
 import {FormateursCardComponent} from './shared/cards/formateurs-card/formateurs-card.component';
 
 import {ApprenantFormComponent} from './shared/forms/apprenant-form/apprenant-form.component';
-import {UpdateApprenantComponent} from './update-apprenant/update-apprenant.component';
+import {UpdateApprenantComponent} from './update/update-apprenant/update-apprenant.component';
 import {FormateurComponent} from './formateur/formateur.component';
 import {FormateurDetailsComponent} from './shared/details/formateur-details/formateur-details.component';
 import {FormateurDialogComponent} from './shared/dialogs/formateur-dialog/formateur-dialog.component';
 import {FormateurFormComponent} from './shared/forms/formateur-form/formateur-form.component';
-import {UpdateFormateurComponent} from './update-formateur/update-formateur.component';
+import {UpdateFormateurComponent} from './update/update-formateur/update-formateur.component';
 import {GroupeDialogComponent} from './shared/dialogs/groupe-dialog/groupe-dialog.component';
 
 import {GroupeFormComponent} from './shared/forms/groupe-form/groupe-form.component';
-import {UpdateGroupeComponent} from './update-groupe/update-groupe.component';
+import {UpdateGroupeComponent} from './update/update-groupe/update-groupe.component';
 import {HomeComponent} from './home/home.component';
 import {CoursComponent} from './cours/cours.component';
 import {CoursCardComponent} from './shared/cards/cours-card/cours-card.component';
@@ -61,14 +61,14 @@ import {SiteDialogComponent} from './shared/dialogs/site-dialog/site-dialog.comp
 import {SiteComponent} from './site/site.component';
 import {CoursFormComponent} from './shared/forms/cours-form/cours-form.component';
 import {CoursDialogComponent} from './shared/dialogs/cours-dialog/cours-dialog.component';
-import { UpdateCoursComponent } from './update-cours/update-cours.component';
+import { UpdateCoursComponent } from './update/update-cours/update-cours.component';
 import { LoginComponent } from './login/login.component';
 
 import {PresencesComponent} from './presences/presences.component';
 import {PresenceComponent} from './presence/presence.component';
 import {PresenceFormComponent} from './shared/forms/presence-form/presence-form.component';
 import {PresenceDialogComponent} from './shared/dialogs/presence-dialog/presence-dialog.component';
-import {UpdatePresenceComponent} from './update-presence/update-presence.component';
+import {UpdatePresenceComponent} from './update/update-presence/update-presence.component';
 import {JwtInterceptor} from './shared/interceptors/jwt.interceptor';
 import {ErrorInterceptor} from './shared/interceptors/error.interceptor';
 

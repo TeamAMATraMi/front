@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { filter, flatMap, map } from 'rxjs/operators';
-import { ApprenantsService } from '../shared/services/apprenants.service';
-import { Apprenant } from '../shared/interfaces/apprenant';
-import {DialogComponent} from '../shared/dialogs/apprenant-dialog/dialog.component';
+import { ApprenantsService } from '../../shared/services/apprenants.service';
+import { Apprenant } from '../../shared/interfaces/apprenant';
+import {DialogComponent} from '../../shared/dialogs/apprenant-dialog/dialog.component';
 
 @Component({
   selector: 'app-update',

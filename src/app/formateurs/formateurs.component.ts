@@ -105,7 +105,7 @@ export class FormateursComponent implements OnInit {
 
     // open modal
     this._formateursDialog = this._dialog.open(FormateurDialogComponent, {
-      width: '500px',
+      width: '800px',
       disableClose: true
     });
 

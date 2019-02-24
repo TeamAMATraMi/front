@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {CoursDialogComponent} from '../shared/dialogs/cours-dialog/cours-dialog.component';
+import {CoursDialogComponent} from '../../shared/dialogs/cours-dialog/cours-dialog.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog, MatDialogRef} from '@angular/material';
-import {CoursService} from '../shared/services/cours.service';
+import {CoursService} from '../../shared/services/cours.service';
 import {filter, flatMap, map} from 'rxjs/operators';
-import {Formateur} from '../shared/interfaces/formateur';
-import {FormateurDialogComponent} from '../shared/dialogs/formateur-dialog/formateur-dialog.component';
-import {Cours} from '../shared/interfaces/cours';
+import {Cours} from '../../shared/interfaces/cours';
 
 @Component({
   selector: 'app-update-cours',
