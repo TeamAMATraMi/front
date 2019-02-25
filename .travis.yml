@@ -18,8 +18,6 @@ install:
   - npm install -g @angular/cli
   - npm install enhanced-resolve@3.3.0 --save-dev
   - npm install express path --save
-  - npm install ng2-charts --save
-  - npm install chart.js --save
 
 script:
   - yarn install
