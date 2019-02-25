@@ -80,8 +80,12 @@ export class ApprenantsComponent implements OnInit {
   afficherApprenants() {
     this._groupesSite = [];
     this._groupes.forEach(e => {
-      if (e.idSite === this._selectedSiteId) {
+      if (this._selectedSiteId === 'allSites') {
         this._groupesSite.push(e);
+      } else {
+        if (e.idSite === this._selectedSiteId) {
+          this._groupesSite.push(e);
+        }
       }
     });
     // On affiche tous les apprenants
