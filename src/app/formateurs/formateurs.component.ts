@@ -6,7 +6,7 @@ import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
 import {filter, flatMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {MatDialog, MatDialogRef, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatDialogRef, MatPaginator, MatSort, MatTableDataSource, Sort} from '@angular/material';
 import {Groupe} from '../shared/interfaces/groupe';
 import {GroupesService} from '../shared/services/groupes.service';
 import {FormateurDialogComponent} from '../shared/dialogs/formateur-dialog/formateur-dialog.component';
@@ -33,11 +33,10 @@ export class FormateursComponent implements OnInit {
 
   private _dialogStatus: string;
   private _formateursDialog: MatDialogRef<FormateurDialogComponent>;
-
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
   private _dataSource: MatTableDataSource<Formateur>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private _router: Router, private _formateursService: FormateursService, private _sitesService: SitesService,
               private _dialog: MatDialog, private _groupesService: GroupesService) {
@@ -51,12 +50,18 @@ export class FormateursComponent implements OnInit {
   }
 
   ngOnInit() {
-    // TODO : fetch with associated service formateur
-    this._formateursService.fetch().subscribe((formateur: Formateur[]) => {
-      this._formateurs = formateur;
-      this._formateursTemp = formateur;
-      this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
+    this._formateursService.fetch().subscribe(_formateur => {
+      this._dataSource = new MatTableDataSource<Formateur>(_formateur);
+      this._formateurs = _formateur;
+      this._formateursTemp = _formateur;
       this._dataSource.paginator = this.paginator;
+      this._dataSource.filterPredicate = (data: {nom: string, prenom: string}, filterValue: string) => {
+        if ((data.nom.trim().toLowerCase().indexOf(filterValue) !== -1) || (data.prenom.trim().toLowerCase().indexOf(filterValue) !== -1)) {
+          return true;
+        } else {
+          return false;
+        }
+      };
       this._dataSource.sort = this.sort;
     });
     this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
@@ -92,11 +97,22 @@ export class FormateursComponent implements OnInit {
     }
     this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
     this._dataSource.paginator = this.paginator;
+    this._dataSource.filterPredicate = (data: {nom: string, prenom: string}, filterValue: string) => {
+      if ((data.nom.trim().toLowerCase().indexOf(filterValue) !== -1) || (data.prenom.trim().toLowerCase().indexOf(filterValue) !== -1)) {
+        return true;
+      } else {
+        return false;
+      }
+    };
     this._dataSource.paginator.firstPage();
   }
 
   get dialogStatus(): string {
     return this._dialogStatus;
+  }
+
+  get dataSource(): MatTableDataSource<Formateur> {
+    return this._dataSource;
   }
 
   showDialog() {
@@ -166,9 +182,6 @@ export class FormateursComponent implements OnInit {
     this._dataSource.paginator.firstPage();
   }
 
-  get dataSource(): MatTableDataSource<Formateur> {
-    return this._dataSource;
-  }
   deleteConfirmation(id: number) {
     if (confirm('Voulez vous vraiment supprimer ce formateur ?')) {
       this.delete(id);
@@ -182,4 +195,25 @@ export class FormateursComponent implements OnInit {
   set selectedSiteId(value: number | string) {
     this._selectedSiteId = value;
   }
+
+ sortData(sort: Sort) {
+    const data = this._dataSource.data.slice();
+    if (!sort.active || sort.direction === '') {
+      this._dataSource.data = data;
+      return;
+    }
+
+    this._dataSource.data = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'NomPrenom': return compare(a.nom, b.nom, isAsc);
+        default: return 0;
+      }
+    });
+  }
+
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

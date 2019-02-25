@@ -52,6 +52,8 @@ export class GroupesComponent implements OnInit {
       this._groupesTemp = groupes;
       this._dataSource = new MatTableDataSource<Groupe>(this._groupes);
       this._dataSource.paginator = this.paginator;
+      this._dataSource.filterPredicate = (data: {nom: string}, filterValue: string) =>
+          data.nom.trim().toLowerCase().indexOf(filterValue) !== -1;
     });
     this._sitesService.fetch().subscribe((sites: Site[]) => { this._sites = sites; });
 
@@ -139,6 +141,8 @@ export class GroupesComponent implements OnInit {
     }
     this._dataSource = new MatTableDataSource<Groupe>(this._groupes);
     this._dataSource.paginator = this.paginator;
+    this._dataSource.filterPredicate = (data: {nom: string}, filterValue: string) =>
+        data.nom.trim().toLowerCase().indexOf(filterValue) !== -1;
     this._dataSource.paginator.firstPage();
   }
 

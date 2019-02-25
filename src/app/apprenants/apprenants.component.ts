@@ -7,7 +7,7 @@ import {SitesService} from '../shared/services/sites.service';
 import {GroupesService} from '../shared/services/groupes.service';
 import {Groupe} from '../shared/interfaces/groupe';
 import {DialogComponent} from '../shared/dialogs/apprenant-dialog/dialog.component';
-import {MatDialog, MatDialogRef, MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatDialogRef, MatPaginator, MatSort, MatTableDataSource, Sort} from '@angular/material';
 import {filter, flatMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
@@ -34,10 +34,10 @@ export class ApprenantsComponent implements OnInit {
   private readonly _delete$: EventEmitter<Apprenant>;
 
   private _displayedColumns = ['NomPrenom', 'DateNaissance', 'PaysOrigine', 'Delete'];
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   private _dataSource: MatTableDataSource<Apprenant>;
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private _router: Router, private _apprenantsService: ApprenantsService, private _sitesService: SitesService,
               private _groupesService: GroupesService, private _dialog: MatDialog) {
@@ -54,12 +54,19 @@ export class ApprenantsComponent implements OnInit {
 
 
   ngOnInit() {
-    // TODO : fetch with associated service
-    this._apprenantsService.fetch().subscribe((apprenants: Apprenant[]) => {
+    this._apprenantsService.fetch().subscribe((apprenants) => {
+      this._dataSource = new MatTableDataSource<Apprenant>(apprenants);
       this._apprenants = apprenants;
       this._apprenantsTemp = apprenants;
-      this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
       this._dataSource.paginator = this.paginator;
+      this._dataSource.sort = this.sort;
+      this._dataSource.filterPredicate = (data: {nom: string, prenom: string}, filterValue: string) => {
+        if ((data.nom.trim().toLowerCase().indexOf(filterValue) !== -1) || (data.prenom.trim().toLowerCase().indexOf(filterValue) !== -1)) {
+          return true;
+        } else {
+          return false;
+        }
+      };
     });
     this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => { this._groupes = groupes; this._groupesSite = this._groupes; });
@@ -80,8 +87,12 @@ export class ApprenantsComponent implements OnInit {
   afficherApprenants() {
     this._groupesSite = [];
     this._groupes.forEach(e => {
-      if (e.idSite === this._selectedSiteId) {
+      if (this._selectedSiteId === 'allSites') {
         this._groupesSite.push(e);
+      } else {
+        if (e.idSite === this._selectedSiteId) {
+          this._groupesSite.push(e);
+        }
       }
     });
     // On affiche tous les apprenants
@@ -110,6 +121,8 @@ export class ApprenantsComponent implements OnInit {
     this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
     this._dataSource.paginator = this.paginator;
     this._dataSource.paginator.firstPage();
+    this._dataSource.filterPredicate = (data: {nom: string}, filterValue: string) =>
+        data.nom.trim().toLowerCase().indexOf(filterValue) !== -1;
   }
 
   get groupes(): Groupe[] {
@@ -124,6 +137,8 @@ export class ApprenantsComponent implements OnInit {
     this._groupesSite = groupe;
     this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
     this._dataSource.paginator = this.paginator;
+    this._dataSource.filterPredicate = (data: {nom: string}, filterValue: string) =>
+        data.nom.trim().toLowerCase().indexOf(filterValue) !== -1;
   }
 
   @Input()
@@ -165,6 +180,8 @@ export class ApprenantsComponent implements OnInit {
               this._apprenants = apprenants;
               this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
               this._dataSource.paginator = this.paginator;
+              this._dataSource.filterPredicate = (data: {nom: string}, filterValue: string) =>
+                  data.nom.trim().toLowerCase().indexOf(filterValue) !== -1;
             },
             _ => this._dialogStatus = 'inactive',
             () => this._dialogStatus = 'inactive'
@@ -214,4 +231,24 @@ export class ApprenantsComponent implements OnInit {
       this.delete(id);
     }
   }
+  sortData(sort: Sort) {
+    const data = this._dataSource.data.slice();
+    if (!sort.active || sort.direction === '') {
+      this._dataSource.data = data;
+      return;
+    }
+    this._dataSource.data = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'NomPrenom': return compare(a.nom, b.nom, isAsc);
+        case 'PaysOrigine': return compare(a.paysOrigine, b.paysOrigine, isAsc);
+        default: return 0;
+      }
+    });
+  }
+
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
