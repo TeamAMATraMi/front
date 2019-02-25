@@ -60,6 +60,13 @@ export class ApprenantsComponent implements OnInit {
       this._apprenantsTemp = apprenants;
       this._dataSource.paginator = this.paginator;
       this._dataSource.sort = this.sort;
+      this._dataSource.filterPredicate = (data: {nom: string, prenom: string}, filterValue: string) => {
+        if ((data.nom.trim().toLowerCase().indexOf(filterValue) !== -1) || (data.prenom.trim().toLowerCase().indexOf(filterValue) !== -1)) {
+          return true;
+        } else {
+          return false;
+        }
+      };
     });
     this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => { this._groupes = groupes; this._groupesSite = this._groupes; });
@@ -114,6 +121,8 @@ export class ApprenantsComponent implements OnInit {
     this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
     this._dataSource.paginator = this.paginator;
     this._dataSource.paginator.firstPage();
+    this._dataSource.filterPredicate = (data: {nom: string}, filterValue: string) =>
+        data.nom.trim().toLowerCase().indexOf(filterValue) !== -1;
   }
 
   get groupes(): Groupe[] {
@@ -128,6 +137,8 @@ export class ApprenantsComponent implements OnInit {
     this._groupesSite = groupe;
     this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
     this._dataSource.paginator = this.paginator;
+    this._dataSource.filterPredicate = (data: {nom: string}, filterValue: string) =>
+        data.nom.trim().toLowerCase().indexOf(filterValue) !== -1;
   }
 
   @Input()
@@ -169,6 +180,8 @@ export class ApprenantsComponent implements OnInit {
               this._apprenants = apprenants;
               this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
               this._dataSource.paginator = this.paginator;
+              this._dataSource.filterPredicate = (data: {nom: string}, filterValue: string) =>
+                  data.nom.trim().toLowerCase().indexOf(filterValue) !== -1;
             },
             _ => this._dialogStatus = 'inactive',
             () => this._dialogStatus = 'inactive'

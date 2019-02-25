@@ -48,6 +48,8 @@ export class CoursComponent implements OnInit {
       this._cours = cours;
       this._dataSource = new MatTableDataSource<Cours>(this._cours);
       this._dataSource.paginator = this.paginator;
+      this._dataSource.filterPredicate = (data: {matiere: string}, filterValue: string) =>
+          data.matiere.trim().toLowerCase().indexOf(filterValue) !== -1;
     });
     this._formateursService.fetch().subscribe((formateurs: Formateur[]) => this._formateurs = formateurs);
   }
