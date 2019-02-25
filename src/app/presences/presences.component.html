@@ -12,7 +12,7 @@
                     <ng-container matColumnDef="NomApprenant">
                         <mat-header-cell *matHeaderCellDef> Date du cours</mat-header-cell>
                         <mat-cell *matCellDef="let element">
-                            <a [routerLink]="['/updatePresence', idCours]">
+                            <a [routerLink]="['/updatePresence', idCours, element]">
                                 {{ element }}
                             </a>
                         </mat-cell>
