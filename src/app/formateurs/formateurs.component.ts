@@ -6,7 +6,7 @@ import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
 import {filter, flatMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {MatDialog, MatDialogRef, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatDialogRef, MatPaginator, MatSort, MatTableDataSource, Sort} from '@angular/material';
 import {Groupe} from '../shared/interfaces/groupe';
 import {GroupesService} from '../shared/services/groupes.service';
 import {FormateurDialogComponent} from '../shared/dialogs/formateur-dialog/formateur-dialog.component';
@@ -33,11 +33,10 @@ export class FormateursComponent implements OnInit {
 
   private _dialogStatus: string;
   private _formateursDialog: MatDialogRef<FormateurDialogComponent>;
+  dataSource: MatTableDataSource<Formateur>;
 
-  @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  private _dataSource: MatTableDataSource<Formateur>;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private _router: Router, private _formateursService: FormateursService, private _sitesService: SitesService,
               private _dialog: MatDialog, private _groupesService: GroupesService) {
@@ -52,12 +51,12 @@ export class FormateursComponent implements OnInit {
 
   ngOnInit() {
     // TODO : fetch with associated service formateur
-    this._formateursService.fetch().subscribe((formateur: Formateur[]) => {
-      this._formateurs = formateur;
-      this._formateursTemp = formateur;
-      this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
-      this._dataSource.paginator = this.paginator;
-      this._dataSource.sort = this.sort;
+    this._formateursService.fetch().subscribe(_formateur => {
+      this.dataSource = new MatTableDataSource<Formateur>(_formateur);
+      this._formateurs = _formateur;
+      this._formateursTemp = _formateur;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
     this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => { this._groupes = groupes; this._groupesSite = this._groupes; });
@@ -90,9 +89,9 @@ export class FormateursComponent implements OnInit {
       this._formateurs = this._formateursTemp;
       this._formateurs = this._formateurs.filter(e => e.idSite === this._selectedSiteId);
     }
-    this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
-    this._dataSource.paginator = this.paginator;
-    this._dataSource.paginator.firstPage();
+    this.dataSource = new MatTableDataSource<Formateur>(this._formateurs);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.paginator.firstPage();
   }
 
   get dialogStatus(): string {
@@ -118,7 +117,7 @@ export class FormateursComponent implements OnInit {
         .subscribe(
             (formateurs: Formateur[]) => {
               this._formateurs = formateurs;
-              this._dataSource.paginator = this.paginator;
+              this.dataSource.paginator = this.paginator;
             },
             _ => this._dialogStatus = 'inactive',
             () => this._dialogStatus = 'inactive'
@@ -162,13 +161,10 @@ export class FormateursComponent implements OnInit {
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this._dataSource.filter = filterValue;
-    this._dataSource.paginator.firstPage();
+    this.dataSource.filter = filterValue;
+    this.dataSource.paginator.firstPage();
   }
 
-  get dataSource(): MatTableDataSource<Formateur> {
-    return this._dataSource;
-  }
   deleteConfirmation(id: number) {
     if (confirm('Voulez vous vraiment supprimer ce formateur ?')) {
       this.delete(id);
@@ -182,4 +178,27 @@ export class FormateursComponent implements OnInit {
   set selectedSiteId(value: number | string) {
     this._selectedSiteId = value;
   }
+
+ sortData(sort: Sort) {
+    const data = this.dataSource.data.slice();
+    if (!sort.active || sort.direction === '') {
+      this.dataSource.data = data;
+      return;
+    }
+
+    this.dataSource.data = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'NomPrenom': return compare(a.nom, b.nom, isAsc);
+        case 'Tel': return compare(a.telephone, b.telephone, isAsc);
+        case 'Adresse': return compare(a.adresse, b.adresse, isAsc);
+        default: return 0;
+      }
+    });
+  }
+
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
