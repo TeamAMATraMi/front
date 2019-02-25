@@ -23,11 +23,12 @@
 </mat-toolbar>
 
 <section>
+    <div class="mat-elevation-z8">
         <mat-table [dataSource]="dataSource" (matSortChange)="sortData($event)" matSort>
 
             <ng-container matColumnDef="NomPrenom">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Nom</mat-header-cell>
-                    <mat-cell *matCellDef="let element">
+                <mat-cell *matCellDef="let element">
                     <a [routerLink]="['/formateur', element.id]">
                         <span>{{element.nom}} {{element.prenom}}</span>
                     </a>
@@ -59,6 +60,8 @@
             <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
         </mat-table>
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+
 </section>
 
 <section class="buttons-fab" *ngIf="dialogStatus === 'inactive'">
