@@ -32,6 +32,8 @@ export class SitesComponent implements OnInit {
           this._sites = sites;
           this._dataSource = new MatTableDataSource<Site>(this._sites);
           this._dataSource.paginator = this.paginator;
+          this._dataSource.filterPredicate = (data: {ville: string}, filterValue: string) =>
+              data.ville.trim().toLowerCase().indexOf(filterValue) !== -1;
       });
   }
 

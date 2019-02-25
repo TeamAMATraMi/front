@@ -58,6 +58,13 @@ export class FormateursComponent implements OnInit {
       this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
       this._dataSource.paginator = this.paginator;
       this._dataSource.sort = this.sort;
+      this._dataSource.filterPredicate = (data: {nom: string, prenom: string}, filterValue: string) => {
+        if ((data.nom.trim().toLowerCase().indexOf(filterValue) !== -1) || (data.prenom.trim().toLowerCase().indexOf(filterValue) !== -1)) {
+          return true;
+        } else {
+          return false;
+        }
+      };
     });
     this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => { this._groupes = groupes; this._groupesSite = this._groupes; });
@@ -92,6 +99,13 @@ export class FormateursComponent implements OnInit {
     }
     this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
     this._dataSource.paginator = this.paginator;
+    this._dataSource.filterPredicate = (data: {nom: string, prenom: string}, filterValue: string) => {
+      if ((data.nom.trim().toLowerCase().indexOf(filterValue) !== -1) || (data.prenom.trim().toLowerCase().indexOf(filterValue) !== -1)) {
+        return true;
+      } else {
+        return false;
+      }
+    };
     this._dataSource.paginator.firstPage();
   }
 
