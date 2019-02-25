@@ -55,6 +55,13 @@ export class FormateursComponent implements OnInit {
       this._formateurs = _formateur;
       this._formateursTemp = _formateur;
       this._dataSource.paginator = this.paginator;
+      this._dataSource.filterPredicate = (data: {nom: string, prenom: string}, filterValue: string) => {
+        if ((data.nom.trim().toLowerCase().indexOf(filterValue) !== -1) || (data.prenom.trim().toLowerCase().indexOf(filterValue) !== -1)) {
+          return true;
+        } else {
+          return false;
+        }
+      };
       this._dataSource.sort = this.sort;
     });
     this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
@@ -90,6 +97,13 @@ export class FormateursComponent implements OnInit {
     }
     this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
     this._dataSource.paginator = this.paginator;
+    this._dataSource.filterPredicate = (data: {nom: string, prenom: string}, filterValue: string) => {
+      if ((data.nom.trim().toLowerCase().indexOf(filterValue) !== -1) || (data.prenom.trim().toLowerCase().indexOf(filterValue) !== -1)) {
+        return true;
+      } else {
+        return false;
+      }
+    };
     this._dataSource.paginator.firstPage();
   }
 
