@@ -33,7 +33,7 @@ export class FormateursComponent implements OnInit {
 
   private _dialogStatus: string;
   private _formateursDialog: MatDialogRef<FormateurDialogComponent>;
-  dataSource: MatTableDataSource<Formateur>;
+  private _dataSource: MatTableDataSource<Formateur>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -50,13 +50,12 @@ export class FormateursComponent implements OnInit {
   }
 
   ngOnInit() {
-    // TODO : fetch with associated service formateur
     this._formateursService.fetch().subscribe(_formateur => {
-      this.dataSource = new MatTableDataSource<Formateur>(_formateur);
+      this._dataSource = new MatTableDataSource<Formateur>(_formateur);
       this._formateurs = _formateur;
       this._formateursTemp = _formateur;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this._dataSource.paginator = this.paginator;
+      this._dataSource.sort = this.sort;
     });
     this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => { this._groupes = groupes; this._groupesSite = this._groupes; });
@@ -89,13 +88,17 @@ export class FormateursComponent implements OnInit {
       this._formateurs = this._formateursTemp;
       this._formateurs = this._formateurs.filter(e => e.idSite === this._selectedSiteId);
     }
-    this.dataSource = new MatTableDataSource<Formateur>(this._formateurs);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.paginator.firstPage();
+    this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
+    this._dataSource.paginator = this.paginator;
+    this._dataSource.paginator.firstPage();
   }
 
   get dialogStatus(): string {
     return this._dialogStatus;
+  }
+
+  get dataSource(): MatTableDataSource<Formateur> {
+    return this._dataSource;
   }
 
   showDialog() {
@@ -117,7 +120,7 @@ export class FormateursComponent implements OnInit {
         .subscribe(
             (formateurs: Formateur[]) => {
               this._formateurs = formateurs;
-              this.dataSource.paginator = this.paginator;
+              this._dataSource.paginator = this.paginator;
             },
             _ => this._dialogStatus = 'inactive',
             () => this._dialogStatus = 'inactive'
@@ -161,8 +164,8 @@ export class FormateursComponent implements OnInit {
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
-    this.dataSource.paginator.firstPage();
+    this._dataSource.filter = filterValue;
+    this._dataSource.paginator.firstPage();
   }
 
   deleteConfirmation(id: number) {
@@ -180,18 +183,16 @@ export class FormateursComponent implements OnInit {
   }
 
  sortData(sort: Sort) {
-    const data = this.dataSource.data.slice();
+    const data = this._dataSource.data.slice();
     if (!sort.active || sort.direction === '') {
-      this.dataSource.data = data;
+      this._dataSource.data = data;
       return;
     }
 
-    this.dataSource.data = data.sort((a, b) => {
+    this._dataSource.data = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'NomPrenom': return compare(a.nom, b.nom, isAsc);
-        case 'Tel': return compare(a.telephone, b.telephone, isAsc);
-        case 'Adresse': return compare(a.adresse, b.adresse, isAsc);
         default: return 0;
       }
     });
