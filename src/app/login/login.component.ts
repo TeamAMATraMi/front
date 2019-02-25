@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    sessionStorage.setItem('token', '');
   }
 
   ngOnChanges(record) {
