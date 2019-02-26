@@ -52,6 +52,14 @@ export class PresencesService {
         );
   }
 
+  fetchByFichePresence(idCours: number, date: number): Observable<Presence []> {
+      return this._http.get<Presence[]>(this._backendURL.fichePresenceIDDate.replace(':idCours,', idCours).replace(':date', date))
+          .pipe(
+              filter(_ => !!_),
+              defaultIfEmpty([])
+          );
+  }
+
 
   /**
    * Function to create a new Presence

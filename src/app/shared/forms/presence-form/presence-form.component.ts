@@ -4,6 +4,9 @@ import {Presence} from '../../interfaces/presence';
 import {PresencesService} from '../../services/presences.service';
 import {Cours} from '../../interfaces/cours';
 import {formatDate} from '@angular/common';
+import {filter, flatMap} from 'rxjs/operators';
+import {Apprenant} from '../../interfaces/apprenant';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-presence-form',
@@ -17,7 +20,7 @@ export class PresenceFormComponent implements OnInit, OnChanges {
   private readonly _submit$: EventEmitter<Presence[]>;
   private readonly _form: FormGroup;
 
-  constructor(private _presencesService: PresencesService) {
+  constructor(private _presencesService: PresencesService, private _route: ActivatedRoute) {
     this._submit$ = new EventEmitter<Presence[]>();
     this._cancel$ = new EventEmitter<void>();
     this._form = this._buildForm();
@@ -26,9 +29,13 @@ export class PresenceFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this._presencesService.fetchByIdCours(this._cours.id).subscribe((presences: Presence[]) => {
-      this._presences = presences;
-    });
+    this._route.params.pipe(
+        filter(params => !!params['id']),
+        flatMap(params => this._presencesService.fetchByFichePresence(params['id'], params['date'])),
+    )
+        .subscribe((presences: Presence[]) => {
+          this._presences = presences;
+        });
   }
 
   get form(): FormGroup {

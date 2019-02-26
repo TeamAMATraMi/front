@@ -60,11 +60,12 @@ export class PresencesComponent implements OnInit {
               this.datetab.push(this._presences[i].date);
             }
           }
-          this._idCours = this._presences[0].id;
+          this._idCours = this._presences[0].idCours;
           this._dataSource = new MatTableDataSource<number>(this.datetab);
         });
 
     console.log('AAAAAAAAAAA ' + this._idCours);
+      console.log('BBBBBBBBB ' + this._presences[0].idCours);
     this._apprenantsService.fetch().subscribe((apprenants: Apprenant[]) => { this._apprenants = apprenants; });
     this._coursService.fetchOne(this._idCours).subscribe((c: Cours) => this._nomCours = c.matiere);
   }

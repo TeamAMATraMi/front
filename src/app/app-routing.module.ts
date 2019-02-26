@@ -41,7 +41,7 @@ const routes: Routes = [
     { path: 'updateGroupe/:id', component: UpdateGroupeComponent, canActivate: [AuthGuard] },
     { path: 'statistiques', component: StatistiquesComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent},
-    { path: 'updatePresence/:id', component: UpdatePresenceComponent, canActivate: [AuthGuard] },
+    { path: 'updatePresence/:id/:date', component: UpdatePresenceComponent, canActivate: [AuthGuard] },
     { path: 'statistiques', component: StatistiquesComponent, canActivate: [AuthGuard]},
     { path: 'presences', component: PresencesComponent},
     { path: 'presence/:id', component: PresenceComponent},
