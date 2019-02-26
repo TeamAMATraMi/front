@@ -1,34 +1,52 @@
-@media (min-width: 768px) {
-    :host(.wide) mat-card {
-        width: 600px;
-    }
+.mat-card{
+    padding: 50px;
+    border-radius: 4px;
+}
+.form-container {
+    height:calc(100vh - 50px);
+    display:flex;
+    flex-basis:468px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding:20px;
 }
 
-mat-card {
-    color: rgba(0,0,0,0.87);
-    background-color: lightgrey;
-    margin: 10px;
-    margin-left: 40%;
-    width: 230px;
+.cur{
+    cursor: pointer;
 }
 
-mat-card:hover {
-    box-shadow: 0 11px 15px -7px rgba(0,0,0,.2),
-    0 24px 38px 3px rgba(0,0,0,.14),
-    0 9px 46px 8px rgba(0,0,0,.12);
+#login-container {
+    display:flex;
+    justify-content: center;
+    align-content: center;
+    height:100vh;
 }
 
-mat-card-title {
-    margin-bottom: 20px;
-    margin-left: 30px;
+.fixedWidth {
+    width:400px;
 }
 
-mat-card-title span {
-    font-size: 24px;
-    font-weight: 400;
-    line-height: 32px;
+
+#submitButton {
+    color: black;
+    background: #634672;
 }
 
-mat-card-actions button[mat-raised-button] {
-    margin: 5px;
+.align-center, a {
+    text-align: center;
+    text-decoration: none;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+.login {
+    height: calc(100vh - 50px);
+    min-width: 100vh;
+    background-size:cover;
+    background-attachment: fixed;
 }
