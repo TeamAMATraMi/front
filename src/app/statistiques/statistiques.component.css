@@ -21,6 +21,16 @@ mat-list-item:hover {
     0 9px 46px 8px rgba(0,0,0,.12);
 }
 
+mat-card {
+    height: 400px;
+    width: 400px;
+}
+
+mat-card-content {
+    height: 100%;
+    width: 100%;
+}
+
 table {
     width: 100%;
 }

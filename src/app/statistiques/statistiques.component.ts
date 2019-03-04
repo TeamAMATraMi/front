@@ -10,21 +10,26 @@ import {StatistiquesService} from '../shared/services/statistiques.service';
 export class StatistiquesComponent implements OnInit {
 
   public sexeLabels: string[] = ['Hommes', 'Femmes'];
-  public sexeType = 'bar';
-  public sexeLegend = false;
   public sexeData: any[] = [
     {data: []}
   ];
   public ageLabels: string[] = [];
-  public ageType = 'doughnut';
   public ageData: number[] = [];
+  public nationaliteLabels: string[] = [];
+  public nationaliteData: number[] = [];
+  public siteLabels: string[] = [];
+  public siteData: number[] = [];
+  public False = false;
+  public bar = 'bar';
+  public doughnut = 'doughnut';
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
     responsive: false
   };
   public chartColors: any[] = [
     {
-      backgroundColor: ['#FF7360', '#6FC8CE', '#FAFFF2', '#FFFCC4', '#B9E8E0', '#74B2F4', '#BE74F4', '#F474A6', '#7474F4', '#74EEF4', '#F4BE74', '#CC045C', '#79EE4E', '#BABF7E']
+      backgroundColor: ['#FF7360', '#6FC8CE', '#FAFFF2', '#FFFCC4', '#B9E8E0', '#74B2F4',
+                        '#BE74F4', '#F474A6', '#7474F4', '#74EEF4', '#F4BE74', '#CC045C', '#79EE4E', '#BABF7E']
     }];
 
   constructor(private _statistiquesService: StatistiquesService, private _router: Router) {}
@@ -44,10 +49,18 @@ export class StatistiquesComponent implements OnInit {
 
     this._statistiquesService.fetchBySite().subscribe((stat: Map<String, number>) => {
       console.log(stat);
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.siteLabels.push(Object.keys(stat)[i]);
+      }
+      this.siteData = Object.values(stat);
     });
 
     this._statistiquesService.fetchByNationalite('all').subscribe((stat: Map<String, number>) => {
       console.log(stat);
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.nationaliteLabels.push(Object.keys(stat)[i]);
+      }
+      this.nationaliteData = Object.values(stat);
     });
 
     this._statistiquesService.fetchBySejour('Stenay').subscribe((stat: Map<String, number>) => {

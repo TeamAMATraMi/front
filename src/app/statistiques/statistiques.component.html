@@ -14,7 +14,7 @@
 
 <br/><br/><br/>
 
-<mat-grid-list cols="2" rowHeight="2:1">
+<mat-grid-list cols="2" rowHeight="1:1">
   <mat-grid-tile>
     <mat-card>
       <mat-card-title>Répartition hommes/femmes</mat-card-title>
@@ -24,8 +24,8 @@
                   [datasets]="sexeData"
                   [labels]="sexeLabels"
                   [options]="barChartOptions"
-                  [legend]="sexeLegend"
-                  [chartType]="sexeType"
+                  [legend]="False"
+                  [chartType]="bar"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
@@ -33,15 +33,50 @@
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
+
   <mat-grid-tile>
     <mat-card>
-      <mat-card-title>Répartition hommes/femmes</mat-card-title>
+      <mat-card-title>Répartition par âge</mat-card-title>
       <mat-card-content>
         <div style="display: block">
           <canvas baseChart
                   [data]="ageData"
                   [labels]="ageLabels"
-                  [chartType]="ageType"
+                  [chartType]="doughnut"
+                  [colors]="chartColors"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>Répartition par nationalité</mat-card-title>
+      <mat-card-content>
+        <div style="display: block">
+          <canvas baseChart
+                  [data]="nationaliteData"
+                  [labels]="nationaliteLabels"
+                  [chartType]="doughnut"
+                  [colors]="chartColors"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>Répartition par nationalité</mat-card-title>
+      <mat-card-content>
+        <div style="display: block">
+          <canvas baseChart
+                  [data]="siteData"
+                  [labels]="siteLabels"
+                  [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
