@@ -82,12 +82,15 @@ export class PresencesService {
 
   update(presences: Presence[]): Observable<any> {
       for (let i = 0; i < presences.length - 1 ; i++) {
-          this._http.put<Presence>(this._backendURL.fichePresences, presences[i], this._options());
+          this.updateOne(<Presence> (presences[i]));
       }
 
-    return this._http.put<Presence>(this._backendURL.fichePresences, presences[presences.length - 1], this._options());
+    return this.updateOne(<Presence>(presences[(presences.length) - 1]));
   }
 
+  private updateOne(presence: Presence): Observable<any> {
+      return this._http.put<Presence>(this._backendURL.allPresences, presence, this._options());
+  }
 
   /**
    * Function to return request options
