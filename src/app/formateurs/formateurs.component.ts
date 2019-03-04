@@ -18,7 +18,7 @@ import {FormateurDialogComponent} from '../shared/dialogs/formateur-dialog/forma
 })
 export class FormateursComponent implements OnInit {
 
-  private _displayedColumns = ['NomPrenom', 'Tel', 'Adresse', 'Delete'];
+  private _displayedColumns = ['NomPrenom', 'Tel', 'Adresse', 'DeleteEdit'];
 
   private _formateur: Formateur;
   private readonly _delete$: EventEmitter<Formateur>;

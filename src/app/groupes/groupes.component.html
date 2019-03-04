@@ -45,6 +45,9 @@
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell
                         *matCellDef="let element">
+                    <button mat-button title="Edit" [routerLink]="['/updateGroup/' + element.id]">
+                        <mat-icon svgIcon="icon-edit"></mat-icon>
+                    </button>
                     <button mat-button title="Delete" (click)="deleteConfirmation(element.id)">
                         <mat-icon svgIcon="icon-delete"></mat-icon>
                     </button>

@@ -46,10 +46,13 @@
                         *matCellDef="let element"> {{element.adresse}} {{element.code_postal}} </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="Delete">
+            <ng-container matColumnDef="DeleteEdit">
                 <mat-header-cell *matHeaderCellDef ></mat-header-cell>
                 <mat-cell
                         *matCellDef="let element">
+                    <button mat-button title="Edit" [routerLink]="['/updateFormateur/' + element.id]">
+                        <mat-icon svgIcon="icon-edit"></mat-icon>
+                    </button>
                     <button mat-button title="Delete" (click)="deleteConfirmation(element.id)">
                         <mat-icon svgIcon="icon-delete"></mat-icon>
                     </button>

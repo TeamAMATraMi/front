@@ -20,6 +20,8 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this._matIconRegistry.addSvgIcon('icon-delete',
             this._domSanitizer.bypassSecurityTrustResourceUrl('/assets/images/icon-delete.svg'));
+        this._matIconRegistry.addSvgIcon('icon-edit',
+            this._domSanitizer.bypassSecurityTrustResourceUrl('/assets/images/icon-edit.svg'));
         this._matIconRegistry.addSvgIcon('not-check',
             this._domSanitizer.bypassSecurityTrustResourceUrl('/assets/images/pasOk.svg'));
         this._matIconRegistry.addSvgIcon('check',
