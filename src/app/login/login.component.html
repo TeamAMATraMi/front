@@ -1,25 +1,19 @@
-<div class="login">
+<form class="form-container" novalidate [formGroup]="form">
+  <mat-card class="align-center" style="opacity: 1;width:500px">
+    <h1 class="mat-headline">Se connecter</h1>
 
-  <div id="login-container">
-    <form class="form-container" novalidate [formGroup]="form">
-      <mat-card class="align-center" style="opacity: 0.9;width:500px">
-        <h1 class="mat-headline">Se connecter</h1>
+    <mat-form-field class="fixedWidth">
+      <mat-label>Utilisateur</mat-label>
+      <input matInput placeholder="Nom d'utilisateur" formControlName="username">
+    </mat-form-field>
 
-        <mat-form-field class="fixedWidth">
-          <mat-label>Utilisateur</mat-label>
-          <input matInput placeholder="Nom d'utilisateur" formControlName="username">
-        </mat-form-field>
- 
-        <mat-form-field class="fixedWidth">
-          <mat-label>Mot de passe</mat-label>
-          <input matInput placeholder="Mot de passe" type="password" formControlName="password">
-        </mat-form-field>
+    <mat-form-field class="fixedWidth">
+      <mat-label>Mot de passe</mat-label>
+      <input matInput placeholder="Mot de passe" type="password" formControlName="password">
+    </mat-form-field>
 
-        <br/>
-        <mat-card-actions>
-          <button class="fixedWidth" id="submitButton" color="accent" mat-button type="submit" (click)="submit(form.value)" [disabled]="form.invalid">Connexion</button>
-        </mat-card-actions>
-      </mat-card>
-    </form>
-  </div>
-</div>
+    <mat-card-actions>
+      <button class="fixedWidth" id="submitButton" color="accent" mat-button type="submit" (click)="submit(form.value)" [disabled]="form.invalid">Connexion</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

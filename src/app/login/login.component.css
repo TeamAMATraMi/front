@@ -1,9 +1,9 @@
 .mat-card{
     padding: 50px;
-    border-radius: 4px;
+    border-radius: 25px;
 }
 .form-container {
-    height:calc(100vh - 50px);
+    height:calc(100vh - 80px);
     display:flex;
     flex-basis:468px;
     flex-direction: column;
@@ -18,17 +18,9 @@
     cursor: pointer;
 }
 
-#login-container {
-    display:flex;
-    justify-content: center;
-    align-content: center;
-    height:100vh;
-}
-
 .fixedWidth {
     width:400px;
 }
-
 
 #submitButton {
     color: black;
@@ -42,11 +34,4 @@
 
 *, :after, :before {
     box-sizing: border-box;
-}
-
-.login {
-    height: calc(100vh - 50px);
-    min-width: 100vh;
-    background-size:cover;
-    background-attachment: fixed;
 }
