@@ -637,10 +637,11 @@
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Auteur du dossier" formControlName="auteurDossier" required name="auteurDossier" />
-                        <mat-error *ngIf="form.get('auteurDossier').dirty && form.get('auteurDossier').hasError('required')">
-                            auteurDossier is <strong>required</strong>
-                        </mat-error>
+                        <mat-select placeholder="Auteur du dossier" formControlName="auteurDossier" required>
+                            <mat-option *ngFor="let c of formateurs" [value]="c.id">
+                                {{ c.nom }}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </p>
                 <p>
