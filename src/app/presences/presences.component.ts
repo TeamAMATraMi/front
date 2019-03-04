@@ -24,7 +24,6 @@ export class PresencesComponent implements OnInit {
   private _presencesDialog: MatDialogRef<PresenceDialogComponent>;
   private _apprenants: Apprenant[];
   private tmp: string;
-  // private _dataSource: MatTableDataSource<Presence>;
   private datetab: Array<number>;
   private _nomCours: string;
   private _idCours: number;
@@ -60,21 +59,11 @@ export class PresencesComponent implements OnInit {
               this.datetab.push(this._presences[i].date);
             }
           }
-          console.log('TOAST ' + this._presences[0].idCours);
           this._idCours = this._presences[0].idCours;
-          console.log('RE-TOAST ' + this._idCours);
           this._dataSource = new MatTableDataSource<number>(this.datetab);
-
-
-          // C'EST ICI MAINTENANT
-            console.log('AAAAAAAAAAA ' + this._idCours);
-            console.log('BBBBB ' + this.presences[0].idCours);
-            this._apprenantsService.fetch().subscribe((apprenants: Apprenant[]) => { this._apprenants = apprenants; });
-            this._coursService.fetchOne(this._idCours).subscribe((c: Cours) => this._nomCours = c.matiere);
-
+          this._apprenantsService.fetch().subscribe((apprenants: Apprenant[]) => { this._apprenants = apprenants; });
+          this._coursService.fetchOne(this._idCours).subscribe((c: Cours) => this._nomCours = c.matiere);
         });
-
-    // C'ETAIT LA
   }
 
   getNomApprenantById(id: number): string {

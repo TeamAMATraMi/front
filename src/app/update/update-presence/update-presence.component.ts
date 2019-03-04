@@ -21,9 +21,8 @@ export class UpdatePresenceComponent implements OnInit {
   ngOnInit() {
     this._route.params
         .pipe(
-            map((params: any) => params.id),
-            map((params: any) => params.date),
-            flatMap((id: number) => this._presencesService.fetchByIdCours(id))
+            filter(params => !!params['id']),
+            flatMap(params => this._presencesService.fetchByIdCours(params['id']))
         )
         .subscribe((presences: Presence[]) => {
           this._presenceDialog = this._dialog.open(PresenceDialogComponent, {
