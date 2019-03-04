@@ -45,7 +45,7 @@
         </p>
         <p>
           <mat-form-field class="full-width">
-            <mat-select placeholder="Formateur" formControlName="formateur" [value]="formateur">
+            <mat-select placeholder="Formateur" formControlName="formateur">
               <mat-option *ngFor="let f of formateurs;" [value]="f.nom + ' ' + f.prenom">
                 {{f.nom}} {{f.prenom}}
               </mat-option>
