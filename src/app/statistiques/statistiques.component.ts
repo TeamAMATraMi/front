@@ -19,7 +19,14 @@ export class StatistiquesComponent implements OnInit {
   public nationaliteData: number[] = [];
   public siteLabels: string[] = [];
   public siteData: number[] = [];
-  public False = false;
+  public sejourLabels: string[] = [];
+  public sejourData: number[] = [];
+  public niveauLangueLabels: string[] = [];
+  public niveauLangueData: number[] = [];
+  public niveauScolLabels: string[] = [];
+  public niveauScolData: number[] = [];
+  public quartierPrioLabels: string[] = [];
+  public quartierPrioData: number[] = [];
   public bar = 'bar';
   public doughnut = 'doughnut';
   public barChartOptions: any = {
@@ -63,16 +70,28 @@ export class StatistiquesComponent implements OnInit {
       this.nationaliteData = Object.values(stat);
     });
 
-    this._statistiquesService.fetchBySejour('Stenay').subscribe((stat: Map<String, number>) => {
+    this._statistiquesService.fetchBySejour('all').subscribe((stat: Map<String, number>) => {
       console.log(stat);
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.sejourLabels.push(Object.keys(stat)[i]);
+      }
+      this.sejourData = Object.values(stat);
     });
 
     this._statistiquesService.fetchByQuartierPrio('all').subscribe((stat: Map<String, number>) => {
       console.log(stat);
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.quartierPrioLabels.push(Object.keys(stat)[i]);
+      }
+      this.quartierPrioData = Object.values(stat);
     });
 
     this._statistiquesService.fetchByNiveauScol('all').subscribe((stat: Map<number, number>) => {
         console.log(stat);
+        for (let i = 0; i < Object.keys(stat).length; i++) {
+          this.niveauScolLabels.push(Object.keys(stat)[i]);
+        }
+        this.niveauScolData = Object.values(stat);
     });
 
     this._statistiquesService.fetchByStatutPro('all').subscribe((stat: Map<String, number>) => {
@@ -85,6 +104,10 @@ export class StatistiquesComponent implements OnInit {
 
     this._statistiquesService.fetchByNiveauLangue('all').subscribe((stat: Map<String, number>) => {
         console.log(stat);
+        for (let i = 0; i < Object.keys(stat).length; i++) {
+          this.niveauLangueLabels.push(Object.keys(stat)[i]);
+        }
+        this.niveauLangueData = Object.values(stat);
     });
   }
 

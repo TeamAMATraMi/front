@@ -24,7 +24,7 @@
                   [datasets]="sexeData"
                   [labels]="sexeLabels"
                   [options]="barChartOptions"
-                  [legend]="False"
+                  [legend]=false
                   [chartType]="bar"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -76,6 +76,74 @@
           <canvas baseChart
                   [data]="siteData"
                   [labels]="siteLabels"
+                  [chartType]="doughnut"
+                  [colors]="chartColors"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>Répartition par titre de séjour</mat-card-title>
+      <mat-card-content>
+        <div style="display: block">
+          <canvas baseChart
+                  [data]="sejourData"
+                  [labels]="sejourLabels"
+                  [chartType]="doughnut"
+                  [colors]="chartColors"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>Répartition par niveau de langue</mat-card-title>
+      <mat-card-content>
+        <div style="display: block">
+          <canvas baseChart
+                  [data]="niveauLangueData"
+                  [labels]="niveauLangueLabels"
+                  [chartType]="doughnut"
+                  [colors]="chartColors"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>Répartition par niveau de scolarisation</mat-card-title>
+      <mat-card-content>
+        <div style="display: block">
+          <canvas baseChart
+                  [data]="niveauScolData"
+                  [labels]="niveauScolLabels"
+                  [chartType]="doughnut"
+                  [colors]="chartColors"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>Répartition par quartier prioritaire</mat-card-title>
+      <mat-card-content>
+        <div style="display: block">
+          <canvas baseChart
+                  [data]="quartierPrioData"
+                  [labels]="quartierPrioLabels"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
