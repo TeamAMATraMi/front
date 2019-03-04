@@ -11,9 +11,6 @@ import {Groupe} from '../../interfaces/groupe';
 })
 export class GroupeFormComponent implements OnInit, OnChanges {
 
-  private _ville: string;
-  private _idSite: string;
-  private _nom: string;
   private _isUpdateMode: boolean;
   private _groupe: Groupe;
   private _sites: Site[];
@@ -31,7 +28,6 @@ export class GroupeFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.ville = 'Tous les sites';
     this._sitesService.fetch().subscribe((sites: Site[]) => {
       this._sites = sites;
       this._form.patchValue({ville: this._sites.length > 0 ? this.getVilleByIdGroup(this._groupe.idSite) : '' });
@@ -52,30 +48,6 @@ export class GroupeFormComponent implements OnInit, OnChanges {
 
   get form(): FormGroup {
     return this._form;
-  }
-
-  get nom(): string {
-    return this._nom;
-  }
-
-  set nom(value: string) {
-    this._nom = value;
-  }
-
-  get idSite(): string {
-    return this._idSite;
-  }
-
-  set idSite(value: string) {
-    this._idSite = value;
-  }
-
-  get ville(): string {
-    return this._ville;
-  }
-
-  set ville(value: string) {
-    this._ville = value;
   }
 
   get sites(): Site[] {
@@ -138,14 +110,6 @@ export class GroupeFormComponent implements OnInit, OnChanges {
     if (record.groupe && record.groupe.currentValue) {
       this._groupe = record.groupe.currentValue;
       this._isUpdateMode = true;
-
-      for (let i = 0; i < this.sites.length; i++) {
-        if (this._sites[i].id === record.groupe.idSite) {
-          this._ville = this._sites[i].ville;
-        }
-      }
-      this._form.patchValue({ville: this._ville});
-
       this._form.patchValue(this._groupe);
 
     } else {

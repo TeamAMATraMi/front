@@ -13,8 +13,6 @@ import {FormateursService} from '../../services/formateurs.service';
 })
 export class CoursFormComponent implements OnInit, OnChanges {
 
-  private _formateur: string;
-  private _groupe: string;
   private _isUpdateMode: boolean;
   private _cours: Cours;
   private _formateurs: Formateur[];
@@ -22,6 +20,7 @@ export class CoursFormComponent implements OnInit, OnChanges {
   private readonly _cancel$: EventEmitter<void>;
   private readonly _submit$: EventEmitter<Cours>;
   private readonly _form: FormGroup;
+  private tmp: string;
 
   constructor(private _formateurService: FormateursService, private _groupesService: GroupesService) {
     this._submit$ = new EventEmitter<Cours>();
@@ -33,31 +32,33 @@ export class CoursFormComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => {
-          this._groupes = groupes;
-          // this._form.patchValue({groupe: this._groupes.filter(groupe => groupe.id === this._cours.idGroupe)[0].nom});
-        }
-    );
+        this._groupes = groupes;
+        this._form.patchValue({nomGroupe: this._groupes.length > 0 ? this.getNomByIdGroupe(this._cours.idGroupe) : '' });
+    });
     this._formateurService.fetch().subscribe((formateurs: Formateur[]) => {
-          this._formateurs = formateurs;
-          // this._form.patchValue({formateur: this._formateurs.filter(formateur => formateur.id === this._cours.idFormateur)[0].nom});
-        }
-    );
+        this._formateurs = formateurs;
+        this._form.patchValue({formateur: this._formateurs.length > 0 ? this.getNomByIdFormateur(this._cours.idFormateur) : '' });
+    });
   }
 
-  get ville(): string {
-    return this._formateur;
+  getNomByIdGroupe(id: number): string {
+    this.tmp = 'default';
+    this._groupes.forEach(s => {
+      if (s.id === id) {
+        this.tmp = s.nom;
+      }
+    });
+    return this.tmp;
   }
 
-  set ville(value: string) {
-    this._formateur = value;
-  }
-
-  get groupe(): string {
-    return this._groupe;
-  }
-
-  set groupe(value: string) {
-    this._groupe = value;
+  getNomByIdFormateur(id: number): string {
+    this.tmp = 'default';
+    this._formateurs.forEach(s => {
+      if (s.id === id) {
+        this.tmp = s.nom + ' ' + s.prenom;
+      }
+    });
+    return this.tmp;
   }
 
   get groupes(): Groupe[] {
@@ -72,10 +73,6 @@ export class CoursFormComponent implements OnInit, OnChanges {
     return this._isUpdateMode;
   }
 
-  set isUpdateMode(value: boolean) {
-    this._isUpdateMode = value;
-  }
-
   get cours(): Cours {
     return this._cours;
   }
@@ -87,14 +84,6 @@ export class CoursFormComponent implements OnInit, OnChanges {
 
   get form(): FormGroup {
     return this._form;
-  }
-
-  get formateur(): string {
-    return this._formateur;
-  }
-
-  set formateur(value: string) {
-    this._formateur = value;
   }
 
   get formateurs(): Formateur[] {
@@ -120,7 +109,7 @@ export class CoursFormComponent implements OnInit, OnChanges {
       duree: new FormControl('', Validators.compose([
         Validators.required
       ])),
-      groupe: new FormControl('', Validators.compose([
+      nomGroupe: new FormControl('', Validators.compose([
         Validators.required
       ]))
     });
@@ -142,7 +131,7 @@ export class CoursFormComponent implements OnInit, OnChanges {
 
   submit(cours: Cours) {
     for (let i = 0; i < this._groupes.length; i++) {
-      if (this._groupes[i].nom === this._form.get('groupe').value) { cours.idGroupe = this._groupes[i].id; }
+      if (this._groupes[i].nom === this._form.get('nomGroupe').value) { cours.idGroupe = this._groupes[i].id; }
     }
     for (let i = 0; i < this._formateurs.length; i++) {
       if ((this._formateurs[i].nom + ' ' + this.formateurs[i].prenom) === this._form.get('formateur').value) {

@@ -45,7 +45,7 @@
         </p>
         <p>
           <mat-form-field class="full-width">
-            <mat-select placeholder="Formateur" formControlName="formateur" name="formateur" [value]="formateur">
+            <mat-select placeholder="Formateur" formControlName="formateur" [value]="formateur">
               <mat-option *ngFor="let f of formateurs;" [value]="f.nom + ' ' + f.prenom">
                 {{f.nom}} {{f.prenom}}
               </mat-option>
@@ -57,15 +57,13 @@
         </p>
         <p>
           <mat-form-field class="full-width">
-            <mat-select placeholder="Groupes" formControlName="groupe" name="groupe" [value]="groupe">
-              <mat-option *ngFor="let g of groupes;" [value]="g.nom">
+            <mat-select placeholder="Groupe" formControlName="nomGroupe">
+              <mat-option *ngFor="let g of groupes" [value]="g.nom">
                 {{g.nom}}
               </mat-option>
-            </mat-select><mat-error *ngIf="form.get('groupe').dirty && form.get('groupe').hasError('required')">
-              groupe est <strong>requis</strong>
-            </mat-error>
-            <mat-error *ngIf="form.get('groupe').dirty && form.get('groupe').hasError('minlength')">
-              minimum <strong>2 characteres</strong>
+            </mat-select>
+            <mat-error *ngIf="form.get('nomGroupe').dirty && form.get('nomGroupe').hasError('required')">
+              nom est <strong>required</strong>
             </mat-error>
           </mat-form-field>
         </p>
