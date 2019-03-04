@@ -11,7 +11,9 @@
     <span class="flex"></span>
   </mat-toolbar-row>
 </mat-toolbar>
+
 <br/><br/><br/>
+
 <mat-grid-list cols="2" rowHeight="2:1">
   <mat-grid-tile>
     <mat-card>
@@ -24,6 +26,7 @@
                   [options]="barChartOptions"
                   [legend]="sexeLegend"
                   [chartType]="sexeType"
+                  [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
@@ -39,6 +42,7 @@
                   [data]="ageData"
                   [labels]="ageLabels"
                   [chartType]="ageType"
+                  [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
