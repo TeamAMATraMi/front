@@ -22,6 +22,7 @@ export class UpdatePresenceComponent implements OnInit {
     this._route.params
         .pipe(
             map((params: any) => params.id),
+            map((params: any) => params.date),
             flatMap((id: number) => this._presencesService.fetchByIdCours(id))
         )
         .subscribe((presences: Presence[]) => {
