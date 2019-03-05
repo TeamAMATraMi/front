@@ -13,7 +13,10 @@
     margin-right: auto;
     padding:20px;
 }
-
+#logo {
+    width:200px;
+    height:200px;
+}
 .cur{
     cursor: pointer;
 }

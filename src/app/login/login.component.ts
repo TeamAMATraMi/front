@@ -1,9 +1,6 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ApprenantsService} from '../shared/services/apprenants.service';
 import {LoginService} from '../shared/services/login.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Formateur} from '../shared/interfaces/formateur';
 import {Utilisateur} from '../shared/interfaces/utilisateur';
 
 @Component({
@@ -16,7 +13,7 @@ export class LoginComponent implements OnInit, OnChanges {
   private _utilisateur: any = {};
   private readonly _form: FormGroup;
 
-  constructor(private _loginsService: LoginService, private _route: ActivatedRoute, private _router: Router) {
+  constructor(private _loginsService: LoginService) {
     this._form = this._buildForm();
   }
 

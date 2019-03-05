@@ -36,6 +36,8 @@ export class AppComponent implements OnInit {
             this._domSanitizer.bypassSecurityTrustResourceUrl('/assets/images/gender-male.svg'));
         this._matIconRegistry.addSvgIcon('phone',
             this._domSanitizer.bypassSecurityTrustResourceUrl('/assets/images/phone.svg'));
+        this._matIconRegistry.addSvgIcon('logo-login',
+            this._domSanitizer.bypassSecurityTrustResourceUrl('/assets/images/logo-login.svg'));
     }
 
 }
