@@ -20,7 +20,7 @@ import {ApprenantsService} from '../shared/services/apprenants.service';
 })
 export class CoursComponent implements OnInit {
 
-  private _displayedColumns = ['matiere', 'formateur', 'horaire', 'Delete'];
+  private _displayedColumns = ['matiere', 'formateur', 'horaire', 'DeleteEdit'];
 
   private _cours: Cours[];
   private _dialogStatus: string;
