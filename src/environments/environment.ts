@@ -15,7 +15,8 @@ export const environment = {
         apprenants: {
             allApprenants: '/api/apprenants',
             oneApprenant: '/api/apprenants/:id',
-            grpApprenant: '/api/apprenantsG/:idGroupe'
+            grpApprenant: '/api/apprenantsG/:idGroupe',
+            existApprenant: '/api/apprenantsExist/:nom/:prenom'
         },
         formateurs: {
             allFormateurs: '/api/formateurs',

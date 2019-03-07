@@ -10,6 +10,7 @@ import {Groupe} from '../../interfaces/groupe';
 import {FormateursService} from '../../services/formateurs.service';
 import {Formateur} from '../../interfaces/formateur';
 import {formatDate} from '@angular/common';
+import {ApprenantsService} from '../../services/apprenants.service';
 
 @Component({
   selector: 'app-apprenant-form',
@@ -37,7 +38,7 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
                                     'Contrat aidé', 'Autre'];
 
   constructor(private _associationsService: AssociationsService, private _quartiersService: QuartiersService,
-              private _groupesService: GroupesService, private _formateursService: FormateursService) {
+              private _groupesService: GroupesService, private _formateursService: FormateursService, private _apprenantsService: ApprenantsService) {
     this._submit$ = new EventEmitter<Apprenant>();
     this._cancel$ = new EventEmitter<void>();
     this._form = this._buildForm();
@@ -142,6 +143,14 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
 
   cancel() {
     this._cancel$.emit();
+  }
+
+  submitConfirmation(apprenant: Apprenant) {
+    if (!this._apprenantsService.exist(apprenant.nom, apprenant.prenom)) {
+      this.submit(apprenant);
+    } else {
+      confirm('Attention doublon !');
+    }
   }
 
   submit(apprenant: Apprenant) {

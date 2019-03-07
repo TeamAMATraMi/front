@@ -641,7 +641,11 @@
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Auteur du dossier" formControlName="auteurDossier" name="auteurDossier" required />
+                        <mat-select placeholder="Auteur du dossier" formControlName="auteurDossier" required>
+                            <mat-option *ngFor="let c of formateurs" [value]="c.id">
+                                {{ c.nom }}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </p>
                 <p>
@@ -731,5 +735,5 @@
 
 <mat-dialog-actions align="end">
     <button mat-button type="button" (click)="cancelConfirmation()">Cancel</button>
-    <button mat-button color="primary" type="submit" (click)="submit(form.value)" [disabled]="form.invalid">Save</button>
+    <button mat-button color="primary" type="submit" (click)="submitConfirmation(form.value)" [disabled]="form.invalid">Save</button>
 </mat-dialog-actions>
