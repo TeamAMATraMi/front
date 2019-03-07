@@ -24,16 +24,16 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   private readonly _submit$: EventEmitter<Apprenant>;
   private readonly _form: FormGroup;
 
-  private _situation: string[] = ['Marié(e)', 'Célibataire', 'Concubinage', 'Veuf(ve)', 'Divorcé(e]', 'Séparé(e)', 'Pacsé(e)'];
+  private _situation: string[] = ['Aucun', 'Marié(e)', 'Célibataire', 'Concubinage', 'Veuf(ve)', 'Divorcé(e]', 'Séparé(e)', 'Pacsé(e)'];
   private _associations: Association[];
   private _quartiersPrio: QuartierPrioritaire[];
   private _groupes: Groupe[];
   private _formateurs: Formateur[];
 
-  private _statutSejour: string[] = ['Régulier', 'Irrégulier', 'CEE', 'Demandeur d\'asile', 'Mineur non accompagné', 'Autre'];
-  private _statutPro: string[] = ['Salarié(e)', 'Femme au foyer', 'Demandeur d\'emploi inscrit à PE',
+  private _statutSejour: string[] = ['Aucun', 'Régulier', 'Irrégulier', 'CEE', 'Demandeur d\'asile', 'Mineur non accompagné', 'Autre'];
+  private _statutPro: string[] = ['Aucun', 'Salarié(e)', 'Femme au foyer', 'Demandeur d\'emploi inscrit à PE',
                                   'Demander d\'emploi non inscrit à PE', 'Retraité(e)', 'Autre'];
-  private _typeContrat: string[] = ['CDI', 'CDD', 'Apprentissage', 'IAE', 'Contrat de professionnalisation',
+  private _typeContrat: string[] = ['Aucun', 'CDI', 'CDD', 'Apprentissage', 'IAE', 'Contrat de professionnalisation',
                                     'Contrat aidé', 'Autre'];
 
   constructor(private _associationsService: AssociationsService, private _quartiersService: QuartiersService,

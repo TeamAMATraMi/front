@@ -60,6 +60,7 @@
         <p>
           <mat-form-field class="full-width">
                 <mat-select placeholder="Site" formControlName="idSite">
+                  <mat-option [value]="0">Aucun</mat-option>
                   <mat-option *ngFor="let s of sites" [value]="s.id">
                     {{s.ville}}
                   </mat-option>

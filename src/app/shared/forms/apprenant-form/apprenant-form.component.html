@@ -106,6 +106,7 @@
                 <p>
                     <mat-form-field>
                         <mat-select placeholder="Pays d'origine" formControlName="paysOrigine" required>
+                            <mat-option value="Non-renseigné">Non renseigné</mat-option>
                             <mat-option value="Afghanistan">Afghanistan </mat-option>
                             <mat-option value="Afrique_Centrale">Afrique Centrale </mat-option>
                             <mat-option value="Afrique_du_sud">Afrique du Sud </mat-option>
@@ -340,6 +341,7 @@
                 <p>
                 <mat-form-field>
                     <mat-select placeholder="Nationalité" formControlName="nationalite">
+                        <mat-option value="Non-renseigné">Non renseigné</mat-option>
                         <mat-option value="Afghane">Afghane (Afghanistan)</mat-option>
                         <mat-option value="Albanaise">Albanaise (Albanie)</mat-option>
                         <mat-option value="Algérienne">Algérienne (Algérie)</mat-option>
@@ -583,6 +585,7 @@
                 <p>
                     <mat-form-field>
                         <mat-select placeholder="Niveau de langue" formControlName="niveauLangue">
+                            <mat-option value="Aucun">Aucun</mat-option>
                             <mat-option value="C2">C2</mat-option>
                             <mat-option value="C1">C1</mat-option>
                             <mat-option value="B2">B2</mat-option>
@@ -629,6 +632,7 @@
                 <p>
                     <mat-form-field class="full-width">
                         <mat-select placeholder="Groupe" formControlName="idGroupe" required>
+                            <mat-option [value]="0">Aucun</mat-option>
                             <mat-option *ngFor="let c of groupes" [value]="c.id">
                                 {{ c.nom }}
                             </mat-option>
@@ -637,16 +641,13 @@
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <mat-select placeholder="Auteur du dossier" formControlName="auteurDossier" required>
-                            <mat-option *ngFor="let c of formateurs" [value]="c.id">
-                                {{ c.nom }}
-                            </mat-option>
-                        </mat-select>
+                        <input matInput placeholder="Auteur du dossier" formControlName="auteurDossier" name="auteurDossier" required />
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field>
                         <mat-select placeholder="Quartier prioritaire" formControlName="quartierPrioritaire">
+                            <mat-option [value]="0">Aucun</mat-option>
                             <mat-option *ngFor="let c of quartiersPrio" [value]="c.id">
                                 {{ c.nom }}
                             </mat-option>
@@ -656,6 +657,7 @@
                 <p>
                     <mat-form-field>
                         <mat-select placeholder="Prise en charge" formControlName="priseCharge">
+                            <mat-option [value]="0">Aucun</mat-option>
                             <mat-option *ngFor="let c of associations" [value]="c.id">
                                 {{ c.nom }}
                             </mat-option>
