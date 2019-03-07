@@ -15,10 +15,10 @@
     <mat-card-content>
       <mat-icon svgIcon="address" ></mat-icon>{{ formateur.adresse}} , {{ formateur.codePostal }}  {{ formateur.commune }}
     </mat-card-content>
-    <mat-card-content *ngIf="site.id !== 0">
+    <mat-card-content *ngIf="formateur.idSite !== 0">
       Site : {{ site.ville}}
     </mat-card-content>
-    <mat-card-content *ngIf="site.id === 0">
+    <mat-card-content *ngIf="formateur.idSite === 0">
       Site : Aucun
     </mat-card-content>
     <mat-card-content>
