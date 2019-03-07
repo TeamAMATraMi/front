@@ -6,7 +6,7 @@ import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
 import {filter, flatMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {MatDialog, MatDialogRef, MatPaginator, MatSort, MatTableDataSource, Sort} from '@angular/material';
+import {MatDialog, MatDialogRef, MatPaginator, MatSnackBar, MatSort, MatTableDataSource, Sort} from '@angular/material';
 import {Groupe} from '../shared/interfaces/groupe';
 import {GroupesService} from '../shared/services/groupes.service';
 import {FormateurDialogComponent} from '../shared/dialogs/formateur-dialog/formateur-dialog.component';
@@ -16,6 +16,7 @@ import {FormateurDialogComponent} from '../shared/dialogs/formateur-dialog/forma
   templateUrl: './formateurs.component.html',
   styleUrls: ['./formateurs.component.css']
 })
+
 export class FormateursComponent implements OnInit {
 
   private _displayedColumns = ['NomPrenom', 'Tel', 'Adresse', 'DeleteEdit'];
@@ -39,7 +40,7 @@ export class FormateursComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private _router: Router, private _formateursService: FormateursService, private _sitesService: SitesService,
-              private _dialog: MatDialog, private _groupesService: GroupesService) {
+              private _dialog: MatDialog, private _groupesService: GroupesService, private snackBar: MatSnackBar) {
     this._formateurs = [];
     this._formateursTemp = [];
     this._sites = [];
@@ -50,11 +51,12 @@ export class FormateursComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._formateursService.fetch().subscribe(_formateur => {
-      this._dataSource = new MatTableDataSource<Formateur>(_formateur);
-      this._formateurs = _formateur;
-      this._formateursTemp = _formateur;
+    this._formateursService.fetch().subscribe(formateurs => {
+      this._dataSource = new MatTableDataSource<Formateur>(formateurs);
+      this._formateurs = formateurs;
+      this._formateursTemp = formateurs;
       this._dataSource.paginator = this.paginator;
+      this._dataSource.sort = this.sort;
       this._dataSource.filterPredicate = (data: {nom: string, prenom: string}, filterValue: string) => {
         if ((data.nom.trim().toLowerCase().indexOf(filterValue) !== -1) || (data.prenom.trim().toLowerCase().indexOf(filterValue) !== -1)) {
           return true;
@@ -62,7 +64,6 @@ export class FormateursComponent implements OnInit {
           return false;
         }
       };
-      this._dataSource.sort = this.sort;
     });
     this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => { this._groupes = groupes; this._groupesSite = this._groupes; });
@@ -134,6 +135,7 @@ export class FormateursComponent implements OnInit {
         .subscribe(
             (formateurs: Formateur[]) => {
               this._formateurs = formateurs;
+              this._dataSource = new MatTableDataSource<Formateur>(this._formateurs);
               this._dataSource.paginator = this.paginator;
             },
             _ => this._dialogStatus = 'inactive',
@@ -150,6 +152,7 @@ export class FormateursComponent implements OnInit {
   }
 
   private _add(formateur: Formateur): Observable<Formateur[]> {
+    this.addOpenSnackBar();
     return this._formateursService
         .create(formateur)
         .pipe(
@@ -185,6 +188,7 @@ export class FormateursComponent implements OnInit {
   deleteConfirmation(id: number) {
     if (confirm('Voulez vous vraiment supprimer ce formateur ?')) {
       this.delete(id);
+      this.deleteOpenSnackBar();
     }
   }
 
@@ -209,6 +213,18 @@ export class FormateursComponent implements OnInit {
         case 'NomPrenom': return compare(a.nom, b.nom, isAsc);
         default: return 0;
       }
+    });
+  }
+
+  addOpenSnackBar() {
+    this.snackBar.open('successfully added', 'OK', {
+      duration: 3000
+    });
+  }
+
+  deleteOpenSnackBar() {
+    this.snackBar.open('successfully deleted', 'OK', {
+      duration: 3000
     });
   }
 

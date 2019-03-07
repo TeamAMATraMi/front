@@ -9,22 +9,21 @@ import {DialogComponent} from './shared/dialogs/apprenant-dialog/dialog.componen
 import { ChartsModule } from 'ng2-charts';
 
 import {
-    MatButtonModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatDialogModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatSelectModule,
-    MatExpansionModule,
-    MatRadioModule,
-    MatFormFieldModule,
-    MatTableDataSource,
-    MatTableModule,
-    MatPaginatorModule, MatSortModule, MatTabsModule, MatDividerModule, MatGridListModule
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatToolbarModule,
+  MatMenuModule,
+  MatSelectModule,
+  MatExpansionModule,
+  MatRadioModule,
+  MatFormFieldModule,
+  MatTableModule,
+  MatPaginatorModule, MatSortModule, MatTabsModule, MatGridListModule, MatSnackBarModule
 } from '@angular/material';
 import {SitesComponent} from './sites/sites.component';
 import {ApprenantsComponent} from './apprenants/apprenants.component';
@@ -149,7 +148,8 @@ import {ErrorInterceptor} from './shared/interceptors/error.interceptor';
         MatTableModule,
         MatTabsModule,
         MatGridListModule,
-        ChartsModule
+        ChartsModule,
+        MatSnackBarModule
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
