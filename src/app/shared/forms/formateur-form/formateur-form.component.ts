@@ -55,6 +55,12 @@ export class FormateurFormComponent implements OnInit, OnChanges {
     this._formateur = value;
   }
 
+  cancelConfirmation() {
+    if (confirm('Voulez vous vraiment annuler l\'ajout ?')) {
+      this.cancel();
+    }
+  }
+
   cancel() {
     this._cancel$.emit();
   }
