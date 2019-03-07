@@ -134,6 +134,12 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
     }
   }
 
+  cancelConfirmation() {
+    if (confirm('Voulez vous vraiment annuler l\'ajout ?')) {
+      this.cancel();
+    }
+  }
+
   cancel() {
     this._cancel$.emit();
   }
