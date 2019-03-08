@@ -53,6 +53,8 @@ export class LoginService {
 
   logout() {
     localStorage.removeItem('currentUtilisateur');
+    this._router.navigate(['/']);
+
   }
 
 }
