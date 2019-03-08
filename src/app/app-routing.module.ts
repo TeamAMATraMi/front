@@ -20,6 +20,7 @@ import {UpdatePresenceComponent} from './update/update-presence/update-presence.
 import {AuthGuard} from './guard/auth.guard';
 import {PresenceComponent} from './presence/presence.component';
 import {PresencesComponent} from './presences/presences.component';
+import {LogoutComponent} from './logout/logout.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', canActivate: [AuthGuard], pathMatch: 'full'},
@@ -46,6 +47,8 @@ const routes: Routes = [
     { path: 'statistiques', component: StatistiquesComponent, canActivate: [AuthGuard]},
     { path: 'presences', component: PresencesComponent, canActivate: [AuthGuard]},
     { path: 'presence/:id', component: PresenceComponent, canActivate: [AuthGuard]},
+    { path: 'logout', component: LogoutComponent }
+
 ];
 
 @NgModule({
