@@ -31,6 +31,14 @@ export class LoginService {
     return this._currentUtilisateur;
   }
 
+  public currentUtilisateurFromStorage(): string {
+    return localStorage.getItem('currentUtilisateur');
+  }
+
+  public is_logged(): boolean {
+    return !!this.currentUtilisateurFromStorage();
+  }
+
 
   login(utilisateur: Utilisateur) {
     this._http.post(this._backendURL.login, utilisateur, {responseType: 'text'})
