@@ -5,7 +5,7 @@ import {Cours} from '../shared/interfaces/cours';
 import {Observable} from 'rxjs';
 import {filter, flatMap} from 'rxjs/operators';
 import {Formateur} from '../shared/interfaces/formateur';
-import {MatDialog, MatDialogRef, MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatDialogRef, MatPaginator, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {CoursDialogComponent} from '../shared/dialogs/cours-dialog/cours-dialog.component';
 import {FormateursService} from '../shared/services/formateurs.service';
 import {GroupesService} from '../shared/services/groupes.service';
@@ -36,7 +36,7 @@ export class CoursComponent implements OnInit {
 
   constructor(private _router: Router, private _coursService: CoursService, private _formateursService: FormateursService,
               private _groupesService: GroupesService, private _presencesService: PresencesService,
-              private _apprenantsService: ApprenantsService, private _dialog: MatDialog) {
+              private _apprenantsService: ApprenantsService, private _dialog: MatDialog, private snackBar: MatSnackBar) {
     this._cours = [];
     this._formateurs = [];
     this._dialogStatus = 'inactive';
@@ -87,6 +87,7 @@ export class CoursComponent implements OnInit {
   }
 
   private _add(cours: Cours): Observable<Cours[]> {
+    this.addOpenSnackBar();
     return this._coursService
       .create(cours)
       .pipe(
@@ -168,6 +169,19 @@ export class CoursComponent implements OnInit {
   deleteConfirmation(id: number) {
     if (confirm('Voulez vous vraiment supprimer ce cours ?')) {
       this.delete(id);
+      this.deleteOpenSnackBar();
     }
+  }
+
+  addOpenSnackBar() {
+    this.snackBar.open('successfully added', 'OK', {
+      duration: 3000
+    });
+  }
+
+  deleteOpenSnackBar() {
+    this.snackBar.open('successfully deleted', 'OK', {
+      duration: 3000
+    });
   }
 }

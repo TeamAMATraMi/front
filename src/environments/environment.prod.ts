@@ -18,7 +18,8 @@ export const environment = {
             formateurs: {
                 allFormateurs: '/api/formateurs',
                 oneFormateur: '/api/formateurs/:id',
-                siteFormateur: '/api/formateursSite/:id'
+                siteFormateur: '/api/formateursSite/:id',
+                existFormateur: '/api/formateursExist/:nom/:prenom'
             },
             cours: {
                 allCours: '/api/cours',

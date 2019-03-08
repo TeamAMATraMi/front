@@ -1,14 +1,12 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {Apprenant} from '../../interfaces/apprenant';
-import {Form, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AssociationsService} from '../../services/associations.service';
 import {Association} from '../../interfaces/association';
 import {QuartierPrioritaire} from '../../interfaces/quartier_prioritaire';
 import {QuartiersService} from '../../services/quartiers.service';
 import {GroupesService} from '../../services/groupes.service';
 import {Groupe} from '../../interfaces/groupe';
-import {FormateursService} from '../../services/formateurs.service';
-import {Formateur} from '../../interfaces/formateur';
 import {formatDate} from '@angular/common';
 import {ApprenantsService} from '../../services/apprenants.service';
 
@@ -20,6 +18,7 @@ import {ApprenantsService} from '../../services/apprenants.service';
 export class ApprenantFormComponent implements OnInit, OnChanges {
 
   private _isUpdateMode: boolean;
+  private exist: boolean;
   private _apprenant: Apprenant;
   private readonly _cancel$: EventEmitter<void>;
   private readonly _submit$: EventEmitter<Apprenant>;
@@ -29,7 +28,6 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   private _associations: Association[];
   private _quartiersPrio: QuartierPrioritaire[];
   private _groupes: Groupe[];
-  private _formateurs: Formateur[];
 
   private _statutSejour: string[] = ['Aucun', 'Régulier', 'Irrégulier', 'CEE', 'Demandeur d\'asile', 'Mineur non accompagné', 'Autre'];
   private _statutPro: string[] = ['Aucun', 'Salarié(e)', 'Femme au foyer', 'Demandeur d\'emploi inscrit à PE',
@@ -38,14 +36,13 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
                                     'Contrat aidé', 'Autre'];
 
   constructor(private _associationsService: AssociationsService, private _quartiersService: QuartiersService,
-              private _groupesService: GroupesService, private _formateursService: FormateursService, private _apprenantsService: ApprenantsService) {
+              private _groupesService: GroupesService, private _apprenantsService: ApprenantsService) {
     this._submit$ = new EventEmitter<Apprenant>();
     this._cancel$ = new EventEmitter<void>();
     this._form = this._buildForm();
     this._associations = [];
     this._quartiersPrio = [];
     this._groupes = [];
-    this._formateurs = [];
   }
 
   @Input()
@@ -79,7 +76,6 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
     this._associationsService.fetch().subscribe((associations: Association[]) => this._associations = associations);
     this._quartiersService.fetch().subscribe((quartiers: QuartierPrioritaire[]) => this._quartiersPrio = quartiers);
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => this._groupes = groupes);
-    this._formateursService.fetch().subscribe((formateurs: Formateur[]) => this._formateurs = formateurs);
   }
 
   ngOnChanges(record) {
@@ -146,11 +142,14 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   }
 
   submitConfirmation(apprenant: Apprenant) {
-    if (!this._apprenantsService.exist(apprenant.nom, apprenant.prenom)) {
-      this.submit(apprenant);
-    } else {
-      confirm('Attention doublon !');
-    }
+    this._apprenantsService.exist(apprenant.nom, apprenant.prenom).subscribe((res: boolean) => {
+      this.exist = res;
+      if (!this.exist) {
+        this.submit(apprenant);
+      } else {
+        confirm('Attention doublon !');
+      }
+    });
   }
 
   submit(apprenant: Apprenant) {
@@ -254,10 +253,6 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
 
   get groupes(): Groupe[] {
     return this._groupes;
-  }
-
-  get formateurs(): Formateur[] {
-    return this._formateurs;
   }
 
   get statutSejour(): string[] {

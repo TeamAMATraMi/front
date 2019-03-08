@@ -641,11 +641,7 @@
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <mat-select placeholder="Auteur du dossier" formControlName="auteurDossier" required>
-                            <mat-option *ngFor="let c of formateurs" [value]="c.id">
-                                {{ c.nom }}
-                            </mat-option>
-                        </mat-select>
+                        <input matInput placeholder="Auteur du dossier" formControlName="auteurDossier" required />
                     </mat-form-field>
                 </p>
                 <p>
