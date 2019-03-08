@@ -43,8 +43,8 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'updatePresence/:id/:date', component: UpdatePresenceComponent, canActivate: [AuthGuard] },
     { path: 'statistiques', component: StatistiquesComponent, canActivate: [AuthGuard]},
-    { path: 'presences', component: PresencesComponent},
-    { path: 'presence/:id', component: PresenceComponent},
+    { path: 'presences', component: PresencesComponent, canActivate: [AuthGuard]},
+    { path: 'presence/:id', component: PresenceComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
