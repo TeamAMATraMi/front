@@ -24,6 +24,7 @@ mat-list-item:hover {
 mat-card {
     height: 400px;
     width: 400px;
+    background-color: #DEDEDE;
 }
 
 mat-card-content {
@@ -33,4 +34,13 @@ mat-card-content {
 
 table {
     width: 100%;
+}
+
+mat-grid-tile {
+    background-color: #DEDEDE;
+}
+
+div {
+    width: 100%;
+    height: 70%;
 }

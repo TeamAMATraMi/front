@@ -1,43 +1,23 @@
-<mat-toolbar>
-  <mat-toolbar-row>
-    <span>Statistiques</span>
-    <span class="flex"></span>
-    <span>Site : </span>
-    <button mat-button [matMenuTriggerFor]="menuSite">Menu</button>
-    <mat-menu #menuSite="matMenu">
-      <button mat-menu-item>Item 1</button>
-      <button mat-menu-item>Item 2</button>
-    </mat-menu>
-    <span class="flex"></span>
-  </mat-toolbar-row>
-</mat-toolbar>
-
 <br/><br/><br/>
+<mat-tab-group>
 
-<mat-grid-list cols="2" rowHeight="1:1">
-  <mat-grid-tile>
-    <mat-card>
-      <mat-card-title>Répartition hommes/femmes</mat-card-title>
-      <mat-card-content>
+  <mat-tab label="Tous les sites">
+    <mat-grid-list cols="3" rowHeight="5:4">
+      <mat-grid-tile>
+        <mat-grid-tile-header>Répartition hommes / femmes</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [datasets]="sexeData"
+                  [data]="sexeData"
                   [labels]="sexeLabels"
-                  [options]="barChartOptions"
-                  [legend]=false
-                  [chartType]="bar"
+                  [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
+      </mat-grid-tile>
 
-  <mat-grid-tile>
-    <mat-card>
-      <mat-card-title>Répartition par âge</mat-card-title>
-      <mat-card-content>
+      <mat-grid-tile>
+        <mat-grid-tile-header>Répartition par âge</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
                   [data]="ageData"
@@ -47,14 +27,10 @@
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
+      </mat-grid-tile>
 
-  <mat-grid-tile>
-    <mat-card>
-      <mat-card-title>Répartition par nationalité</mat-card-title>
-      <mat-card-content>
+      <mat-grid-tile>
+        <mat-grid-tile-header>Répartition par nationalité</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
                   [data]="nationaliteData"
@@ -64,14 +40,10 @@
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
+      </mat-grid-tile>
 
-  <mat-grid-tile>
-    <mat-card>
-      <mat-card-title>Répartition par nationalité</mat-card-title>
-      <mat-card-content>
+      <mat-grid-tile>
+        <mat-grid-tile-header>Répartition par site</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
                   [data]="siteData"
@@ -81,14 +53,10 @@
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
+      </mat-grid-tile>
 
-  <mat-grid-tile>
-    <mat-card>
-      <mat-card-title>Répartition par titre de séjour</mat-card-title>
-      <mat-card-content>
+      <mat-grid-tile>
+        <mat-grid-tile-header>Répartition par titre de séjour</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
                   [data]="sejourData"
@@ -98,14 +66,10 @@
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
+      </mat-grid-tile>
 
-  <mat-grid-tile>
-    <mat-card>
-      <mat-card-title>Répartition par niveau de langue</mat-card-title>
-      <mat-card-content>
+      <mat-grid-tile>
+        <mat-grid-tile-header>Répartition par niveau de langue</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
                   [data]="niveauLangueData"
@@ -115,14 +79,10 @@
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
+      </mat-grid-tile>
 
-  <mat-grid-tile>
-    <mat-card>
-      <mat-card-title>Répartition par niveau de scolarisation</mat-card-title>
-      <mat-card-content>
+      <mat-grid-tile>
+        <mat-grid-tile-header>Répartition par niveau de scolarisation</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
                   [data]="niveauScolData"
@@ -132,14 +92,10 @@
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
+      </mat-grid-tile>
 
-  <mat-grid-tile>
-    <mat-card>
-      <mat-card-title>Répartition par quartier prioritaire</mat-card-title>
-      <mat-card-content>
+      <mat-grid-tile>
+        <mat-grid-tile-header>Répartition par quartier prioritaire</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
                   [data]="quartierPrioData"
@@ -149,8 +105,103 @@
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-tab>
+  <mat-tab *ngFor="let site of getSites()" label="{{site.ville}}">
+    <mat-grid-list cols="3" rowHeight="5:4">
+      <mat-grid-tile>
+        <mat-grid-tile-header>Répartition hommes / femmes</mat-grid-tile-header>
+        <div style="display: block">
+          <canvas baseChart
+                  [data]="sexeData"
+                  [labels]="sexeLabels"
+                  [chartType]="doughnut"
+                  [colors]="chartColors"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-grid-tile-header>Répartition par âge</mat-grid-tile-header>
+        <div style="display: block">
+          <canvas baseChart
+                  [data]="ageData"
+                  [labels]="ageLabels"
+                  [chartType]="doughnut"
+                  [colors]="chartColors"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-grid-tile-header>Répartition par nationalité</mat-grid-tile-header>
+        <div style="display: block">
+          <canvas baseChart
+                  [data]="nationaliteData"
+                  [labels]="nationaliteLabels"
+                  [chartType]="doughnut"
+                  [colors]="chartColors"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-grid-tile-header>Répartition par titre de séjour</mat-grid-tile-header>
+        <div style="display: block">
+          <canvas baseChart
+                  [data]="sejourData"
+                  [labels]="sejourLabels"
+                  [chartType]="doughnut"
+                  [colors]="chartColors"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-grid-tile-header>Répartition par niveau de langue</mat-grid-tile-header>
+        <div style="display: block">
+          <canvas baseChart
+                  [data]="niveauLangueData"
+                  [labels]="niveauLangueLabels"
+                  [chartType]="doughnut"
+                  [colors]="chartColors"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-grid-tile-header>Répartition par niveau de scolarisation</mat-grid-tile-header>
+        <div style="display: block">
+          <canvas baseChart
+                  [data]="niveauScolData"
+                  [labels]="niveauScolLabels"
+                  [chartType]="doughnut"
+                  [colors]="chartColors"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-grid-tile-header>Répartition par quartier prioritaire</mat-grid-tile-header>
+        <div style="display: block">
+          <canvas baseChart
+                  [data]="quartierPrioData"
+                  [labels]="quartierPrioLabels"
+                  [chartType]="doughnut"
+                  [colors]="chartColors"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-tab>
+</mat-tab-group>
+
 
