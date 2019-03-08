@@ -142,14 +142,14 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   }
 
   submitConfirmation(apprenant: Apprenant) {
-    this._apprenantsService.exist(apprenant.nom, apprenant.prenom).subscribe((res: boolean) => this.exist = res);
-    console.log('AAAAAAAAAAAAAAAAAAAAAAAA ' + this.exist);
-
-    if (!this.exist) {
-      this.submit(apprenant);
-    } else {
-      confirm('Attention doublon !');
-    }
+    this._apprenantsService.exist(apprenant.nom, apprenant.prenom).subscribe((res: boolean) => {
+      this.exist = res;
+      if (!this.exist) {
+        this.submit(apprenant);
+      } else {
+        confirm('Attention doublon !');
+      }
+    });
   }
 
   submit(apprenant: Apprenant) {
