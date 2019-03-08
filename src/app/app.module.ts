@@ -70,6 +70,7 @@ import {PresenceDialogComponent} from './shared/dialogs/presence-dialog/presence
 import {UpdatePresenceComponent} from './update/update-presence/update-presence.component';
 import {JwtInterceptor} from './shared/interceptors/jwt.interceptor';
 import {ErrorInterceptor} from './shared/interceptors/error.interceptor';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
     declarations: [
@@ -113,7 +114,8 @@ import {ErrorInterceptor} from './shared/interceptors/error.interceptor';
         PresencesComponent,
         PresenceFormComponent,
         PresenceDialogComponent,
-        UpdatePresenceComponent
+        UpdatePresenceComponent,
+        LogoutComponent
     ],
     entryComponents: [
         DialogComponent,

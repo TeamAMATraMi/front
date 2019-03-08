@@ -10,5 +10,12 @@
     <a [routerLink]="['/sites']">Sites</a>
     <a [routerLink]="['/groupes']">Groupes</a>
     <a [routerLink]="['/statistiques']">Statistiques</a>
+    <a  [routerLink]="['/logout']">
+      <button mat-button >
+        <mat-icon [ngStyle]="{'color':'white'}" svgIcon="logo-logout"></mat-icon>
+      </button>
+      Se Déconnecter
+    </a>
+
   </span>
 </mat-toolbar>

@@ -2,6 +2,8 @@ import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {LoginService} from '../shared/services/login.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Utilisateur} from '../shared/interfaces/utilisateur';
+import {filter, flatMap} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +14,15 @@ export class LoginComponent implements OnInit, OnChanges {
 
   private _utilisateur: any = {};
   private readonly _form: FormGroup;
+  private _error: boolean;
 
-  constructor(private _loginsService: LoginService) {
+  constructor(private _loginsService: LoginService, private _route: ActivatedRoute) {
     this._form = this._buildForm();
+    this._error = false;
+  }
+
+  get error(): boolean {
+    return this._error;
   }
 
   get form(): FormGroup {
@@ -37,6 +45,10 @@ export class LoginComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this._route.params.pipe(
+        filter(params => !!params['error'])
+    )
+        .subscribe((_) => this._error = true);
   }
 
   ngOnChanges(record) {
