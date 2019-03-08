@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {Groupe} from '../shared/interfaces/groupe';
 import {GroupesService} from '../shared/services/groupes.service';
 import {filter, flatMap} from 'rxjs/operators';
-import {MatDialog, MatDialogRef, MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatDialogRef, MatPaginator, MatSnackBar, MatTableDataSource} from '@angular/material';
 import {Observable} from 'rxjs';
 import {GroupeDialogComponent} from '../shared/dialogs/groupe-dialog/groupe-dialog.component';
 import {Site} from '../shared/interfaces/site';
@@ -30,7 +30,7 @@ export class GroupesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private _router: Router, private _groupesService: GroupesService,
-              private _dialog: MatDialog, private _sitesService: SitesService) {
+              private _dialog: MatDialog, private _sitesService: SitesService, private snackBar: MatSnackBar) {
     this._groupes = [];
     this._groupesTemp = [];
     this._dialogStatus = 'inactive';
@@ -100,6 +100,7 @@ export class GroupesComponent implements OnInit {
   }
 
   private _add(groupe: Groupe): Observable<Groupe[]> {
+    this.addOpenSnackBar();
     return this._groupesService
         .create(groupe)
         .pipe(
@@ -156,6 +157,7 @@ export class GroupesComponent implements OnInit {
   deleteConfirmation(id: number) {
     if (confirm('Voulez vous vraiment supprimer ce groupe ?')) {
       this.delete(id);
+      this.deleteOpenSnackBar();
     }
   }
 
@@ -165,5 +167,17 @@ export class GroupesComponent implements OnInit {
 
   set selectedSiteId(value: number | string) {
     this._selectedSiteId = value;
+  }
+
+  addOpenSnackBar() {
+    this.snackBar.open('successfully added', 'OK', {
+      duration: 3000
+    });
+  }
+
+  deleteOpenSnackBar() {
+    this.snackBar.open('successfully deleted', 'OK', {
+      duration: 3000
+    });
   }
 }
