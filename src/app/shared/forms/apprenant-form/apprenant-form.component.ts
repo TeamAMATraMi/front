@@ -20,6 +20,7 @@ import {ApprenantsService} from '../../services/apprenants.service';
 export class ApprenantFormComponent implements OnInit, OnChanges {
 
   private _isUpdateMode: boolean;
+  private exist: boolean;
   private _apprenant: Apprenant;
   private readonly _cancel$: EventEmitter<void>;
   private readonly _submit$: EventEmitter<Apprenant>;
@@ -38,7 +39,8 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
                                     'Contrat aidé', 'Autre'];
 
   constructor(private _associationsService: AssociationsService, private _quartiersService: QuartiersService,
-              private _groupesService: GroupesService, private _formateursService: FormateursService, private _apprenantsService: ApprenantsService) {
+              private _groupesService: GroupesService, private _formateursService: FormateursService,
+              private _apprenantsService: ApprenantsService) {
     this._submit$ = new EventEmitter<Apprenant>();
     this._cancel$ = new EventEmitter<void>();
     this._form = this._buildForm();
@@ -146,7 +148,10 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   }
 
   submitConfirmation(apprenant: Apprenant) {
-    if (!this._apprenantsService.exist(apprenant.nom, apprenant.prenom)) {
+    this._apprenantsService.exist(apprenant.nom, apprenant.prenom).subscribe((res: boolean) => this.exist = res);
+    console.log('AAAAAAAAAAAAAAAAAAAAAAAA ' + this.exist);
+
+    if (!this.exist) {
       this.submit(apprenant);
     } else {
       confirm('Attention doublon !');

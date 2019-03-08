@@ -58,11 +58,7 @@ export class ApprenantsService {
      * Function to return if an apprenant exist
      */
     exist(nom: string, prenom: string): Observable<boolean> {
-        return this._http.get<boolean>(this._backendURL.existApprenant.replace(':nom', nom).replace( ':prenom', prenom))
-            .pipe(
-                filter(_ => !!_),
-                defaultIfEmpty(false)
-            );
+        return this._http.get<boolean>(this._backendURL.existApprenant.replace(':nom', nom).replace( ':prenom', prenom));
     }
 
     /**
