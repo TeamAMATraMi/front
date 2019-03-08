@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit, OnChanges {
   private _utilisateur: any = {};
   private readonly _form: FormGroup;
   private _error: boolean;
+  hide = true;
 
   constructor(private _loginsService: LoginService, private _route: ActivatedRoute) {
     this._form = this._buildForm();
