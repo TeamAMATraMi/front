@@ -13,6 +13,8 @@
       <input matInput placeholder="Mot de passe" type="password" formControlName="password">
     </mat-form-field>
 
+    <mat-error *ngIf="error">Erreur : Identifiant ou mot de passe incorrect.</mat-error>
+
     <mat-card-actions>
       <button class="fixedWidth" id="submitButton" color="accent" mat-button type="submit" (click)="submit(form.value)" [disabled]="form.invalid">Connexion</button>
     </mat-card-actions>
