@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Formateur} from '../../interfaces/formateur';
 import {SitesService} from '../../services/sites.service';
 import {Site} from '../../interfaces/site';
+import {FormateursService} from '../../services/formateurs.service';
 
 @Component({
   selector: 'app-formateur-form',
@@ -18,7 +19,9 @@ export class FormateurFormComponent implements OnInit, OnChanges {
   private readonly _submit$: EventEmitter<Formateur>;
   private readonly _form: FormGroup;
 
-  constructor(private _sitesService: SitesService) {
+  private exist: boolean;
+
+  constructor(private _sitesService: SitesService, private _formateursService: FormateursService) {
     this._submit$ = new EventEmitter<Formateur>();
     this._cancel$ = new EventEmitter<void>();
     this._form = this._buildForm();
@@ -59,6 +62,17 @@ export class FormateurFormComponent implements OnInit, OnChanges {
     if (confirm('Voulez vous vraiment annuler l\'ajout ?')) {
       this.cancel();
     }
+  }
+
+  submitConfirmation(formateur: Formateur) {
+    this._formateursService.exist(formateur.nom, formateur.prenom).subscribe((res: boolean) => {
+      this.exist = res;
+      if (!this.exist) {
+        this.submit(formateur);
+      } else {
+        confirm('Attention doublon !');
+      }
+    });
   }
 
   cancel() {

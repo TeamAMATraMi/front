@@ -52,6 +52,13 @@ export class FormateursService {
     }
 
     /**
+     * Function to return if a formateur exist
+     */
+    exist(nom: string, prenom: string): Observable<boolean> {
+        return this._http.get<boolean>(this._backendURL.existFormateur.replace(':nom', nom).replace( ':prenom', prenom));
+    }
+
+    /**
      * Function to create a new Apprenant
      */
     create(formateur: Formateur): Observable<any> {
