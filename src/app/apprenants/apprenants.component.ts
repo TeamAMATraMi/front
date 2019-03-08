@@ -7,7 +7,7 @@ import {SitesService} from '../shared/services/sites.service';
 import {GroupesService} from '../shared/services/groupes.service';
 import {Groupe} from '../shared/interfaces/groupe';
 import {DialogComponent} from '../shared/dialogs/apprenant-dialog/dialog.component';
-import {MatDialog, MatDialogRef, MatPaginator, MatSort, MatTableDataSource, Sort} from '@angular/material';
+import {MatDialog, MatDialogRef, MatPaginator, MatSnackBar, MatSort, MatTableDataSource, Sort} from '@angular/material';
 import {filter, flatMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
@@ -40,7 +40,7 @@ export class ApprenantsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private _router: Router, private _apprenantsService: ApprenantsService, private _sitesService: SitesService,
-              private _groupesService: GroupesService, private _dialog: MatDialog) {
+              private _groupesService: GroupesService, private _dialog: MatDialog, private snackBar: MatSnackBar) {
     this._apprenants = [];
     this._apprenantsTemp = [];
     this._sites = [];
@@ -189,6 +189,7 @@ export class ApprenantsComponent implements OnInit {
   }
 
   private _add(apprenant: Apprenant): Observable<Apprenant[]> {
+    this.addOpenSnackBar();
     return this._apprenantsService
         .create(apprenant)
         .pipe(
@@ -229,6 +230,7 @@ export class ApprenantsComponent implements OnInit {
   deleteConfirmation(id: number) {
     if (confirm('Voulez vous vraiment supprimer cet apprenant ?')) {
       this.delete(id);
+      this.deleteOpenSnackBar();
     }
   }
   sortData(sort: Sort) {
@@ -244,6 +246,18 @@ export class ApprenantsComponent implements OnInit {
         case 'PaysOrigine': return compare(a.paysOrigine, b.paysOrigine, isAsc);
         default: return 0;
       }
+    });
+  }
+
+  addOpenSnackBar() {
+    this.snackBar.open('successfully added', 'OK', {
+      duration: 3000
+    });
+  }
+
+  deleteOpenSnackBar() {
+    this.snackBar.open('successfully deleted', 'OK', {
+      duration: 3000
     });
   }
 
