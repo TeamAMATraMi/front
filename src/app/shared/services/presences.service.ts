@@ -4,6 +4,7 @@ import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
 import {defaultIfEmpty, filter, map} from 'rxjs/operators';
 import {Presence} from '../interfaces/presence';
+import {Apprenant} from '../interfaces/apprenant';
 
 @Injectable({
   providedIn: 'root'
@@ -80,16 +81,8 @@ export class PresencesService {
   }
 
 
-  update(presences: Presence[]): Observable<any> {
-      for (let i = 0; i < presences.length - 1 ; i++) {
-          this.updateOne(<Presence> (presences[i]));
-      }
-
-    return this.updateOne(<Presence>(presences[(presences.length) - 1]));
-  }
-
-  private updateOne(presence: Presence): Observable<any> {
-      return this._http.put<Presence>(this._backendURL.allPresences, presence, this._options());
+  update(presence: Presence): Observable<any> {
+    return this._http.put<Presence>(this._backendURL.allPresences, presence, this._options());
   }
 
   /**

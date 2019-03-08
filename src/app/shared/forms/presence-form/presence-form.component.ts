@@ -17,11 +17,11 @@ export class PresenceFormComponent implements OnInit, OnChanges {
   private _presences: Presence[];
   private _cours: Cours;
   private readonly _cancel$: EventEmitter<void>;
-  private readonly _submit$: EventEmitter<Presence[]>;
+  private readonly _submit$: EventEmitter<Presence>;
   private readonly _form: FormGroup;
 
   constructor(private _presencesService: PresencesService, private _route: ActivatedRoute) {
-    this._submit$ = new EventEmitter<Presence[]>();
+    this._submit$ = new EventEmitter<Presence>();
     this._cancel$ = new EventEmitter<void>();
     this._form = this._buildForm();
     this._presences = [];
@@ -64,8 +64,8 @@ export class PresenceFormComponent implements OnInit, OnChanges {
     this._cancel$.emit();
   }
 
-  submit(presences: Presence[]) {
-    this._submit$.emit(presences);
+  submit(presence: Presence) {
+    this._submit$.emit(presence);
   }
 
   @Output('cancel')
@@ -74,7 +74,7 @@ export class PresenceFormComponent implements OnInit, OnChanges {
   }
 
   @Output('submit')
-  get submit$(): EventEmitter<Presence[]> {
+  get submit$(): EventEmitter<Presence> {
     return this._submit$;
   }
 
@@ -94,4 +94,5 @@ export class PresenceFormComponent implements OnInit, OnChanges {
       this._form.patchValue(this._presences);
     }
   }
+
 }
