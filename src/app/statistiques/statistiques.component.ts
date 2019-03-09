@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {StatistiquesService} from '../shared/services/statistiques.service';
 import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
+import * as jsPDF from 'jspdf';
+import * as html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-statistiques',
@@ -29,6 +31,7 @@ export class StatistiquesComponent implements OnInit {
   public quartierPrioData: number[] = [];
   public bar = 'bar';
   public doughnut = 'doughnut';
+  @ViewChild('content') content: ElementRef;
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
     responsive: false
@@ -117,4 +120,12 @@ export class StatistiquesComponent implements OnInit {
     return this._sites;
   }
 
+  makePdf() {
+    html2canvas(document.getElementById('content')).then(function(canvas) {
+      const img = canvas.toDataURL('image/png');
+      const doc = new jsPDF('landscape', '', 'a3');
+      doc.addImage(img, 'JPEG', 40, 10);
+      doc.save('testCanvas.pdf');
+    });
+  }
 }

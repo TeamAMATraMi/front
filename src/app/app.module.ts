@@ -72,6 +72,7 @@ import {JwtInterceptor} from './shared/interceptors/jwt.interceptor';
 import {ErrorInterceptor} from './shared/interceptors/error.interceptor';
 import { LogoutComponent } from './logout/logout.component';
 
+
 @NgModule({
     declarations: [
         AppComponent,
