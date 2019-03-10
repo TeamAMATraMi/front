@@ -106,6 +106,13 @@ export class GroupeComponent implements OnInit {
       }
     });
   }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this._dataSource.filter = filterValue;
+    this._dataSource.paginator.firstPage();
+  }
 }
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {

@@ -1,3 +1,19 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span>Apprenants</span>
+    <span class="flex"></span>
+
+    <span class="flex"></span>
+    <span>
+          <mat-form-field>
+              <mat-icon matPrefix></mat-icon>
+              <input matInput (input)="applyFilter($event.target.value) "placeholder="Chercher">
+          </mat-form-field>
+      </span>
+
+  </mat-toolbar-row>
+</mat-toolbar>
+
 <section>
   <div class="mat-elevation-z8">
     <mat-table [dataSource]="dataSource" (matSortChange)="sortData($event)" matSort>
