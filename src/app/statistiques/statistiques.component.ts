@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 import {StatistiquesService} from '../shared/services/statistiques.service';
 import {Site} from '../shared/interfaces/site';
@@ -9,7 +9,8 @@ import * as html2canvas from 'html2canvas';
 @Component({
   selector: 'app-statistiques',
   templateUrl: './statistiques.component.html',
-  styleUrls: ['./statistiques.component.css']
+  styleUrls: ['./statistiques.component.css'],
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class StatistiquesComponent implements OnInit {
 
