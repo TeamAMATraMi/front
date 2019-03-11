@@ -18,19 +18,18 @@ export class StatistiquesComponent implements OnInit {
 
   constructor(private _statistiquesService: StatistiquesService, private _sitesService: SitesService, private _router: Router) {}
 
-  public sexeLabels: Map<string, string[]> = new Map();
+  private _sexeLabels: Map<string, string[]> = new Map();
   private _sexeData: Map<string, number[]> = new Map();
   private _nationaliteLabels: Map<string, string[]> = new Map();
   private _nationaliteData: Map<string, number[]> = new Map();
+  private _ageLabels: Map<string, string[]> = new Map();
+  private _ageData: Map<string, number[]> = new Map();
+  private _siteLabels: Map<string, string[]> = new Map();
+  private _siteData: Map<string, number[]> = new Map();
+  public _sejourLabels: Map<String, String[]> = new Map();
+  public _sejourData: Map<String, number[]> = new Map();
 
-  /*  public ageLabels: Map<String, String[]> = new Map();
-  public ageData: Map<String, number[]> = new Map();
-  public nationaliteLabels: Map<String, String[]> = new Map();
-  public nationaliteData: Map<String, number[]> = new Map();
-  public siteLabels: Map<String, String[]> = new Map();
-  public siteData: Map<String, number[]> = new Map();
-  public sejourLabels: Map<String, String[]> = new Map();
-  public sejourData: Map<String, number[]> = new Map();
+  /*
   public niveauLangueLabels: Map<String, String[]> = new Map();
   public niveauLangueData: Map<String, number[]> = new Map();
   public niveauScolLabels: Map<String, String[]> = new Map();
@@ -67,22 +66,47 @@ export class StatistiquesComponent implements OnInit {
     return this._sexeData.get(this._site);
   }
 
+  get sexeLabels(): string[] {
+    return this._sexeLabels.get(this._site);
+  }
+
   get nationaliteData(): number[] {
     return this._nationaliteData.get(this._site);
   }
 
-  get nationaliteLabel(): string[] {
+  get nationaliteLabels(): string[] {
     return this._nationaliteLabels.get(this._site);
+  }
+
+  get ageData(): number[] {
+    return this._ageData.get(this._site);
+  }
+
+  get ageLabels(): string[] {
+    return this._ageLabels.get(this._site);
+  }
+
+  get siteData(): number[] {
+    return this._siteData.get('all');
+  }
+
+  get siteLabels(): string[] {
+    return this._siteLabels.get('all');
   }
 
   ngOnInit() {
     this._site = 'all';
-    this.sexeLabels.set(this._site, ['Hommes', 'Femmes']);
+    this._sexeLabels.set(this._site, ['Hommes', 'Femmes']);
     this._sexeData.set(this._site, []);
 
-    this._nationaliteData.set('all', []);
-    this._nationaliteLabels.set('all', []);
+    this._ageData.set('all', []);
+    this._ageLabels.set('', []);
 
+    this._nationaliteData.set('all', []);
+    this._nationaliteLabels.set('', []);
+
+    this._siteData.set('all', []);
+    this._siteLabels.set('', []);
 
     this._sitesService.fetch().subscribe((sites: Site[]) => {
       this._sites = sites;
@@ -103,53 +127,45 @@ export class StatistiquesComponent implements OnInit {
       this._sexeData.set('all', [stat['M'], stat['F']]);
     });
 
+    this._statistiquesService.fetchByAge().subscribe( (stat: Map<string, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.tmpL.push(Object.keys(stat)[i]);
+      }
+
+      this._ageLabels.set('all', Array.from(this.tmpL));
+      this._ageData.set('all', Object.values(stat));
+      this.tmpL = [];
+    });
+
     this._statistiquesService.fetchByNationalite('all').subscribe((stat: Map<string, number>) => {
       for (let i = 0; i < Object.keys(stat).length; i++) {
         this.tmpL.push(Object.keys(stat)[i]);
       }
       this._nationaliteLabels.set(this._site, Array.from(this.tmpL));
       this._nationaliteData.set(this._site, Object.values(stat));
-      this._sexeData.set('all', [stat['M'], stat['F']]);
+      this.tmpL = [];
+    });
+
+    this._statistiquesService.fetchBySite().subscribe((stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.tmpL.push(Object.keys(stat)[i]);
+      }
+      this._siteLabels.set('all', Array.from(this.tmpL));
+      this._siteData.set('all', Object.values(stat));
       this.tmpL = [];
     });
 
 
+    this._statistiquesService.fetchBySejour('all').subscribe((stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.tmpL.push(Object.keys(stat)[i]);
+      }
+      this.sejourLabels.set('all', Array.from(this.tmpL));
+      this.sejourData.set('all', Object.values(stat));
+      this.tmpL = [];
+    });
 
-      /*    this._statistiquesService.fetchByAge().subscribe( (stat: Map<String, number>) => {
-            for (let i = 0; i < Object.keys(stat).length; i++) {
-              this.tmpL.push(Object.keys(stat)[i]);
-            }
-
-            this.ageLabels.set('all', Array.from(this.tmpL));
-            this.ageData.set('all', Object.values(stat));
-            this.tmpL = [];
-          });
-
-          this._statistiquesService.fetchBySite().subscribe((stat: Map<String, number>) => {
-            for (let i = 0; i < Object.keys(stat).length; i++) {
-              this.tmpL.push(Object.keys(stat)[i]);
-            }
-            this.siteLabels.set('all', Array.from(this.tmpL));
-            this.siteData.set('all', Object.values(stat));
-            this.tmpL = [];
-          });
-          this._statistiquesService.fetchByNationalite('all').subscribe((stat: Map<String, number>) => {
-            for (let i = 0; i < Object.keys(stat).length; i++) {
-              this.tmpL.push(Object.keys(stat)[i]);
-            }
-            this.nationaliteLabels.set('all', Array.from(this.tmpL));
-            this.nationaliteData.set('all', Object.values(stat));
-            this.tmpL = [];
-          });
-
-          this._statistiquesService.fetchBySejour('all').subscribe((stat: Map<String, number>) => {
-            for (let i = 0; i < Object.keys(stat).length; i++) {
-              this.tmpL.push(Object.keys(stat)[i]);
-            }
-            this.sejourLabels.set('all', Array.from(this.tmpL));
-            this.sejourData.set('all', Object.values(stat));
-            this.tmpL = [];
-          });
+      /*
 
           this._statistiquesService.fetchByQuartierPrio('all').subscribe((stat: Map<String, number>) => {
             for (let i = 0; i < Object.keys(stat).length; i++) {

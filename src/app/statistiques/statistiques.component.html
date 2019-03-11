@@ -8,7 +8,7 @@
         <div style="display: block">
           <canvas baseChart
                   [data]="sexeData"
-                  [labels]="sexeLabels.get('all')"
+                  [labels]="sexeLabels"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -16,26 +16,25 @@
         </div>
       </mat-grid-tile>
 
-  <!--    <mat-grid-tile>
+      <mat-grid-tile>
         <mat-grid-tile-header>Répartition par âge</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="ageData.get('all')"
-                  [labels]="ageLabels.get('all')"
+                  [data]="ageData"
+                  [labels]="ageLabels"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
       </mat-grid-tile>
-      !-->
 
       <mat-grid-tile>
         <mat-grid-tile-header>Répartition par nationalité</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
                   [data]="nationaliteData"
-                  [labels]="nationaliteLabel"
+                  [labels]="nationaliteLabels"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -43,13 +42,12 @@
         </div>
       </mat-grid-tile>
 
-      <!--
       <mat-grid-tile>
         <mat-grid-tile-header>Répartition par site</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="siteData.get('all')"
-                  [labels]="siteLabels.get('all')"
+                  [data]="siteData"
+                  [labels]="siteLabels"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -70,6 +68,7 @@
         </div>
       </mat-grid-tile>
 
+      <!--
       <mat-grid-tile>
         <mat-grid-tile-header>Répartition par niveau de langue</mat-grid-tile-header>
         <div style="display: block">
@@ -118,35 +117,32 @@
         <div style="display: block">
           <canvas baseChart
                   [data]="sexeData"
-                  [labels]="sexeLabels.get('all')"
+                  [labels]="sexeLabels"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
       </mat-grid-tile>
-      <!--
       <mat-grid-tile>
         <mat-grid-tile-header>Répartition par âge</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="ageData[site]"
-                  [labels]="ageLabels[site]"
+                  [data]="ageData"
+                  [labels]="ageLabels"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
       </mat-grid-tile>
-      -->
-
 
       <mat-grid-tile>
         <mat-grid-tile-header>Répartition par nationalité</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
                   [data]="nationaliteData"
-                  [labels]="nationaliteLabel"
+                  [labels]="nationaliteLabels"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
