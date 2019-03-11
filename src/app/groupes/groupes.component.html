@@ -37,14 +37,17 @@
 
             <ng-container matColumnDef="Site">
                 <mat-header-cell *matHeaderCellDef> Site</mat-header-cell>
-                <mat-cell
-                        *matCellDef="let element"> {{ getVilleByIdGroup(element.idSite) }} </mat-cell>
+                <mat-cell *matCellDef="let element"> {{ getVilleByIdGroup(element.idSite) }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Nombre">
+                <mat-header-cell *matHeaderCellDef> Nombre de personnes</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{ getNombreByIdGroup(element.id) }} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Delete">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                <mat-cell
-                        *matCellDef="let element">
+                <mat-cell *matCellDef="let element">
                     <button mat-button title="Edit" [routerLink]="['/updateGroupe/' + element.id]">
                         <mat-icon svgIcon="icon-edit"></mat-icon>
                     </button>
