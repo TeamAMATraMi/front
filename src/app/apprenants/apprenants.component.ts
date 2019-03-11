@@ -35,7 +35,7 @@ export class ApprenantsComponent implements OnInit {
 
   private _displayedColumns = ['NomPrenom', 'DateNaissance', 'PaysOrigine', 'Delete'];
   private _dataSource: MatTableDataSource<Apprenant>;
-  private  value = '';
+  _valueForSearch = '';
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -234,6 +234,11 @@ export class ApprenantsComponent implements OnInit {
       this.deleteOpenSnackBar();
     }
   }
+
+  get valueForSearch(): string {
+    return this._valueForSearch;
+  }
+
   sortData(sort: Sort) {
     const data = this._dataSource.data.slice();
     if (!sort.active || sort.direction === '') {

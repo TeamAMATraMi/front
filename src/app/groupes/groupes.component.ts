@@ -29,7 +29,7 @@ export class GroupesComponent implements OnInit {
   private tmp: string;
   private tmpInt: number;
   private _selectedSiteId: number | string;
-  private _value = '';
+  value = '';
 
   private _dataSource: MatTableDataSource<Groupe>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -142,10 +142,6 @@ export class GroupesComponent implements OnInit {
 
   set groupes(value: Groupe[]) {
     this._groupes = value;
-  }
-
-  get value(): string {
-    return this._value;
   }
 
   get dataSource(): MatTableDataSource<Groupe> {
