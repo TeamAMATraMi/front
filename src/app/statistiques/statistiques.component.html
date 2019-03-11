@@ -118,7 +118,7 @@
         <div style="display: block">
           <canvas baseChart
                   [data]="sexeData"
-                  [labels]="sexeLabels[site]"
+                  [labels]="sexeLabels.get('all')"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"

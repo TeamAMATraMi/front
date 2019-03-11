@@ -80,6 +80,10 @@ export class StatistiquesComponent implements OnInit {
     this.sexeLabels.set(this._site, ['Hommes', 'Femmes']);
     this._sexeData.set(this._site, []);
 
+    this._nationaliteData.set('all', []);
+    this._nationaliteLabels.set('all', []);
+
+
     this._sitesService.fetch().subscribe((sites: Site[]) => {
       this._sites = sites;
       this._sites.forEach((current_site) => {
@@ -99,12 +103,13 @@ export class StatistiquesComponent implements OnInit {
       this._sexeData.set('all', [stat['M'], stat['F']]);
     });
 
-    this._statistiquesService.fetchByNationalite(this._site).subscribe((stat: Map<string, number>) => {
+    this._statistiquesService.fetchByNationalite('all').subscribe((stat: Map<string, number>) => {
       for (let i = 0; i < Object.keys(stat).length; i++) {
         this.tmpL.push(Object.keys(stat)[i]);
       }
       this._nationaliteLabels.set(this._site, Array.from(this.tmpL));
       this._nationaliteData.set(this._site, Object.values(stat));
+      this._sexeData.set('all', [stat['M'], stat['F']]);
       this.tmpL = [];
     });
 
@@ -252,8 +257,8 @@ export class StatistiquesComponent implements OnInit {
   public tabChanged(event: MatTabChangeEvent) {
     this._site = event.tab.textLabel;
     const clone = JSON.parse(JSON.stringify(this._nationaliteData));
-    clone[0].data = data;
-    this._nationaliteData = data;
+    //clone[0].data = data;
+    //this._nationaliteData = data;
     //console.log(event.tab.textLabel);
   }
 
