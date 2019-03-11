@@ -166,7 +166,7 @@ export class ApprenantsComponent implements OnInit {
 
     // open modal
     this._apprenantsDialog = this._dialog.open(DialogComponent, {
-      width: '500px',
+      width: '1000px',
       disableClose: true
     });
 

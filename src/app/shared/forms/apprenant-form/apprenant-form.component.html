@@ -8,13 +8,23 @@
             <span style="width:100%">{{ form.get('nom').value }} {{ form.get('prenom').value }}</span>
         </p>
 
+        <p>
+            <mat-form-field class="champs-width">
+                <input matInput placeholder="Auteur du dossier" formControlName="auteurDossier" required />
+            </mat-form-field>
+
+            <mat-form-field class="tab">
+                <input matInput type="date" placeholder="Date d'inscription" formControlName="dateInscription" name="dateInscription" />
+            </mat-form-field>
+        </p>
+
         <mat-accordion>
             <mat-expansion-panel expanded>
                 <mat-expansion-panel-header>
                     <mat-panel-title>Profil</mat-panel-title>
                 </mat-expansion-panel-header>
                 <p>
-                    <mat-form-field class="full-width">
+                    <mat-form-field class="champs-width">
                         <input matInput placeholder="Nom" formControlName="nom" minlength="2" required name="nom" />
                         <mat-error *ngIf="form.get('nom').dirty && form.get('nom').hasError('required')">
                             nom est <strong>requis</strong>
@@ -23,9 +33,8 @@
                             min <strong>2 lettres</strong>
                         </mat-error>
                     </mat-form-field>
-                </p>
-                <p>
-                    <mat-form-field class="full-width">
+
+                    <mat-form-field class="tab">
                         <input matInput placeholder="Prénom" formControlName="prenom" minlength="2" required name="prenom" />
                         <mat-error *ngIf="form.get('prenom').dirty && form.get('prenom').hasError('required')">
                             prenom est <strong>requis</strong>
@@ -44,15 +53,14 @@
                     </mat-form-field>
                 </p>
                 <p>
-                    <mat-form-field class="full-width">
+                    <mat-form-field class="champs-width">
                         <input matInput placeholder="Code postal" formControlName="codePostal" name="codePostal" />
                         <mat-error *ngIf="form.get('codePostal').dirty && form.get('codePostal').hasError('pattern')">
                             nécessite <strong> 5 chiffres</strong>
                         </mat-error>
                     </mat-form-field>
-                </p>
-                <p>
-                    <mat-form-field class="full-width">
+
+                    <mat-form-field class="tab">
                         <input matInput placeholder="Commune" formControlName="commune" minlength="2" required name="commune" />
                         <mat-error *ngIf="form.get('commune').dirty && form.get('commune').hasError('required')">
                             commune est <strong>requis</strong>
@@ -63,19 +71,27 @@
                     </mat-form-field>
                 </p>
                 <p>
-                    <mat-form-field class="full-width">
+                    <mat-form-field class="champs-width">
                         <input matInput placeholder="Téléphone" formControlName="telephone" name="telephone" />
                         <mat-error *ngIf="form.get('telephone').dirty && form.get('telephone').hasError('pattern')">
                             Ceci n'est pas un <strong>numéro français</strong>
                         </mat-error>
                     </mat-form-field>
-                </p>
-                <p>
-                    <mat-form-field class="full-width">
+
+                    <mat-form-field class="tab">
                         <input matInput type="date" placeholder="Date de naissance" formControlName="dateNaissance" name="dateNaissance" />
                         <mat-error *ngIf="form.get('dateNaissance').dirty && form.get('dateNaissance').hasError('pattern')">
                             Date de type <strong>JJ/MM/YYYY</strong>
                         </mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <mat-select placeholder="Situation personnelle" formControlName="situationPersonnelle">
+                            <mat-option *ngFor="let c of situation" [value]="c">
+                                {{ c }}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </p>
                 <p>
@@ -96,13 +112,8 @@
 
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
-                    <mat-panel-title>Informations</mat-panel-title>
+                    <mat-panel-title>Séjour</mat-panel-title>
                 </mat-expansion-panel-header>
-                <p>
-                    <mat-form-field class="full-width">
-                        <input matInput type="date" placeholder="Date d'inscription" formControlName="dateInscription" name="dateInscription" />
-                    </mat-form-field>
-                </p>
                 <p>
                     <mat-form-field>
                         <mat-select placeholder="Pays d'origine" formControlName="paysOrigine" required>
@@ -552,8 +563,38 @@
                 </p>
                 <p>
                     <mat-form-field>
-                        <mat-select placeholder="Situation personnelle" formControlName="situationPersonnelle">
-                            <mat-option *ngFor="let c of situation" [value]="c">
+                        <mat-select placeholder="Statut du séjour" formControlName="statutSejour">
+                            <mat-option *ngFor="let c of statutSejour" [value]="c">
+                                {{ c }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </p>
+                <div *ngIf="form.get('statutSejour').value === 'Régulier'">
+                    <p>
+                        <mat-form-field class="full-width">
+                            <input matInput type="date" placeholder="Date de la carte de séjour" formControlName="dateCarteSejour"/>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field class="full-width">
+                            <input matInput type="date" placeholder="Date de fin de la carte de séjour" formControlName="dateFinCarteSejour"/>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field>
+                            <mat-select placeholder="Statut professionnel" formControlName="statutPro">
+                                <mat-option *ngFor="let c of statutPro" [value]="c">
+                                    {{ c }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </p>
+                </div>
+                <p>
+                    <mat-form-field *ngIf="form.get('statutPro').value === 'Salarié(e)'">
+                        <mat-select placeholder="Type de contrat" formControlName="typeContrat">
+                            <mat-option *ngFor="let c of typeContrat" [value]="c">
                                 {{ c }}
                             </mat-option>
                         </mat-select>
@@ -627,7 +668,7 @@
 
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
-                    <mat-panel-title>Autres</mat-panel-title>
+                    <mat-panel-title>Autre</mat-panel-title>
                 </mat-expansion-panel-header>
                 <p>
                     <mat-form-field class="full-width">
@@ -641,11 +682,6 @@
                 </p>
                 <p>
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Auteur du dossier" formControlName="auteurDossier" required />
-                    </mat-form-field>
-                </p>
-                <p>
-                    <mat-form-field>
                         <mat-select placeholder="Quartier prioritaire" formControlName="quartierPrioritaire">
                             <mat-option [value]="0">Aucun</mat-option>
                             <mat-option *ngFor="let c of quartiersPrio" [value]="c.id">
@@ -655,7 +691,7 @@
                     </mat-form-field>
                 </p>
                 <p>
-                    <mat-form-field>
+                    <mat-form-field class="full-width">
                         <mat-select placeholder="Prise en charge" formControlName="priseCharge">
                             <mat-option [value]="0">Aucun</mat-option>
                             <mat-option *ngFor="let c of associations" [value]="c.id">
@@ -679,53 +715,13 @@
                     </mat-radio-group>
                 </p>
                 <p>
-                    <mat-form-field>
-                        <mat-select placeholder="Statut du séjour" formControlName="statutSejour">
-                            <mat-option *ngFor="let c of statutSejour" [value]="c">
-                                {{ c }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </p>
-                <div *ngIf="form.get('statutSejour').value === 'Régulier'">
-                    <p>
-                        <mat-form-field class="full-width">
-                            <input matInput type="date" placeholder="Date de la carte de séjour" formControlName="dateCarteSejour"/>
-                        </mat-form-field>
-                    </p>
-                    <p>
-                        <mat-form-field class="full-width">
-                            <input matInput type="date" placeholder="Date de fin de la carte de séjour" formControlName="dateFinCarteSejour"/>
-                        </mat-form-field>
-                    </p>
-                    <p>
-                        <mat-form-field>
-                            <mat-select placeholder="Statut professionnel" formControlName="statutPro">
-                                <mat-option *ngFor="let c of statutPro" [value]="c">
-                                    {{ c }}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </p>
-                </div>
-                <p>
-                    <mat-form-field *ngIf="form.get('statutPro').value === 'Salarié(e)'">
-                        <mat-select placeholder="Type de contrat" formControlName="typeContrat">
-                            <mat-option *ngFor="let c of typeContrat" [value]="c">
-                                {{ c }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </p>
-                <p>
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Remarques" formControlName="remarques" name="remarques" />
+                        <textarea matInput matTextareaAutosize placeholder="Remarques" formControlName="remarques" name="remarques"></textarea>
                     </mat-form-field>
                 </p>
             </mat-expansion-panel>
 
         </mat-accordion>
-
     </form>
 </mat-dialog-content>
 
