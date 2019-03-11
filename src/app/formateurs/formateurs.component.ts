@@ -36,7 +36,7 @@ export class FormateursComponent implements OnInit {
   private _formateursDialog: MatDialogRef<FormateurDialogComponent>;
   private _dataSource: MatTableDataSource<Formateur>;
 
-  private _value = '';
+  value = '';
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -160,10 +160,6 @@ export class FormateursComponent implements OnInit {
         .pipe(
             flatMap(_ => this._formateursService.fetch())
         );
-  }
-
-  get value(): string {
-    return this._value;
   }
 
   @Input()
