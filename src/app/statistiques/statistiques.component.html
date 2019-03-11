@@ -1,14 +1,14 @@
 <br/><br/><br/>
 <mat-tab-group>
 
-  <mat-tab label="Tous les sites">
+  <mat-tab label="all">
     <mat-grid-list cols="3" rowHeight="5:4">
       <mat-grid-tile>
         <mat-grid-tile-header>Répartition hommes / femmes</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="sexeData"
-                  [labels]="sexeLabels"
+                  [data]="sexeData.get('all').values()"
+                  [labels]="sexeLabels.get('all')"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -16,12 +16,12 @@
         </div>
       </mat-grid-tile>
 
-      <mat-grid-tile>
+  <!--    <mat-grid-tile>
         <mat-grid-tile-header>Répartition par âge</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="ageData"
-                  [labels]="ageLabels"
+                  [data]="ageData.get('all')"
+                  [labels]="ageLabels.get('all')"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -33,8 +33,8 @@
         <mat-grid-tile-header>Répartition par nationalité</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="nationaliteData"
-                  [labels]="nationaliteLabels"
+                  [data]="nationaliteData.get('all')"
+                  [labels]="nationaliteLabels.get('all')"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -46,8 +46,8 @@
         <mat-grid-tile-header>Répartition par site</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="siteData"
-                  [labels]="siteLabels"
+                  [data]="siteData.get('all')"
+                  [labels]="siteLabels.get('all')"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -59,8 +59,8 @@
         <mat-grid-tile-header>Répartition par titre de séjour</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="sejourData"
-                  [labels]="sejourLabels"
+                  [data]="sejourData.get('all')"
+                  [labels]="sejourLabels.get('all')"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -72,8 +72,8 @@
         <mat-grid-tile-header>Répartition par niveau de langue</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="niveauLangueData"
-                  [labels]="niveauLangueLabels"
+                  [data]="niveauLangueData.get('all')"
+                  [labels]="niveauLangueLabels.get('all')"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -85,8 +85,8 @@
         <mat-grid-tile-header>Répartition par niveau de scolarisation</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="niveauScolData"
-                  [labels]="niveauScolLabels"
+                  [data]="niveauScolData.get('all')"
+                  [labels]="niveauScolLabels.get('all')"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -98,8 +98,8 @@
         <mat-grid-tile-header>Répartition par quartier prioritaire</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="quartierPrioData"
-                  [labels]="quartierPrioLabels"
+                  [data]="quartierPrioData.get('all')"
+                  [labels]="quartierPrioLabels.get('all')"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -108,14 +108,14 @@
       </mat-grid-tile>
     </mat-grid-list>
   </mat-tab>
-  <mat-tab *ngFor="let site of getSites()" label="{{site.ville}}">
+  <mat-tab *ngFor="let site of getSites() " label="{{site.ville}}">
     <mat-grid-list cols="3" rowHeight="5:4">
       <mat-grid-tile>
         <mat-grid-tile-header>Répartition hommes / femmes</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="sexeData"
-                  [labels]="sexeLabels"
+                  [data]="sexeData[site]"
+                  [labels]="sexeLabels[site]"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -127,8 +127,8 @@
         <mat-grid-tile-header>Répartition par âge</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="ageData"
-                  [labels]="ageLabels"
+                  [data]="ageData[site]"
+                  [labels]="ageLabels[site]"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -140,8 +140,8 @@
         <mat-grid-tile-header>Répartition par nationalité</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="nationaliteData"
-                  [labels]="nationaliteLabels"
+                  [data]="nationaliteData[site]"
+                  [labels]="nationaliteLabels[site]"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -153,8 +153,8 @@
         <mat-grid-tile-header>Répartition par titre de séjour</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="sejourData"
-                  [labels]="sejourLabels"
+                  [data]="sejourData[site]"
+                  [labels]="sejourLabels[site]"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -166,8 +166,8 @@
         <mat-grid-tile-header>Répartition par niveau de langue</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="niveauLangueData"
-                  [labels]="niveauLangueLabels"
+                  [data]="niveauLangueData[site]"
+                  [labels]="niveauLangueLabels[site]"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -179,8 +179,8 @@
         <mat-grid-tile-header>Répartition par niveau de scolarisation</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="niveauScolData"
-                  [labels]="niveauScolLabels"
+                  [data]="niveauScolData[site]"
+                  [labels]="niveauScolLabels[site]"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -192,14 +192,14 @@
         <mat-grid-tile-header>Répartition par quartier prioritaire</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="quartierPrioData"
-                  [labels]="quartierPrioLabels"
+                  [data]="quartierPrioData[site]"
+                  [labels]="quartierPrioLabels[site]"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
-      </mat-grid-tile>
+      </mat-grid-tile><!-->
     </mat-grid-list>
   </mat-tab>
 </mat-tab-group>
