@@ -32,13 +32,8 @@ export class StatistiquesComponent implements OnInit {
   private _niveauLangueData: Map<string, number[]> = new Map();
   private _niveauScolLabels: Map<string, string[]> = new Map();
   private _niveauScolData: Map<string, number[]> = new Map();
-
-  /*
-  public quartierPrioLabels: Map<String, String[]> = new Map();
-  public quartierPrioData: Map<String, number[]> = new Map();
-  public bar = 'bar';
-  */
-
+  private _quartierPrioLabels: Map<string, string[]> = new Map();
+  private _quartierPrioData: Map<string, number[]> = new Map();
   public doughnut = 'doughnut';
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
@@ -118,6 +113,14 @@ export class StatistiquesComponent implements OnInit {
     return this._niveauScolLabels.get(this._site);
   }
 
+  get quartierPrioData(): number[] {
+    return this._quartierPrioData.get(this._site);
+  }
+
+  get quartierPrioLabels(): string[] {
+    return this._quartierPrioLabels.get(this._site);
+  }
+
   ngOnInit() {
     this._site = 'all';
     this._sexeLabels.set(this._site, ['Hommes', 'Femmes']);
@@ -140,6 +143,9 @@ export class StatistiquesComponent implements OnInit {
 
     this._niveauScolData.set('all', []);
     this._niveauScolLabels.set('', []);
+
+    this._quartierPrioData.set('all', []);
+    this._quartierPrioLabels.set('', []);
 
     this._sitesService.fetch().subscribe((sites: Site[]) => {
       this._sites = sites;
@@ -180,6 +186,14 @@ export class StatistiquesComponent implements OnInit {
           this.tmpL = [];
         });
 
+        this._statistiquesService.fetchByQuartierPrio(current_site.ville).subscribe((stat: Map<String, number>) => {
+          for (let i = 0; i < Object.keys(stat).length; i++) {
+            this.tmpL.push(Object.keys(stat)[i]);
+          }
+          this._quartierPrioLabels.set(current_site.ville, Array.from(this.tmpL));
+          this._quartierPrioData.set(current_site.ville, Object.values(stat));
+          this.tmpL = [];
+        });
 
       });
 
@@ -245,18 +259,16 @@ export class StatistiquesComponent implements OnInit {
       this.tmpL = [];
     });
 
+    this._statistiquesService.fetchByQuartierPrio('all').subscribe((stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.tmpL.push(Object.keys(stat)[i]);
+      }
+      this._quartierPrioLabels.set('all', Array.from(this.tmpL));
+      this._quartierPrioData.set('all', Object.values(stat));
+      this.tmpL = [];
+    });
+
     /*
-
-        this._statistiquesService.fetchByQuartierPrio('all').subscribe((stat: Map<String, number>) => {
-          for (let i = 0; i < Object.keys(stat).length; i++) {
-            this.tmpL.push(Object.keys(stat)[i]);
-          }
-          this.quartierPrioLabels.set('all', Array.from(this.tmpL));
-          this.quartierPrioData.set('all', Object.values(stat));
-          this.tmpL = [];
-        });
-
-
         this._statistiquesService.fetchByStatutPro('all').subscribe((stat: Map<String, number>) => {
         });
 
@@ -267,15 +279,6 @@ export class StatistiquesComponent implements OnInit {
 /*    this._sitesService.fetch().subscribe((sites: Site[]) => {
       this._sites = sites;
       this._sites.forEach((sit) => {
-
-        this._statistiquesService.fetchByQuartierPrio(sit.ville).subscribe((stat: Map<String, number>) => {
-          for (let i = 0; i < Object.keys(stat).length; i++) {
-            this.tmpL.push(Object.keys(stat)[i]);
-          }
-          this.quartierPrioLabels.set(sit.ville, Array.from(this.tmpL));
-          this.quartierPrioData.set(sit.ville, Object.values(stat));
-          this.tmpL = [];
-        });
 
 
         this._statistiquesService.fetchByStatutPro(sit.ville).subscribe((stat: Map<String, number>) => {
@@ -297,16 +300,16 @@ export class StatistiquesComponent implements OnInit {
     console.log(e);
   }
 
-  public get sites() : Site[] {
+  public get sites(): Site[] {
     return this._sites;
   }
 
   public tabChanged(event: MatTabChangeEvent) {
     this._site = event.tab.textLabel;
     const clone = JSON.parse(JSON.stringify(this._nationaliteData));
-    //clone[0].data = data;
-    //this._nationaliteData = data;
-    //console.log(event.tab.textLabel);
+    // clone[0].data = data;
+    // this._nationaliteData = data;
+    // console.log(event.tab.textLabel);
   }
 
 

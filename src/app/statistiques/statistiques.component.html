@@ -93,21 +93,19 @@
         </div>
       </mat-grid-tile>
 
-      <!--
-
       <mat-grid-tile>
         <mat-grid-tile-header>Répartition par quartier prioritaire</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="quartierPrioData.get('all')"
-                  [labels]="quartierPrioLabels.get('all')"
+                  [data]="quartierPrioData"
+                  [labels]="quartierPrioLabels"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
       </mat-grid-tile>
-  !-->
+
     </mat-grid-list>
   </mat-tab>
   <mat-tab *ngFor="let site of sites " label="{{site.ville}}">
@@ -187,20 +185,21 @@
         </div>
       </mat-grid-tile>
 
+      <mat-grid-tile>
+        <mat-grid-tile-header>Répartition par quartier prioritaire</mat-grid-tile-header>
+        <div style="display: block">
+          <canvas baseChart
+                  [data]="quartierPrioData"
+                  [labels]="quartierPrioLabels"
+                  [chartType]="doughnut"
+                  [colors]="chartColors"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </mat-grid-tile>
       <!--
 
-<mat-grid-tile>
-  <mat-grid-tile-header>Répartition par quartier prioritaire</mat-grid-tile-header>
-  <div style="display: block">
-    <canvas baseChart
-            [data]="quartierPrioData[site]"
-            [labels]="quartierPrioLabels[site]"
-            [chartType]="doughnut"
-            [colors]="chartColors"
-            (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"></canvas>
-  </div>
-</mat-grid-tile>!-->
+!-->
     </mat-grid-list>
   </mat-tab>
 </mat-tab-group>
