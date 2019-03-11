@@ -673,7 +673,6 @@
                 <p>
                     <mat-form-field class="full-width">
                         <mat-select placeholder="Groupe" formControlName="idGroupe" required>
-                            <mat-option [value]="0">Aucun</mat-option>
                             <mat-option *ngFor="let c of groupes" [value]="c.id">
                                 {{ c.nom }}
                             </mat-option>
