@@ -33,10 +33,8 @@ export class StatistiquesComponent implements OnInit {
   public bar = 'bar';
   public doughnut = 'doughnut';
   @ViewChild('content') content: ElementRef;
-  public barChartOptions: any = {
-    scaleShowVerticalLines: false,
-    responsive: false
-  };
+
+
   public chartColors: any[] = [
     {
       backgroundColor: ['#FF7360', '#6FC8CE', '#FAFFF2', '#FFFCC4', '#B9E8E0', '#74B2F4',
@@ -124,9 +122,9 @@ export class StatistiquesComponent implements OnInit {
   makePdf() {
     html2canvas(document.getElementById('content')).then(function(canvas) {
       const img = canvas.toDataURL('image/png');
-      const doc = new jsPDF('landscape', '', 'a3');
-      doc.addImage(img, 'JPEG', 40, 10);
-      doc.save('testCanvas.pdf');
+      const doc = new jsPDF('landscape ', '', 'a2');
+      doc.addImage(img, 'JPEG', 0, -11);
+      doc.save('statistique.pdf');
     });
   }
 }
