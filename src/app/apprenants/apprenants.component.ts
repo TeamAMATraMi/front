@@ -35,6 +35,7 @@ export class ApprenantsComponent implements OnInit {
 
   private _displayedColumns = ['NomPrenom', 'DateNaissance', 'PaysOrigine', 'Delete'];
   private _dataSource: MatTableDataSource<Apprenant>;
+  private  value = '';
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -165,7 +166,7 @@ export class ApprenantsComponent implements OnInit {
 
     // open modal
     this._apprenantsDialog = this._dialog.open(DialogComponent, {
-      width: '500px',
+      width: '1000px',
       disableClose: true
     });
 

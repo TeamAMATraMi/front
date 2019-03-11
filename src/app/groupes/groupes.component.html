@@ -14,8 +14,10 @@
         <span class="flex"></span>
         <span>
           <mat-form-field>
-              <mat-icon matPrefix></mat-icon>
-              <input matInput (input)="applyFilter($event.target.value)" placeholder="Chercher">
+              <input matInput (input)="applyFilter($event.target.value)" placeholder="Chercher" [(ngModel)]="value">
+                <button mat-button *ngIf="value" matSuffix mat-icon-button (click)="value='';afficherGroupes();">
+                    <mat-icon>close</mat-icon>
+                </button>
           </mat-form-field>
         </span>
     </mat-toolbar-row>

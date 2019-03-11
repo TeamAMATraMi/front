@@ -33,7 +33,7 @@ constructor(private _route: ActivatedRoute, private _router: Router, private _ap
         )
         .subscribe((apprenant: Apprenant) => {
           this._apprenantsDialog = this._dialog.open(DialogComponent, {
-            width: '500px',
+            width: '1000px',
             disableClose: true,
             data: apprenant
           });
