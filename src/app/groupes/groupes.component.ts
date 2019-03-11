@@ -179,6 +179,17 @@ export class GroupesComponent implements OnInit {
     }
   }
 
+  clear(id: number) {
+    this._groupesService.clear(id).subscribe(null, null, () => this.ngOnInit());
+  }
+
+  clearConfirmation(id: number) {
+    if (confirm('Voulez vous vraiment vider ce groupe ?')) {
+      this.clear(id);
+      this.clearOpenSnackBar();
+    }
+  }
+
   get selectedSiteId(): number | string {
     return this._selectedSiteId;
   }
@@ -188,13 +199,19 @@ export class GroupesComponent implements OnInit {
   }
 
   addOpenSnackBar() {
-    this.snackBar.open('successfully added', 'OK', {
+    this.snackBar.open('ajout effectué', 'OK', {
       duration: 3000
     });
   }
 
   deleteOpenSnackBar() {
-    this.snackBar.open('successfully deleted', 'OK', {
+    this.snackBar.open('suppression effectué', 'OK', {
+      duration: 3000
+    });
+  }
+
+  clearOpenSnackBar() {
+    this.snackBar.open('nettoyage effectué', 'OK', {
       duration: 3000
     });
   }
