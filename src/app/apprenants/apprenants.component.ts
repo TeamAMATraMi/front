@@ -35,7 +35,7 @@ export class ApprenantsComponent implements OnInit {
 
   private _displayedColumns = ['NomPrenom', 'DateNaissance', 'PaysOrigine', 'Delete'];
   private _dataSource: MatTableDataSource<Apprenant>;
-  private  value = '';
+  private _value = '';
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -140,6 +140,10 @@ export class ApprenantsComponent implements OnInit {
     this._dataSource.paginator = this.paginator;
     this._dataSource.filterPredicate = (data: {nom: string}, filterValue: string) =>
         data.nom.trim().toLowerCase().indexOf(filterValue) !== -1;
+  }
+
+  get value(): string {
+    return this._value;
   }
 
   @Input()
