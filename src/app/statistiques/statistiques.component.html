@@ -59,22 +59,20 @@
         <mat-grid-tile-header>Répartition par titre de séjour</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="sejourData.get('all')"
-                  [labels]="sejourLabels.get('all')"
+                  [data]="sejourData"
+                  [labels]="sejourLabels"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
       </mat-grid-tile>
-
-      <!--
       <mat-grid-tile>
         <mat-grid-tile-header>Répartition par niveau de langue</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="niveauLangueData.get('all')"
-                  [labels]="niveauLangueLabels.get('all')"
+                  [data]="niveauLangueData"
+                  [labels]="niveauLangueLabels"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -86,14 +84,16 @@
         <mat-grid-tile-header>Répartition par niveau de scolarisation</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="niveauScolData.get('all')"
-                  [labels]="niveauScolLabels.get('all')"
+                  [data]="niveauScolData"
+                  [labels]="niveauScolLabels"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
       </mat-grid-tile>
+
+      <!--
 
       <mat-grid-tile>
         <mat-grid-tile-header>Répartition par quartier prioritaire</mat-grid-tile-header>
@@ -149,27 +149,24 @@
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
       </mat-grid-tile>
-
-      <!--
-    <mat-grid-tile>
+      <mat-grid-tile>
         <mat-grid-tile-header>Répartition par titre de séjour</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="sejourData[site]"
-                  [labels]="sejourLabels[site]"
+                  [data]="sejourData"
+                  [labels]="sejourLabels"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
       </mat-grid-tile>
-
       <mat-grid-tile>
         <mat-grid-tile-header>Répartition par niveau de langue</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="niveauLangueData[site]"
-                  [labels]="niveauLangueLabels[site]"
+                  [data]="niveauLangueData"
+                  [labels]="niveauLangueLabels"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -181,8 +178,8 @@
         <mat-grid-tile-header>Répartition par niveau de scolarisation</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="niveauScolData[site]"
-                  [labels]="niveauScolLabels[site]"
+                  [data]="niveauScolData"
+                  [labels]="niveauScolLabels"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -190,18 +187,20 @@
         </div>
       </mat-grid-tile>
 
-      <mat-grid-tile>
-        <mat-grid-tile-header>Répartition par quartier prioritaire</mat-grid-tile-header>
-        <div style="display: block">
-          <canvas baseChart
-                  [data]="quartierPrioData[site]"
-                  [labels]="quartierPrioLabels[site]"
-                  [chartType]="doughnut"
-                  [colors]="chartColors"
-                  (chartHover)="chartHovered($event)"
-                  (chartClick)="chartClicked($event)"></canvas>
-        </div>
-      </mat-grid-tile>!-->
+      <!--
+
+<mat-grid-tile>
+  <mat-grid-tile-header>Répartition par quartier prioritaire</mat-grid-tile-header>
+  <div style="display: block">
+    <canvas baseChart
+            [data]="quartierPrioData[site]"
+            [labels]="quartierPrioLabels[site]"
+            [chartType]="doughnut"
+            [colors]="chartColors"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+  </div>
+</mat-grid-tile>!-->
     </mat-grid-list>
   </mat-tab>
 </mat-tab-group>

@@ -26,14 +26,14 @@ export class StatistiquesComponent implements OnInit {
   private _ageData: Map<string, number[]> = new Map();
   private _siteLabels: Map<string, string[]> = new Map();
   private _siteData: Map<string, number[]> = new Map();
-  public _sejourLabels: Map<String, String[]> = new Map();
-  public _sejourData: Map<String, number[]> = new Map();
+  private _sejourLabels: Map<string, string[]> = new Map();
+  private _sejourData: Map<string, number[]> = new Map();
+  private _niveauLangueLabels: Map<string, string[]> = new Map();
+  private _niveauLangueData: Map<string, number[]> = new Map();
+  private _niveauScolLabels: Map<string, string[]> = new Map();
+  private _niveauScolData: Map<string, number[]> = new Map();
 
   /*
-  public niveauLangueLabels: Map<String, String[]> = new Map();
-  public niveauLangueData: Map<String, number[]> = new Map();
-  public niveauScolLabels: Map<String, String[]> = new Map();
-  public niveauScolData: Map<String, number[]> = new Map();
   public quartierPrioLabels: Map<String, String[]> = new Map();
   public quartierPrioData: Map<String, number[]> = new Map();
   public bar = 'bar';
@@ -94,6 +94,30 @@ export class StatistiquesComponent implements OnInit {
     return this._siteLabels.get('all');
   }
 
+  get sejourData(): number[] {
+    return this._sejourData.get(this._site);
+  }
+
+  get sejourLabels(): string[] {
+    return this._siteLabels.get(this._site);
+  }
+
+  get niveauLangueData(): number[] {
+    return this._niveauLangueData.get(this._site);
+  }
+
+  get niveauLangueLabels(): string[] {
+    return this._niveauLangueLabels.get(this._site);
+  }
+
+  get niveauScolData(): number[] {
+    return this._niveauScolData.get(this._site);
+  }
+
+  get niveauScolLabels(): string[] {
+    return this._niveauScolLabels.get(this._site);
+  }
+
   ngOnInit() {
     this._site = 'all';
     this._sexeLabels.set(this._site, ['Hommes', 'Femmes']);
@@ -108,6 +132,15 @@ export class StatistiquesComponent implements OnInit {
     this._siteData.set('all', []);
     this._siteLabels.set('', []);
 
+    this._sejourData.set('all', []);
+    this._sejourLabels.set('', []);
+
+    this._niveauLangueData.set('all', []);
+    this._niveauLangueLabels.set('', []);
+
+    this._niveauScolData.set('all', []);
+    this._niveauScolLabels.set('', []);
+
     this._sitesService.fetch().subscribe((sites: Site[]) => {
       this._sites = sites;
       this._sites.forEach((current_site) => {
@@ -119,6 +152,35 @@ export class StatistiquesComponent implements OnInit {
           this._nationaliteData.set(current_site.ville, Object.values(stat));
           this.tmpL = [];
         });
+
+        this._statistiquesService.fetchBySejour(current_site.ville).subscribe((stat: Map<string, number>) => {
+          for (let i = 0; i < Object.keys(stat).length; i++) {
+            this.tmpL.push(Object.keys(stat)[i]);
+          }
+          this._sejourLabels.set(current_site.ville, Array.from(this.tmpL));
+          this._sejourData.set(current_site.ville, Object.values(stat));
+          this.tmpL = [];
+        });
+
+        this._statistiquesService.fetchByNiveauLangue(current_site.ville).subscribe((stat: Map<string, number>) => {
+          for (let i = 0; i < Object.keys(stat).length; i++) {
+            this.tmpL.push(Object.keys(stat)[i]);
+          }
+          this._niveauLangueLabels.set(current_site.ville, Array.from(this.tmpL));
+          this._niveauLangueData.set(current_site.ville, Object.values(stat));
+          this.tmpL = [];
+        });
+
+        this._statistiquesService.fetchByNiveauScol(current_site.ville).subscribe((stat: Map<number, number>) => {
+          for (let i = 0; i < Object.keys(stat).length; i++) {
+            this.tmpL.push(Object.keys(stat)[i]);
+          }
+          this._niveauScolLabels.set(current_site.ville, Array.from(this.tmpL));
+          this._niveauScolData.set(current_site.ville, Object.values(stat));
+          this.tmpL = [];
+        });
+
+
       });
 
     });
@@ -146,7 +208,7 @@ export class StatistiquesComponent implements OnInit {
       this.tmpL = [];
     });
 
-    this._statistiquesService.fetchBySite().subscribe((stat: Map<String, number>) => {
+    this._statistiquesService.fetchBySite().subscribe((stat: Map<string, number>) => {
       for (let i = 0; i < Object.keys(stat).length; i++) {
         this.tmpL.push(Object.keys(stat)[i]);
       }
@@ -156,70 +218,55 @@ export class StatistiquesComponent implements OnInit {
     });
 
 
-    this._statistiquesService.fetchBySejour('all').subscribe((stat: Map<String, number>) => {
+    this._statistiquesService.fetchBySejour('all').subscribe((stat: Map<string, number>) => {
       for (let i = 0; i < Object.keys(stat).length; i++) {
         this.tmpL.push(Object.keys(stat)[i]);
       }
-      this.sejourLabels.set('all', Array.from(this.tmpL));
-      this.sejourData.set('all', Object.values(stat));
+      this._sejourLabels.set('all', Array.from(this.tmpL));
+      this._sejourData.set('all', Object.values(stat));
       this.tmpL = [];
     });
 
-      /*
+    this._statistiquesService.fetchByNiveauLangue('all').subscribe((stat: Map<string, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.tmpL.push(Object.keys(stat)[i]);
+      }
+      this._niveauLangueLabels.set('all', Array.from(this.tmpL));
+      this._niveauLangueData.set('all', Object.values(stat));
+      this.tmpL = [];
+    });
 
-          this._statistiquesService.fetchByQuartierPrio('all').subscribe((stat: Map<String, number>) => {
-            for (let i = 0; i < Object.keys(stat).length; i++) {
-              this.tmpL.push(Object.keys(stat)[i]);
-            }
-            this.quartierPrioLabels.set('all', Array.from(this.tmpL));
-            this.quartierPrioData.set('all', Object.values(stat));
-            this.tmpL = [];
-          });
+    this._statistiquesService.fetchByNiveauScol('all').subscribe((stat: Map<number, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.tmpL.push(Object.keys(stat)[i]);
+      }
+      this._niveauScolLabels.set('all', Array.from(this.tmpL));
+      this._niveauScolData.set('all', Object.values(stat));
+      this.tmpL = [];
+    });
 
-          this._statistiquesService.fetchByNiveauScol('all').subscribe((stat: Map<number, number>) => {
-            for (let i = 0; i < Object.keys(stat).length; i++) {
-              this.tmpL.push(Object.keys(stat)[i]);
-            }
-            this.niveauScolLabels.set('all', Array.from(this.tmpL));
-            this.niveauScolData.set('all', Object.values(stat));
-            this.tmpL = [];
-          });
+    /*
 
-          this._statistiquesService.fetchByStatutPro('all').subscribe((stat: Map<String, number>) => {
-          });
+        this._statistiquesService.fetchByQuartierPrio('all').subscribe((stat: Map<String, number>) => {
+          for (let i = 0; i < Object.keys(stat).length; i++) {
+            this.tmpL.push(Object.keys(stat)[i]);
+          }
+          this.quartierPrioLabels.set('all', Array.from(this.tmpL));
+          this.quartierPrioData.set('all', Object.values(stat));
+          this.tmpL = [];
+        });
 
-          this._statistiquesService.fetchByPriseCharge('all').subscribe((stat: Map<number, number>) => {
-          });
 
-          this._statistiquesService.fetchByNiveauLangue('all').subscribe((stat: Map<String, number>) => {
-            for (let i = 0; i < Object.keys(stat).length; i++) {
-              this.tmpL.push(Object.keys(stat)[i]);
-            }
-            this.niveauLangueLabels.set('all', Array.from(this.tmpL));
-            this.niveauLangueData.set('all', Object.values(stat));
-            this.tmpL = [];
-          });
-      */
+        this._statistiquesService.fetchByStatutPro('all').subscribe((stat: Map<String, number>) => {
+        });
+
+        this._statistiquesService.fetchByPriseCharge('all').subscribe((stat: Map<number, number>) => {
+        });
+
+    */
 /*    this._sitesService.fetch().subscribe((sites: Site[]) => {
       this._sites = sites;
       this._sites.forEach((sit) => {
-        this._statistiquesService.fetchByNationalite(sit.ville).subscribe((stat: Map<String, number>) => {
-          for (let i = 0; i < Object.keys(stat).length; i++) {
-            this.tmpL.push(Object.keys(stat)[i]);
-          }
-          this.nationaliteLabels.set(sit.ville, Array.from(this.tmpL));
-          this.nationaliteData.set(sit.ville, Object.values(stat));
-          this.tmpL = [];
-        });
-
-        this._statistiquesService.fetchBySejour(sit.ville).subscribe((stat: Map<String, number>) => {
-          for (let i = 0; i < Object.keys(stat).length; i++) {
-            this.tmpL.push(Object.keys(stat)[i]);
-          }
-          this.sejourLabels.set(sit.ville, Array.from(this.tmpL));
-          this.sejourData.set(sit.ville, Object.values(stat));
-          this.tmpL = [];
-        });
 
         this._statistiquesService.fetchByQuartierPrio(sit.ville).subscribe((stat: Map<String, number>) => {
           for (let i = 0; i < Object.keys(stat).length; i++) {
@@ -230,14 +277,6 @@ export class StatistiquesComponent implements OnInit {
           this.tmpL = [];
         });
 
-        this._statistiquesService.fetchByNiveauScol(sit.ville).subscribe((stat: Map<number, number>) => {
-          for (let i = 0; i < Object.keys(stat).length; i++) {
-            this.tmpL.push(Object.keys(stat)[i]);
-          }
-          this.niveauScolLabels.set(sit.ville, Array.from(this.tmpL));
-          this.niveauScolData.set(sit.ville, Object.values(stat));
-          this.tmpL = [];
-        });
 
         this._statistiquesService.fetchByStatutPro(sit.ville).subscribe((stat: Map<String, number>) => {
         });
@@ -245,14 +284,6 @@ export class StatistiquesComponent implements OnInit {
         this._statistiquesService.fetchByPriseCharge(sit.ville).subscribe((stat: Map<number, number>) => {
         });
 
-        this._statistiquesService.fetchByNiveauLangue(sit.ville).subscribe((stat: Map<String, number>) => {
-          for (let i = 0; i < Object.keys(stat).length; i++) {
-            this.tmpL.push(Object.keys(stat)[i]);
-          }
-          this.niveauLangueLabels.set(sit.ville, Array.from(this.tmpL));
-          this.niveauLangueData.set(sit.ville, Object.values(stat));
-          this.tmpL = [];
-        });
       });
     });*/
   }
