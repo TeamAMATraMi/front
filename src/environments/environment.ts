@@ -34,7 +34,8 @@ export const environment = {
         },
         groupes: {
             allGroupes: '/api/groupes',
-            oneGroupe: '/api/groupes/:id'
+            oneGroupe: '/api/groupes/:id',
+            clearGroupe: '/api/groupesClear/:id'
         },
         associations: {
             allAssociations: '/api/associations',

@@ -8,6 +8,8 @@ import {Observable} from 'rxjs';
 import {GroupeDialogComponent} from '../shared/dialogs/groupe-dialog/groupe-dialog.component';
 import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
+import {ApprenantsService} from '../shared/services/apprenants.service';
+import {Apprenant} from '../shared/interfaces/apprenant';
 
 @Component({
   selector: 'app-groupes',
@@ -16,22 +18,26 @@ import {SitesService} from '../shared/services/sites.service';
 })
 export class GroupesComponent implements OnInit {
 
-  private _displayedColumns = ['Nom', 'Site', 'Delete'];
+  private _displayedColumns = ['Nom', 'Site', 'Nombre', 'Delete'];
   private _groupes: Groupe[];
+  private _apprenants: Apprenant[];
   private _groupesTemp: Groupe[];
   private _dialogStatus: string;
   private _groupesDialog: MatDialogRef<GroupeDialogComponent>;
   private readonly _delete$: EventEmitter<Groupe>;
   private _sites: Site[];
   private tmp: string;
+  private tmpInt: number;
   private _selectedSiteId: number | string;
 
   private _dataSource: MatTableDataSource<Groupe>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private _router: Router, private _groupesService: GroupesService,
-              private _dialog: MatDialog, private _sitesService: SitesService, private snackBar: MatSnackBar) {
+              private _dialog: MatDialog, private _sitesService: SitesService, private snackBar: MatSnackBar,
+              private _apprenantsServices: ApprenantsService) {
     this._groupes = [];
+    this._apprenants = [];
     this._groupesTemp = [];
     this._dialogStatus = 'inactive';
     this._sites = [];
@@ -56,7 +62,9 @@ export class GroupesComponent implements OnInit {
           data.nom.trim().toLowerCase().indexOf(filterValue) !== -1;
     });
     this._sitesService.fetch().subscribe((sites: Site[]) => { this._sites = sites; });
-
+    this._apprenantsServices.fetch().subscribe((app: Apprenant[]) => {
+        this._apprenants = app;
+    });
   }
 
   getVilleByIdGroup(id: number): string {
@@ -67,6 +75,16 @@ export class GroupesComponent implements OnInit {
       }
     });
     return this.tmp;
+  }
+
+  getNombreByIdGroup(id: number): number {
+      this.tmpInt = 0;
+      this._apprenants.forEach(s => {
+          if (s.idGroupe === id) {
+              this.tmpInt++;
+          }
+      });
+      return this.tmpInt;
   }
 
   /**
@@ -161,6 +179,17 @@ export class GroupesComponent implements OnInit {
     }
   }
 
+  clear(id: number) {
+    this._groupesService.clear(id).subscribe(null, null, () => this.ngOnInit());
+  }
+
+  clearConfirmation(id: number) {
+    if (confirm('Voulez vous vraiment vider ce groupe ?')) {
+      this.clear(id);
+      this.clearOpenSnackBar();
+    }
+  }
+
   get selectedSiteId(): number | string {
     return this._selectedSiteId;
   }
@@ -170,13 +199,19 @@ export class GroupesComponent implements OnInit {
   }
 
   addOpenSnackBar() {
-    this.snackBar.open('successfully added', 'OK', {
+    this.snackBar.open('ajout effectué', 'OK', {
       duration: 3000
     });
   }
 
   deleteOpenSnackBar() {
-    this.snackBar.open('successfully deleted', 'OK', {
+    this.snackBar.open('suppression effectué', 'OK', {
+      duration: 3000
+    });
+  }
+
+  clearOpenSnackBar() {
+    this.snackBar.open('nettoyage effectué', 'OK', {
       duration: 3000
     });
   }
