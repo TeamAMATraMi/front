@@ -36,6 +36,8 @@ export class FormateursComponent implements OnInit {
   private _formateursDialog: MatDialogRef<FormateurDialogComponent>;
   private _dataSource: MatTableDataSource<Formateur>;
 
+  private  value = '';
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 

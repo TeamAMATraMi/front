@@ -35,6 +35,7 @@ export class ApprenantsComponent implements OnInit {
 
   private _displayedColumns = ['NomPrenom', 'DateNaissance', 'PaysOrigine', 'Delete'];
   private _dataSource: MatTableDataSource<Apprenant>;
+  private  value = '';
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
