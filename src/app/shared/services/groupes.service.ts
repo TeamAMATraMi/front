@@ -44,6 +44,13 @@ export class GroupesService {
   }
 
   /**
+   * Function to clear one Groupe for current id
+   */
+  clear(id: number): Observable<string> {
+    return this._http.get<string>(this._backendURL.clearGroupe.replace(':id', id));
+  }
+
+  /**
    * Function to create a new Groupe
    */
   create(groupe: Groupe): Observable<any> {
