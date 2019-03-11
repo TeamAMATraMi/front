@@ -64,7 +64,7 @@ export class GroupesComponent implements OnInit {
     });
     this._sitesService.fetch().subscribe((sites: Site[]) => { this._sites = sites; });
     this._apprenantsServices.fetch().subscribe((app: Apprenant[]) => {
-        this._apprenants = app;
+      this._apprenants = app;
     });
   }
 
@@ -79,13 +79,13 @@ export class GroupesComponent implements OnInit {
   }
 
   getNombreByIdGroup(id: number): number {
-      this.tmpInt = 0;
-      this._apprenants.forEach(s => {
-          if (s.idGroupe === id) {
-              this.tmpInt++;
-          }
-      });
-      return this.tmpInt;
+    this.tmpInt = 0;
+    this._apprenants.forEach(s => {
+      if (s.idGroupe === id) {
+        this.tmpInt++;
+      }
+    });
+    return this.tmpInt;
   }
 
   /**
@@ -186,6 +186,7 @@ export class GroupesComponent implements OnInit {
 
   clear(id: number) {
     this._groupesService.clear(id).subscribe(null, null, () => this.ngOnInit());
+    this._dataSource = new MatTableDataSource<Groupe>(this._groupes);
   }
 
   clearConfirmation(id: number) {
