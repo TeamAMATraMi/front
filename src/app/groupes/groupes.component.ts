@@ -29,6 +29,7 @@ export class GroupesComponent implements OnInit {
   private tmp: string;
   private tmpInt: number;
   private _selectedSiteId: number | string;
+  private  value = '';
 
   private _dataSource: MatTableDataSource<Groupe>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
