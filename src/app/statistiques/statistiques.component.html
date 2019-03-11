@@ -1,5 +1,5 @@
 <br/><br/><br/>
-<mat-tab-group>
+<mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event)">
 
   <mat-tab label="all">
     <mat-grid-list cols="3" rowHeight="5:4">
@@ -7,7 +7,7 @@
         <mat-grid-tile-header>Répartition hommes / femmes</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="sexeData.get('all').values()"
+                  [data]="sexeData"
                   [labels]="sexeLabels.get('all')"
                   [chartType]="doughnut"
                   [colors]="chartColors"
@@ -28,13 +28,14 @@
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
       </mat-grid-tile>
+      !-->
 
       <mat-grid-tile>
         <mat-grid-tile-header>Répartition par nationalité</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="nationaliteData.get('all')"
-                  [labels]="nationaliteLabels.get('all')"
+                  [data]="nationaliteData"
+                  [labels]="nationaliteLabel"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -42,6 +43,7 @@
         </div>
       </mat-grid-tile>
 
+      <!--
       <mat-grid-tile>
         <mat-grid-tile-header>Répartition par site</mat-grid-tile-header>
         <div style="display: block">
@@ -106,15 +108,16 @@
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
       </mat-grid-tile>
+  !-->
     </mat-grid-list>
   </mat-tab>
-  <mat-tab *ngFor="let site of getSites() " label="{{site.ville}}">
+  <mat-tab *ngFor="let site of sites " label="{{site.ville}}">
     <mat-grid-list cols="3" rowHeight="5:4">
       <mat-grid-tile>
         <mat-grid-tile-header>Répartition hommes / femmes</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="sexeData[site]"
+                  [data]="sexeData"
                   [labels]="sexeLabels[site]"
                   [chartType]="doughnut"
                   [colors]="chartColors"
@@ -122,7 +125,7 @@
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
       </mat-grid-tile>
-
+      <!--
       <mat-grid-tile>
         <mat-grid-tile-header>Répartition par âge</mat-grid-tile-header>
         <div style="display: block">
@@ -135,13 +138,15 @@
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
       </mat-grid-tile>
+      -->
+
 
       <mat-grid-tile>
         <mat-grid-tile-header>Répartition par nationalité</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
-                  [data]="nationaliteData[site]"
-                  [labels]="nationaliteLabels[site]"
+                  [data]="nationaliteData"
+                  [labels]="nationaliteLabel"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
@@ -149,7 +154,8 @@
         </div>
       </mat-grid-tile>
 
-      <mat-grid-tile>
+      <!--
+    <mat-grid-tile>
         <mat-grid-tile-header>Répartition par titre de séjour</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
@@ -199,7 +205,7 @@
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
-      </mat-grid-tile><!-->
+      </mat-grid-tile>!-->
     </mat-grid-list>
   </mat-tab>
 </mat-tab-group>
