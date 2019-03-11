@@ -9,6 +9,8 @@ import {GroupesService} from '../../services/groupes.service';
 import {Groupe} from '../../interfaces/groupe';
 import {formatDate} from '@angular/common';
 import {ApprenantsService} from '../../services/apprenants.service';
+import {Site} from '../../interfaces/site';
+import {SitesService} from '../../services/sites.service';
 
 @Component({
   selector: 'app-apprenant-form',
@@ -28,6 +30,8 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   private _associations: Association[];
   private _quartiersPrio: QuartierPrioritaire[];
   private _groupes: Groupe[];
+  private _sites: Site[];
+  private _groupesTemp: Groupe[];
 
   private _statutSejour: string[] = ['Aucun', 'Régulier', 'Irrégulier', 'CEE', 'Demandeur d\'asile', 'Mineur non accompagné', 'Autre'];
   private _statutPro: string[] = ['Aucun', 'Salarié(e)', 'Femme au foyer', 'Demandeur d\'emploi inscrit à PE',
@@ -36,13 +40,16 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
                                     'Contrat aidé', 'Autre'];
 
   constructor(private _associationsService: AssociationsService, private _quartiersService: QuartiersService,
-              private _groupesService: GroupesService, private _apprenantsService: ApprenantsService) {
+              private _groupesService: GroupesService, private _apprenantsService: ApprenantsService,
+              private _sitesService: SitesService) {
     this._submit$ = new EventEmitter<Apprenant>();
     this._cancel$ = new EventEmitter<void>();
     this._form = this._buildForm();
     this._associations = [];
     this._quartiersPrio = [];
     this._groupes = [];
+    this._sites = [];
+    this._groupesTemp = [];
   }
 
   @Input()
@@ -75,7 +82,11 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   ngOnInit() {
     this._associationsService.fetch().subscribe((associations: Association[]) => this._associations = associations);
     this._quartiersService.fetch().subscribe((quartiers: QuartierPrioritaire[]) => this._quartiersPrio = quartiers);
-    this._groupesService.fetch().subscribe((groupes: Groupe[]) => this._groupes = groupes);
+    this._groupesService.fetch().subscribe((groupes: Groupe[]) => {
+      this._groupes = groupes;
+      this._groupesTemp = groupes;
+    });
+    this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
   }
 
   ngOnChanges(record) {
@@ -144,10 +155,14 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   submitConfirmation(apprenant: Apprenant) {
     this._apprenantsService.exist(apprenant.nom, apprenant.prenom).subscribe((res: boolean) => {
       this.exist = res;
-      if (!this.exist) {
-        this.submit(apprenant);
+      if (!this.isUpdateMode) {
+        if (!this.exist) {
+          this.submit(apprenant);
+        } else {
+          confirm('Attention doublon !');
+        }
       } else {
-        confirm('Attention doublon !');
+        this.submit(apprenant);
       }
     });
   }
@@ -235,7 +250,8 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
       statutPro: new FormControl('', Validators.compose([
       ])),
       typeContrat: new FormControl('', Validators.compose([
-      ]))
+      ])),
+      idSite: new FormControl('')
     });
   }
 
@@ -265,5 +281,22 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
 
   get typeContrat(): string[] {
     return this._typeContrat;
+  }
+
+  get sites(): Site[] {
+    return this._sites;
+  }
+
+  get groupesTemp(): Groupe[] {
+    return this._groupesTemp;
+  }
+
+  setGroupesTemp(id: number) {
+    this._groupesTemp = [];
+    this._groupes.forEach(g => {
+      if (g.idSite === this._form.get('idSite').value) {
+        this._groupesTemp.push(g);
+      }
+    });
   }
 }
