@@ -174,13 +174,13 @@ export class CoursComponent implements OnInit {
   }
 
   addOpenSnackBar() {
-    this.snackBar.open('successfully added', 'OK', {
+    this.snackBar.open('Ajout effectué avec succés', 'OK', {
       duration: 3000
     });
   }
 
   deleteOpenSnackBar() {
-    this.snackBar.open('successfully deleted', 'OK', {
+    this.snackBar.open('suppression effectué', 'OK', {
       duration: 3000
     });
   }
