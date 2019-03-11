@@ -24,8 +24,8 @@
         <span class="flex"></span>
         <span>
           <mat-form-field>
-              <input matInput (input)="applyFilter($event.target.value)" placeholder="Chercher" [(ngModel)]="value">
-              <button mat-button *ngIf="value" matSuffix mat-icon-button (click)="value='';afficherApprenants();">
+              <input matInput (input)="applyFilter($event.target.value)" placeholder="Chercher" [(ngModel)]="_valueForSearch">
+              <button mat-button *ngIf="_valueForSearch" matSuffix mat-icon-button (click)="_valueForSearch='';afficherApprenants();">
                     <mat-icon>close</mat-icon>
               </button>
           </mat-form-field>
