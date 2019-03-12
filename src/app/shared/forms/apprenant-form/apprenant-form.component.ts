@@ -40,16 +40,13 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
                                     'Contrat aidé', 'Autre'];
 
   constructor(private _associationsService: AssociationsService, private _quartiersService: QuartiersService,
-              private _groupesService: GroupesService, private _apprenantsService: ApprenantsService,
-              private _sitesService: SitesService) {
+              private _groupesService: GroupesService, private _apprenantsService: ApprenantsService) {
     this._submit$ = new EventEmitter<Apprenant>();
     this._cancel$ = new EventEmitter<void>();
     this._form = this._buildForm();
     this._associations = [];
     this._quartiersPrio = [];
     this._groupes = [];
-    this._sites = [];
-    this._groupesTemp = [];
   }
 
   @Input()
@@ -82,11 +79,7 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
   ngOnInit() {
     this._associationsService.fetch().subscribe((associations: Association[]) => this._associations = associations);
     this._quartiersService.fetch().subscribe((quartiers: QuartierPrioritaire[]) => this._quartiersPrio = quartiers);
-    this._groupesService.fetch().subscribe((groupes: Groupe[]) => {
-      this._groupes = groupes;
-      this._groupesTemp = groupes;
-    });
-    this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
+    this._groupesService.fetch().subscribe((groupes: Groupe[]) => this._groupes = groupes);
   }
 
   ngOnChanges(record) {
@@ -281,18 +274,5 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
 
   get sites(): Site[] {
     return this._sites;
-  }
-
-  get groupesTemp(): Groupe[] {
-    return this._groupesTemp;
-  }
-
-  setGroupesTemp(id: number) {
-    this._groupesTemp = [];
-    this._groupes.forEach(g => {
-      if (g.idSite === this._form.get('idSite').value) {
-        this._groupesTemp.push(g);
-      }
-    });
   }
 }

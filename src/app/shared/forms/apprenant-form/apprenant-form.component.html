@@ -672,17 +672,8 @@
                 </mat-expansion-panel-header>
                 <p>
                     <mat-form-field class="full-width">
-                        <mat-select placeholder="Site" formControlName="idSite" required>
-                            <mat-option *ngFor="let c of sites" [value]="c.id" (click)="setGroupesTemp(c.id)">
-                                {{ c.ville }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </p>
-                <p>
-                    <mat-form-field class="full-width">
                         <mat-select placeholder="Groupe" formControlName="idGroupe" required>
-                            <mat-option *ngFor="let c of groupesTemp" [value]="c.id">
+                            <mat-option *ngFor="let c of groupes" [value]="c.id">
                                 {{ c.nom }}
                             </mat-option>
                         </mat-select>
