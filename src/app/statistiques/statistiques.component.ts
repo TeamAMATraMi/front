@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 import {StatistiquesService} from '../shared/services/statistiques.service';
 import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
+import * as jsPDF from 'jspdf';
+import * as html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-statistiques',
@@ -113,8 +115,13 @@ export class StatistiquesComponent implements OnInit {
     console.log(e);
   }
 
-  public getSites() {
-    return this._sites;
+  makePdf() {
+    html2canvas(document.getElementById('content')).then(function(canvas) {
+      const img = canvas.toDataURL('image/png');
+      const doc = new jsPDF('landscape ', '', 'a2');
+      doc.addImage(img, 'JPEG', 10, -11);
+      doc.save('statistique.pdf');
+    });
   }
 
 }
