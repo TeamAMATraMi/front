@@ -7,7 +7,6 @@ mat-toolbar.extend-toolbar {
     width: 100%;
     z-index: 1;
     color: white;
-    margin-bottom: 10px;
 }
 
 mat-toolbar .flex {
@@ -30,7 +29,7 @@ mat-toolbar a:not(.active):hover {
 }
 
 mat-toolbar a img {
-    height: 100%;
+    height: 95%;
     margin-left: -60px;
 }
 

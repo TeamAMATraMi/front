@@ -6,7 +6,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {DialogComponent} from './shared/dialogs/apprenant-dialog/dialog.component';
-import { ChartsModule } from 'ng2-charts';
+import {ChartsModule } from 'ng2-charts';
 
 import {
   MatButtonModule,
@@ -25,6 +25,7 @@ import {
   MatTableModule,
   MatPaginatorModule, MatSortModule, MatTabsModule, MatGridListModule, MatSnackBarModule
 } from '@angular/material';
+
 import {SitesComponent} from './sites/sites.component';
 import {ApprenantsComponent} from './apprenants/apprenants.component';
 import {FormateursComponent} from './formateurs/formateurs.component';
@@ -60,8 +61,8 @@ import {SiteDialogComponent} from './shared/dialogs/site-dialog/site-dialog.comp
 import {SiteComponent} from './site/site.component';
 import {CoursFormComponent} from './shared/forms/cours-form/cours-form.component';
 import {CoursDialogComponent} from './shared/dialogs/cours-dialog/cours-dialog.component';
-import { UpdateCoursComponent } from './update/update-cours/update-cours.component';
-import { LoginComponent } from './login/login.component';
+import {UpdateCoursComponent } from './update/update-cours/update-cours.component';
+import {LoginComponent } from './login/login.component';
 
 import {PresencesComponent} from './presences/presences.component';
 import {PresenceComponent} from './presence/presence.component';
@@ -70,7 +71,7 @@ import {PresenceDialogComponent} from './shared/dialogs/presence-dialog/presence
 import {UpdatePresenceComponent} from './update/update-presence/update-presence.component';
 import {JwtInterceptor} from './shared/interceptors/jwt.interceptor';
 import {ErrorInterceptor} from './shared/interceptors/error.interceptor';
-import { LogoutComponent } from './logout/logout.component';
+import {LogoutComponent } from './logout/logout.component';
 
 
 @NgModule({

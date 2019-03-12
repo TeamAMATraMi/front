@@ -201,7 +201,7 @@ export class GroupesComponent implements OnInit {
   }
 
   addOpenSnackBar() {
-    this.snackBar.open('ajout effectué', 'OK', {
+    this.snackBar.open('Ajout effectué avec succés', 'OK', {
       duration: 3000
     });
   }

@@ -29,10 +29,6 @@ export class CourComponent implements OnInit {
     return this._cour;
   }
 
-  set cour(value: Cours) {
-    this._cour = value;
-  }
-
   modifier(cour: Cours) {
     this._coursService
       .update(cour)

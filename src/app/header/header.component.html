@@ -10,12 +10,10 @@
     <a [routerLink]="['/sites']">Sites</a>
     <a [routerLink]="['/groupes']">Groupes</a>
     <a [routerLink]="['/statistiques']">Statistiques</a>
-    <a [routerLink]="['/logout']" *ngIf="logged">
-      <button mat-button >
-        <mat-icon [ngStyle]="{'color':'white'}" svgIcon="logo-logout"></mat-icon>
-      </button>
-      Se Déconnecter
-    </a>
-
   </span>
+    <div style="cursor: pointer;"[routerLink]="['/logout']" *ngIf="logged">
+      <button mat-button >
+        <mat-icon>exit_to_app </mat-icon> Se Déconnecter
+      </button>
+    </div>
 </mat-toolbar>
