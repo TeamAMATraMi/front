@@ -16,6 +16,7 @@ import {CoursComponent} from './cours/cours.component';
 import {CourComponent} from './cour/cour.component';
 import {UpdateCoursComponent} from './update/update-cours/update-cours.component';
 import {LoginComponent} from './login/login.component';
+import {SignupComponent} from './signup/signup.component';
 import {UpdatePresenceComponent} from './update/update-presence/update-presence.component';
 import {AuthGuard} from './guard/auth.guard';
 import {PresenceComponent} from './presence/presence.component';
@@ -42,6 +43,7 @@ const routes: Routes = [
     { path: 'updateGroupe/:id', component: UpdateGroupeComponent, canActivate: [AuthGuard] },
     { path: 'statistiques', component: StatistiquesComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent},
+    { path: 'signup', component: SignupComponent},
     { path: 'login/:error', component: LoginComponent},
     { path: 'updatePresence/:id/:date', component: UpdatePresenceComponent, canActivate: [AuthGuard] },
     { path: 'statistiques', component: StatistiquesComponent, canActivate: [AuthGuard]},

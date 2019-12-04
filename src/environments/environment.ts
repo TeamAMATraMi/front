@@ -10,7 +10,8 @@ export const environment = {
         port: '28080',
         endpoints: {
             auth: {
-                login: '/login'
+                login: '/login',
+                signup: '/sign-up'
             },
             apprenants: {
                 allApprenants: '/api/apprenants',

@@ -1,0 +1,36 @@
+.mat-card{
+    padding: 50px;
+    border-radius: 25px;
+}
+.form-container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    padding:20px;
+}
+#logo {
+    width:200px;
+    height:200px;
+}
+.cur{
+    cursor: pointer;
+}
+
+.fixedWidth {
+    width:400px;
+}
+
+#submitButton {
+    color: black;
+    background: #634672;
+}
+
+.align-center, a {
+    text-align: center;
+    text-decoration: none;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}

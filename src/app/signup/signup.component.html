@@ -1,0 +1,21 @@
+<form class="form-container" novalidate [formGroup]="form">
+  <mat-card class="align-center" style="opacity: 1;width:500px">
+    <mat-icon id="logo" svgIcon="logo-login"></mat-icon>
+    <h1 class="mat-headline">Creer un compte</h1>
+
+    <mat-form-field class="fixedWidth">
+      <mat-label>Utilisateur</mat-label>
+      <input matInput placeholder="Nom d'utilisateur" formControlName="username">
+    </mat-form-field>
+
+    <mat-form-field class="fixedWidth">
+      <mat-label>Mot de passe</mat-label>
+      <input matInput placeholder="Mot de passe" [type]="hide ? 'password' : 'text'" formControlName="password">
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </mat-form-field>
+
+    <mat-card-actions>
+      <button class="fixedWidth" id="submitButton" color="accent" mat-button type="submit" (click)="submit(form.value)" [disabled]="form.invalid">Creer</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

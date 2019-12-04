@@ -63,6 +63,7 @@ import {CoursFormComponent} from './shared/forms/cours-form/cours-form.component
 import {CoursDialogComponent} from './shared/dialogs/cours-dialog/cours-dialog.component';
 import {UpdateCoursComponent } from './update/update-cours/update-cours.component';
 import {LoginComponent } from './login/login.component';
+import {SignupComponent } from './signup/signup.component';
 
 import {PresencesComponent} from './presences/presences.component';
 import {PresenceComponent} from './presence/presence.component';
@@ -112,6 +113,7 @@ import {LogoutComponent } from './logout/logout.component';
         SiteComponent,
         UpdateCoursComponent,
         LoginComponent,
+        SignupComponent,
         PresenceComponent,
         PresencesComponent,
         PresenceFormComponent,
