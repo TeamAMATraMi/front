@@ -4,7 +4,7 @@ export const environment = {
     backend: {
         protocol: 'http',
         host: '92.222.9.74',
-        port: '8080',
+        port: '28080',
         endpoints: {
             auth: {
                 login: '/login'
