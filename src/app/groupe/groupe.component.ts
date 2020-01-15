@@ -8,7 +8,13 @@ import {ApprenantsService} from '../shared/services/apprenants.service';
 import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
 import {MatPaginator, MatSort, MatTableDataSource, Sort} from '@angular/material';
-import * as jsPDF from "jspdf";
+import {CoursService} from '../shared/services/cours.service';
+import {Cours} from '../shared/interfaces/cours';
+declare const require: any;
+const jsPDF = require('jspdf');
+require('jspdf-autotable');
+
+
 
 @Component({
   selector: 'app-groupe',
@@ -27,7 +33,7 @@ export class GroupeComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _apprenantsService: ApprenantsService, private _route: ActivatedRoute, private _sitesService: SitesService) {
+  constructor(private _apprenantsService: ApprenantsService, private _route: ActivatedRoute, private _sitesService: SitesService, private _coursService: CoursService) {
     this._groupe = {} as Groupe;
     this._apprenants = [];
     this._sites = [];
@@ -90,17 +96,50 @@ export class GroupeComponent implements OnInit {
   }
 
   downloadPDF() {
-    const doc = new jsPDF();
-    this._apprenants.forEach(element => {
-      doc.text(20, 20, 'Hello world!');
-      doc.text(20, 30, 'This is client-side Javascript, pumping out a PDF.');
-      doc.addPage();
-      doc.text(20, 20, 'Do you like that?');
+    this._route.params.pipe(
+        filter(params => !!params['id']),
+        flatMap(params => this._coursService.fetchFromGroup(params['id'])),
+    )
+    .subscribe((cours: Cours[]) => {
+      const doc = new jsPDF();
+      const apprenantsRows = [];
+      this._apprenants.forEach(apprenant => {
+        const cols = [];
+        cols.push(apprenant.prenom + ' ' + apprenant.nom.toUpperCase());
+        cours.forEach(cour =>{
+          cols.push('');
+        });
+        apprenantsRows.push(cols);
 
+      });
+      const header = ['Apprenant'];
+      cours.forEach(cour => {
+        const columnName = cour.matiere + ' ' + cour.horaire;
+        header.push(columnName);
+      });
+      doc.autoTable({
+        headerStyles: {
+          fillColor: [255, 255, 255],
+          fontStyle: 'bold',
+          textColor: [0, 0, 0]
+        },
+        head: [
+            [
+                {content: ''},
+                {
+                  content: 'Cours',
+                  colSpan: (header.length - 1)
+                }
+            ],
+            header],
+        body: apprenantsRows,
+      });
+
+
+      // Save the PDF
+      doc.save('Présences_' + Date.now() + '.pdf');
     });
 
-    // Save the PDF
-    doc.save('Test.pdf');
   }
 
   sortData(sort: Sort) {
