@@ -8,6 +8,7 @@ import {ApprenantsService} from '../shared/services/apprenants.service';
 import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
 import {MatPaginator, MatSort, MatTableDataSource, Sort} from '@angular/material';
+import * as jsPDF from "jspdf";
 
 @Component({
   selector: 'app-groupe',
@@ -86,6 +87,20 @@ export class GroupeComponent implements OnInit {
 
   get dataSource(): MatTableDataSource<Apprenant> {
     return this._dataSource;
+  }
+
+  downloadPDF() {
+    const doc = new jsPDF();
+    this._apprenants.forEach(element => {
+      doc.text(20, 20, 'Hello world!');
+      doc.text(20, 30, 'This is client-side Javascript, pumping out a PDF.');
+      doc.addPage();
+      doc.text(20, 20, 'Do you like that?');
+
+    });
+
+    // Save the PDF
+    doc.save('Test.pdf');
   }
 
   sortData(sort: Sort) {
