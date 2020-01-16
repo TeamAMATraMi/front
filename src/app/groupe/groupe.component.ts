@@ -96,6 +96,8 @@ export class GroupeComponent implements OnInit {
   }
 
   downloadPDF() {
+    const SESSION_CELL_MAX_CHARACTERS = 10;
+    const SESSION_CELL_WIDTH = 20;
     this._route.params.pipe(
         filter(params => !!params['id']),
         flatMap(params => this._coursService.fetchFromGroup(params['id'])),
@@ -113,16 +115,27 @@ export class GroupeComponent implements OnInit {
 
       });
       const header = ['Apprenant'];
+      const ownColumnStyles = {
+        0: {
+          columnWidth: 'auto'
+        }
+      };
+      var index = 1;
       cours.forEach(cour => {
-        const columnName = cour.matiere + ' ' + cour.horaire;
+        var columnName = cour.matiere + ' ' + cour.horaire;
+        columnName = columnName.substring(0, SESSION_CELL_MAX_CHARACTERS) + '...';
         header.push(columnName);
+        ownColumnStyles[index++] = {columnWidth: SESSION_CELL_WIDTH};
       });
       doc.autoTable({
+        showHead: 'everyPage',
+        theme: 'grid',
         headerStyles: {
           fillColor: [255, 255, 255],
           fontStyle: 'bold',
           textColor: [0, 0, 0]
         },
+        columnStyles: ownColumnStyles,
         head: [
             [
                 {content: ''},
