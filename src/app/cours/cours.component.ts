@@ -32,7 +32,7 @@ export class CoursComponent implements OnInit {
   private _formateur: Formateur; // Variable temporaire
 
   private _dataSource: MatTableDataSource<Cours>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
   constructor(private _router: Router, private _coursService: CoursService, private _formateursService: FormateursService,
               private _groupesService: GroupesService, private _presencesService: PresencesService,

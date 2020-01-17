@@ -115,13 +115,13 @@ export class StatistiquesComponent implements OnInit {
     console.log(e);
   }
 
-  makePdf() {
-    html2canvas(document.getElementById('content')).then(function(canvas) {
-      const img = canvas.toDataURL('image/png');
-      const doc = new jsPDF('landscape ', '', 'a2');
-      doc.addImage(img, 'JPEG', 10, -11);
-      doc.save('statistique.pdf');
-    });
-  }
+  // makePdf() {
+  //   html2canvas(document.getElementById('content')).then(function(canvas) {
+  //     const img = canvas.toDataURL('image/png');
+  //     const doc = new jsPDF('landscape ', '', 'a2');
+  //     doc.addImage(img, 'JPEG', 10, -11);
+  //     doc.save('statistique.pdf');
+  //   });
+  // }
 
 }

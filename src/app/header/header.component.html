@@ -3,7 +3,7 @@
 
   <span class="flex"></span>
 
-  <span>
+  <span *ngIf="logged">
     <a [routerLink]="['/apprenants']">Apprenants</a>
     <a [routerLink]="['/formateurs']">Formateurs</a>
     <a [routerLink]="['/cours']">Cours</a>

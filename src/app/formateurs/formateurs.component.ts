@@ -38,8 +38,8 @@ export class FormateursComponent implements OnInit {
 
   value = '';
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(private _router: Router, private _formateursService: FormateursService, private _sitesService: SitesService,
               private _dialog: MatDialog, private _groupesService: GroupesService, private snackBar: MatSnackBar) {

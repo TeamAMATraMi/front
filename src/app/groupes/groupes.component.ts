@@ -10,6 +10,8 @@ import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
 import {ApprenantsService} from '../shared/services/apprenants.service';
 import {Apprenant} from '../shared/interfaces/apprenant';
+import {Formateur} from '../shared/interfaces/formateur';
+import {FormateursService} from '../shared/services/formateurs.service';
 
 @Component({
   selector: 'app-groupes',
@@ -18,7 +20,7 @@ import {Apprenant} from '../shared/interfaces/apprenant';
 })
 export class GroupesComponent implements OnInit {
 
-  private _displayedColumns = ['Nom', 'Site', 'Nombre', 'Delete'];
+  private _displayedColumns = ['Nom', 'Site', 'Formateur', 'Nombre', 'Delete'];
   private _groupes: Groupe[];
   private _apprenants: Apprenant[];
   private _groupesTemp: Groupe[];
@@ -26,25 +28,30 @@ export class GroupesComponent implements OnInit {
   private _groupesDialog: MatDialogRef<GroupeDialogComponent>;
   private readonly _delete$: EventEmitter<Groupe>;
   private _sites: Site[];
+  private _formateurs: Formateur[];
   private tmp: string;
   private tmpInt: number;
   private _selectedSiteId: number | string;
   value = '';
 
   private _dataSource: MatTableDataSource<Groupe>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
   constructor(private _router: Router, private _groupesService: GroupesService,
               private _dialog: MatDialog, private _sitesService: SitesService, private snackBar: MatSnackBar,
-              private _apprenantsServices: ApprenantsService) {
+              private _apprenantsServices: ApprenantsService, private _formateursService: FormateursService) {
     this._groupes = [];
     this._apprenants = [];
     this._groupesTemp = [];
     this._dialogStatus = 'inactive';
     this._sites = [];
+    this._formateurs = [];
     this._selectedSiteId = 'allSites';
   }
 
+  get formateurs(): Formateur[] {
+    return this._formateurs;
+  }
   get sites(): Site[] {
     return this._sites;
   }
@@ -63,6 +70,7 @@ export class GroupesComponent implements OnInit {
           data.nom.trim().toLowerCase().indexOf(filterValue) !== -1;
     });
     this._sitesService.fetch().subscribe((sites: Site[]) => { this._sites = sites; });
+    this._formateursService.fetch().subscribe((formateurs: Formateur[]) => { this._formateurs = formateurs; });
     this._apprenantsServices.fetch().subscribe((app: Apprenant[]) => {
       this._apprenants = app;
     });
@@ -77,6 +85,17 @@ export class GroupesComponent implements OnInit {
     });
     return this.tmp;
   }
+
+  getFormateurByIdGroup(id: number): string {
+    this.tmp = 'default';
+    this._formateurs.forEach(s => {
+      if (s.id === id) {
+        this.tmp = s.nom;
+      }
+    });
+    return this.tmp;
+  }
+
 
   getNombreByIdGroup(id: number): number {
     this.tmpInt = 0;

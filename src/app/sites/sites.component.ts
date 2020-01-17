@@ -20,7 +20,7 @@ export class SitesComponent implements OnInit {
   private _displayedColumns = ['id', 'ville', 'Delete'];
 
   private _dataSource: MatTableDataSource<Site>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
   constructor(private _router: Router, private _sitesService: SitesService, private _dialog: MatDialog,
               private snackBar: MatSnackBar) {

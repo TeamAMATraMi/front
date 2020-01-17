@@ -37,8 +37,8 @@ export class ApprenantsComponent implements OnInit {
   private _dataSource: MatTableDataSource<Apprenant>;
   _valueForSearch = '';
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(private _router: Router, private _apprenantsService: ApprenantsService, private _sitesService: SitesService,
               private _groupesService: GroupesService, private _dialog: MatDialog, private snackBar: MatSnackBar) {

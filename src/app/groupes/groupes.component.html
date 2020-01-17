@@ -42,6 +42,12 @@
                 <mat-cell *matCellDef="let element"> {{ getVilleByIdGroup(element.idSite) }} </mat-cell>
             </ng-container>
 
+            <ng-container matColumnDef="Formateur">
+                <mat-header-cell *matHeaderCellDef> Formateur</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{ getFormateurByIdGroup(element.idFormateur) }} </mat-cell>
+            </ng-container>
+
+
             <ng-container matColumnDef="Nombre">
                 <mat-header-cell *matHeaderCellDef> Nombre de personnes</mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{ getNombreByIdGroup(element.id) }} </mat-cell>

@@ -30,8 +30,8 @@ export class GroupeComponent implements OnInit {
   private _dataSource: MatTableDataSource<Apprenant>;
   private _displayedColumns = ['NomPrenom', 'DateNaissance', 'PaysOrigine'];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(private _apprenantsService: ApprenantsService, private _route: ActivatedRoute, private _sitesService: SitesService, private _coursService: CoursService) {
     this._groupe = {} as Groupe;

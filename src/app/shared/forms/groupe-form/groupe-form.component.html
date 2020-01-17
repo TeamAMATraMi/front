@@ -6,18 +6,6 @@
     <mat-accordion>
         <p>
           <mat-form-field class="full-width">
-            <mat-select placeholder="Site" formControlName="ville" name="ville">
-              <mat-option *ngFor="let s of sites; let i = index;" [value]="s.ville">
-                {{s.ville}}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="form.get('ville').dirty && form.get('ville').hasError('required')">
-              ville est <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field class="full-width">
             <input matInput placeholder="Nom" formControlName="nom" minlength="2" required name="nom" />
             <mat-error *ngIf="form.get('nom').dirty && form.get('nom').hasError('required')">
               nom est <strong>requis</strong>
@@ -27,6 +15,35 @@
             </mat-error>
           </mat-form-field>
         </p>
+
+
+      <p>
+        <mat-form-field class="full-width">
+          <mat-select placeholder="ville" formControlName="nomVille" name="nomVille">
+            <mat-option *ngFor="let s of sites; let i = index;" [value]="s.ville">
+              {{s.ville}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('nomVille').dirty && form.get('nomVille').hasError('required')">
+            ville est <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field class="full-width">
+          <mat-select placeholder="nomFormateur" formControlName="nomFormateur" name="nomFormateur">
+            <mat-option *ngFor="let f of formateurs; let i = index;" [value]="f.nom">
+              {{f.nom}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('nomFormateur').dirty && form.get('nomFormateur').hasError('required')">
+            Formateur est <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+
     </mat-accordion>
   </form>
 </mat-dialog-content>

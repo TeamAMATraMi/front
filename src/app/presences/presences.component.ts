@@ -28,7 +28,7 @@ export class PresencesComponent implements OnInit {
   private _nomCours: string;
   private _idCours: number;
   private _dataSource: MatTableDataSource<number>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
   constructor(private _route: ActivatedRoute, private _presencesService: PresencesService,
               private _dialog: MatDialog, private _apprenantsService: ApprenantsService,

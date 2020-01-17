@@ -3,6 +3,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SitesService} from '../../services/sites.service';
 import {Site} from '../../interfaces/site';
 import {Groupe} from '../../interfaces/groupe';
+import {Formateur} from '../../interfaces/formateur';
+import {FormateursService} from '../../services/formateurs.service';
 
 @Component({
   selector: 'app-groupe-form',
@@ -14,23 +16,29 @@ export class GroupeFormComponent implements OnInit, OnChanges {
   private _isUpdateMode: boolean;
   private _groupe: Groupe;
   private _sites: Site[];
+  private _formateurs: Formateur[];
 
   private readonly _cancel$: EventEmitter<void>;
   private readonly _submit$: EventEmitter<Groupe>;
   private readonly _form: FormGroup;
   private tmp: string;
 
-  constructor(private _sitesService: SitesService) {
+  constructor(private _sitesService: SitesService, private _formateurService: FormateursService) {
     this._submit$ = new EventEmitter<Groupe>();
     this._cancel$ = new EventEmitter<void>();
     this._form = this._buildForm();
     this._sites = [];
+    this._formateurs = [];
   }
 
   ngOnInit() {
     this._sitesService.fetch().subscribe((sites: Site[]) => {
       this._sites = sites;
       this._form.patchValue({ville: this._sites.length > 0 ? this.getVilleByIdGroup(this._groupe.idSite) : '' });
+        }
+    );
+    this._formateurService.fetch().subscribe((formateurs: Formateur[]) => {
+          this._formateurs = formateurs;
         }
     );
   }
@@ -58,6 +66,14 @@ export class GroupeFormComponent implements OnInit, OnChanges {
     this._sites = value;
   }
 
+  get formateurs(): Formateur[] {
+    return this._formateurs;
+  }
+
+  set formateurs(value: Formateur[]) {
+    this._formateurs = value;
+  }
+
   get isUpdateMode(): boolean {
     return this._isUpdateMode;
   }
@@ -77,8 +93,13 @@ export class GroupeFormComponent implements OnInit, OnChanges {
 
   submit(groupe: Groupe) {
     for (let i = 0; i < this.sites.length; i++) {
-      if (this._sites[i].ville === this._form.get('ville').value) {
+      if (this._sites[i].ville === this._form.get('nomVille').value) {
         groupe.idSite = this._sites[i].id;
+      }
+    }
+    for (let i = 0; i < this.formateurs.length; i++) {
+      if (this._formateurs[i].nom === this._form.get('nomFormateur').value) {
+        groupe.idFormateur = this._formateurs[i].id;
       }
     }
     this._submit$.emit(groupe);
@@ -100,7 +121,10 @@ export class GroupeFormComponent implements OnInit, OnChanges {
       nom: new FormControl('', Validators.compose([
         Validators.required, Validators.minLength(2)
       ])),
-      ville: new FormControl('', Validators.compose([
+      nomVille: new FormControl('', Validators.compose([
+        Validators.required, Validators.minLength(2)
+      ])),
+      nomFormateur: new FormControl('', Validators.compose([
         Validators.required
       ]))
     });
@@ -115,6 +139,7 @@ export class GroupeFormComponent implements OnInit, OnChanges {
     } else {
       this._groupe = {
         idSite: 0,
+        idFormateur: 0,
         nom: ''
       };
       this._isUpdateMode = false;
