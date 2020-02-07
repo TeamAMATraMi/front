@@ -9,7 +9,7 @@ import {Seance} from '../../interfaces/seance';
 import {SeancesService} from '../../services/seances.service';
 
 @Component({
-  selector: 'app-cours-form',
+  selector: 'app-seance-form',
   templateUrl: './seance-form.component.html',
   styleUrls: ['./seance-form.component.css']
 })

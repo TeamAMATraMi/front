@@ -95,6 +95,7 @@ export class GroupeComponent implements OnInit {
     return this._dataSource;
   }
 
+  /**
   downloadPDF() {
     const SESSION_CELL_MAX_CHARACTERS = 10;
     const SESSION_CELL_WIDTH = 20;
@@ -154,6 +155,8 @@ export class GroupeComponent implements OnInit {
     });
 
   }
+
+   */
 
   sortData(sort: Sort) {
     const data = this._dataSource.data.slice();

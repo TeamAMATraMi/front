@@ -1,3 +1,10 @@
 <section>
   <app-cour-details [cour]="cour" (modifier)="modifier($event)"> </app-cour-details>
 </section>
+
+
+<section class="buttons-fab" *ngIf="dialogStatus === 'inactive'">
+  <button (click)="showDialog()" mat-fab color="primary" class="button-add">
+    <b class="material-icons">+</b>
+  </button>
+</section>
