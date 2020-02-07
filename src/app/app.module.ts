@@ -74,7 +74,7 @@ import {JwtInterceptor} from './shared/interceptors/jwt.interceptor';
 import {ErrorInterceptor} from './shared/interceptors/error.interceptor';
 import {LogoutComponent } from './logout/logout.component';
 import {SeanceFormComponent} from './shared/forms/seance-form/seance-form.component';
-import { SeanceDialogComponent } from './shared/dialogs/seance-dialog/seance-dialog.component';
+import {SeanceDialogComponent} from './shared/dialogs/seance-dialog/seance-dialog.component';
 
 
 @NgModule({
