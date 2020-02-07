@@ -40,12 +40,7 @@ export class SeancesService {
      * Function to return all Seances for cours id
      */
     fetchFromCours(id: number): Observable<Seance[]> {
-        return this._http.get<Seance[]>(this._backendURL.allSeances)
-            .pipe(
-                filter(_ => !!_ ),
-                map(_ => _.filter(__ => __.idCours == id)),
-                defaultIfEmpty([])
-            );
+        return this._http.get<Seance[]>(this._backendURL.allSeancesByCours.replace(':id', id));
     }
 
     /**
