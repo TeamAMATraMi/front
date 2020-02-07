@@ -100,9 +100,6 @@ export class CoursFormComponent implements OnInit, OnChanges {
       matiere: new FormControl('', Validators.compose([
         Validators.required
       ])),
-      horaire: new FormControl('', Validators.compose([
-        Validators.required
-      ])),
       formateur: new FormControl('', Validators.compose([
         Validators.required
       ])),
@@ -149,7 +146,6 @@ export class CoursFormComponent implements OnInit, OnChanges {
     } else {
       this._cours = {
         duree: 0,
-        horaire: 0,
         idFormateur: 0,
         idGroupe: 0,
         matiere: ''

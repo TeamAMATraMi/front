@@ -27,19 +27,11 @@
         <p>
           <mat-form-field class="full-width">
             <input matInput placeholder="Horaire" type="time" id="appt" formControlName="horaire" minlength="2" required name="horaire" />
-            <mat-error *ngIf="form.get('horaire').dirty && form.get('horaire').hasError('required')">
-              horaire est <strong>requis</strong>
-            </mat-error>
-            <mat-error *ngIf="form.get('horaire').dirty && form.get('horaire').hasError('minlength')">
-              min <strong>2 lettres</strong>
-            </mat-error>
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Durée" formControlName="duree" maxlength="255" required name="duree" />
             <mat-error *ngIf="form.get('duree').dirty && form.get('duree').hasError('required')">
-              duree est <strong>requis</strong>
+              durée est <strong>requis</strong>
+            </mat-error>
+            <mat-error *ngIf="form.get('duree').dirty && form.get('duree').hasError('minlength')">
+              min <strong>2 lettres</strong>
             </mat-error>
           </mat-form-field>
         </p>
