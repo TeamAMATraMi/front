@@ -73,6 +73,7 @@ import {UpdatePresenceComponent} from './update/update-presence/update-presence.
 import {JwtInterceptor} from './shared/interceptors/jwt.interceptor';
 import {ErrorInterceptor} from './shared/interceptors/error.interceptor';
 import {LogoutComponent } from './logout/logout.component';
+import {SeanceFormComponent} from './shared/forms/seance-form/seance-form.component';
 
 
 @NgModule({
@@ -111,6 +112,7 @@ import {LogoutComponent } from './logout/logout.component';
         SiteDialogComponent,
         SiteFormComponent,
         SiteComponent,
+        SeanceFormComponent,
         UpdateCoursComponent,
         LoginComponent,
         SignupComponent,

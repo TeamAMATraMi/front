@@ -37,6 +37,18 @@ export class CoursService {
     }
 
     /**
+     * Function to return all Cours for group id
+     */
+    fetchFromGroup(id: number): Observable<Cours[]> {
+        return this._http.get<Cours[]>(this._backendURL.allCours)
+            .pipe(
+                filter(_ => !!_ ),
+                map(_ => _.filter(__ => __.idGroupe == id)),
+                defaultIfEmpty([])
+            );
+    }
+
+    /**
      * Function to return one Cours for current id
      */
     fetchOne(id: number): Observable<Cours> {
@@ -56,7 +68,7 @@ export class CoursService {
     delete(id: number): Observable<number> {
       return this._http.delete(this._backendURL.oneCours.replace(':id', id))
         .pipe(
-          map(_ => id)
+          map(_ =>  id)
         );
     }
 

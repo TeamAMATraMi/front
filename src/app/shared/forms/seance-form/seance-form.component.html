@@ -1,0 +1,47 @@
+<h2 mat-dialog-title *ngIf="isUpdateMode">Modifier un cours</h2>
+<h2 mat-dialog-title *ngIf="!isUpdateMode">Ajouter un cours</h2>
+
+<mat-dialog-content>
+  <form novalidate [formGroup]="form">
+
+    <p *ngIf="isUpdateMode">
+      <span style="width:100%">{{ form.get('matiere').value }} {{ form.get('horaire').value }}</span>
+    </p>
+
+    <mat-accordion>
+      <mat-expansion-panel expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Profil</mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Date" type="time" id="appt" formControlName="date" minlength="2" required name="date" />
+            <mat-error *ngIf="form.get('date').dirty && form.get('date').hasError('required')">
+              date est <strong>requis</strong>
+            </mat-error>
+            <mat-error *ngIf="form.get('date').dirty && form.get('date').hasError('minlength')">
+              min <strong>2 lettres</strong>
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Horaire" type="time" id="apph" formControlName="horaire" minlength="2" required name="horaire" />
+            <mat-error *ngIf="form.get('horaire').dirty && form.get('horaire').hasError('required')">
+              horaire est <strong>requis</strong>
+            </mat-error>
+            <mat-error *ngIf="form.get('horaire').dirty && form.get('horaire').hasError('minlength')">
+              min <strong>2 lettres</strong>
+            </mat-error>
+          </mat-form-field>
+        </p>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()">Annuler</button>
+  <button mat-button color="primary" type="submit" (click)="submit(form.value)" [disabled]="form.invalid">Enregistrer</button>
+</mat-dialog-actions>
