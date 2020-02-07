@@ -119,7 +119,7 @@ import {LogoutComponent } from './logout/logout.component';
         PresenceFormComponent,
         PresenceDialogComponent,
         UpdatePresenceComponent,
-        LogoutComponent
+        LogoutComponent,
     ],
     entryComponents: [
         DialogComponent,
