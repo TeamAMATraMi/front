@@ -20,6 +20,8 @@ export class PresenceFormComponent implements OnInit, OnChanges {
   private readonly _submit$: EventEmitter<Presence>;
   private readonly _form: FormGroup;
 
+  public displayedColumns: string[] = ['idApprenant', 'present'];
+
   constructor(private _presencesService: PresencesService, private _route: ActivatedRoute) {
     this._submit$ = new EventEmitter<Presence>();
     this._cancel$ = new EventEmitter<void>();

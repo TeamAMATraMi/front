@@ -1,18 +1,42 @@
 <h2 mat-dialog-title> Modifier la fiche de présence</h2>
 
-      <mat-dialog-content *ngFor="let presence of presences">
-        <form novalidate [formGroup]="form">
+      <mat-dialog-content>
+          <table mat-table [dataSource]="presences" class="mat-elevation-z8">
+              <!-- Position Column -->
+              <ng-container matColumnDef="idApprenant">
+                  <th mat-header-cell *matHeaderCellDef> # </th>
+                  <td mat-cell *matCellDef="let element"> {{element.idApprenant}} </td>
+              </ng-container>
 
-          <p>
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="present">
+                  <th mat-header-cell *matHeaderCellDef> Présence </th>
+                  <td mat-cell *matCellDef="let element">
+                      <mat-radio-group>
+                          <mat-radio-button value="present" [checked]="element.present">Présent</mat-radio-button>
+                          <mat-radio-button value="absent" [checked]="!element.present">Absent</mat-radio-button>
+                      </mat-radio-group>
+                  </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+<!--
+          <form novalidate [formGroup]="form" *ngFor="let presence of presences">
+
             <mat-dialog-actions>
                 <div formControlName="idApprenant"> {{ presence.idApprenant }} </div>
-                <div formControlName="present"> {{ presence.present }} </div>
-              <button mat-button color="primary" type="submit" align="right" (click)="submit(form.value)" [disabled]="form.invalid">Present</button>
-              <button mat-button color="warn" type="submit" align="right" (click)="submit(form.value)" [disabled]="form.invalid">Absent</button>
+                <mat-radio-group>
+                    <mat-radio-button (click)="submit(form.value)" [value]="presence.present">Présent</mat-radio-button>
+                    <mat-radio-button (click)="submit(form.value)" [value]="!presence.present">Absent</mat-radio-button>
+                </mat-radio-group>
             </mat-dialog-actions>
-          </p>
+
 
         </form>
+        -->
       </mat-dialog-content>
 
 
