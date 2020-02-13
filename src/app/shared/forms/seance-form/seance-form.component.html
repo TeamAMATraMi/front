@@ -15,7 +15,7 @@
         </mat-expansion-panel-header>
         <p>
           <mat-form-field class="full-width">
-            <input matInput placeholder="Date" type="time" id="appt" formControlName="date" minlength="2" required name="date" />
+            <input matInput placeholder="Date" type="date" id="appt" formControlName="date" minlength="2" required name="date" />
             <mat-error *ngIf="form.get('date').dirty && form.get('date').hasError('required')">
               date est <strong>requis</strong>
             </mat-error>
