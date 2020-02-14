@@ -6,9 +6,6 @@
 
     <br/><br/><br/>
     <mat-card-content>
-      horaire : {{ cour.horaire}}
-    </mat-card-content>
-    <mat-card-content>
       matiere: {{ cour.matiere }}
     </mat-card-content>
     <mat-card-content>
@@ -18,10 +15,41 @@
 
 </section>
 
-<!--<section>
-  <mat-dialog-actions align="end">
-    <button color="primary" mat-raised-button mat-button type="button" [routerLink]="['/updatePresence', cour.id]">Presences</button>
-  </mat-dialog-actions>
-</section>-->
 
-<app-presences></app-presences>
+<h1>SNIFF</h1>
+
+
+<section>
+  <div class="mat-elevation-z8">
+    <mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="infos">
+        <mat-header-cell *matHeaderCellDef>Date de la séance</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <span>{{element.date}} {{element.horaire}}</span>
+        </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="modifications">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell
+                *matCellDef="let element">
+          <button mat-button title="Edit" [routerLink]="['']">
+            <mat-icon svgIcon="icon-edit"></mat-icon>
+          </button>
+
+          <button mat-button title="Delete" (click)="deleteSeance()">
+            <mat-icon svgIcon="icon-delete"></mat-icon>
+          </button>
+
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+
+</section>
+
+
+<!--<app-presences></app-presences>-->

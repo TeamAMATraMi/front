@@ -115,6 +115,7 @@ export class StatistiquesComponent implements OnInit {
     console.log(e);
   }
 
+  /**
   makePdf() {
     html2canvas(document.getElementById('content')).then(function(canvas) {
       const img = canvas.toDataURL('image/png');
@@ -122,6 +123,6 @@ export class StatistiquesComponent implements OnInit {
       doc.addImage(img, 'JPEG', 10, -11);
       doc.save('statistique.pdf');
     });
-  }
+  }*/
 
 }

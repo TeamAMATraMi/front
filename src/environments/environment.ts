@@ -33,6 +33,7 @@ export const environment = {
             cours: {
                 allCours: '/api/cours',
                 oneCours: '/api/cours/:id',
+                addSeance: '/api/cours/:id/addSeance',
             },
             sites: {
                 allSites: '/api/sites',

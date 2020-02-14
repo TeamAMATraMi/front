@@ -148,6 +148,7 @@ export class CoursFormComponent implements OnInit, OnChanges {
         duree: 0,
         idFormateur: 0,
         idGroupe: 0,
+        seances: [],
         matiere: ''
       };
       this._isUpdateMode = false;

@@ -4,6 +4,7 @@ import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
 import {defaultIfEmpty, filter, map} from 'rxjs/operators';
 import {Cours} from '../interfaces/cours';
+import {Seance} from '../interfaces/seance';
 
 @Injectable({
     providedIn: 'root'
@@ -86,5 +87,13 @@ export class CoursService {
         return { headers: new HttpHeaders(Object.assign({
                 'Content-Type': 'application/json'
             }, headerList)) };
+    }
+
+    /**
+     * Fonction pour ajouter une seance dans un cours
+     * @param seance
+     */
+    addSeance(seance: Seance): Observable<any> {
+        return this._http.put<Seance>(this._backendURL.addSeance.replace(':id', seance.cours.id), seance, this._options());
     }
 }

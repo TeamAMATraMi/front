@@ -7,6 +7,9 @@ import {Formateur} from '../../interfaces/formateur';
 import {FormateursService} from '../../services/formateurs.service';
 import {Seance} from '../../interfaces/seance';
 import {SeancesService} from '../../services/seances.service';
+import {CoursService} from '../../services/cours.service';
+import { ActivatedRoute } from "@angular/router";
+
 
 @Component({
   selector: 'app-seance-form',
@@ -20,12 +23,13 @@ export class SeanceFormComponent implements OnInit, OnChanges {
   private readonly _cancel$: EventEmitter<void>;
   private readonly _submit$: EventEmitter<Seance>;
   private readonly _form: FormGroup;
-  private tmp: string;
 
-  constructor(private _formateurService: FormateursService, private _seanceService: SeancesService) {
+
+  constructor() {
     this._submit$ = new EventEmitter<Seance>();
     this._cancel$ = new EventEmitter<void>();
     this._form = this._buildForm();
+
   }
 
   ngOnInit() {
@@ -85,7 +89,7 @@ export class SeanceFormComponent implements OnInit, OnChanges {
       this._form.patchValue(this._seance);
     } else {
       this._seance = {
-        idCours: 0,
+        cours: null,
         date: 0,
         horaire: 0
       };

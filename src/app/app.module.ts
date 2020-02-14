@@ -75,6 +75,7 @@ import {ErrorInterceptor} from './shared/interceptors/error.interceptor';
 import {LogoutComponent } from './logout/logout.component';
 import {SeanceFormComponent} from './shared/forms/seance-form/seance-form.component';
 import {SeanceDialogComponent} from './shared/dialogs/seance-dialog/seance-dialog.component';
+import { DisplaySeanceComponent } from './display-seance/display-seance.component';
 
 
 @NgModule({
@@ -123,7 +124,8 @@ import {SeanceDialogComponent} from './shared/dialogs/seance-dialog/seance-dialo
         PresenceDialogComponent,
         UpdatePresenceComponent,
         LogoutComponent,
-        SeanceDialogComponent
+        SeanceDialogComponent,
+        DisplaySeanceComponent,
     ],
     entryComponents: [
         DialogComponent,

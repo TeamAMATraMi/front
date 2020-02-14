@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+
             "outputPath": "dist/AppliTrami",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -60,6 +61,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+            "disableHostCheck" : true,
             "browserTarget": "AppliTrami:build"
           },
           "configurations": {

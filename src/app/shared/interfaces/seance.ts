@@ -1,6 +1,8 @@
+import {Cours} from './cours';
+
 export interface Seance {
   id?: number;
-  idCours: number;
+  cours: Cours;
   date: number;
   horaire: number;
 }
