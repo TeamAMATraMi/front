@@ -7,6 +7,8 @@ import {formatDate} from '@angular/common';
 import {filter, flatMap} from 'rxjs/operators';
 import {Apprenant} from '../../interfaces/apprenant';
 import {ActivatedRoute} from '@angular/router';
+import {ApprenantsService} from '../../services/apprenants.service';
+import {CoursService} from '../../services/cours.service';
 
 @Component({
   selector: 'app-presence-form',
@@ -15,14 +17,18 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class PresenceFormComponent implements OnInit, OnChanges {
   private _presences: Presence[];
+  private _apprenants: Apprenant[];
   private _cours: Cours;
+  private _date: number;
   private readonly _cancel$: EventEmitter<void>;
   private readonly _submit$: EventEmitter<Presence>;
   private readonly _form: FormGroup;
 
-  public displayedColumns: string[] = ['idApprenant', 'present'];
+  public displayedColumns: string[] = ['idApprenant', 'nomApprenant', 'present'];
+  public dataSource;
 
-  constructor(private _presencesService: PresencesService, private _route: ActivatedRoute) {
+  constructor(private _presencesService: PresencesService, private _apprenantsService: ApprenantsService,
+              private _coursService: CoursService, private _route: ActivatedRoute) {
     this._submit$ = new EventEmitter<Presence>();
     this._cancel$ = new EventEmitter<void>();
     this._form = this._buildForm();
@@ -33,12 +39,45 @@ export class PresenceFormComponent implements OnInit, OnChanges {
   ngOnInit() {
     this._route.params.pipe(
         filter(params => !!params['id']),
-        flatMap(params => this._presencesService.fetchByFichePresence(params['id'], params['date'])),
+        flatMap(params => { this._date = params['date']; return this._coursService.fetchOne(params['id']); })
     )
-        .subscribe((presences: Presence[]) => {
-          this._presences = presences;
+        .subscribe((cours: Cours) => {
+          this._cours = cours;
+          this._route.params.pipe(
+              filter(params => !!params['id']),
+              flatMap(params => this._presencesService.fetchByFichePresence(params['id'], params['date'])),
+          )
+              .subscribe((presences: Presence[]) => {
+                this._presences = presences;
+                  this._apprenantsService.fetchByGroup(this._cours.idGroupe).subscribe(
+                      (apprenants: Apprenant[]) => {
+                        this._apprenants = apprenants;
+                        if (this._presences.length === 0) {
+                          for (let i = 0; i < apprenants.length; i++) {
+                            this._presences.push({
+                              id: 0,
+                              date: this._date,
+                              idApprenant: apprenants[i].id,
+                              idCours: this._cours.id,
+                              present: false
+                            });
+                          }
+                        }
+
+                      }
+                  );
+
+              });
         });
   }
+  apprenantById(id: number): Apprenant{
+    for (let i = 0; i < this._apprenants.length; i++) {
+      if (this._apprenants[i].id === id) {
+        return this._apprenants[i];
+      }
+    }
+    return null;
+}
 
   get form(): FormGroup {
     return this._form;
