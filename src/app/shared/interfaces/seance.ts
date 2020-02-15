@@ -2,7 +2,8 @@ import {Cours} from './cours';
 
 export interface Seance {
   id?: number;
+  idPresence: number;
   cours: Cours;
-  date: number;
-  horaire: number;
+  date: Date;
+  horaire: String;
 }

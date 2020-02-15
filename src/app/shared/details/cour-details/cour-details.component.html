@@ -15,25 +15,29 @@
 
 </section>
 
-
-<h1>SNIFF</h1>
-
+<h1>Séances</h1>
 
 <section>
   <div class="mat-elevation-z8">
     <mat-table [dataSource]="dataSource">
-      <ng-container matColumnDef="infos">
+      <ng-container matColumnDef="date">
         <mat-header-cell *matHeaderCellDef>Date de la séance</mat-header-cell>
         <mat-cell *matCellDef="let element">
-            <span>{{element.date}} {{element.horaire}}</span>
+          <span>{{element.date | date: 'dd/MM/yyyy'}}</span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="horaire">
+        <mat-header-cell *matHeaderCellDef>Horaire de la séance</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span>{{element.horaire}}</span>
         </mat-cell>
       </ng-container>
 
 
-      <ng-container matColumnDef="modifications">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell
-                *matCellDef="let element">
+      <ng-container matColumnDef="modif">
+        <mat-header-cell *matHeaderCellDef>Modifcations</mat-header-cell>
+        <mat-cell *matCellDef="let element">
           <button mat-button title="Edit" [routerLink]="['']">
             <mat-icon svgIcon="icon-edit"></mat-icon>
           </button>
@@ -50,6 +54,5 @@
   </div>
 
 </section>
-
 
 <!--<app-presences></app-presences>-->

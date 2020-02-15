@@ -90,8 +90,9 @@ export class SeanceFormComponent implements OnInit, OnChanges {
     } else {
       this._seance = {
         cours: null,
-        date: 0,
-        horaire: 0
+        date: '',
+        horaire: '',
+        idPresence: 0
       };
       this._isUpdateMode = false;
     }

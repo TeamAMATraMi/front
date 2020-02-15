@@ -20,7 +20,7 @@ export class CourDetailsComponent implements OnInit {
   private _presences: Presence[];
   private readonly _modifier$: EventEmitter<Cours>;
   private _dataSource: MatTableDataSource<Seance>;
-  displayedColumns: ['infos', 'modifications'];
+  displayedColumns: string[] = ['date', 'horaire', 'modif'];
 
 
 
@@ -39,17 +39,11 @@ export class CourDetailsComponent implements OnInit {
   }
 
   get dataSource(): MatTableDataSource<Seance> {
-    console.log(this._dataSource)
     return this._dataSource;
   }
 
   deleteSeance() {
 
-  }
-
-  @Input()
-  set cour(cour: Cours) {
-    this._cour = cour;
   }
 
   get presences(): Presence[] {
@@ -66,20 +60,24 @@ export class CourDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this._route.params
+        .subscribe(
+            (params: Params) => {
+              const id = +params['id'];
+              this._coursService.fetchOne(id).subscribe((cours: Cours) => {
+                this._cour = cours;
+                this._dataSource = new MatTableDataSource<Seance>(this._cour.seances);
+                console.log(this._dataSource);
+              });
+            }
+        );
+
     this._route.params.pipe(
         filter(params => !!params['id']),
         flatMap(params => this._presencesService.fetchByIdCours(params['id']))
     )
         .subscribe((presences: Presence[]) => this._presences = presences);
 
-    this._route.params
-        .subscribe(
-            (params: Params) => {
-              const id = +params['id'];
-              this._coursService.fetchOne(id).subscribe((cours: Cours) => this._cour = cours);
-            }
-        );
-    this._dataSource = new MatTableDataSource<Seance>(this._cour.seances);
   }
 
   modifier() {
