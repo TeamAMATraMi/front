@@ -4,10 +4,6 @@
 <mat-dialog-content>
   <form novalidate [formGroup]="form">
 
-    <p *ngIf="isUpdateMode">
-      <span style="width:100%">{{ form.get('matiere').value }} {{ form.get('horaire').value }}</span>
-    </p>
-
     <mat-accordion>
       <mat-expansion-panel expanded>
         <mat-expansion-panel-header>

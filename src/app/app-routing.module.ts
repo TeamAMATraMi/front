@@ -22,6 +22,7 @@ import {AuthGuard} from './guard/auth.guard';
 import {PresenceComponent} from './presence/presence.component';
 import {PresencesComponent} from './presences/presences.component';
 import {LogoutComponent} from './logout/logout.component';
+import {UpdateSeanceComponent} from './update/update-seance/update-seance.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', canActivate: [AuthGuard], pathMatch: 'full'},
@@ -49,7 +50,8 @@ const routes: Routes = [
     { path: 'statistiques', component: StatistiquesComponent, canActivate: [AuthGuard]},
     { path: 'presences', component: PresencesComponent, canActivate: [AuthGuard]},
     { path: 'presence/:id', component: PresenceComponent, canActivate: [AuthGuard]},
-    { path: 'logout', component: LogoutComponent }
+    { path: 'logout', component: LogoutComponent },
+    { path: 'updateSeance/:id', component: UpdateSeanceComponent }
 
 ];
 

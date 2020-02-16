@@ -76,7 +76,7 @@ import {LogoutComponent } from './logout/logout.component';
 import {SeanceFormComponent} from './shared/forms/seance-form/seance-form.component';
 import {SeanceDialogComponent} from './shared/dialogs/seance-dialog/seance-dialog.component';
 import { DisplaySeanceComponent } from './display-seance/display-seance.component';
-
+import {UpdateSeanceComponent} from './update/update-seance/update-seance.component'
 
 @NgModule({
     declarations: [
@@ -126,6 +126,7 @@ import { DisplaySeanceComponent } from './display-seance/display-seance.componen
         LogoutComponent,
         SeanceDialogComponent,
         DisplaySeanceComponent,
+        UpdateSeanceComponent,
     ],
     entryComponents: [
         DialogComponent,

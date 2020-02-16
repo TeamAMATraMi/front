@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {Cours} from '../../interfaces/cours';
 import {Presence} from '../../interfaces/presence';
 import {filter, flatMap} from 'rxjs/operators';
@@ -6,8 +6,8 @@ import {ActivatedRoute, Params} from '@angular/router';
 import {PresencesService} from '../../services/presences.service';
 import {Seance} from '../../interfaces/seance';
 import {MatTableDataSource} from '@angular/material';
-import {Apprenant} from '../../interfaces/apprenant';
 import {CoursService} from '../../services/cours.service';
+import {SeancesService} from '../../services/seances.service';
 
 @Component({
   selector: 'app-cour-details',
@@ -24,7 +24,7 @@ export class CourDetailsComponent implements OnInit {
 
 
 
-  constructor(private _presencesService: PresencesService, private _route: ActivatedRoute, private _coursService: CoursService) {
+  constructor(private _presencesService: PresencesService, private _seancesService: SeancesService ,private _route: ActivatedRoute, private _coursService: CoursService) {
     this._modifier$ = new EventEmitter<Cours>();
     this._cour = {} as Cours;
     this._presences = [];
@@ -34,16 +34,16 @@ export class CourDetailsComponent implements OnInit {
     return this._cour;
   }
 
-  get seances(): Seance[] {
-    return this._cour.seances;
-  }
-
   get dataSource(): MatTableDataSource<Seance> {
     return this._dataSource;
   }
 
-  deleteSeance() {
-
+  @Input()
+  set cours(value: any) {
+    console.log(this._cour);
+    this._cour = value;
+    console.log(this._cour);
+    this.ngOnInit()
   }
 
   get presences(): Presence[] {
@@ -57,6 +57,12 @@ export class CourDetailsComponent implements OnInit {
   @Output('modifier')
   get modifier$(): EventEmitter<Cours> {
     return this._modifier$;
+  }
+
+  deleteConfirmation(id: number) {
+    if (confirm('Voulez vous vraiment supprimer cette séance ?')) {
+      this.delete(id);
+    }
   }
 
   ngOnInit() {
@@ -82,5 +88,9 @@ export class CourDetailsComponent implements OnInit {
 
   modifier() {
     this._modifier$.emit(this._cour);
+  }
+
+  private delete(id: number) {
+    this._seancesService.delete(id).subscribe(null, null, () => this.ngOnInit());
   }
 }

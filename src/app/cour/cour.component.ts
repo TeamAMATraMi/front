@@ -47,7 +47,7 @@ export class CourComponent implements OnInit {
         );
   }
 
-  get cour(): Cours {
+  get cours(): Cours {
     return this._cour;
   }
 
@@ -73,14 +73,12 @@ export class CourComponent implements OnInit {
    * Permet d'ajouter une seance dans un cours
    */
   private _add(seance: Seance): Observable<Cours> {
-    console.log(seance);
-    console.log(this._cour.id);
     seance.cours = this._cour;
     this.addOpenSnackBar();
     return this._coursService
         .addSeance(seance)
         .pipe(
-            flatMap(_ => this._coursService.fetchOne(this.cour.id))
+            flatMap(_ => this._coursService.fetchOne(this._cour.id))
         );
   }
 
@@ -91,10 +89,7 @@ export class CourComponent implements OnInit {
     // open modal
     this._seanceDialog = this._dialog.open(SeanceDialogComponent, {
       width: '500px',
-      disableClose: true,
-      data: {
-        idCours: this._cour.id
-      }
+      disableClose: true
     });
 
     // subscribe to afterClosed observable to set apprenant-dialogs status and do process

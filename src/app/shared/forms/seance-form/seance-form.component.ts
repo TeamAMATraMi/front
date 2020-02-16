@@ -79,6 +79,8 @@ export class SeanceFormComponent implements OnInit, OnChanges {
   }
 
   submit(seance: Seance) {
+    seance.cours = this._seance.cours
+    console.log(seance);
     this._submit$.emit(seance);
   }
 
@@ -87,10 +89,11 @@ export class SeanceFormComponent implements OnInit, OnChanges {
       this._seance = record.seance.currentValue;
       this._isUpdateMode = true;
       this._form.patchValue(this._seance);
+
     } else {
       this._seance = {
         cours: null,
-        date: '',
+        date: null,
         horaire: '',
         idPresence: 0
       };

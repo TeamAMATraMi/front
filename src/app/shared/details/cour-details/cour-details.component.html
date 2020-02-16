@@ -38,11 +38,11 @@
       <ng-container matColumnDef="modif">
         <mat-header-cell *matHeaderCellDef>Modifcations</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button mat-button title="Edit" [routerLink]="['']">
+          <button mat-button title="Edit" [routerLink]="['/updateSeance/' + element.id]">
             <mat-icon svgIcon="icon-edit"></mat-icon>
           </button>
 
-          <button mat-button title="Delete" (click)="deleteSeance()">
+          <button mat-button title="Delete" (click)="deleteConfirmation(element.id)">
             <mat-icon svgIcon="icon-delete"></mat-icon>
           </button>
 

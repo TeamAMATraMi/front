@@ -10,17 +10,16 @@ import {Seance} from '../../interfaces/seance';
 })
 export class SeanceDialogComponent implements OnInit {
 
-  constructor(private _dialogRef: MatDialogRef<SeanceDialogComponent>, @Inject(MAT_DIALOG_DATA) private _data: any) { }
+  constructor(private _dialogRef: MatDialogRef<SeanceDialogComponent>, @Inject(MAT_DIALOG_DATA) private _seance: Seance) { }
 
   ngOnInit() {
   }
 
-  get idCours(): number {
-      return this._data.idCours;
+  get seance(): Seance {
+    return this._seance;
   }
 
   onCancel() {
-      console.log(this.idCours);
     this._dialogRef.close();
   }
 
