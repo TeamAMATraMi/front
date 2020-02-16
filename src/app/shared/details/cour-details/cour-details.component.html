@@ -1,18 +1,17 @@
 <section>
-  <mat-card class="mat-whiteframe-2dp">
-    <mat-dialog-actions align="end">
-      <button color="primary" mat-raised-button style="position: absolute;left: 20px;margin: 0;" mat-button type="button" [routerLink]="['/updateCours', cour.id]">Modifier</button>
-    </mat-dialog-actions>
 
-    <br/><br/><br/>
-    <mat-card-content>
-      matiere: {{ cour.matiere }}
-    </mat-card-content>
-    <mat-card-content>
-      duree : {{ cour.duree }}
-    </mat-card-content>
-  </mat-card>
-
+    <mat-card class="mat-whiteframe-2dp header-mat">
+        <mat-card-title>Cours de {{cour.matiere}}</mat-card-title>
+        <mat-card-subtitle>Durée du cours : {{cour.duree}}h</mat-card-subtitle>
+        <mat-card-content>
+          <mat-dialog-actions align="end">
+            <button color="primary" mat-raised-button style="position: absolute;left: 20px;bottom: 20px;margin: 0;" mat-button type="button" [routerLink]="['/updateCours', cour.id]">Modifier le cours</button>
+          </mat-dialog-actions>
+          <mat-dialog-actions align="end">
+            <button color="accent" mat-raised-button style="position: absolute;right: 20px;bottom: 20px;margin: 0;" mat-button type="button" [routerLink]="['']">Imprimer les séances</button>
+          </mat-dialog-actions>
+        </mat-card-content>
+    </mat-card>
 </section>
 
 <h1>Séances</h1>
