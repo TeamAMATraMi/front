@@ -19,9 +19,13 @@ export class UpdatePresenceComponent implements OnInit {
               private _dialog: MatDialog) { }
 
   ngOnInit() {
+      console.log("UpdatePresenceComponent", "ngOnInit");
     this._route.params
         .pipe(
-            filter(params => !!params['id']),
+            filter(params => {
+                console.log("params", params);
+                return !!params['id'];
+            }),
             flatMap(params => {
               return this._presencesService.fetchByIdSeance(params['id'])})
         )

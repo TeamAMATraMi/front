@@ -43,15 +43,15 @@ export class PresenceFormComponent implements OnInit, OnChanges {
               return !!params['idCours'];
         }),
         flatMap(params => {
-          return this._coursService.fetchOne(params['id']);
+          return this._coursService.fetchOne(params['idCours']);
         })
     )
         .subscribe((cours: Cours) => {
           this._cours = cours;
           console.log("Cours trouvé ? ", !!this._cours? "Oui": "Non");
           this._route.params.pipe(
-              filter(params => !!params['idSeance']),
-              flatMap(params => this._presencesService.fetchByIdSeance(params['idSeance'])),
+              filter(params => !!params['id']),
+              flatMap(params => this._presencesService.fetchByIdSeance(params['id'])),
           )
               .subscribe((presences: Presence[]) => {
                 this._presences = presences;
