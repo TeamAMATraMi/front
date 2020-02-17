@@ -33,7 +33,8 @@ export class CoursFormComponent implements OnInit, OnChanges {
   ngOnInit() {
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => {
         this._groupes = groupes;
-        this._form.patchValue({nomGroupe: this._groupes.length > 0 ? this.getNomByIdGroupe(this._cours.idGroupe) : '' });
+        console.log(groupes);
+      this._form.patchValue({nomGroupe: this._groupes.length > 0 ? this.getNomByIdGroupe(this._cours.idGroupe) : '' });
     });
     this._formateurService.fetch().subscribe((formateurs: Formateur[]) => {
         this._formateurs = formateurs;
@@ -100,13 +101,13 @@ export class CoursFormComponent implements OnInit, OnChanges {
       matiere: new FormControl('', Validators.compose([
         Validators.required
       ])),
-      formateur: new FormControl('', Validators.compose([
+      idFormateur: new FormControl('', Validators.compose([
         Validators.required
       ])),
       duree: new FormControl('', Validators.compose([
         Validators.required
       ])),
-      nomGroupe: new FormControl('', Validators.compose([
+      idGroupe: new FormControl('', Validators.compose([
         Validators.required
       ]))
     });
@@ -128,13 +129,15 @@ export class CoursFormComponent implements OnInit, OnChanges {
 
   submit(cours: Cours) {
     for (let i = 0; i < this._groupes.length; i++) {
-      if (this._groupes[i].nom === this._form.get('nomGroupe').value) { cours.idGroupe = this._groupes[i].id; }
+      if (this._groupes[i].nom === this._form.get('idGroupe').value) { cours.idGroupe = this._groupes[i].id; }
     }
     for (let i = 0; i < this._formateurs.length; i++) {
-      if ((this._formateurs[i].nom + ' ' + this.formateurs[i].prenom) === this._form.get('formateur').value) {
+      if ((this._formateurs[i].nom + ' ' + this.formateurs[i].prenom) === this._form.get('idFormateur').value) {
         cours.idFormateur = this._formateurs[i].id;
       }
     }
+    console.log("submit : ");
+    console.log(cours);
     this._submit$.emit(cours);
   }
 

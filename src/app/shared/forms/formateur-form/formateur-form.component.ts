@@ -112,7 +112,7 @@ export class FormateurFormComponent implements OnInit, OnChanges {
         Validators.pattern('[0-9]{5}')
       ])),
       commune: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(2)
+        Validators.minLength(2)
       ])),
       idSite: new FormControl('', Validators.compose([
       ])),

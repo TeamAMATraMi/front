@@ -106,4 +106,12 @@ export class StatistiquesService {
                 defaultIfEmpty(null)
             );
     }
+
+    fetchByPrimoArrivant(): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.primoArrivantStatistiques)
+            .pipe(
+                filter(_ => !!_),
+                defaultIfEmpty(null)
+            );
+    }
 }

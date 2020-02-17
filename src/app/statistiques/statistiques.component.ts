@@ -29,6 +29,8 @@ export class StatistiquesComponent implements OnInit {
   public niveauScolData: number[] = [];
   public quartierPrioLabels: string[] = [];
   public quartierPrioData: number[] = [];
+  public primoArrivantLabels: string[] = [];
+  public primoArrivantData: number[] = [];
   public bar = 'bar';
   public doughnut = 'doughnut';
   public barChartOptions: any = {
@@ -103,6 +105,13 @@ export class StatistiquesComponent implements OnInit {
         this.niveauLangueLabels.push(Object.keys(stat)[i]);
       }
       this.niveauLangueData = Object.values(stat);
+    });
+
+    this._statistiquesService.fetchByPrimoArrivant().subscribe( (stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.primoArrivantLabels.push(Object.keys(stat)[i]);
+      }
+      this.primoArrivantData = Object.values(stat);
     });
   }
 

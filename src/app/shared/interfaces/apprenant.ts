@@ -9,6 +9,7 @@ export interface Apprenant {
   idGroupe: number;
   dateInscription: number;
   auteurDossier: string;
+  primoArrivant: boolean;
   majeur: boolean;
   dateNaissance: number;
   genre: string;

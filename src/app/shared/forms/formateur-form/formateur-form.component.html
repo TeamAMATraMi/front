@@ -70,10 +70,7 @@
 
         <p>
           <mat-form-field class="full-width">
-            <input matInput placeholder="Commune" formControlName="commune" minlength="2" required name="commune" />
-            <mat-error *ngIf="form.get('commune').dirty && form.get('commune').hasError('required')">
-              commune est <strong>requis</strong>
-            </mat-error>
+            <input matInput placeholder="Commune" formControlName="commune" minlength="2"/>
             <mat-error *ngIf="form.get('commune').dirty && form.get('commune').hasError('minlength')">
               minimum <strong>2 characteres</strong>
             </mat-error>
