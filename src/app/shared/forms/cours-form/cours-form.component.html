@@ -5,7 +5,7 @@
   <form novalidate [formGroup]="form">
 
     <p *ngIf="isUpdateMode">
-      <span style="width:100%">{{ form.get('matiere').value }} {{ form.get('horaire').value }}</span>
+      <span style="width:100%">{{ form.get('matiere').value }} </span>
     </p>
 
     <mat-accordion>
@@ -26,7 +26,7 @@
         </p>
         <p>
           <mat-form-field class="full-width">
-            <input matInput placeholder="Durée" type="time" id="appt" formControlName="duree" minlength="2" required name="duree" />
+            <input matInput placeholder="Durée de la séance en heure" type="number" id="appt" formControlName="duree" minlength="2" required name="duree" />
             <mat-error *ngIf="form.get('duree').dirty && form.get('duree').hasError('required')">
               durée est <strong>requis</strong>
             </mat-error>
@@ -37,24 +37,24 @@
         </p>
         <p>
           <mat-form-field class="full-width">
-            <mat-select placeholder="Formateur" formControlName="formateur">
+            <mat-select placeholder="Formateur" formControlName="idFormateur">
               <mat-option *ngFor="let f of formateurs;" [value]="f.nom + ' ' + f.prenom">
                 {{f.nom}} {{f.prenom}}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="form.get('formateur').dirty && form.get('formateur').hasError('required')">
+            <mat-error *ngIf="form.get('idFormateur').dirty && form.get('idFormateur').hasError('required')">
               codePostal est <strong>required</strong>
             </mat-error>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field class="full-width">
-            <mat-select placeholder="Groupe" formControlName="nomGroupe">
+            <mat-select placeholder="Groupe" formControlName="idGroupe">
               <mat-option *ngFor="let g of groupes" [value]="g.nom">
                 {{g.nom}}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="form.get('nomGroupe').dirty && form.get('nomGroupe').hasError('required')">
+            <mat-error *ngIf="form.get('idGroupe').dirty && form.get('idGroupe').hasError('required')">
               nom est <strong>required</strong>
             </mat-error>
           </mat-form-field>
