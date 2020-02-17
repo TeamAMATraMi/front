@@ -8,7 +8,7 @@
             <button color="primary" mat-raised-button style="position: absolute;left: 20px;bottom: 20px;margin: 0;" mat-button type="button" [routerLink]="['/updateCours', cour.id]">Modifier le cours</button>
           </mat-dialog-actions>
           <mat-dialog-actions align="end">
-            <button color="accent" mat-raised-button style="position: absolute;right: 20px;bottom: 20px;margin: 0;" mat-button type="button" [routerLink]="['']">Imprimer les séances</button>
+            <button color="accent" mat-raised-button style="position: absolute;right: 20px;bottom: 20px;margin: 0;" mat-button type="button" (click)="downloadPDF()">Imprimer les séances</button>
           </mat-dialog-actions>
         </mat-card-content>
     </mat-card>
@@ -35,7 +35,7 @@
 
 
       <ng-container matColumnDef="modif">
-        <mat-header-cell *matHeaderCellDef>Modifcations</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Modifications</mat-header-cell>
         <mat-cell *matCellDef="let element">
           <button mat-button title="Edit" [routerLink]="['/updateSeance/' + element.id]">
             <mat-icon svgIcon="icon-edit"></mat-icon>

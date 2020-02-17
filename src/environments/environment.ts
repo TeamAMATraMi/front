@@ -27,6 +27,7 @@ export const environment = {
             },
             seances: {
                 oneSeance: '/api/seances/:id',
+                allSeancesByCours: '/api/seancesC/:id',
             },
             cours: {
                 allCours: '/api/cours',
