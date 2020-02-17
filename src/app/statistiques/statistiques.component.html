@@ -110,6 +110,19 @@
                   (chartClick)="chartClicked($event)"></canvas>
         </div>
       </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-grid-tile-header>Répartition par primo arrivant</mat-grid-tile-header>
+        <div style="display: block">
+          <canvas baseChart
+                  [data]="primoArrivantData"
+                  [labels]="primoArrivantLabels"
+                  [chartType]="doughnut"
+                  [colors]="chartColors"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </mat-grid-tile>
     </mat-grid-list>
   </mat-tab>
 </mat-tab-group>

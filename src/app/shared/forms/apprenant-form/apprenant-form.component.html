@@ -10,7 +10,7 @@
 
         <p>
             <mat-form-field class="champs-width">
-                <input matInput placeholder="Auteur du dossier" formControlName="auteurDossier" required />
+                <input matInput placeholder="Auteur du dossier" formControlName="auteurDossier" />
             </mat-form-field>
 
             <mat-form-field class="tab">
@@ -61,10 +61,7 @@
                     </mat-form-field>
 
                     <mat-form-field class="tab">
-                        <input matInput placeholder="Commune" formControlName="commune" minlength="2" required name="commune" />
-                        <mat-error *ngIf="form.get('commune').dirty && form.get('commune').hasError('required')">
-                            commune est <strong>requis</strong>
-                        </mat-error>
+                        <input matInput placeholder="Commune" formControlName="commune" minlength="2"/>
                         <mat-error *ngIf="form.get('commune').dirty && form.get('commune').hasError('minlength')">
                             minimum <strong>2 characteres</strong>
                         </mat-error>
@@ -95,6 +92,13 @@
                     </mat-form-field>
                 </p>
                 <p>
+                    <mat-label>Primo arrivant : </mat-label>
+                    <mat-radio-group formControlName="primoArrivant">
+                        <mat-radio-button class="radiobutton-width" [value]="true">Oui</mat-radio-button>
+                        <mat-radio-button class="radiobutton-width" [value]="false">Non</mat-radio-button>
+                    </mat-radio-group>
+                </p>
+                <p>
                     <mat-label>Majeur : </mat-label>
                     <mat-radio-group formControlName="majeur">
                         <mat-radio-button class="radiobutton-width" [value]="true">Oui</mat-radio-button>
@@ -116,7 +120,7 @@
                 </mat-expansion-panel-header>
                 <p>
                     <mat-form-field>
-                        <mat-select placeholder="Pays d'origine" formControlName="paysOrigine" required>
+                        <mat-select placeholder="Pays d'origine" formControlName="paysOrigine">
                             <mat-option value="Non-renseigné">Non renseigné</mat-option>
                             <mat-option value="Afghanistan">Afghanistan </mat-option>
                             <mat-option value="Afrique_Centrale">Afrique Centrale </mat-option>
@@ -672,7 +676,7 @@
                 </mat-expansion-panel-header>
                 <p>
                     <mat-form-field class="full-width">
-                        <mat-select placeholder="Groupe" formControlName="idGroupe" required>
+                        <mat-select placeholder="Groupe" formControlName="idGroupe">
                             <mat-option *ngFor="let c of groupes" [value]="c.id">
                                 {{ c.nom }}
                             </mat-option>

@@ -105,6 +105,7 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
         idGroupe: 0,
         dateInscription: 0,
         auteurDossier: '',
+        primoArrivant: false,
         majeur: true,
         dateNaissance: 0,
         genre: '',
@@ -183,15 +184,15 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
         Validators.pattern('[0-9]{5}')
       ])),
       commune: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(2)
+        Validators.minLength(2)
       ])),
       idGroupe: new FormControl('', Validators.compose([
-        Validators.required
       ])),
       dateInscription: new FormControl(formatDate(new Date(), 'yyyy-MM-dd', 'en'), Validators.compose([
       ])),
       auteurDossier: new FormControl('', Validators.compose([
-        Validators.required
+      ])),
+      primoArrivant: new FormControl('', Validators.compose([
       ])),
       majeur: new FormControl('', Validators.compose([
       ])),
@@ -200,7 +201,6 @@ export class ApprenantFormComponent implements OnInit, OnChanges {
       genre: new FormControl('', Validators.compose([
       ])),
       paysOrigine: new FormControl('', Validators.compose([
-        Validators.required
       ])),
       nationalite: new FormControl('', Validators.compose([
       ])),
