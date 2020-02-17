@@ -46,7 +46,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'signup', component: SignupComponent},
     { path: 'login/:error', component: LoginComponent},
-    { path: 'updatePresence/:id/:date', component: UpdatePresenceComponent, canActivate: [AuthGuard] },
+    { path: 'updatePresence/:id/:idCours', component: UpdatePresenceComponent, canActivate: [AuthGuard] },
     { path: 'statistiques', component: StatistiquesComponent, canActivate: [AuthGuard]},
     { path: 'presences', component: PresencesComponent, canActivate: [AuthGuard]},
     { path: 'presence/:id', component: PresenceComponent, canActivate: [AuthGuard]},

@@ -17,7 +17,7 @@
 <h1>Séances</h1>
 
 <section>
-  <div class="mat-elevation-z8">
+  <div class="mat-elevation-z8" style="width:100%;">
     <mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="date">
         <mat-header-cell *matHeaderCellDef>Date de la séance</mat-header-cell>
@@ -43,6 +43,11 @@
 
           <button mat-button title="Delete" (click)="deleteConfirmation(element.id)">
             <mat-icon svgIcon="icon-delete"></mat-icon>
+          </button>
+
+
+          <button mat-button title="Présences">
+            <mat-icon svgIcon="icon-present" [routerLink]="['/updatePresence/' + element.id + '/' + cour.id]"></mat-icon>
           </button>
 
         </mat-cell>

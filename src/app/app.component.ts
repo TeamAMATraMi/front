@@ -40,5 +40,7 @@ export class AppComponent implements OnInit {
             this._domSanitizer.bypassSecurityTrustResourceUrl('/assets/images/logo-login.svg'));
         this._matIconRegistry.addSvgIcon('pdf',
             this._domSanitizer.bypassSecurityTrustResourceUrl('/assets/images/pdf.svg'));
+        this._matIconRegistry.addSvgIcon('icon-present',
+            this._domSanitizer.bypassSecurityTrustResourceUrl('/assets/images/present.svg'));
     }
 }

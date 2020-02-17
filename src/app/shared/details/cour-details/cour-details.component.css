@@ -128,3 +128,7 @@ img {
 .header-mat {
     text-align: center;
 }
+
+mat-table {
+    width: 100%;
+}

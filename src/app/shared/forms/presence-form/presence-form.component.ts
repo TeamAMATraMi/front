@@ -19,7 +19,6 @@ export class PresenceFormComponent implements OnInit, OnChanges {
   private _presences: Presence[];
   private _apprenants: Apprenant[];
   private _cours: Cours;
-  private _date: number;
   private readonly _cancel$: EventEmitter<void>;
   private readonly _submit$: EventEmitter<Presence>;
   private readonly _form: FormGroup;
@@ -37,35 +36,43 @@ export class PresenceFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    console.log("PresenceFormComponent","ngOnInit");
     this._route.params.pipe(
-        filter(params => !!params['id']),
-        flatMap(params => { this._date = params['date']; return this._coursService.fetchOne(params['id']); })
+        filter(params => {
+              console.log("params", params);
+              return !!params['idCours'];
+        }),
+        flatMap(params => {
+          return this._coursService.fetchOne(params['id']);
+        })
     )
         .subscribe((cours: Cours) => {
           this._cours = cours;
+          console.log("Cours trouvé ? ", !!this._cours? "Oui": "Non");
           this._route.params.pipe(
-              filter(params => !!params['id']),
-              flatMap(params => this._presencesService.fetchByFichePresence(params['id'], params['date'])),
+              filter(params => !!params['idSeance']),
+              flatMap(params => this._presencesService.fetchByIdSeance(params['idSeance'])),
           )
               .subscribe((presences: Presence[]) => {
                 this._presences = presences;
+                console.log("La fiche de présence existe-t'elle? ", this.presences.length === 0? "Non": "Oui");
+                if (this._presences.length === 0) {
                   this._apprenantsService.fetchByGroup(this._cours.idGroupe).subscribe(
                       (apprenants: Apprenant[]) => {
+                        console.log("Création de la fiche de présence");
                         this._apprenants = apprenants;
-                        if (this._presences.length === 0) {
-                          for (let i = 0; i < apprenants.length; i++) {
-                            this._presences.push({
-                              id: 0,
-                              date: this._date,
-                              idApprenant: apprenants[i].id,
-                              idCours: this._cours.id,
-                              present: false
-                            });
-                          }
+                        for (let i = 0; i < apprenants.length; i++) {
+                          this._presences.push({
+                            id: 0,
+                            date: 0,
+                            idApprenant: apprenants[i].id,
+                            idCours: this._cours.id,
+                            present: false
+                          });
                         }
-
                       }
                   );
+                }
 
               });
         });

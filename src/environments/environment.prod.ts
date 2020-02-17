@@ -59,7 +59,7 @@ export const environment = {
                 onePresence: '/api/presence/:id',
                 idCoursPresence: '/api/presencesC/:id',
                 fichePresences: '/api/presencesF',
-                fichePresenceIDDate: 'api/presencesIDDate/:idCours/:date'
+                fichePresenceByIdSeance: 'api/presencesS/:idSeance'
             }
         }
     }
