@@ -622,10 +622,14 @@
                 </p>
                 <p>
                     <mat-label>Milieu scolaire : </mat-label>
-                    <mat-radio-group formControlName="milieuScolaire">
-                        <mat-radio-button class="radiobutton-width" [value]="true">Urbain</mat-radio-button>
-                        <mat-radio-button class="radiobutton-width" [value]="false">Rural</mat-radio-button>
-                    </mat-radio-group>
+                    <mat-form-field>
+                        <mat-select placeholder="Milieu scolaire" formControlName="milieuScolaire">
+                            <mat-option [value]="null">Non renseigné</mat-option>
+                            <mat-option [value]="true">Urbain</mat-option>
+                            <mat-option [value]="false">Rural</mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field>
