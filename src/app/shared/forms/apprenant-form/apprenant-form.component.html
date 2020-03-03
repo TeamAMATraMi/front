@@ -624,7 +624,7 @@
                     <mat-label>Milieu scolaire : </mat-label>
                     <mat-form-field>
                         <mat-select placeholder="Milieu scolaire" formControlName="milieuScolaire">
-                            <mat-option [value]="null">Non renseigné</mat-option>
+                            <mat-option [value]="">Non renseigné</mat-option>
                             <mat-option [value]="true">Urbain</mat-option>
                             <mat-option [value]="false">Rural</mat-option>
 
@@ -681,6 +681,9 @@
                 <p>
                     <mat-form-field class="full-width">
                         <mat-select placeholder="Groupe" formControlName="idGroupe">
+                            <mat-option  [value]="">
+                                Non renseignés
+                        </mat-option>
                             <mat-option *ngFor="let c of groupes" [value]="c.id">
                                 {{ c.nom }}
                             </mat-option>
