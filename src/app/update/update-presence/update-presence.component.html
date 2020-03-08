@@ -22,8 +22,8 @@
             </ng-container>
 
 
-            <ng-container matColumnDef="presences">
-                <mat-header-cell *matHeaderCellDef>Present/Absent
+            <ng-container matColumnDef="present">
+                <mat-header-cell *matHeaderCellDef>Present
                     <mat-checkbox (change)="$event ? masterToggle() : null"
                                   [checked]="selection.hasValue() && isAllSelected()"
                                   [indeterminate]="selection.hasValue() && !isAllSelected()">

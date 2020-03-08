@@ -12,6 +12,7 @@ import {CoursService} from '../../shared/services/cours.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {ApprenantsService} from '../../shared/services/apprenants.service';
 import {SelectionModel} from '@angular/cdk/collections';
+import {SeancesService} from '../../shared/services/seances.service';
 
 @Component({
   selector: 'app-update-presence',
@@ -25,11 +26,12 @@ export class UpdatePresenceComponent implements OnInit {
   private _cours: Cours;
   private _presences: Presence[];
   private _selection: SelectionModel<Apprenant>;
-  displayedColumns: String[] = ['nom'];
+  displayedColumns: String[] = ['nom', 'present'];
 
 
   constructor(private _route: ActivatedRoute, private _router: Router, private _presencesService: PresencesService,
-              private _apprenantsService: ApprenantsService, private _coursService: CoursService, private _dialog: MatDialog) {
+              private _apprenantsService: ApprenantsService, private _coursService: CoursService, private _seancesService: SeancesService,
+              private _dialog: MatDialog) {
       this._seance = {} as Seance;
       this._cours = {} as Cours;
       this._presences = [];
@@ -52,6 +54,9 @@ export class UpdatePresenceComponent implements OnInit {
             });
             this._presencesService.fetchByIdSeance(params['id']).subscribe((presences: Presence[]) => {
                 this._presences = presences;
+            });
+            this._seancesService.fetchOne(params['id']).subscribe((seance: Seance) => {
+                this._seance = seance;
             });
         });
   }
