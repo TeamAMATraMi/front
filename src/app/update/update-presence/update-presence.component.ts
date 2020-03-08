@@ -27,6 +27,7 @@ export class UpdatePresenceComponent implements OnInit {
   private _presences: Presence[];
   private _selection: SelectionModel<Apprenant>;
   displayedColumns: String[] = ['nom', 'present'];
+  initialSelection: Apprenant[];
 
 
   constructor(private _route: ActivatedRoute, private _router: Router, private _presencesService: PresencesService,
@@ -35,9 +36,9 @@ export class UpdatePresenceComponent implements OnInit {
       this._seance = {} as Seance;
       this._cours = {} as Cours;
       this._presences = [];
-      const initialSelection = [];
+      this.initialSelection = [];
       const allowMultiSelect = true;
-      this._selection = new SelectionModel<Apprenant>(allowMultiSelect, initialSelection);
+      this._selection = new SelectionModel<Apprenant>(allowMultiSelect, this.initialSelection);
   }
 
   ngOnInit() {
@@ -54,6 +55,15 @@ export class UpdatePresenceComponent implements OnInit {
             });
             this._presencesService.fetchByIdSeance(params['id']).subscribe((presences: Presence[]) => {
                 this._presences = presences;
+                if (!this._presences == null || this._presences.length != 0) {
+                    this._presences.forEach( presence => {
+                        this._dataSource.data.forEach(value => {
+                            if (value.id == presence.idApprenant) {
+                                this.initialSelection.push(value);
+                            }
+                        });
+                    });
+                }
             });
             this._seancesService.fetchOne(params['id']).subscribe((seance: Seance) => {
                 this._seance = seance;
@@ -107,7 +117,43 @@ export class UpdatePresenceComponent implements OnInit {
 
     /** Validation des presences **/
     validatePresences() {
-
+        // si on a pas de présence au prealable
+        if (this._presences == null || this._presences.length == 0) {
+            this._dataSource.data.forEach(value => {
+                    this._presencesService.create({
+                        id: null,
+                        date: this._seance.date,
+                        idSeance: this._seance.id,
+                        idApprenant: value.id,
+                        present: this._selection.isSelected(value)
+                    } as Presence);
+            });
+        } else { // on a deja des presences
+            this._dataSource.data.forEach(value => {
+                let create = true;
+                this._presences.forEach(presence => {
+                    if (presence.idApprenant == value.id) {
+                        create = false;
+                        this._presencesService.update({
+                            id: presence.id,
+                            date: this._seance.date,
+                            idSeance: this._seance.id,
+                            idApprenant: value.id,
+                            present: this._selection.isSelected(value)
+                        } as Presence);
+                    }
+                });
+                if (create) {
+                    this._presencesService.create({
+                        id: null,
+                        date: this._seance.date,
+                        idSeance: this._seance.id,
+                        idApprenant: value.id,
+                        present: this._selection.isSelected(value)
+                    } as Presence);
+                }
+            });
+        }
         alert('Présences enregistrées');
     }
 
