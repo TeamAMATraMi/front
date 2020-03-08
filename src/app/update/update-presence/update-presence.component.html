@@ -1,43 +1,40 @@
 <section>
 
 <mat-card class="mat-whiteframe-2dp header-mat">
-    <mat-card-title>Cours de {{cours.matiere}}</mat-card-title>
-    <mat-card-subtitle>Seance du {{seance.date}}</mat-card-subtitle>
-    <mat-card-content>
-        <mat-dialog-actions align="end">
-            <button color="primary" mat-raised-button style="position: absolute;left: 20px;bottom: 20px;margin: 0;" mat-button type="button" [routerLink]="['/updateCours', cours.id]">Modifier le cours</button>
-        </mat-dialog-actions>
 
+    <mat-card-content>
+        <mat-card-title>Cours de {{cours.matiere}}</mat-card-title>
+        <mat-card-subtitle>Seance du {{seance.date}}</mat-card-subtitle>
     </mat-card-content>
 </mat-card>
 </section>
 
-<h1>Liste des apprenants pour la seance</h1>
+<h1 style="align:center">Liste des apprenants pour la seance</h1>
 
 <section>
     <div class="mat-elevation-z8" style="width:100%;">
         <mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="nom">
                 <mat-header-cell *matHeaderCellDef>Nom Prenom</mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                    <span>{{element.nom}} {{element.prenom}}</span>
+                <mat-cell *matCellDef="let apprenant">
+                    <span>{{apprenant.nom}} {{apprenant.prenom}}</span>
                 </mat-cell>
             </ng-container>
 
 
             <ng-container matColumnDef="presences">
-                <th mat-header-cell *matHeaderCellDef>Present/Absent
+                <mat-header-cell *matHeaderCellDef>Present/Absent
                     <mat-checkbox (change)="$event ? masterToggle() : null"
                                   [checked]="selection.hasValue() && isAllSelected()"
                                   [indeterminate]="selection.hasValue() && !isAllSelected()">
                     </mat-checkbox>
-                </th>
-                <td mat-cell *matCellDef="let row">
+                </mat-header-cell>>
+                <mat-cell *matCellDef="let row">
                     <mat-checkbox (click)="$event.stopPropagation()"
                                   (change)="$event ? selection.toggle(row) : null"
                                   [checked]="selection.isSelected(row)">
                     </mat-checkbox>
-                </td>
+                </mat-cell>>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -25,7 +25,7 @@ export class UpdatePresenceComponent implements OnInit {
   private _cours: Cours;
   private _presences: Presence[];
   private _selection: SelectionModel<Apprenant>;
-  displayedColumns: String[] = ['nom', 'prenom', 'id'];
+  displayedColumns: String[] = ['nom'];
 
 
   constructor(private _route: ActivatedRoute, private _router: Router, private _presencesService: PresencesService,
