@@ -10,6 +10,8 @@ import {PresencesService} from '../shared/services/presences.service';
 import {PresenceDialogComponent} from '../shared/dialogs/presence-dialog/presence-dialog.component';
 import {CoursService} from '../shared/services/cours.service';
 import {Cours} from '../shared/interfaces/cours';
+import {SeancesService} from '../shared/services/seances.service';
+import {Seance} from '../shared/interfaces/seance';
 
 @Component({
   selector: 'app-presences',
@@ -31,8 +33,8 @@ export class PresencesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private _route: ActivatedRoute, private _presencesService: PresencesService,
-              private _dialog: MatDialog, private _apprenantsService: ApprenantsService,
-              private _coursService: CoursService) {
+              private _dialog: MatDialog, private _seancesService: SeancesService,
+              private _apprenantsService: ApprenantsService, private _coursService: CoursService) {
     this._presences = [];
     this._dialogStatus = 'inactive';
     this._apprenants = [];
@@ -55,14 +57,16 @@ export class PresencesComponent implements OnInit {
         .subscribe((presences: Presence[]) => {
           this._presences = presences;
           for (let i = 0; i < this._presences.length; i++) {
-            if (!this.datetab.includes(this._presences[i].date, 0)) {
-              this.datetab.push(this._presences[i].date);
+            if (!this.datetab.includes(this.dateConverter(this._presences[i].date), 0)) {
+              this.datetab.push(this.dateConverter(this._presences[i].date));
             }
           }
-          this._idCours = this._presences[0].idCours;
+          this._seancesService.fetchOne(this._presences[0].idSeance).subscribe((value: Seance) => {
+            this._idCours = value.cours.id;
+            this._nomCours = value.cours.matiere;
+          });
           this._dataSource = new MatTableDataSource<number>(this.datetab);
           this._apprenantsService.fetch().subscribe((apprenants: Apprenant[]) => { this._apprenants = apprenants; });
-          this._coursService.fetchOne(this._idCours).subscribe((c: Cours) => this._nomCours = c.matiere);
         });
   }
 
@@ -136,6 +140,10 @@ export class PresencesComponent implements OnInit {
     return this._displayedColumns;
   }
 
-
+  private dateConverter(date: Date): number {
+    let res = 0;
+    res = date.getFullYear() * 1000 + date.getMonth() * 100 + date.getDay();
+    return res;
+  }
 
 }
