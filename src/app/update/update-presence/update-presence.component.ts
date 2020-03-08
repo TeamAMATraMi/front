@@ -47,6 +47,7 @@ export class UpdatePresenceComponent implements OnInit {
                 this._cours = cours;
                 this._apprenantsService.fetchByGroup(this._cours.idGroupe).subscribe((apprenants: Apprenant[]) => {
                     this._dataSource = new MatTableDataSource<Apprenant>(apprenants);
+                    console.log(this._dataSource);
                 });
             });
             this._presencesService.fetchByIdSeance(params['id']).subscribe((presences: Presence[]) => {
