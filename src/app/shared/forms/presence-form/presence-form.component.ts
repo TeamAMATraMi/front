@@ -64,9 +64,9 @@ export class PresenceFormComponent implements OnInit, OnChanges {
                         for (let i = 0; i < apprenants.length; i++) {
                           this._presences.push({
                             id: 0,
-                            date: 0,
+                            date: new Date(),
                             idApprenant: apprenants[i].id,
-                            idCours: this._cours.id,
+                            idSeance: presences[0].idSeance,
                             present: false
                           });
                         }
@@ -142,5 +142,7 @@ export class PresenceFormComponent implements OnInit, OnChanges {
       this._form.patchValue(this._presences);
     }
   }
+
+
 
 }
