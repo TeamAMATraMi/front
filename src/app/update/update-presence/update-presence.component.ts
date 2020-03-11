@@ -57,12 +57,11 @@ export class UpdatePresenceComponent implements OnInit {
                     this._presences.forEach( presence => {
                         this._dataSource.data.forEach(value => {
                             if (presence.present && value.id == presence.idApprenant) {
-                                this.initialSelection.push(value);
+                                this._selection.select(value);
                             }
                         });
                     });
                 }
-                this._selection = new SelectionModel<Apprenant>(true, this.initialSelection);
             });
             this._seancesService.fetchOne(params['id']).subscribe((seance: Seance) => {
                 this._seance = seance;

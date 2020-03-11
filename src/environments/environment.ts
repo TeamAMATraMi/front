@@ -6,7 +6,7 @@ export const environment = {
     production: false,
     backend: {
         protocol: 'http',
-        host: '127.0.0.1',
+        host: '51.178.82.205',
         port: '28080',
         endpoints: {
             auth: {
