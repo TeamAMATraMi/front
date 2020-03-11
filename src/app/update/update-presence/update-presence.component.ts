@@ -37,8 +37,7 @@ export class UpdatePresenceComponent implements OnInit {
       this._cours = {} as Cours;
       this._presences = [];
       this.initialSelection = [];
-      const allowMultiSelect = true;
-      this._selection = new SelectionModel<Apprenant>(allowMultiSelect, this.initialSelection);
+      this._selection = new SelectionModel<Apprenant>(true, this.initialSelection);
   }
 
   ngOnInit() {
@@ -50,7 +49,6 @@ export class UpdatePresenceComponent implements OnInit {
                 this._cours = cours;
                 this._apprenantsService.fetchByGroup(this._cours.idGroupe).subscribe((apprenants: Apprenant[]) => {
                     this._dataSource = new MatTableDataSource<Apprenant>(apprenants);
-                    console.log(this._dataSource);
                 });
             });
             this._presencesService.fetchByIdSeance(params['id']).subscribe((presences: Presence[]) => {
@@ -60,6 +58,7 @@ export class UpdatePresenceComponent implements OnInit {
                         this._dataSource.data.forEach(value => {
                             if (value.id == presence.idApprenant) {
                                 this.initialSelection.push(value);
+                                this._selection = new SelectionModel<Apprenant>(true, this.initialSelection);
                             }
                         });
                     });
@@ -126,7 +125,7 @@ export class UpdatePresenceComponent implements OnInit {
                         idSeance: this._seance.id,
                         idApprenant: value.id,
                         present: this._selection.isSelected(value)
-                    } as Presence);
+                    } as Presence).subscribe();
             });
         } else { // on a deja des presences
             this._dataSource.data.forEach(value => {
