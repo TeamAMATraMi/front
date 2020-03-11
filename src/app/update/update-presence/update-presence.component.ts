@@ -37,7 +37,6 @@ export class UpdatePresenceComponent implements OnInit {
       this._cours = {} as Cours;
       this._presences = [];
       this.initialSelection = [];
-      this._selection = new SelectionModel<Apprenant>(true, this.initialSelection);
   }
 
   ngOnInit() {
@@ -56,13 +55,13 @@ export class UpdatePresenceComponent implements OnInit {
                 if (!this._presences == null || this._presences.length != 0) {
                     this._presences.forEach( presence => {
                         this._dataSource.data.forEach(value => {
-                            if (value.id == presence.idApprenant) {
+                            if (presence.present && value.id == presence.idApprenant) {
                                 this.initialSelection.push(value);
-                                this._selection = new SelectionModel<Apprenant>(true, this.initialSelection);
                             }
                         });
                     });
                 }
+                this._selection = new SelectionModel<Apprenant>(true, this.initialSelection);
             });
             this._seancesService.fetchOne(params['id']).subscribe((seance: Seance) => {
                 this._seance = seance;
