@@ -37,6 +37,7 @@ export class UpdatePresenceComponent implements OnInit {
       this._cours = {} as Cours;
       this._presences = [];
       this.initialSelection = [];
+      this._selection = new SelectionModel<Apprenant>(true, this.initialSelection);
   }
 
   ngOnInit() {
@@ -61,7 +62,7 @@ export class UpdatePresenceComponent implements OnInit {
                         });
                     });
                 }
-                this._selection = new SelectionModel<Apprenant>(true, this.initialSelection);
+                // this._selection = new SelectionModel<Apprenant>(true, this.initialSelection);
             });
             this._seancesService.fetchOne(params['id']).subscribe((seance: Seance) => {
                 this._seance = seance;
