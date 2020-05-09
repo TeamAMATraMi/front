@@ -3,8 +3,8 @@ import {Router} from '@angular/router';
 import {StatistiquesService} from '../shared/services/statistiques.service';
 import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
-import * as jsPDF from 'jspdf';
-import * as html2canvas from 'html2canvas';
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-statistiques',
@@ -124,14 +124,22 @@ export class StatistiquesComponent implements OnInit {
     console.log(e);
   }
 
-  /**
-  makePdf() {
-    html2canvas(document.getElementById('content')).then(function(canvas) {
-      const img = canvas.toDataURL('image/png');
-      const doc = new jsPDF('landscape ', '', 'a2');
-      doc.addImage(img, 'JPEG', 10, -11);
-      doc.save('statistique.pdf');
+
+  public makePdf() {
+          var data = document.getElementById('content');
+          html2canvas(data).then(canvas => {
+            // Few necessary setting options
+            var imgWidth = 208;
+            var pageHeight = 295;
+            var imgHeight = canvas.height * imgWidth / canvas.width;
+            var heightLeft = imgHeight;
+
+            const contentDataURL = canvas.toDataURL('image/png')
+            let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+            var position = 0;
+            pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+            pdf.save('statistique.pdf'); // Generated PDF
     });
-  }*/
+  }
 
 }
