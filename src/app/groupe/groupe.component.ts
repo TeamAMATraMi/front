@@ -95,6 +95,63 @@ export class GroupeComponent implements OnInit {
     return this._dataSource;
   }
 
+  
+public downloadPDF() {
+    const SESSION_CELL_MAX_CHARACTERS = 20;
+    const SESSION_CELL_WIDTH = 28;
+     if (!this._groupe || !this._apprenants || this._sites.length < 1) {
+              alert('Impossible de trouver le groupe ou les participants... Veuillez réessayer.')
+              return;
+            }
+
+    .subscribe((apprenants: Apprenant[]) => {
+            this._apprenants = apprenants;
+    this._coursService.fetchOne(this.groupe.id).subscribe((groupe: Groupe) =>{
+      const doc = new jsPDF();
+      const apprenantsRows = [];
+      this._apprenants.forEach(apprenant => {
+        const cols = [];
+        cols.push(apprenant.prenom + ' ' + apprenant.nom.toUpperCase());
+        cour.seances.forEach(c =>{
+          cols.push('');
+        });
+        apprenantsRows.push(cols);
+
+      });
+      const header = ['Apprenant'];
+      const ownColumnStyles = {
+        0: {
+          cellWidth: 'auto'
+        }
+      };
+
+      doc.autoTable({
+        showHead: 'everyPage',
+        theme: 'grid',
+        headStyles: {
+          fillColor: [255, 255, 255],
+          fontStyle: 'bold',
+          textColor: [0, 0, 0]
+        },
+        columnStyles: ownColumnStyles,
+        head: [
+          [
+            {content: ''},
+            {
+              content: 'Groupe ' + this.groupe.Nom,
+              colSpan: (header.length - 1)
+            }
+          ],
+          header],
+        body: apprenantsRows,
+      });
+
+
+      // Save the PDF
+      doc.save('ListeAppreant' + Date.now() + '.pdf');
+
+    });
+    }
   /**
   downloadPDF() {
     const SESSION_CELL_MAX_CHARACTERS = 10;

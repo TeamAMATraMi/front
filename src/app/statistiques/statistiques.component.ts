@@ -124,7 +124,7 @@ export class StatistiquesComponent implements OnInit {
     console.log(e);
   }
 
-
+//Telechargement pdf
   public makePdf() {
           var data = document.getElementById('content');
           html2canvas(data).then(canvas => {
