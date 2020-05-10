@@ -10,9 +10,11 @@ import {SitesService} from '../shared/services/sites.service';
 import {MatPaginator, MatSort, MatTableDataSource, Sort} from '@angular/material';
 import {CoursService} from '../shared/services/cours.service';
 import {Cours} from '../shared/interfaces/cours';
-declare const require: any;
-const jsPDF = require('jspdf');
-require('jspdf-autotable');
+import {NgZone} from '@angular/core';
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
+
+
 
 
 
@@ -95,127 +97,7 @@ export class GroupeComponent implements OnInit {
     return this._dataSource;
   }
 
-  
-public downloadPDF() {
-    const SESSION_CELL_MAX_CHARACTERS = 20;
-    const SESSION_CELL_WIDTH = 28;
-     if (!this._groupe || !this._apprenants || this._sites.length < 1) {
-              alert('Impossible de trouver le groupe ou les participants... Veuillez réessayer.')
-              return;
-            }
-
-    .subscribe((apprenants: Apprenant[]) => {
-            this._apprenants = apprenants;
-    this._coursService.fetchOne(this.groupe.id).subscribe((groupe: Groupe) =>{
-      const doc = new jsPDF();
-      const apprenantsRows = [];
-      this._apprenants.forEach(apprenant => {
-        const cols = [];
-        cols.push(apprenant.prenom + ' ' + apprenant.nom.toUpperCase());
-        cour.seances.forEach(c =>{
-          cols.push('');
-        });
-        apprenantsRows.push(cols);
-
-      });
-      const header = ['Apprenant'];
-      const ownColumnStyles = {
-        0: {
-          cellWidth: 'auto'
-        }
-      };
-
-      doc.autoTable({
-        showHead: 'everyPage',
-        theme: 'grid',
-        headStyles: {
-          fillColor: [255, 255, 255],
-          fontStyle: 'bold',
-          textColor: [0, 0, 0]
-        },
-        columnStyles: ownColumnStyles,
-        head: [
-          [
-            {content: ''},
-            {
-              content: 'Groupe ' + this.groupe.Nom,
-              colSpan: (header.length - 1)
-            }
-          ],
-          header],
-        body: apprenantsRows,
-      });
-
-
-      // Save the PDF
-      doc.save('ListeAppreant' + Date.now() + '.pdf');
-
-    });
-    }
-  /**
-  downloadPDF() {
-    const SESSION_CELL_MAX_CHARACTERS = 10;
-    const SESSION_CELL_WIDTH = 20;
-    this._route.params.pipe(
-        filter(params => !!params['id']),
-        flatMap(params => this._coursService.fetchFromGroup(params['id'])),
-    )
-    .subscribe((cours: Cours[]) => {
-      const doc = new jsPDF();
-      const apprenantsRows = [];
-      this._apprenants.forEach(apprenant => {
-        const cols = [];
-        cols.push(apprenant.prenom + ' ' + apprenant.nom.toUpperCase());
-        cours.forEach(cour =>{
-          cols.push('');
-        });
-        apprenantsRows.push(cols);
-
-      });
-      const header = ['Apprenant'];
-      const ownColumnStyles = {
-        0: {
-          columnWidth: 'auto'
-        }
-      };
-      var index = 1;
-      cours.forEach(cour => {
-        var columnName = cour.matiere + ' ' + cour.horaire;
-        columnName = columnName.substring(0, SESSION_CELL_MAX_CHARACTERS) + '...';
-        header.push(columnName);
-        ownColumnStyles[index++] = {columnWidth: SESSION_CELL_WIDTH};
-      });
-      doc.autoTable({
-        showHead: 'everyPage',
-        theme: 'grid',
-        headerStyles: {
-          fillColor: [255, 255, 255],
-          fontStyle: 'bold',
-          textColor: [0, 0, 0]
-        },
-        columnStyles: ownColumnStyles,
-        head: [
-            [
-                {content: ''},
-                {
-                  content: 'Cours',
-                  colSpan: (header.length - 1)
-                }
-            ],
-            header],
-        body: apprenantsRows,
-      });
-
-
-      // Save the PDF
-      doc.save('Présences_' + Date.now() + '.pdf');
-    });
-
-  }
-
-   */
-
-  sortData(sort: Sort) {
+ sortData(sort: Sort) {
     const data = this._dataSource.data.slice();
     if (!sort.active || sort.direction === '') {
       this._dataSource.data = data;
@@ -239,6 +121,25 @@ public downloadPDF() {
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this._dataSource.filter = filterValue;
     this._dataSource.paginator.firstPage();
+  }
+
+
+//Telechargement pdf
+  public makePdf() {
+          var data = document.getElementById('content');
+          html2canvas(data).then(canvas => {
+            // Few necessary setting options
+            var imgWidth = 208;
+            var pageHeight = 295;
+            var imgHeight = canvas.height * imgWidth / canvas.width;
+            var heightLeft = imgHeight;
+
+            const contentDataURL = canvas.toDataURL('image/png')
+            let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+            var position = 0;
+            pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+            pdf.save('ListeApprenant.pdf'); // Generated PDF
+    });
   }
 }
 

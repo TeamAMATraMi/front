@@ -1,7 +1,7 @@
 <mat-toolbar>
   <mat-toolbar-row>
-      <button (click)="downloadPDF()"><mat-icon id="logo" svgIcon="pdf"></mat-icon></button>
-    <span>Apprenants</span>
+  <input class="download" type="button" value="Télecharger la liste " (click)="makePdf()"/>
+    
     <span class="flex"></span>
 
     <span class="flex"></span>
@@ -16,8 +16,14 @@
 
 <section>
   <div class="mat-elevation-z8">
+	<div id="content">
+<br>
+<div style="text-align: center;">
+    <span style="font:normal 800 1.2em/normal Geneva, Arial, sans">Liste des apprenants</span>
+</div>    
+<br>
     <mat-table [dataSource]="dataSource" (matSortChange)="sortData($event)" matSort>
-
+	
       <ng-container matColumnDef="NomPrenom">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
         <mat-cell *matCellDef="let element">
@@ -40,6 +46,7 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
+</div>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
   </div>
 
