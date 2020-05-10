@@ -3,7 +3,7 @@ import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
 import {Router} from '@angular/router';
 import {filter, flatMap} from 'rxjs/operators';
-import {MatDialog, MatDialogRef, MatPaginator, MatSnackBar, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatDialogRef, MatPaginator, MatSnackBar, MatTableDataSource,MatSort, Sort} from '@angular/material';
 import {Observable} from 'rxjs';
 import {SiteDialogComponent} from '../shared/dialogs/site-dialog/site-dialog.component';
 
@@ -21,6 +21,7 @@ export class SitesComponent implements OnInit {
 
   private _dataSource: MatTableDataSource<Site>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private _router: Router, private _sitesService: SitesService, private _dialog: MatDialog,
               private snackBar: MatSnackBar) {
@@ -33,6 +34,7 @@ export class SitesComponent implements OnInit {
       this._sites = sites;
       this._dataSource = new MatTableDataSource<Site>(this._sites);
       this._dataSource.paginator = this.paginator;
+      this._dataSource.sort = this.sort;
       this._dataSource.filterPredicate = (data: {ville: string}, filterValue: string) =>
         data.ville.trim().toLowerCase().indexOf(filterValue) !== -1;
     });
@@ -89,6 +91,23 @@ export class SitesComponent implements OnInit {
       );
   }
 
+sortData(sort: Sort) {
+    const data = this._dataSource.data.slice();
+    if (!sort.active || sort.direction === '') {
+      this._dataSource.data = data;
+      return;
+    }
+    this._dataSource.data = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'id': return compare(a.id, b.id, isAsc);
+        case 'ville': return compare(a.ville, b.ville, isAsc);
+        default: return 0;
+      }
+    });
+  }
+
+
   delete(id: number) {
     this._sitesService
       .delete(id)
@@ -120,4 +139,7 @@ export class SitesComponent implements OnInit {
       duration: 3000
     });
   }
+}
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

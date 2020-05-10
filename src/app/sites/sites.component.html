@@ -13,9 +13,9 @@
 
 <section>
     <div class="mat-elevation-z8">
-        <mat-table [dataSource]="dataSource">
+      <mat-table [dataSource]="dataSource" (matSortChange)="sortData($event)" matSort>
             <ng-container matColumnDef="id">
-                <mat-header-cell *matHeaderCellDef> Id du site</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Id du site</mat-header-cell>
 
                 <mat-cell *matCellDef="let element">
                     <span>{{element.id}}</span>
@@ -23,7 +23,7 @@
             </ng-container>
 
             <ng-container matColumnDef="ville">
-                <mat-header-cell *matHeaderCellDef> Ville</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Ville</mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.ville}} </mat-cell>
             </ng-container>
 
