@@ -25,9 +25,10 @@
 
 <section>
     <div class="mat-elevation-z8">
-        <mat-table [dataSource]="dataSource">
+
+        <mat-table [dataSource]="dataSource" (matSortChange)="sortData($event)" matSort>
             <ng-container matColumnDef="Nom">
-                <mat-header-cell *matHeaderCellDef> Nom du Groupe</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Nom du Groupe</mat-header-cell>
 
                 <mat-cell *matCellDef="let element">
                     <a [routerLink]="['/apprenantsG', element.id]">
@@ -43,7 +44,7 @@
             </ng-container>
 
             <ng-container matColumnDef="Nombre">
-                <mat-header-cell *matHeaderCellDef> Nombre de personnes</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header > Nombre de personnes</mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{ getNombreByIdGroup(element.id) }} </mat-cell>
             </ng-container>
 

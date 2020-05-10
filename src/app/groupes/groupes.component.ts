@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {Groupe} from '../shared/interfaces/groupe';
 import {GroupesService} from '../shared/services/groupes.service';
 import {filter, flatMap} from 'rxjs/operators';
-import {MatDialog, MatDialogRef, MatPaginator, MatSnackBar, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatDialogRef, MatPaginator, MatSnackBar, MatTableDataSource, MatSort, Sort} from '@angular/material';
 import {Observable} from 'rxjs';
 import {GroupeDialogComponent} from '../shared/dialogs/groupe-dialog/groupe-dialog.component';
 import {Site} from '../shared/interfaces/site';
@@ -33,6 +33,7 @@ export class GroupesComponent implements OnInit {
 
   private _dataSource: MatTableDataSource<Groupe>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private _router: Router, private _groupesService: GroupesService,
               private _dialog: MatDialog, private _sitesService: SitesService, private snackBar: MatSnackBar,
@@ -59,6 +60,7 @@ export class GroupesComponent implements OnInit {
       this._groupesTemp = groupes;
       this._dataSource = new MatTableDataSource<Groupe>(this._groupes);
       this._dataSource.paginator = this.paginator;
+      this._dataSource.sort = this.sort;
       this._dataSource.filterPredicate = (data: {nom: string}, filterValue: string) =>
           data.nom.trim().toLowerCase().indexOf(filterValue) !== -1;
     });
@@ -200,6 +202,22 @@ export class GroupesComponent implements OnInit {
     this._selectedSiteId = value;
   }
 
+ sortData(sort: Sort) {
+    const data = this._dataSource.data.slice();
+    if (!sort.active || sort.direction === '') {
+      this._dataSource.data = data;
+      return;
+    }
+    this._dataSource.data = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'Nom': return compare(a.nom, b.nom, isAsc);
+        case 'Nombre': return compare( this.getNombreByIdGroup(a.id), this.getNombreByIdGroup(b.id), isAsc);
+        default: return 0;
+      }
+    });
+  }
+
   addOpenSnackBar() {
     this.snackBar.open('Ajout effectué avec succés', 'OK', {
       duration: 3000
@@ -217,4 +235,7 @@ export class GroupesComponent implements OnInit {
       duration: 3000
     });
   }
+}
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
