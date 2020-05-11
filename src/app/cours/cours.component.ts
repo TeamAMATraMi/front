@@ -5,7 +5,7 @@ import {Cours} from '../shared/interfaces/cours';
 import {Observable} from 'rxjs';
 import {filter, flatMap} from 'rxjs/operators';
 import {Formateur} from '../shared/interfaces/formateur';
-import {MatDialog, MatDialogRef, MatPaginator, MatSnackBar, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatDialogRef, MatPaginator, MatSnackBar, MatTableDataSource ,MatSort, Sort} from '@angular/material';
 import {CoursDialogComponent} from '../shared/dialogs/cours-dialog/cours-dialog.component';
 import {FormateursService} from '../shared/services/formateurs.service';
 import {GroupesService} from '../shared/services/groupes.service';
@@ -33,6 +33,7 @@ export class CoursComponent implements OnInit {
 
   private _dataSource: MatTableDataSource<Cours>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private _router: Router, private _coursService: CoursService, private _formateursService: FormateursService,
               private _groupesService: GroupesService, private _presencesService: PresencesService,
@@ -48,6 +49,7 @@ export class CoursComponent implements OnInit {
       this._cours = cours;
       this._dataSource = new MatTableDataSource<Cours>(this._cours);
       this._dataSource.paginator = this.paginator;
+      this._dataSource.sort = this.sort;
       this._dataSource.filterPredicate = (data: {matiere: string}, filterValue: string) =>
           data.matiere.trim().toLowerCase().indexOf(filterValue) !== -1;
     });
@@ -103,6 +105,25 @@ export class CoursComponent implements OnInit {
   delete(id: number) {
     this._coursService.delete(id).subscribe(null, null, () => this.ngOnInit());
   }
+
+
+ sortData(sort: Sort) {
+    const data = this._dataSource.data.slice();
+    if (!sort.active || sort.direction === '') {
+      this._dataSource.data = data;
+      return;
+    }
+    this._dataSource.data = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'matiere': return compare(a.matiere, b.matiere, isAsc);
+        case 'duree': return compare( a.duree, b.duree, isAsc);
+        default: return 0;
+      }
+    });
+  }
+
+
 
   showDialog() {
     // set cours-dialogs status
@@ -184,4 +205,7 @@ export class CoursComponent implements OnInit {
       duration: 3000
     });
   }
+}
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

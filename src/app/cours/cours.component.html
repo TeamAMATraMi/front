@@ -13,9 +13,10 @@
 
 <section>
     <div class="mat-elevation-z8">
-        <mat-table [dataSource]="dataSource">
+        <mat-table [dataSource]="dataSource" (matSortChange)="sortData($event)" matSort>
+            
             <ng-container matColumnDef="matiere">
-                <mat-header-cell *matHeaderCellDef>Cours</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Cours</mat-header-cell>
                 <mat-cell *matCellDef="let element">
                     <a [routerLink]="['/cours', element.id]">
                         <span>{{element.matiere}}</span>
@@ -30,7 +31,7 @@
             </ng-container>
 
             <ng-container matColumnDef="horaire">
-                <mat-header-cell *matHeaderCellDef>Durée Séance</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Durée Séance</mat-header-cell>
                 <mat-cell
                         *matCellDef="let element"> {{element.duree}} </mat-cell>
             </ng-container>
