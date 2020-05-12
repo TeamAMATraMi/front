@@ -49,14 +49,23 @@ export class StatistiquesComponent implements OnInit {
 
   ngOnInit() {
     this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
-    this._statistiquesService.fetchBySexe().subscribe((stat: Map<String, number>) => {
+   
+ this._statistiquesService.fetchBySexe().subscribe((stat: Map<String, number>) => {
       this.sexeData = [stat['M'], stat['F']];
     });
+
     this._statistiquesService.fetchByAge().subscribe( (stat: Map<String, number>) => {
       for (let i = 0; i < Object.keys(stat).length; i++) {
         this.ageLabels.push(Object.keys(stat)[i]);
       }
       this.ageData = Object.values(stat);
+    });
+
+ this._statistiquesService.fetchByNationalite('all').subscribe((stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.nationaliteLabels.push(Object.keys(stat)[i]);
+      }
+      this.nationaliteData = Object.values(stat);
     });
 
     this._statistiquesService.fetchBySite().subscribe((stat: Map<String, number>) => {
@@ -66,12 +75,7 @@ export class StatistiquesComponent implements OnInit {
       this.siteData = Object.values(stat);
     });
 
-    this._statistiquesService.fetchByNationalite('all').subscribe((stat: Map<String, number>) => {
-      for (let i = 0; i < Object.keys(stat).length; i++) {
-        this.nationaliteLabels.push(Object.keys(stat)[i]);
-      }
-      this.nationaliteData = Object.values(stat);
-    });
+   
 
     this._statistiquesService.fetchBySejour('all').subscribe((stat: Map<String, number>) => {
       for (let i = 0; i < Object.keys(stat).length; i++) {
@@ -80,12 +84,7 @@ export class StatistiquesComponent implements OnInit {
       this.sejourData = Object.values(stat);
     });
 
-    this._statistiquesService.fetchByQuartierPrio('all').subscribe((stat: Map<String, number>) => {
-      for (let i = 0; i < Object.keys(stat).length; i++) {
-        this.quartierPrioLabels.push(Object.keys(stat)[i]);
-      }
-      this.quartierPrioData = Object.values(stat);
-    });
+    
 
     this._statistiquesService.fetchByNiveauScol('all').subscribe((stat: Map<number, number>) => {
       for (let i = 0; i < Object.keys(stat).length; i++) {
@@ -94,11 +93,14 @@ export class StatistiquesComponent implements OnInit {
       this.niveauScolData = Object.values(stat);
     });
 
-    this._statistiquesService.fetchByStatutPro('all').subscribe((stat: Map<String, number>) => {
+    
+this._statistiquesService.fetchByQuartierPrio('all').subscribe((stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.quartierPrioLabels.push(Object.keys(stat)[i]);
+      }
+      this.quartierPrioData = Object.values(stat);
     });
 
-    this._statistiquesService.fetchByPriseCharge('Stenay').subscribe((stat: Map<number, number>) => {
-    });
 
     this._statistiquesService.fetchByNiveauLangue('all').subscribe((stat: Map<String, number>) => {
       for (let i = 0; i < Object.keys(stat).length; i++) {

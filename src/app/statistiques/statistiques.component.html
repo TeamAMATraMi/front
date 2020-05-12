@@ -35,7 +35,8 @@
         </div>
       </mat-grid-tile>
 
-      <mat-grid-tile>
+      
+<mat-grid-tile>
         <mat-grid-tile-header>Répartition par nationalité</mat-grid-tile-header>
         <div style="display: block">
           <canvas baseChart
@@ -103,13 +104,14 @@
       <mat-grid-tile>
         <mat-grid-tile-header>Répartition par quartier prioritaire</mat-grid-tile-header>
         <div style="display: block">
-          <canvas baseChart
+		<canvas baseChart
                   [data]="quartierPrioData"
                   [labels]="quartierPrioLabels"
                   [chartType]="doughnut"
                   [colors]="chartColors"
                   (chartHover)="chartHovered($event)"
                   (chartClick)="chartClicked($event)"></canvas>
+         
         </div>
       </mat-grid-tile>
 

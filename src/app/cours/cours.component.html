@@ -14,7 +14,6 @@
 <section>
     <div class="mat-elevation-z8">
         <mat-table [dataSource]="dataSource" (matSortChange)="sortData($event)" matSort>
-            
             <ng-container matColumnDef="matiere">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Cours</mat-header-cell>
                 <mat-cell *matCellDef="let element">

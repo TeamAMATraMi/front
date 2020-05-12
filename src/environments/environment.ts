@@ -55,7 +55,7 @@ export const environment = {
                 sexeStatistiques: '/api/sexe',
                 ageStatistiques: '/api/age',
                 siteStatistiques: '/api/site',
-                nationaliteStatistiques: '/api/nationalite',
+                nationaliteStatistiques: '/api/nationalite/:nom',
                 titreSejourStatistiques: '/api/titreSejour/:nom',
                 quartierPrioStatistiques: '/api/quartierPrio/:nom',
                 niveauScolStatistiques: '/api/niveauScol/:nom',
