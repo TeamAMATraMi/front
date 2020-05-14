@@ -52,7 +52,8 @@ export const environment = {
                 niveauScolStatistiques: '/api/niveauScol/:nom',
                 statutProStatistiques: '/api/statutPro/:nom',
                 priseChargeStatistiques: '/api/priseCharge/:nom',
-                niveauLangueStatistiques: '/api/niveauLangue/:nom'
+                niveauLangueStatistiques: '/api/niveauLangue/:nom',
+		presenceStatistiques: '/api/presence'
             },
             presences: {
                 allPresences: '/api/presences',

@@ -67,6 +67,14 @@ export class StatistiquesService {
             );
     }
 
+fetchByPresence(): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.presenceStatistiques)
+            .pipe(
+                filter(_ => !!_),
+                defaultIfEmpty(null)
+            );
+    }
+
     fetchByQuartierPrio(site: string): Observable<Map<String, number>> {
         return this._http.get<Map<String, number>>(this._backendURL.quartierPrioStatistiques.replace(':nom', site))
             .pipe(

@@ -113,6 +113,14 @@ img {
     margin-right: 18px;
 }
 
+div {
+    width: 100%;
+    height: 70%;
+}
+
+
+
+
 @media (max-width: 412px) {
     img {
         margin-right: 3px;

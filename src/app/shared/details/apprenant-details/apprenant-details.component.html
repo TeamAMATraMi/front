@@ -109,6 +109,28 @@
           </mat-grid-list>
         </mat-card>
       </mat-tab>
+	<mat-tab label="Presence">
+ <mat-grid-list cols="3" rowHeight="5:4">
+ 	<mat-grid-tile>
+	<mat-grid-tile-header>Assiduité </mat-grid-tile-header>
+        <div style="display: block">
+	
+          <canvas baseChart
+                  [data]="sexeData"
+                  [labels]="sexeLabels"
+                  [chartType]="doughnut"
+                  [colors]="chartColors"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"
+		></canvas>
+	       
+</div>
+	
+      </mat-grid-tile>
+</mat-grid-list>
+	
+
+</mat-tab>
 
     </mat-tab-group>
 
