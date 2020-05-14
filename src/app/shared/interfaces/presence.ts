@@ -1,7 +1,7 @@
 export interface Presence {
   id: number;
-  date: number;
+  date: Date;
   idApprenant: number;
-  idCours: number;
+  idSeance: number;
   present: boolean;
 }

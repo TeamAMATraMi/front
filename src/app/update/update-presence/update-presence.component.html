@@ -1,0 +1,45 @@
+<section>
+
+    <mat-card class="mat-whiteframe-2dp header-mat">
+        <mat-card-title>Cours de {{cours.matiere}}</mat-card-title>
+        <mat-card-subtitle>Seance du {{seance.date}}</mat-card-subtitle>
+    </mat-card>
+</section>
+
+<h1>Liste des apprenants pour la seance</h1>
+
+<section>
+    <div class="mat-elevation-z8" style="width:100%;">
+        <mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="nom">
+                <mat-header-cell *matHeaderCellDef>Nom Prenom</mat-header-cell>
+                <mat-cell *matCellDef="let apprenant">
+                    <span>{{apprenant.nom}} {{apprenant.prenom}}</span>
+                </mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="present">
+                <mat-header-cell *matHeaderCellDef>Present
+                    <mat-checkbox #ref (change)="$event ? masterToggle(ref) : null"
+                                  [checked]="selection.hasValue() && isAllSelected()"
+                                  [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    </mat-checkbox>
+                </mat-header-cell>>
+                <mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()"
+                                  (change)="$event ? selection.toggle(row) : null;isSomeSelected()"
+                                  [checked]="selection.isSelected(row)">
+                    </mat-checkbox>
+                </mat-cell>>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+    <div>
+        <button color="accent" mat-raised-button style="position: absolute;right: 20px;bottom: 20px;margin: 0;" mat-button type="button" (click)="validatePresences()">Valider les présences</button>
+    </div>
+
+</section>

@@ -46,6 +46,8 @@ export class CourDetailsComponent implements OnInit {
     return this._dataSource;
   }
 
+
+
   @Input()
   set cours(value: any) {
     console.log(this._cour);
@@ -85,18 +87,17 @@ export class CourDetailsComponent implements OnInit {
                 this._apprenantsService.fetchByGroup(cours.idGroupe)
                     .subscribe((apprenants: Apprenant[]) => {
                       this._courApprenants = apprenants;
-                    });
+                          });
               });
             }
         );
 
-    /*
-    this._route.params.pipe(
-        filter(params => !!params['id']),
-        flatMap(params => this._presencesService.fetchByIdCours(params['id']))
-    )
-        .subscribe((presences: Presence[]) => this._presences = presences);
-  */
+    
+   this._presencesService.fetch().subscribe((presences: Presence[]) => {
+	this._presences=presences;
+});
+   
+  
   }
 
   modifier() {
@@ -114,15 +115,38 @@ export class CourDetailsComponent implements OnInit {
       alert('Impossible de trouver le cours ou les participants... Veuillez réessayer.')
       return;
     }
+
+ 
+  
+
+    
     this._coursService.fetchOne(this._cour.id).subscribe((cour: Cours) =>{
       const doc = new jsPDF();
       const apprenantsRows = [];
       this._courApprenants.forEach(apprenant => {
         const cols = [];
         cols.push(apprenant.prenom + ' ' + apprenant.nom.toUpperCase());
-        cour.seances.forEach(c =>{
-          cols.push('');
-        });
+       cour.seances.forEach(c => {
+	if(this.presences == null || this.presences.length ==0){
+		cols.push(' ');
+}
+else{
+	this._presences.forEach(presence => {
+		if(presence.present == false) {
+		cols.push('Absent');
+}
+	else if(presence.present == true){
+	cols.push('Present');
+
+}
+
+});
+}
+
+
+
+
+});              
         apprenantsRows.push(cols);
 
       });
@@ -167,6 +191,7 @@ export class CourDetailsComponent implements OnInit {
       // Save the PDF
       doc.save('Présences_' + Date.now() + '.pdf');
 
-    });
+ 
+        });
   }
 }
