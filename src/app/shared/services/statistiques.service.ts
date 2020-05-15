@@ -67,8 +67,8 @@ export class StatistiquesService {
             );
     }
 
-fetchByPresence(): Observable<Map<String, number>> {
-        return this._http.get<Map<String, number>>(this._backendURL.presenceStatistiques)
+	fetchByPresences(site: number): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.presencesStatistiques.replace(':nom', site))
             .pipe(
                 filter(_ => !!_),
                 defaultIfEmpty(null)

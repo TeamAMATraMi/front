@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Apprenant} from '../../interfaces/apprenant';
 import {StatistiquesService} from '../../services/statistiques.service';
+import {ApprenantsService} from '../../services/apprenants.service';
+import {ActivatedRoute, Params} from '@angular/router';
 
 @Component({
   selector: 'app-apprenant-details',
@@ -26,7 +28,7 @@ export class ApprenantDetailsComponent implements OnInit {
   private _apprenant: Apprenant;
   private readonly _modifier$: EventEmitter<Apprenant>;
 
-  constructor(private _statistiquesService: StatistiquesService) {
+  constructor(private _statistiquesService: StatistiquesService ,private _apprenantsService: ApprenantsService, private _route: ActivatedRoute) {
     this._modifier$ = new EventEmitter<Apprenant>();
     this._apprenant = {} as Apprenant;
   }
@@ -47,9 +49,15 @@ export class ApprenantDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-this._statistiquesService.fetchByPresence().subscribe((stat: Map<String, number>) => {
+this._route.params.subscribe((params: Params) => {
+              this._apprenantsService.fetchOne(params['id']).subscribe((apprenant: Apprenant) => {
+                this._apprenant = apprenant;
+this._statistiquesService.fetchByPresences(this._apprenant.id).subscribe((stat: Map<String, number>) => {
       this.sexeData = [stat['Present'], stat['Absent']];
+	
     });
+ });
+ });
   }
 
   modifier() {
