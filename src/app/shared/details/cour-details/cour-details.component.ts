@@ -132,10 +132,10 @@ export class CourDetailsComponent implements OnInit {
 }
 else{
 	this._presences.forEach(presence => {
-		if(presence.present == false) {
+		if(presence.present == false && c.id == presence.idSeance && apprenant.id == presence.idApprenant) {
 		cols.push('Absent');
 }
-	else if(presence.present == true){
+	else if(presence.present == true && c.id == presence.idSeance && apprenant.id == presence.idApprenant){
 	cols.push('Present');
 
 }
