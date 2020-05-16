@@ -109,11 +109,21 @@
           </mat-grid-list>
         </mat-card>
       </mat-tab>
-	<mat-tab label="Presence">
- <mat-grid-list cols="3" rowHeight="5:4">
- 	<mat-grid-tile>
-	<mat-grid-tile-header>Assiduité </mat-grid-tile-header>
-        <div style="display: block">
+
+
+<mat-tab label="Presence">
+        <mat-card>
+          <mat-card-title-group style="justify-content: center">
+            <mat-card-title>
+              <span>{{ apprenant.nom }} {{ apprenant.prenom }}
+                <mat-icon style="color: blue" svgIcon="gender-male" *ngIf="apprenant.genre=='M'"></mat-icon>
+                <mat-icon style="color: pink" svgIcon="gender-female" *ngIf="apprenant.genre=='F'"></mat-icon>
+              </span>
+            </mat-card-title>
+          </mat-card-title-group>
+          <mat-grid-list cols="2" rowHeight="14:1">
+
+           <div style="display: block">
 	
           <canvas baseChart
                   [data]="sexeData"
@@ -126,11 +136,35 @@
 	       
 </div>
 	
-      </mat-grid-tile>
-</mat-grid-list>
-	
+          </mat-grid-list>
+        </mat-card>
+      </mat-tab>
 
-</mat-tab>
+
+<mat-tab label="Assiduité">
+<mat-card>
+          <mat-card-title-group style="justify-content: center">
+            <mat-card-title>
+              <span>{{ apprenant.nom }} {{ apprenant.prenom }}
+                <mat-icon style="color: blue" svgIcon="gender-male" *ngIf="apprenant.genre=='M'"></mat-icon>
+                <mat-icon style="color: pink" svgIcon="gender-female" *ngIf="apprenant.genre=='F'"></mat-icon>
+              </span>
+            </mat-card-title>
+          </mat-card-title-group>
+ </mat-card>
+ </mat-tab>
+
+
+
+
+
+
+
+
+
+
+
+
 
     </mat-tab-group>
 
