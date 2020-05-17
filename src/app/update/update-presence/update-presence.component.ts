@@ -48,26 +48,43 @@ export class UpdatePresenceComponent implements OnInit {
       console.log('UpdatePresenceComponent', 'ngOnInit');
       this._route.params.subscribe((params: Params) => {
             const idCours = +params['idCours'];
+
+this._seancesService.fetchOne(params['id']).subscribe((seances: Seance) => {
+               this._seance =seances;
+ });
             this._coursService.fetchOne(idCours).subscribe((cours: Cours) => {
                 this._cours = cours;
                 this._apprenantsService.fetchByGroup(this._cours.idGroupe).subscribe((apprenants: Apprenant[]) => {
                     this._dataSource = new MatTableDataSource<Apprenant>(apprenants);
+		this._presencesService.fetch().subscribe((presences: Presence[]) => {
+
+ if (this._presences != null || this._presences.length != 0) {
+        this._presences.forEach( presence => {
+            apprenants.forEach(value => {
+                if (presence.present && value.id == presence.idApprenant && this._seance.id== presence.idSeance) {
+                    this._selection.select(value);
+                }
+            });
+        });
+    }
+
+	
+});
                 });
 		
 		
  });
-	this._seancesService.fetchOne(params['id']).subscribe((seances: Seance) => {
-               this._seance =seances;
- });
+
+	
 
  });
-	
             
-  
 this._presencesService.fetch().subscribe((presences: Presence[]) => {
 	this._presences=presences;
 });
-     	
+     
+   
+	
             
   }
 
