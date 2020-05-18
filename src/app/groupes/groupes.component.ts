@@ -70,15 +70,6 @@ export class GroupesComponent implements OnInit {
     });
   }
 
-  getVilleByIdGroup(id: number): string {
-    this.tmp = 'default';
-    this._sites.forEach(s => {
-      if (s.id === id) {
-        this.tmp = s.ville;
-      }
-    });
-    return this.tmp;
-  }
 
   getNombreByIdGroup(id: number): number {
     this.tmpInt = 0;
@@ -202,6 +193,17 @@ export class GroupesComponent implements OnInit {
     this._selectedSiteId = value;
   }
 
+
+  getVilleByIdGroup(id: number): string {
+    this.tmp = 'default';
+    this._sites.forEach(s => {
+      if (s.id === id) {
+        this.tmp = s.ville;
+      }
+    });
+    return this.tmp;
+  }
+
  sortData(sort: Sort) {
     const data = this._dataSource.data.slice();
     if (!sort.active || sort.direction === '') {
@@ -212,7 +214,7 @@ export class GroupesComponent implements OnInit {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'Nom': return compare(a.nom, b.nom, isAsc);
-        case 'Nombre': return compare( this.getNombreByIdGroup(a.id), this.getNombreByIdGroup(b.id), isAsc);
+        case 'Site': return compare( this.getVilleByIdGroup(a.idSite), this.getVilleByIdGroup(b.idSite), isAsc);
         default: return 0;
       }
     });

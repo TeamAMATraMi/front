@@ -39,12 +39,12 @@
             </ng-container>
 
             <ng-container matColumnDef="Site">
-                <mat-header-cell *matHeaderCellDef> Site</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Site</mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{ getVilleByIdGroup(element.idSite) }} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="Nombre">
-                <mat-header-cell *matHeaderCellDef mat-sort-header > Nombre de personnes</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef  > Nombre de personnes</mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{ getNombreByIdGroup(element.id) }} </mat-cell>
             </ng-container>
 

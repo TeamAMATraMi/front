@@ -24,6 +24,7 @@ export class CourDetailsComponent implements OnInit {
 
   private _cour: Cours;
   private _courApprenants: Apprenant[];
+  private _seance : Seance[];
   private _presences: Presence[];
   private readonly _modifier$: EventEmitter<Cours>;
   private _dataSource: MatTableDataSource<Seance>;
@@ -96,7 +97,7 @@ export class CourDetailsComponent implements OnInit {
    this._presencesService.fetch().subscribe((presences: Presence[]) => {
 	this._presences=presences;
 });
-   
+  
   
   }
 

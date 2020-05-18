@@ -24,7 +24,7 @@
             </ng-container>
 
             <ng-container matColumnDef="formateur">
-                <mat-header-cell *matHeaderCellDef>Formateur</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Formateur</mat-header-cell>
                 <mat-cell
                         *matCellDef="let element"> {{getNomFormateur(element.idFormateur)}} {{getPrenomFormateur(element.idFormateur)}} </mat-cell>
             </ng-container>

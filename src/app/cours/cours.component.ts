@@ -106,6 +106,30 @@ export class CoursComponent implements OnInit {
     this._coursService.delete(id).subscribe(null, null, () => this.ngOnInit());
   }
 
+ getNomFormateur(id: number): string {
+    this._formateurs.forEach(f => {
+      if (f.id === id) {
+        this._formateur = f;
+      }
+    });
+    if (this._formateur !== undefined) {
+      return this._formateur.nom;
+    }
+    return '';
+  }
+
+  getPrenomFormateur(id: number): string {
+    this._formateurs.forEach(f => {
+      if (f.id === id) {
+        this._formateur = f;
+      }
+    });
+    if (this._formateur !== undefined) {
+      return this._formateur.prenom;
+    }
+    return '';
+  } 
+
 
  sortData(sort: Sort) {
     const data = this._dataSource.data.slice();
@@ -118,6 +142,7 @@ export class CoursComponent implements OnInit {
       switch (sort.active) {
         case 'matiere': return compare(a.matiere, b.matiere, isAsc);
         case 'duree': return compare( a.duree, b.duree, isAsc);
+	 case 'formateur': return compare( this.getNomFormateur(a.idFormateur), this.getNomFormateur(b.idFormateur), isAsc);
         default: return 0;
       }
     });
@@ -156,30 +181,7 @@ export class CoursComponent implements OnInit {
     return this._displayedColumns;
   }
 
-  getNomFormateur(id: number): string {
-    this._formateurs.forEach(f => {
-      if (f.id === id) {
-        this._formateur = f;
-      }
-    });
-    if (this._formateur !== undefined) {
-      return this._formateur.nom;
-    }
-    return '';
-  }
-
-  getPrenomFormateur(id: number): string {
-    this._formateurs.forEach(f => {
-      if (f.id === id) {
-        this._formateur = f;
-      }
-    });
-    if (this._formateur !== undefined) {
-      return this._formateur.prenom;
-    }
-    return '';
-  }
-
+ 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
