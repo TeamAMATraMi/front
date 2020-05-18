@@ -151,20 +151,43 @@
               </span>
             </mat-card-title>
           </mat-card-title-group>
- </mat-card>
+
+
+    <div style="width:100%;">
+        <mat-table [dataSource]="dataSource">
+               <ng-container matColumnDef="Matiere">
+                <mat-header-cell *matHeaderCellDef >Matiere</mat-header-cell>
+                 <mat-cell *matCellDef="let element"> {{ getMatiereById(element.id) }}  </mat-cell>
+            </ng-container>
+
+ 		<ng-container matColumnDef="Date">
+                <mat-header-cell *matHeaderCellDef> Date</mat-header-cell>
+                 <mat-cell *matCellDef="let element"> {{ getDateByIdFor(element.id) }}  </mat-cell>
+            </ng-container>
+
+	<ng-container matColumnDef="Horaire">
+                <mat-header-cell *matHeaderCellDef> Horaire</mat-header-cell>
+                 <mat-cell *matCellDef="let element"> {{ getHoraireById(element.id) }}  </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Presences">
+                <mat-header-cell *matHeaderCellDef>Presences</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{ getPresenceByIdFor(element.id) }}  </mat-cell>
+            </ng-container>
+
+            
+
+            <mat-header-row *matHeaderRowDef="displayed"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayed;"></mat-row>
+        </mat-table>
+
+       
+    </div>
+
+
+  </mat-card>
+
  </mat-tab>
-
-
-
-
-
-
-
-
-
-
-
-
 
     </mat-tab-group>
 
