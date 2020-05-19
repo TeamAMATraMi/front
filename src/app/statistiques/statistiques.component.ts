@@ -67,11 +67,11 @@ this._groupes = [];
      this._groupesService.fetch().subscribe((groupes: Groupe[]) => { this._groupes = groupes; this._groupesSite = this._groupes; });
   
    
- this._statistiquesService.fetchBySexe().subscribe((stat: Map<String, number>) => {
+ this._statistiquesService.fetchBySexe('all').subscribe((stat: Map<String, number>) => {
       this.sexeData = [stat['M'], stat['F']];
     });
 
-    this._statistiquesService.fetchByAge().subscribe( (stat: Map<String, number>) => {
+    this._statistiquesService.fetchByAge('all').subscribe( (stat: Map<String, number>) => {
       for (let i = 0; i < Object.keys(stat).length; i++) {
         this.ageLabels.push(Object.keys(stat)[i]);
       }
@@ -87,7 +87,7 @@ this._groupes = [];
 
 
 
-    this._statistiquesService.fetchBySite().subscribe((stat: Map<String, number>) => {
+    this._statistiquesService.fetchBySite('all').subscribe((stat: Map<String, number>) => {
       for (let i = 0; i < Object.keys(stat).length; i++) {
         this.siteLabels.push(Object.keys(stat)[i]);
       }
@@ -128,7 +128,7 @@ this._statistiquesService.fetchByQuartierPrio('all').subscribe((stat: Map<String
       this.niveauLangueData = Object.values(stat);
     });
 
-    this._statistiquesService.fetchByPrimoArrivant().subscribe( (stat: Map<String, number>) => {
+    this._statistiquesService.fetchByPrimoArrivant('all').subscribe( (stat: Map<String, number>) => {
       for (let i = 0; i < Object.keys(stat).length; i++) {
         this.primoArrivantLabels.push(Object.keys(stat)[i]);
       }
@@ -167,8 +167,17 @@ get form(): FormGroup {
     return this._form;
   }
 
-afficherApprenants() {
+afficherStats() {
 this.nationaliteLabels.length=0;
+this.sejourLabels.length=0;
+this.ageLabels.length=0;
+this.primoArrivantLabels.length=0;
+this.siteLabels.length=0;
+this.niveauScolLabels.length=0;
+this.niveauLangueLabels.length=0;
+this.quartierPrioLabels.length=0;
+this.niveauLangueLabels.length=0;
+
     this._groupesSite = [];
     this._groupes.forEach(e => {
       if (this._selectedSiteId === 'allSites') {
@@ -181,7 +190,39 @@ this.nationaliteLabels.length=0;
     });
 
  if (this._selectedSiteId === 'allSites') {
+
+ this._statistiquesService.fetchBySite('all').subscribe((stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.siteLabels.push(Object.keys(stat)[i]);
+      }
+      this.siteData = Object.values(stat);
+    });
+
+
+//Repartition Sexe  tout les sites 
+this._statistiquesService.fetchBySexe('all').subscribe((stat: Map<String, number>) => {
+      this.sexeData = [stat['M'], stat['F']];
+    });
+
+//Repartition Primo  tout les sites 
+this._statistiquesService.fetchByPrimoArrivant('all').subscribe( (stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.primoArrivantLabels.push(Object.keys(stat)[i]);
+      }
+      this.primoArrivantData = Object.values(stat);
+    });
+
+
+//Repartition Age  tout les sites 
+ this._statistiquesService.fetchByAge('all').subscribe( (stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.ageLabels.push(Object.keys(stat)[i]);
+      }
+      this.ageData = Object.values(stat);
+    });
+  
         
+//Repartition nationalité pour tout les sites
        this._statistiquesService.fetchByNationalite('all').subscribe((stat: Map<String, number>) => {
       for (let i = 0; i < Object.keys(stat).length; i++) {
         this.nationaliteLabels.push(Object.keys(stat)[i]);
@@ -189,18 +230,123 @@ this.nationaliteLabels.length=0;
       this.nationaliteData = Object.values(stat);
     });
 
+//Repartition Sejour pour tout le site selectionné  
+
+  this._statistiquesService.fetchBySejour('all').subscribe((stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.sejourLabels.push(Object.keys(stat)[i]);
+      }
+      this.sejourData = Object.values(stat);
+    });
+
+//Repartition Niveau scolaire pour tout les sites
+ 
+this._statistiquesService.fetchByNiveauScol('all').subscribe((stat: Map<number, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.niveauScolLabels.push(Object.keys(stat)[i]);
+      }
+      this.niveauScolData = Object.values(stat);
+    });
+
+
+//Repartition quartier Prioritaire pour tout les sites   
+this._statistiquesService.fetchByQuartierPrio('all').subscribe((stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.quartierPrioLabels.push(Object.keys(stat)[i]);
+      }
+      this.quartierPrioData = Object.values(stat);
+    });
+
+
+//Repartition niveau langue pour tout les sites 
+ this._statistiquesService.fetchByNiveauLangue('all').subscribe((stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.niveauLangueLabels.push(Object.keys(stat)[i]);
+      }
+      this.niveauLangueData = Object.values(stat);
+    });
+
     }
  else {
  this._sites.forEach(e => {
       if (e.id === this._selectedSiteId) {
-this.nationaliteData=[];
-        
+  
+//Repartition Nationalité  tout le site selectionné     
  this._statistiquesService.fetchByNationalite(e.ville).subscribe((stat: Map<String, number>) => {
       for (let i = 0; i < Object.keys(stat).length; i++) {
         this.nationaliteLabels.push(Object.keys(stat)[i]);
       }
       this.nationaliteData = Object.values(stat);
     });
+
+//Repartition Age le site selectionné
+ this._statistiquesService.fetchByAge(e.ville).subscribe( (stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.ageLabels.push(Object.keys(stat)[i]);
+      }
+      this.ageData = Object.values(stat);
+    });
+  
+//Repartition Primo  pout le site selectionné
+this._statistiquesService.fetchByPrimoArrivant(e.ville).subscribe( (stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.primoArrivantLabels.push(Object.keys(stat)[i]);
+      }
+      this.primoArrivantData = Object.values(stat);
+    });
+
+
+ this._statistiquesService.fetchBySite(e.ville).subscribe((stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.siteLabels.push(Object.keys(stat)[i]);
+      }
+      this.siteData = Object.values(stat);
+    });
+
+
+
+//Repartition Sejour pour  le site selectionné  
+
+ this._statistiquesService.fetchBySejour(e.ville).subscribe((stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.sejourLabels.push(Object.keys(stat)[i]);
+      }
+      this.sejourData = Object.values(stat);
+    });
+
+//Repartition quaetier Prioritaire pour le site selectionné  
+
+this._statistiquesService.fetchByQuartierPrio(e.ville).subscribe((stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.quartierPrioLabels.push(Object.keys(stat)[i]);
+      }
+      this.quartierPrioData = Object.values(stat);
+    });
+
+
+//Repartition Sexe   le site selectionné 
+this._statistiquesService.fetchBySexe(e.ville).subscribe((stat: Map<String, number>) => {
+      this.sexeData = [stat['M'], stat['F']];
+    });
+  
+
+//Repartition niveau langue pour tout les sites 
+ this._statistiquesService.fetchByNiveauLangue(e.ville).subscribe((stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.niveauLangueLabels.push(Object.keys(stat)[i]);
+      }
+      this.niveauLangueData = Object.values(stat);
+    });
+
+//Repartition Niveau scolaire  le site selectionné 
+  
+this._statistiquesService.fetchByNiveauScol(e.ville).subscribe((stat: Map<number, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.niveauScolLabels.push(Object.keys(stat)[i]);
+      }
+      this.niveauScolData = Object.values(stat);
+    });
+
      }
    });
 }

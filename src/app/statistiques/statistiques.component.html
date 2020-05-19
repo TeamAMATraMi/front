@@ -14,8 +14,8 @@
         <span>Site : </span>
         <mat-form-field>
             <mat-select [(value)]="selectedSiteId">
-                <mat-option value="allSites" (click)="groupesSites = groupes; afficherApprenants()">Tous les sites</mat-option>
-                <mat-option *ngFor="let site of sites" [value]="site.id" (click)="afficherApprenants()">{{site.ville}}</mat-option>
+                <mat-option value="allSites" (click)="groupesSites = groupes; afficherStats()">Tous les sites</mat-option>
+                <mat-option *ngFor="let site of sites" [value]="site.id" (click)="afficherStats()">{{site.ville}}</mat-option>
             </mat-select>
         </mat-form-field>
 

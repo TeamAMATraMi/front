@@ -27,24 +27,24 @@ export class StatistiquesService {
     /**
      * Function to get statistiques by sexe
      */
-    fetchBySexe(): Observable<Map<String, number>> {
-        return this._http.get<Map<String, number>>(this._backendURL.sexeStatistiques)
+    fetchBySexe(site: string): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.sexeStatistiques.replace(':nom', site))
             .pipe(
                 filter(_ => !!_),
                 defaultIfEmpty(null)
             );
     }
 
-    fetchByAge(): Observable<Map<String, number>> {
-        return this._http.get<Map<String, number>>(this._backendURL.ageStatistiques)
+    fetchByAge(site: string): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.ageStatistiques.replace(':nom', site))
             .pipe(
                 filter(_ => !!_),
                 defaultIfEmpty(null)
             );
     }
 
-    fetchBySite(): Observable<Map<String, number>> {
-        return this._http.get<Map<String, number>>(this._backendURL.siteStatistiques)
+    fetchBySite(site: string): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.siteStatistiques.replace(':nom', site))
             .pipe(
                 filter(_ => !!_),
                 defaultIfEmpty(null)
@@ -115,8 +115,8 @@ export class StatistiquesService {
             );
     }
 
-    fetchByPrimoArrivant(): Observable<Map<String, number>> {
-        return this._http.get<Map<String, number>>(this._backendURL.primoArrivantStatistiques)
+    fetchByPrimoArrivant(site: string): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.primoArrivantStatistiques.replace(':nom', site))
             .pipe(
                 filter(_ => !!_),
                 defaultIfEmpty(null)

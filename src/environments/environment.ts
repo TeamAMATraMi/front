@@ -52,9 +52,9 @@ export const environment = {
                 oneQuartier: '/api/quartiers/:id'
             },
             statistiques: {
-                sexeStatistiques: '/api/sexe',
-                ageStatistiques: '/api/age',
-                siteStatistiques: '/api/site',
+                sexeStatistiques: '/api/sexe/:nom',
+                ageStatistiques: '/api/age/:nom',
+                siteStatistiques: '/api/site/:nom',
                 nationaliteStatistiques: '/api/nationalite/:nom',
                 titreSejourStatistiques: '/api/titreSejour/:nom',
                 quartierPrioStatistiques: '/api/quartierPrio/:nom',
@@ -62,7 +62,7 @@ export const environment = {
                 statutProStatistiques: '/api/statutPro/:nom',
                 priseChargeStatistiques: '/api/priseCharge/:nom',
                 niveauLangueStatistiques: '/api/niveauLangue/:nom',
-                primoArrivantStatistiques: '/api/primoArrivant',
+                primoArrivantStatistiques: '/api/primoArrivant/:nom',
 		presencesStatistiques: '/api/presence/:nom'
             },
             presences: {
