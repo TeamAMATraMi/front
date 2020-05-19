@@ -6,8 +6,42 @@
 <div id="content">
   <br/><br/><br/>
 
+<form novalidate [formGroup]="form">
+<mat-toolbar >
+    <mat-toolbar-row>
+
+       
+        <span>Site : </span>
+        <mat-form-field>
+            <mat-select [(value)]="selectedSiteId">
+                <mat-option value="allSites" (click)="groupesSites = groupes; afficherApprenants()">Tous les sites</mat-option>
+                <mat-option *ngFor="let site of sites" [value]="site.id" (click)="afficherApprenants()">{{site.ville}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <span class="flex"></span>
+
+        <span>Durée :  &nbsp;</span> &nbsp;
+	
+<a>Du &nbsp; </a>
+	<mat-form-field class="tab">
+                <input matInput type="date"   name="debutDate" formControlName="debutDate" />
+            </mat-form-field>
+&nbsp; <a>Au </a> &nbsp;
+	<mat-form-field class="tab">
+
+                <input matInput type="date"  name="finDate"  formControlName="finDate" />
+            </mat-form-field>
+
+<button mat-button color="primary" type="submit" >Appliquer</button>
+    
+    </mat-toolbar-row>
+</mat-toolbar>
+  </form> 
+
+
 <mat-tab-group>
-  <mat-tab label="Tous les sites">
+  <mat-tab >
     <mat-grid-list cols="3" rowHeight="5:4">
       <mat-grid-tile>
         <mat-grid-tile-header>Répartition hommes / femmes</mat-grid-tile-header>

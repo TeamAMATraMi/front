@@ -5,6 +5,10 @@ import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import {formatDate} from '@angular/common';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {GroupesService} from '../shared/services/groupes.service';
+import {Groupe} from '../shared/interfaces/groupe';
 
 @Component({
   selector: 'app-statistiques',
@@ -33,6 +37,12 @@ export class StatistiquesComponent implements OnInit {
   public primoArrivantData: number[] = [];
   public bar = 'bar';
   public doughnut = 'doughnut';
+  private _groupesSite: Groupe[];
+  private  _groupes: Groupe[];
+
+  private _selectedSiteId: number | string;
+ private readonly _form: FormGroup;
+
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
     responsive: false
@@ -45,10 +55,17 @@ export class StatistiquesComponent implements OnInit {
   private _sites: Site[];
 
 
-  constructor(private _statistiquesService: StatistiquesService, private _sitesService: SitesService, private _router: Router) {}
+  constructor(private _statistiquesService: StatistiquesService,private _groupesService: GroupesService, private _sitesService: SitesService, private _router: Router) {
+   this._form = this._buildForm();
+	this._selectedSiteId = 'allSites';
+	 this._groupesSite = [];
+this._groupes = [];
+}
 
   ngOnInit() {
     this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
+     this._groupesService.fetch().subscribe((groupes: Groupe[]) => { this._groupes = groupes; this._groupesSite = this._groupes; });
+  
    
  this._statistiquesService.fetchBySexe().subscribe((stat: Map<String, number>) => {
       this.sexeData = [stat['M'], stat['F']];
@@ -67,6 +84,8 @@ export class StatistiquesComponent implements OnInit {
       }
       this.nationaliteData = Object.values(stat);
     });
+
+
 
     this._statistiquesService.fetchBySite().subscribe((stat: Map<String, number>) => {
       for (let i = 0; i < Object.keys(stat).length; i++) {
@@ -142,6 +161,68 @@ this._statistiquesService.fetchByQuartierPrio('all').subscribe((stat: Map<String
       pdf.save('statistique.pdf'); // Generated PDF 
      
     });
+  }
+
+get form(): FormGroup {
+    return this._form;
+  }
+
+afficherApprenants() {
+this.nationaliteLabels.length=0;
+    this._groupesSite = [];
+    this._groupes.forEach(e => {
+      if (this._selectedSiteId === 'allSites') {
+        this._groupesSite.push(e);
+      } else {
+        if (e.idSite === this._selectedSiteId) {
+          this._groupesSite.push(e);
+        }
+      }
+    });
+
+ if (this._selectedSiteId === 'allSites') {
+        
+       this._statistiquesService.fetchByNationalite('all').subscribe((stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.nationaliteLabels.push(Object.keys(stat)[i]);
+      }
+      this.nationaliteData = Object.values(stat);
+    });
+
+    }
+ else {
+ this._sites.forEach(e => {
+      if (e.id === this._selectedSiteId) {
+this.nationaliteData=[];
+        
+ this._statistiquesService.fetchByNationalite(e.ville).subscribe((stat: Map<String, number>) => {
+      for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.nationaliteLabels.push(Object.keys(stat)[i]);
+      }
+      this.nationaliteData = Object.values(stat);
+    });
+     }
+   });
+}
+}
+
+ get sites(): Site[] {
+    return this._sites;
+  }
+get selectedSiteId(): number | string {
+    return this._selectedSiteId;
+  }
+
+  set selectedSiteId(value: number | string) {
+    this._selectedSiteId = value;
+  }
+
+
+ private _buildForm(): FormGroup {
+    return new FormGroup({finDate: new FormControl(formatDate(new Date(), 'yyyy-MM-dd', 'en'), Validators.compose([
+      ])), debutDate: new FormControl('', Validators.compose([
+      ]))
+ });
   }
 
 }
