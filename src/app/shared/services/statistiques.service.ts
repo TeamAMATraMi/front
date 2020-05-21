@@ -27,40 +27,40 @@ export class StatistiquesService {
     /**
      * Function to get statistiques by sexe
      */
-    fetchBySexe(site: string): Observable<Map<String, number>> {
-        return this._http.get<Map<String, number>>(this._backendURL.sexeStatistiques.replace(':nom', site))
+    fetchBySexe(site: string,dateDebut:number,dateFin:number): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.sexeStatistiques.replace(':nom', site).replace(':dateDebut', dateDebut).replace(':dateFin', dateFin))
             .pipe(
                 filter(_ => !!_),
                 defaultIfEmpty(null)
             );
     }
 
-    fetchByAge(site: string): Observable<Map<String, number>> {
-        return this._http.get<Map<String, number>>(this._backendURL.ageStatistiques.replace(':nom', site))
+    fetchByAge(site: string,dateDebut:number,dateFin:number): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.ageStatistiques.replace(':nom', site).replace(':dateDebut', dateDebut).replace(':dateFin', dateFin))
             .pipe(
                 filter(_ => !!_),
                 defaultIfEmpty(null)
             );
     }
 
-    fetchBySite(site: string): Observable<Map<String, number>> {
-        return this._http.get<Map<String, number>>(this._backendURL.siteStatistiques.replace(':nom', site))
+    fetchBySite(site: string,dateDebut:number,dateFin:number): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.siteStatistiques.replace(':nom', site).replace(':dateDebut', dateDebut).replace(':dateFin', dateFin))
             .pipe(
                 filter(_ => !!_),
                 defaultIfEmpty(null)
             );
     }
 
-    fetchByNationalite(site: string): Observable<Map<String, number>> {
-        return this._http.get<Map<String, number>>(this._backendURL.nationaliteStatistiques.replace(':nom', site))
+    fetchByNationalite(site: string,dateDebut:number,dateFin:number): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.nationaliteStatistiques.replace(':nom', site).replace(':dateDebut', dateDebut).replace(':dateFin', dateFin))
             .pipe(
                 filter(_ => !!_),
                 defaultIfEmpty(null)
             );
     }
 
-    fetchBySejour(site: string): Observable<Map<String, number>> {
-        return this._http.get<Map<String, number>>(this._backendURL.titreSejourStatistiques.replace(':nom', site))
+    fetchBySejour(site: string,dateDebut:number,dateFin:number): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.titreSejourStatistiques.replace(':nom', site).replace(':dateDebut', dateDebut).replace(':dateFin', dateFin))
             .pipe(
                 filter(_ => !!_),
                 defaultIfEmpty(null)
@@ -75,48 +75,48 @@ export class StatistiquesService {
             );
     }
 
-    fetchByQuartierPrio(site: string): Observable<Map<String, number>> {
-        return this._http.get<Map<String, number>>(this._backendURL.quartierPrioStatistiques.replace(':nom', site))
+    fetchByQuartierPrio(site: string,dateDebut:number,dateFin:number): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.quartierPrioStatistiques.replace(':nom', site).replace(':dateDebut', dateDebut).replace(':dateFin', dateFin))
             .pipe(
                 filter(_ => !!_),
                 defaultIfEmpty(null)
             );
     }
 
-    fetchByNiveauScol(site: string): Observable<Map<number, number>> {
-        return this._http.get<Map<number, number>>(this._backendURL.niveauScolStatistiques.replace(':nom', site))
+    fetchByNiveauScol(site: string,dateDebut:number,dateFin:number): Observable<Map<number, number>> {
+        return this._http.get<Map<number, number>>(this._backendURL.niveauScolStatistiques.replace(':nom', site).replace(':dateDebut', dateDebut).replace(':dateFin', dateFin))
             .pipe(
                 filter(_ => !!_),
                 defaultIfEmpty(null)
             );
     }
 
-    fetchByStatutPro(site: string): Observable<Map<String, number>> {
-        return this._http.get<Map<String, number>>(this._backendURL.statutProStatistiques.replace(':nom', site))
+    fetchByStatutPro(site: string,dateDebut:number,dateFin:number): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.statutProStatistiques.replace(':nom', site).replace(':dateDebut', dateDebut).replace(':dateFin', dateFin))
             .pipe(
                 filter(_ => !!_),
                 defaultIfEmpty(null)
             );
     }
 
-    fetchByPriseCharge(site: string): Observable<Map<number, number>> {
-        return this._http.get<Map<number, number>>(this._backendURL.priseChargeStatistiques.replace(':nom', site))
+    fetchByPriseCharge(site: string,dateDebut:number,dateFin:number): Observable<Map<number, number>> {
+        return this._http.get<Map<number, number>>(this._backendURL.priseChargeStatistiques.replace(':nom', site).replace(':dateDebut', dateDebut).replace(':dateFin', dateFin))
             .pipe(
                 filter(_ => !!_),
                 defaultIfEmpty(null)
             );
     }
 
-    fetchByNiveauLangue(site: string): Observable<Map<String, number>> {
-        return this._http.get<Map<String, number>>(this._backendURL.niveauLangueStatistiques.replace(':nom', site))
+    fetchByNiveauLangue(site: string,dateDebut:number,dateFin:number): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.niveauLangueStatistiques.replace(':nom', site).replace(':dateDebut', dateDebut).replace(':dateFin', dateFin))
             .pipe(
                 filter(_ => !!_),
                 defaultIfEmpty(null)
             );
     }
 
-    fetchByPrimoArrivant(site: string): Observable<Map<String, number>> {
-        return this._http.get<Map<String, number>>(this._backendURL.primoArrivantStatistiques.replace(':nom', site))
+    fetchByPrimoArrivant(site: string,dateDebut:number,dateFin:number): Observable<Map<String, number>> {
+        return this._http.get<Map<String, number>>(this._backendURL.primoArrivantStatistiques.replace(':nom', site).replace(':dateDebut', dateDebut).replace(':dateFin', dateFin))
             .pipe(
                 filter(_ => !!_),
                 defaultIfEmpty(null)

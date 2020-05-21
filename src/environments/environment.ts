@@ -52,18 +52,18 @@ export const environment = {
                 oneQuartier: '/api/quartiers/:id'
             },
             statistiques: {
-                sexeStatistiques: '/api/sexe/:nom',
-                ageStatistiques: '/api/age/:nom',
-                siteStatistiques: '/api/site/:nom',
-                nationaliteStatistiques: '/api/nationalite/:nom',
-                titreSejourStatistiques: '/api/titreSejour/:nom',
-                quartierPrioStatistiques: '/api/quartierPrio/:nom',
-                niveauScolStatistiques: '/api/niveauScol/:nom',
-                statutProStatistiques: '/api/statutPro/:nom',
-                priseChargeStatistiques: '/api/priseCharge/:nom',
-                niveauLangueStatistiques: '/api/niveauLangue/:nom',
-                primoArrivantStatistiques: '/api/primoArrivant/:nom',
-		presencesStatistiques: '/api/presence/:nom'
+                sexeStatistiques: '/api/sexe/:nom/:dateDebut/:dateFin',
+                ageStatistiques: '/api/age/:nom/:dateDebut/:dateFin',
+                siteStatistiques: '/api/site/:nom/:dateDebut/:dateFin',
+                nationaliteStatistiques: '/api/nationalite/:nom/:dateDebut/:dateFin',
+                titreSejourStatistiques: '/api/titreSejour/:nom/:dateDebut/:dateFin',
+                quartierPrioStatistiques: '/api/quartierPrio/:nom/:dateDebut/:dateFin',
+                niveauScolStatistiques: '/api/niveauScol/:nom/:dateDebut/:dateFin',
+                statutProStatistiques: '/api/statutPro/:nom/:dateDebut/:dateFin',
+                priseChargeStatistiques: '/api/priseCharge/:nom/:dateDebut/:dateFin',
+                niveauLangueStatistiques: '/api/niveauLangue/:nom/:dateDebut/:dateFin',
+                primoArrivantStatistiques: '/api/primoArrivant/:nom/:dateDebut/:dateFin',
+		presencesStatistiques: '/api/presence/:nom/:dateDebut/:dateFin'
             },
             presences: {
                 allPresences: '/api/presences',
