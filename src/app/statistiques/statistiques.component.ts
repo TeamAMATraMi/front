@@ -1,4 +1,4 @@
-import { Component, OnInit , ViewChild} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {BaseChartDirective} from 'ng2-charts/ng2-charts';
 import {StatistiquesService} from '../shared/services/statistiques.service';
@@ -59,8 +59,6 @@ export class StatistiquesComponent implements OnInit {
     }];
   private _sites: Site[];
 
-@ViewChild('baseChart')
-chart: BaseChartDirective;
 
   constructor(private _statistiquesService: StatistiquesService,private _apprenantsService: ApprenantsService, private _groupesService: GroupesService, private _sitesService: SitesService, private _router: Router) {
    this._form = this._buildForm();
@@ -212,28 +210,7 @@ this.primoArrivantLabels.length=0;
     });
 
  if (this._selectedSiteId === 'allSites') {
-
-this.nationaliteData.length=0;
-this.ageData.length=0;
-this.siteData.length=0;
-this.sejourData.length=0;
-this.niveauScolData.length=0;
-this.quartierPrioData.length=0;
-this.niveauLangueData.length=0;
-this.quartierPrioData.length=0;
-this.primoArrivantData.length=0;
-
-this.nationaliteLabels.length=0;
-this.ageLabels.length=0;
-this.siteLabels.length=0;
-this.sejourLabels.length=0;
-this.niveauScolLabels.length=0;
-this.quartierPrioLabels.length=0;
-this.niveauLangueLabels.length=0;
-this.quartierPrioLabels.length=0;
-this.primoArrivantLabels.length=0;
-
-	if(this._form.value.debutDate==null){
+	if(this._form.value.debutDate==''){
 
  this._statistiquesService.fetchBySite('all',1,1).subscribe((stat: Map<String, number>) => {
       for (let i = 0; i < Object.keys(stat).length; i++) {
@@ -347,8 +324,6 @@ this._statistiquesService.fetchByPrimoArrivant('all',this._form.value.debutDate,
     });
   
 
-if(this.chart !== undefined){
-        this.chart.ngOnDestroy();
 //Repartition nationalité pour tout les sites
        this._statistiquesService.fetchByNationalite('all',this._form.value.debutDate,this._form.value.finDate).subscribe((stat: Map<String, number>) => {
       for (let i = 0; i < Object.keys(stat).length; i++) {
@@ -357,7 +332,7 @@ if(this.chart !== undefined){
       this.nationaliteData = Object.values(stat);
     });
 
-}
+
 
 //Repartition Sejour pour tout le site selectionné  
 
@@ -403,28 +378,7 @@ this._statistiquesService.fetchByQuartierPrio('all',this._form.value.debutDate,t
  else {
  this._sites.forEach(e => {
       if (e.id === this._selectedSiteId) {
-
-this.nationaliteData.length=0;
-this.ageData.length=0;
-this.siteData.length=0;
-this.sejourData.length=0;
-this.niveauScolData.length=0;
-this.quartierPrioData.length=0;
-this.niveauLangueData.length=0;
-this.quartierPrioData.length=0;
-this.primoArrivantData.length=0;
-
-this.nationaliteLabels.length=0;
-this.ageLabels.length=0;
-this.siteLabels.length=0;
-this.sejourLabels.length=0;
-this.niveauScolLabels.length=0;
-this.quartierPrioLabels.length=0;
-this.niveauLangueLabels.length=0;
-this.quartierPrioLabels.length=0;
-this.primoArrivantLabels.length=0;
-
-	if(this._form.value.debutDate==null){
+	if(this._form.value.debutDate==''){
   
 //Repartition Nationalité  tout le site selectionné     
  this._statistiquesService.fetchByNationalite(e.ville,1,1).subscribe((stat: Map<String, number>) => {
@@ -621,13 +575,11 @@ if (this._selectedSiteId === 'allSites') {
 	
 
   this._statistiquesService.fetchByNationalite('all',this._form.value.debutDate,this._form.value.finDate).subscribe((stat: Map<String, number>) => {
-      for (let i = 0; i < Object.keys(stat).length; i++) {
-        this.nationaliteLabels.push(Object.keys(stat)[i]);
-	
+	for (let i = 0; i < Object.keys(stat).length; i++) {
+        this.nationaliteLabels.push(Object.keys(stat)[i]);	
 	
       }
-	this.nationaliteData=Object.values(stat);
-      
+	this.nationaliteData=Object.values(stat);     
     });
 
 this._statistiquesService.fetchBySexe('all',this._form.value.debutDate,this._form.value.finDate).subscribe((stat: Map<String, number>) => {
