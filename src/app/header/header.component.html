@@ -12,9 +12,21 @@
     <a [routerLink]="['/calendar']">Calendrier</a>
     <a [routerLink]="['/statistiques']">Statistiques</a>
   </span>
+
+	<div >
+      <button mat-button [matMenuTriggerFor]="theme">Mode</button>
+       <mat-menu #theme="matMenu">
+	<app-setting-change-color-scheme></app-setting-change-color-scheme>
+	</mat-menu>
+    </div>
+
+
     <div style="cursor: pointer;"[routerLink]="['/logout']" *ngIf="logged">
       <button mat-button >
         <mat-icon>exit_to_app </mat-icon> Se Déconnecter
       </button>
     </div>
+
+ 
+
 </mat-toolbar>

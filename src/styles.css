@@ -1,5 +1,18 @@
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+@import '~@fullcalendar/timegrid/main.css';
+
+
+
+
+
+.color-scheme-dark{
+    background-color: #1f2935;
+    color :white;
+}
+
 body {
   padding: 0;
   margin: 0;

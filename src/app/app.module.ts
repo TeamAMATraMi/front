@@ -9,6 +9,7 @@ import {DialogComponent} from './shared/dialogs/apprenant-dialog/dialog.componen
 import {ChartsModule } from 'ng2-charts';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
+
 import {
   MatButtonModule,
   MatCardModule,
@@ -26,6 +27,8 @@ import {
   MatTableModule,
   MatPaginatorModule, MatSortModule, MatTabsModule, MatGridListModule, MatSnackBarModule
 } from '@angular/material';
+
+import { SettingChangeColorSchemeComponent } from "./darkmode/setting-change-color-scheme.component";
 
 import {SitesComponent} from './sites/sites.component';
 import {ApprenantsComponent} from './apprenants/apprenants.component';
@@ -78,11 +81,12 @@ import {LogoutComponent } from './logout/logout.component';
 import {SeanceFormComponent} from './shared/forms/seance-form/seance-form.component';
 import {SeanceDialogComponent} from './shared/dialogs/seance-dialog/seance-dialog.component';
 import { DisplaySeanceComponent } from './display-seance/display-seance.component';
-import {UpdateSeanceComponent} from './update/update-seance/update-seance.component'
+import {UpdateSeanceComponent} from './update/update-seance/update-seance.component';
 
 @NgModule({
     declarations: [
         AppComponent,
+	SettingChangeColorSchemeComponent,
         HeaderComponent,
         DialogComponent,
         SitesComponent,
