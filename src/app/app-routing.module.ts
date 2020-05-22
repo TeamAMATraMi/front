@@ -13,6 +13,7 @@ import {UpdateFormateurComponent} from './update/update-formateur/update-formate
 import {HomeComponent} from './home/home.component';
 import {UpdateGroupeComponent} from './update/update-groupe/update-groupe.component';
 import {CoursComponent} from './cours/cours.component';
+import {CalendarComponent} from './calendar/calendar.component';
 import {CourComponent} from './cour/cour.component';
 import {UpdateCoursComponent} from './update/update-cours/update-cours.component';
 import {LoginComponent} from './login/login.component';
@@ -51,6 +52,7 @@ const routes: Routes = [
     { path: 'presences', component: PresencesComponent, canActivate: [AuthGuard]},
     { path: 'presence/:id', component: PresenceComponent, canActivate: [AuthGuard]},
     { path: 'logout', component: LogoutComponent },
+    { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard]},
     { path: 'updateSeance/:id', component: UpdateSeanceComponent }
 
 ];

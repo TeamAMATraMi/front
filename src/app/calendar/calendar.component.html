@@ -1,0 +1,33 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span>Emplois du temps</span>
+    <span class="flex"></span>
+    
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<section>
+     <div class='app'>  
+
+  <div class='app-calendar' *ngIf="calendarVisible">
+    <full-calendar
+      #calendar
+      defaultView="dayGridMonth"
+      [header]="{
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      }"
+      [plugins]="calendarPlugins"
+      [weekends]="calendarWeekends"
+      [events]="calendarEvents"
+
+      [locales] ="locale"
+      locale="fr"
+      (dateClick)="handleDateClick($event)"
+    ></full-calendar>
+  </div>
+
+</div>
+    
+</section>

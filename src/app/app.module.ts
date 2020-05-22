@@ -7,6 +7,7 @@ import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {DialogComponent} from './shared/dialogs/apprenant-dialog/dialog.component';
 import {ChartsModule } from 'ng2-charts';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 import {
   MatButtonModule,
@@ -39,6 +40,7 @@ import {ApprenantDetailsComponent} from './shared/details/apprenant-details/appr
 import {GroupesComponent} from './groupes/groupes.component';
 import {GroupeComponent} from './groupe/groupe.component';
 import {FormateursCardComponent} from './shared/cards/formateurs-card/formateurs-card.component';
+import {CalendarComponent} from './calendar/calendar.component';
 
 import {ApprenantFormComponent} from './shared/forms/apprenant-form/apprenant-form.component';
 import {UpdateApprenantComponent} from './update/update-apprenant/update-apprenant.component';
@@ -86,6 +88,7 @@ import {UpdateSeanceComponent} from './update/update-seance/update-seance.compon
         SitesComponent,
         ApprenantsComponent,
         FormateursComponent,
+	CalendarComponent,
         StatistiquesComponent,
         ApprenantCardComponent,
         SitesCardComponent,
@@ -156,6 +159,7 @@ import {UpdateSeanceComponent} from './update/update-seance/update-seance.compon
         MatSelectModule,
         MatExpansionModule,
         MatRadioModule,
+  FullCalendarModule,
         MatFormFieldModule,
         MatPaginatorModule,
         MatSortModule,
