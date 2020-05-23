@@ -195,4 +195,74 @@ else{
  
         });
   }
+
+
+
+downloadFeuilleHebergement(){
+ const SESSION_CELL_MAX_CHARACTERS = 20;
+	    const SESSION_CELL_WIDTH = 28;
+	    if (!this._cour || !this._courApprenants || this._courApprenants.length < 1) {
+	      alert('Impossible de trouver le cours ou les participants... Veuillez réessayer.')
+	      return;
+	    }
+	    this._coursService.fetchOne(this._cour.id).subscribe((cour: Cours) =>{
+	      const doc = new jsPDF();
+	      const apprenantsRows = [];
+	      this._courApprenants.forEach(apprenant => {
+	        const cols = [];
+	        cols.push(apprenant.prenom + ' ' + apprenant.nom.toUpperCase());
+	        cour.seances.forEach(c =>{
+	          cols.push('');
+	        });
+	        apprenantsRows.push(cols);
+	
+	      });
+	      const header = ['Apprenant'];
+	      const ownColumnStyles = {
+	        0: {
+	          cellWidth: 'auto'
+	        }
+	      };
+	      var index = 1;
+	      cour.seances.forEach(seance => {
+	        console.log("seance : ",seance);
+	        var columnName = (!!seance.date? formatDate(seance.date,'dd/MM/yyyy', 'en-US') + ' ' : ' ') + (!!seance.horaire ? seance.horaire : '');
+	        if(columnName.length + 3 > SESSION_CELL_MAX_CHARACTERS) {
+	          columnName = columnName.substring(0, SESSION_CELL_MAX_CHARACTERS - 3) + '...';
+	        }
+	        header.push(columnName);
+	        ownColumnStyles[index++] = {cellWidth: SESSION_CELL_WIDTH};
+	      });
+	      doc.autoTable({
+	        showHead: 'everyPage',
+	        theme: 'grid',
+	        headStyles: {
+	          fillColor: [255, 255, 255],
+	          fontStyle: 'bold',
+	          textColor: [0, 0, 0]
+	        },
+	        columnStyles: ownColumnStyles,
+	        head: [
+	          [
+	            {content: ''},
+	            {
+	              content: 'Cours ' + this._cour.matiere,
+	              colSpan: (header.length - 1)
+	            }
+	          ],
+	          header],
+	        body: apprenantsRows,
+	      });
+	
+	
+	      // Save the PDF
+	      doc.save('Présences_' + Date.now() + '.pdf');
+	
+	    });
+	  }
+
+
+
+
+
 }
