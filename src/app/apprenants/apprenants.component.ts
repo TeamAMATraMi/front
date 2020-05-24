@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {Site} from '../shared/interfaces/site';
 import {SitesService} from '../shared/services/sites.service';
 import {GroupesService} from '../shared/services/groupes.service';
+import {ExcelService} from '../shared/services/excel.service';
 import {Groupe} from '../shared/interfaces/groupe';
 import {DialogComponent} from '../shared/dialogs/apprenant-dialog/dialog.component';
 import {MatDialog, MatDialogRef, MatPaginator, MatSnackBar, MatSort, MatTableDataSource, Sort} from '@angular/material';
@@ -27,6 +28,7 @@ export class ApprenantsComponent implements OnInit {
   private _groupeTemp: Groupe;
   private _selectedSiteId: number | string;
   private _selectedGroupeId: number | string;
+  private data : any[];
 
   private _dialogStatus: string;
   private _apprenantsDialog: MatDialogRef<DialogComponent>;
@@ -40,13 +42,14 @@ export class ApprenantsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _router: Router, private _apprenantsService: ApprenantsService, private _sitesService: SitesService,
+  constructor(private _router: Router, private _apprenantsService: ApprenantsService, private excelService:ExcelService ,private _sitesService: SitesService,
               private _groupesService: GroupesService, private _dialog: MatDialog, private snackBar: MatSnackBar) {
     this._apprenants = [];
     this._apprenantsTemp = [];
     this._sites = [];
     this._groupes = [];
     this._groupesSite = [];
+this.data=[];
 
     this._dialogStatus = 'inactive';
     this._selectedSiteId = 'allSites';
@@ -266,6 +269,127 @@ export class ApprenantsComponent implements OnInit {
       duration: 3000
     });
   }
+
+
+downloadApprenantsExcel(){
+this.data=[];
+var rsa;
+  	
+		this._apprenants.forEach(apprenant => {
+	this._groupes.forEach(e => {
+	if(apprenant.idGroupe == e.id ){
+		if(apprenant.rsa==false){
+		rsa='Non';
+		}
+		else if(apprenant.rsa==true){
+		rsa='Oui';
+		}
+		else{
+		rsa='';
+		}
+if(apprenant.genre=="M"){
+		this.data = this.data.concat({
+		Nom : apprenant.nom,
+		Prenom :apprenant.prenom,
+		Naissance : apprenant.dateNaissance,
+		Genre: apprenant.genre,
+		Nationalité : apprenant.nationalite,
+		PaysOrigine : apprenant.paysOrigine,
+		Inscription :apprenant.dateInscription,
+		Groupe : e.nom,
+		DateArrivee : apprenant.dateArrivee,
+		Telephone : apprenant.telephone,
+		Adresse :apprenant.adresse,
+		CodePostal : apprenant.codePostal,
+		Commune : apprenant.commune,
+		AuteurDossier:apprenant.auteurDossier,
+		PrimoArrivant:apprenant.primoArrivant,
+		Majeur : apprenant.majeur,
+		QuartierPrioritaire: apprenant.quartierPrioritaire,
+		SituationPersonnelle:apprenant.situationPersonnelle,
+		PriseCharge : apprenant.priseCharge,
+		RSA : rsa,
+		tempsScolarisation: apprenant.tempsScolarisation,
+  		diplome: apprenant.diplome,
+		  milieuScolaire: apprenant.milieuScolaire,
+		  niveauLangue: apprenant.niveauLangue,
+		  lireLangue: apprenant.lireLangue,
+		  ecrireLangue: apprenant.ecrireLangue,
+		  lireAlphaLatin: apprenant.lireAlphaLatin,
+		  ecrireAlphaLatin: apprenant.ecrireAlphaLatin,
+		  cotisationPayee: apprenant.cotisationPayee,
+		  remarques: apprenant.remarques,
+		  statutSejour: apprenant.statutSejour,
+		  dateCarteSejour: apprenant.dateCarteSejour,
+		  dateFinCarteSejour: apprenant.dateFinCarteSejour,
+		  statutPro: apprenant.statutPro,
+		  typeContrat: apprenant.typeContrat
+		
+  
+  
+  
+  
+		});
+	       }
+
+else{
+
+this.data = this.data.concat({
+		Nom : apprenant.nom,
+		Prenom :apprenant.prenom,
+		Naissance : apprenant.dateNaissance,
+		Genre: 'F',
+		Nationalité : apprenant.nationalite,
+		PaysOrigine : apprenant.paysOrigine,
+		Inscription :apprenant.dateInscription,
+		Groupe : e.nom,
+		DateArrivee : apprenant.dateArrivee,
+		Telephone : apprenant.telephone,
+		Adresse :apprenant.adresse,
+		CodePostal : apprenant.codePostal,
+		Commune : apprenant.commune,
+		AuteurDossier:apprenant.auteurDossier,
+		PrimoArrivant:apprenant.primoArrivant,
+		Majeur : apprenant.majeur,
+		QuartierPrioritaire: apprenant.quartierPrioritaire,
+		SituationPersonnelle:apprenant.situationPersonnelle,
+		PriseCharge : apprenant.priseCharge,
+		RSA : rsa,
+		tempsScolarisation: apprenant.tempsScolarisation,
+  		diplome: apprenant.diplome,
+		  milieuScolaire: apprenant.milieuScolaire,
+		  niveauLangue: apprenant.niveauLangue,
+		  lireLangue: apprenant.lireLangue,
+		  ecrireLangue: apprenant.ecrireLangue,
+		  lireAlphaLatin: apprenant.lireAlphaLatin,
+		  ecrireAlphaLatin: apprenant.ecrireAlphaLatin,
+		  cotisationPayee: apprenant.cotisationPayee,
+		  remarques: apprenant.remarques,
+		  statutSejour: apprenant.statutSejour,
+		  dateCarteSejour: apprenant.dateCarteSejour,
+		  dateFinCarteSejour: apprenant.dateFinCarteSejour,
+		  statutPro: apprenant.statutPro,
+		  typeContrat: apprenant.typeContrat
+		
+		});
+
+
+
+}
+
+}
+	      });
+	 });
+		
+	
+	      // Save the PDF
+	     this.excelService.exportAsExcelFile(this.data, 'FeuilleEmargement');
+	
+	    
+	  }
+
+
+
 
 }
 

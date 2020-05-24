@@ -30,7 +30,9 @@ export class CourDetailsComponent implements OnInit {
   private readonly _modifier$: EventEmitter<Cours>;
   private _dataSource: MatTableDataSource<Seance>;
   private data : any[];
+  
   displayedColumns: string[] = ['date', 'horaire', 'modif'];
+  private seance : string;
  
 
 
@@ -40,6 +42,7 @@ export class CourDetailsComponent implements OnInit {
     this._modifier$ = new EventEmitter<Cours>();
     this._cour = {} as Cours;
     this._presences = [];
+	this._courApprenants = [];
 	this.data=[];
   }
 
@@ -223,24 +226,8 @@ downloadFeuilleEmargement() {
         const cols = [];
         cols.push(apprenant.prenom + ' ' + apprenant.nom.toUpperCase());
        cour.seances.forEach(c => {
-	if(this.presences == null || this.presences.length ==0){
+	
 		cols.push(' ');
-}
-else{
-	this._presences.forEach(presence => {
-		if(presence.present == false && c.id == presence.idSeance && apprenant.id == presence.idApprenant) {
-		cols.push('Absent');
-}
-	else if(presence.present == true && c.id == presence.idSeance && apprenant.id == presence.idApprenant){
-	cols.push('Present');
-
-}
-
-});
-}
-
-
-
 
 });              
         apprenantsRows.push(cols);
@@ -282,7 +269,7 @@ else{
           header],
         body: apprenantsRows,
       });
-
+ 
 
       // Save the PDF
       doc.save('Présences_' + Date.now() + '.pdf');
@@ -300,36 +287,52 @@ else{
 
 
 
-
-
-
-
-
-
-
-
 downloadFeuilleEmargementExcel(){
 this.data=[];
   	this.cour.seances.forEach(seance => {
-		this._courApprenants.forEach(apprenant => {
+		this._courApprenants.forEach(apprenant => {		
 		this.data = this.data.concat({
 		Nom : apprenant.nom,
 		Prenom :apprenant.prenom,
 		Matiere : this.cour.matiere,
 		Date :seance.date,
 		Horaire :seance.horaire,
-		Presences: ' '
+		Presences: ' '	       
+	      });
+ 		});
+});
+		
+
+this.cour.seances.forEach(seance => {
+		this._courApprenants.forEach(apprenant => {
+
+if(this.data.find(ob=> ob['Date']==seance.date && ob['Nom']==apprenant.nom && ob['Prenom']==apprenant.prenom)==null){
+this.data = this.data.concat({
+		Nom : apprenant.nom,
+		Prenom :apprenant.prenom,
+		Matiere : this.cour.matiere,
+		Date :seance.date,
+		Horaire :seance.horaire,
+		Presences: '  '
 	       
 	      });
-	 });
+}
+
+});
+		
+	 
 		});
 
 	
 	      // Save the PDF
-	     this.excelService.exportAsExcelFile(this.data, 'FeuilleEmargement');
+	     this.excelService.exportAsExcelFile(this.data, 'Gestionpresences');
 	
 	    
-	  }
+	  }      
+	
+	    
+
+
 downloadGestionExcel(){
 this.data=[];
   	this.cour.seances.forEach(seance => {

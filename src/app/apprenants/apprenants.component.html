@@ -78,6 +78,9 @@
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
     </div>
 
+<button color="success" mat-raised-button style="position: absolute;left: 20px;bottom: 5px;margin: 0;" mat-button type="button" (click)="downloadApprenantsExcel()">Télécharger liste d'apprenants EXCEL</button>
+
+
 </section>
 
 <section class="buttons-fab" *ngIf="dialogStatus === 'inactive'">
