@@ -39,7 +39,7 @@ this.calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
 this._cours = cours;
 this._cours.forEach(cour =>{
 cour.seances.forEach(seance =>{
-this.calendarEvents=this.calendarEvents.concat({ title: cour.matiere, start :seance.date});
+this.calendarEvents=this.calendarEvents.concat({ title: cour.matiere, start :seance.date+' 10:00'});
 });
 });
 });

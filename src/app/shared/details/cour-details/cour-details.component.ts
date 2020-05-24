@@ -11,6 +11,7 @@ import {SeancesService} from '../../services/seances.service';
 import {Apprenant} from '../../interfaces/apprenant';
 import {ApprenantsService} from '../../services/apprenants.service';
 import {formatDate} from '@angular/common';
+import {ExcelService} from '../../services/excel.service';
 
 declare const require: any;
 const jsPDF = require('jspdf');
@@ -28,15 +29,18 @@ export class CourDetailsComponent implements OnInit {
   private _presences: Presence[];
   private readonly _modifier$: EventEmitter<Cours>;
   private _dataSource: MatTableDataSource<Seance>;
+  private data : any[];
   displayedColumns: string[] = ['date', 'horaire', 'modif'];
+ 
 
 
 
   constructor(private _presencesService: PresencesService, private _seancesService: SeancesService ,
-              private _apprenantsService: ApprenantsService, private _route: ActivatedRoute, private _coursService: CoursService) {
+              private _apprenantsService: ApprenantsService, private excelService:ExcelService ,private _route: ActivatedRoute, private _coursService: CoursService) {
     this._modifier$ = new EventEmitter<Cours>();
     this._cour = {} as Cours;
     this._presences = [];
+	this.data=[];
   }
 
   get cour(): Cours {
@@ -97,6 +101,7 @@ export class CourDetailsComponent implements OnInit {
    this._presencesService.fetch().subscribe((presences: Presence[]) => {
 	this._presences=presences;
 });
+
   
   
   }
@@ -109,7 +114,7 @@ export class CourDetailsComponent implements OnInit {
     this._seancesService.delete(id).subscribe(null, null, () => this.ngOnInit());
   }
 
-  downloadPDF() {
+  downloadPDFPresence() {
     const SESSION_CELL_MAX_CHARACTERS = 20;
     const SESSION_CELL_WIDTH = 28;
     if (!this._cour || !this._courApprenants || this._courApprenants.length < 1) {
@@ -198,69 +203,194 @@ else{
 
 
 
-downloadFeuilleHebergement(){
- const SESSION_CELL_MAX_CHARACTERS = 20;
-	    const SESSION_CELL_WIDTH = 28;
-	    if (!this._cour || !this._courApprenants || this._courApprenants.length < 1) {
-	      alert('Impossible de trouver le cours ou les participants... Veuillez réessayer.')
-	      return;
-	    }
-	    this._coursService.fetchOne(this._cour.id).subscribe((cour: Cours) =>{
-	      const doc = new jsPDF();
-	      const apprenantsRows = [];
-	      this._courApprenants.forEach(apprenant => {
-	        const cols = [];
-	        cols.push(apprenant.prenom + ' ' + apprenant.nom.toUpperCase());
-	        cour.seances.forEach(c =>{
-	          cols.push('');
-	        });
-	        apprenantsRows.push(cols);
-	
+
+downloadFeuilleEmargement() {
+    const SESSION_CELL_MAX_CHARACTERS = 20;
+    const SESSION_CELL_WIDTH = 28;
+    if (!this._cour || !this._courApprenants || this._courApprenants.length < 1) {
+      alert('Impossible de trouver le cours ou les participants... Veuillez réessayer.')
+      return;
+    }
+
+ 
+  
+
+    
+    this._coursService.fetchOne(this._cour.id).subscribe((cour: Cours) =>{
+      const doc = new jsPDF();
+      const apprenantsRows = [];
+      this._courApprenants.forEach(apprenant => {
+        const cols = [];
+        cols.push(apprenant.prenom + ' ' + apprenant.nom.toUpperCase());
+       cour.seances.forEach(c => {
+	if(this.presences == null || this.presences.length ==0){
+		cols.push(' ');
+}
+else{
+	this._presences.forEach(presence => {
+		if(presence.present == false && c.id == presence.idSeance && apprenant.id == presence.idApprenant) {
+		cols.push('Absent');
+}
+	else if(presence.present == true && c.id == presence.idSeance && apprenant.id == presence.idApprenant){
+	cols.push('Present');
+
+}
+
+});
+}
+
+
+
+
+});              
+        apprenantsRows.push(cols);
+
+      });
+      const header = ['Apprenant'];
+      const ownColumnStyles = {
+        0: {
+          cellWidth: 'auto'
+        }
+      };
+      var index = 1;
+      cour.seances.forEach(seance => {
+        console.log("seance : ",seance);
+        var columnName = (!!seance.date? formatDate(seance.date,'dd/MM/yyyy', 'en-US') + ' ' : ' ') + (!!seance.horaire ? seance.horaire : '');
+        if(columnName.length + 3 > SESSION_CELL_MAX_CHARACTERS) {
+          columnName = columnName.substring(0, SESSION_CELL_MAX_CHARACTERS - 3) + '...';
+        }
+        header.push(columnName);
+        ownColumnStyles[index++] = {cellWidth: SESSION_CELL_WIDTH};
+      });
+      doc.autoTable({
+        showHead: 'everyPage',
+        theme: 'grid',
+        headStyles: {
+          fillColor: [255, 255, 255],
+          fontStyle: 'bold',
+          textColor: [0, 0, 0]
+        },
+        columnStyles: ownColumnStyles,
+        head: [
+          [
+            {content: ''},
+            {
+              content: 'Cours ' + this._cour.matiere,
+              colSpan: (header.length - 1)
+            }
+          ],
+          header],
+        body: apprenantsRows,
+      });
+
+
+      // Save the PDF
+      doc.save('Présences_' + Date.now() + '.pdf');
+
+ 
+        });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+downloadFeuilleEmargementExcel(){
+this.data=[];
+  	this.cour.seances.forEach(seance => {
+		this._courApprenants.forEach(apprenant => {
+		this.data = this.data.concat({
+		Nom : apprenant.nom,
+		Prenom :apprenant.prenom,
+		Matiere : this.cour.matiere,
+		Date :seance.date,
+		Horaire :seance.horaire,
+		Presences: ' '
+	       
 	      });
-	      const header = ['Apprenant'];
-	      const ownColumnStyles = {
-	        0: {
-	          cellWidth: 'auto'
-	        }
-	      };
-	      var index = 1;
-	      cour.seances.forEach(seance => {
-	        console.log("seance : ",seance);
-	        var columnName = (!!seance.date? formatDate(seance.date,'dd/MM/yyyy', 'en-US') + ' ' : ' ') + (!!seance.horaire ? seance.horaire : '');
-	        if(columnName.length + 3 > SESSION_CELL_MAX_CHARACTERS) {
-	          columnName = columnName.substring(0, SESSION_CELL_MAX_CHARACTERS - 3) + '...';
-	        }
-	        header.push(columnName);
-	        ownColumnStyles[index++] = {cellWidth: SESSION_CELL_WIDTH};
-	      });
-	      doc.autoTable({
-	        showHead: 'everyPage',
-	        theme: 'grid',
-	        headStyles: {
-	          fillColor: [255, 255, 255],
-	          fontStyle: 'bold',
-	          textColor: [0, 0, 0]
-	        },
-	        columnStyles: ownColumnStyles,
-	        head: [
-	          [
-	            {content: ''},
-	            {
-	              content: 'Cours ' + this._cour.matiere,
-	              colSpan: (header.length - 1)
-	            }
-	          ],
-	          header],
-	        body: apprenantsRows,
-	      });
-	
+	 });
+		});
+
 	
 	      // Save the PDF
-	      doc.save('Présences_' + Date.now() + '.pdf');
+	     this.excelService.exportAsExcelFile(this.data, 'FeuilleEmargement');
 	
-	    });
+	    
 	  }
+downloadGestionExcel(){
+this.data=[];
+  	this.cour.seances.forEach(seance => {
+		this._courApprenants.forEach(apprenant => {		
+if(this.presences != null || this.presences.length !=0){		
+	this._presences.forEach(presence => {
+		if(presence.present == false && seance.id == presence.idSeance && apprenant.id == presence.idApprenant) {
+		this.data = this.data.concat({
+		Nom : apprenant.nom,
+		Prenom :apprenant.prenom,
+		Matiere : this.cour.matiere,
+		Date :seance.date,
+		Horaire :seance.horaire,
+		Presences: 'Absent'	       
+	      });
+		}
 
+	else if(presence.present == true && seance.id == presence.idSeance && apprenant.id == presence.idApprenant){
+	this.data = this.data.concat({
+		Nom : apprenant.nom,
+		Prenom :apprenant.prenom,
+		Matiere : this.cour.matiere,
+		Date :seance.date,
+		Horaire :seance.horaire,
+		Presences: 'Present '
+	       
+	      });
+}
+ });
+}
+ 		});
+		
+	 
+		});
+
+this.cour.seances.forEach(seance => {
+		this._courApprenants.forEach(apprenant => {
+
+if(this.data.find(ob=> ob['Date']==seance.date && ob['Nom']==apprenant.nom && ob['Prenom']==apprenant.prenom)==null){
+this.data = this.data.concat({
+		Nom : apprenant.nom,
+		Prenom :apprenant.prenom,
+		Matiere : this.cour.matiere,
+		Date :seance.date,
+		Horaire :seance.horaire,
+		Presences: '  '
+	       
+	      });
+}
+
+});
+		
+	 
+		});
+
+	
+	      // Save the PDF
+	     this.excelService.exportAsExcelFile(this.data, 'Gestionpresences');
+	
+	    
+	  }
 
 
 

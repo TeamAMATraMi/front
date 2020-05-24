@@ -82,6 +82,7 @@ import {SeanceFormComponent} from './shared/forms/seance-form/seance-form.compon
 import {SeanceDialogComponent} from './shared/dialogs/seance-dialog/seance-dialog.component';
 import { DisplaySeanceComponent } from './display-seance/display-seance.component';
 import {UpdateSeanceComponent} from './update/update-seance/update-seance.component';
+import {ExcelService} from './shared/services/excel.service';
 
 @NgModule({
     declarations: [
@@ -175,7 +176,8 @@ import {UpdateSeanceComponent} from './update/update-seance/update-seance.compon
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+	[ExcelService]
     ],
     bootstrap: [AppComponent]
 })

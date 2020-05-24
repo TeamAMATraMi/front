@@ -23,6 +23,7 @@ mat-list-item {
     background-color: white;
     margin: 10px;
     width: 80%;
+    height:120px;
 }
 
 mat-list-item {
@@ -60,7 +61,7 @@ mat-card-title-group {
 .buttons-info [mat-button] {
     min-width: 0px;
     padding: 2px;
-    height: 40px;
+    height: 20px;
 }
 
 mat-icon {
@@ -77,6 +78,11 @@ mat-card-actions button[mat-raised-button] {
     margin: 5px;
 }
 
+
+
+.mat-success{
+	 background-color: green;
+}
 .hl {
     background-color: orange;
     color: white;

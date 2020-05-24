@@ -90,14 +90,15 @@ this._statistiquesService.fetchByPresences(this._apprenant.id).subscribe((stat: 
     });
  });
  });
+  this._coursService.fetch().subscribe((cours: Cours[]) => { this._cours = cours; 
+});
 this._presencesService.fetch().subscribe((presences: Presence[]) => {
 	this._presences=presences;
 });
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => {
       this._groupes = groupes;
       this._dataSource = new MatTableDataSource<Groupe>(this._groupes);      
-     this._coursService.fetch().subscribe((cours: Cours[]) => { this._cours = cours; 
-}); 
+    
 }); 
 
   }
