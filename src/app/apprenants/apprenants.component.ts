@@ -274,10 +274,21 @@ this.data=[];
 downloadApprenantsExcel(){
 this.data=[];
 var rsa;
+var majeur;
+var primoArrivant;
+var milieuScolaire;
+var lireLangue;
+var ecrireLangue;
+var lireAlphaLatin;
+var ecrireAlphaLatin;
+var cotisationPayee;
+
   	
 		this._apprenants.forEach(apprenant => {
 	this._groupes.forEach(e => {
 	if(apprenant.idGroupe == e.id ){
+
+//Affichage de boolean 
 		if(apprenant.rsa==false){
 		rsa='Non';
 		}
@@ -287,6 +298,93 @@ var rsa;
 		else{
 		rsa='';
 		}
+
+if(apprenant.majeur==false){
+		majeur='Non';
+		}
+		else if(apprenant.majeur==true){
+		majeur='Oui';
+		}
+		else{
+		majeur='';
+		}
+
+
+if(apprenant.primoArrivant==false){
+		primoArrivant='Non';
+		}
+		else if(apprenant.primoArrivant==true){
+		primoArrivant='Oui';
+		}
+		else{
+		primoArrivant='';
+		}
+
+
+if(apprenant.milieuScolaire==false){
+		milieuScolaire='Non';
+		}
+		else if(apprenant.milieuScolaire==true){
+		milieuScolaire='Oui';
+		}
+		else{
+		milieuScolaire='';
+		}
+
+if(apprenant.lireLangue==false){
+		lireLangue='Non';
+		}
+		else if(apprenant.lireLangue==true){
+		lireLangue='Oui';
+		}
+		else{
+		lireLangue='';
+		}
+
+if(apprenant.ecrireAlphaLatin==false){
+		ecrireAlphaLatin='Non';
+		}
+		else if(apprenant.ecrireAlphaLatin==true){
+		ecrireAlphaLatin='Oui';
+		}
+		else{
+		ecrireAlphaLatin='';
+		}
+
+if(apprenant.cotisationPayee==false){
+		cotisationPayee='Non';
+		}
+		else if(apprenant.majeur==true){
+		cotisationPayee='Oui';
+		}
+		else{
+		cotisationPayee='';
+		}
+
+if(apprenant.ecrireLangue==false){
+		ecrireLangue='Non';
+		}
+		else if(apprenant.ecrireLangue==true){
+		ecrireLangue='Oui';
+		}
+		else{
+		ecrireLangue='';
+		}
+
+if(apprenant.lireAlphaLatin==false){
+		lireAlphaLatin='Non';
+		}
+		else if(apprenant.lireAlphaLatin==true){
+		lireAlphaLatin='Oui';
+		}
+		else{
+		lireAlphaLatin='';
+		}
+
+
+
+
+
 if(apprenant.genre=="M"){
 		this.data = this.data.concat({
 		Nom : apprenant.nom,
@@ -303,21 +401,21 @@ if(apprenant.genre=="M"){
 		CodePostal : apprenant.codePostal,
 		Commune : apprenant.commune,
 		AuteurDossier:apprenant.auteurDossier,
-		PrimoArrivant:apprenant.primoArrivant,
-		Majeur : apprenant.majeur,
+		PrimoArrivant:primoArrivant,
+		Majeur : majeur,
 		QuartierPrioritaire: apprenant.quartierPrioritaire,
 		SituationPersonnelle:apprenant.situationPersonnelle,
 		PriseCharge : apprenant.priseCharge,
 		RSA : rsa,
 		tempsScolarisation: apprenant.tempsScolarisation,
   		diplome: apprenant.diplome,
-		  milieuScolaire: apprenant.milieuScolaire,
+		  milieuScolaire: milieuScolaire,
 		  niveauLangue: apprenant.niveauLangue,
-		  lireLangue: apprenant.lireLangue,
-		  ecrireLangue: apprenant.ecrireLangue,
-		  lireAlphaLatin: apprenant.lireAlphaLatin,
-		  ecrireAlphaLatin: apprenant.ecrireAlphaLatin,
-		  cotisationPayee: apprenant.cotisationPayee,
+		  lireLangue: lireLangue,
+		  ecrireLangue: ecrireLangue,
+		  lireAlphaLatin: lireAlphaLatin,
+		  ecrireAlphaLatin: ecrireAlphaLatin,
+		  cotisationPayee: cotisationPayee,
 		  remarques: apprenant.remarques,
 		  statutSejour: apprenant.statutSejour,
 		  dateCarteSejour: apprenant.dateCarteSejour,
@@ -349,21 +447,21 @@ this.data = this.data.concat({
 		CodePostal : apprenant.codePostal,
 		Commune : apprenant.commune,
 		AuteurDossier:apprenant.auteurDossier,
-		PrimoArrivant:apprenant.primoArrivant,
-		Majeur : apprenant.majeur,
+		PrimoArrivant:primoArrivant,
+		Majeur : majeur,
 		QuartierPrioritaire: apprenant.quartierPrioritaire,
 		SituationPersonnelle:apprenant.situationPersonnelle,
 		PriseCharge : apprenant.priseCharge,
 		RSA : rsa,
 		tempsScolarisation: apprenant.tempsScolarisation,
   		diplome: apprenant.diplome,
-		  milieuScolaire: apprenant.milieuScolaire,
+		  milieuScolaire: milieuScolaire,
 		  niveauLangue: apprenant.niveauLangue,
-		  lireLangue: apprenant.lireLangue,
-		  ecrireLangue: apprenant.ecrireLangue,
-		  lireAlphaLatin: apprenant.lireAlphaLatin,
-		  ecrireAlphaLatin: apprenant.ecrireAlphaLatin,
-		  cotisationPayee: apprenant.cotisationPayee,
+		  lireLangue: lireLangue,
+		  ecrireLangue: ecrireLangue,
+		  lireAlphaLatin: lireAlphaLatin,
+		  ecrireAlphaLatin: ecrireAlphaLatin,
+		  cotisationPayee:cotisationPayee,
 		  remarques: apprenant.remarques,
 		  statutSejour: apprenant.statutSejour,
 		  dateCarteSejour: apprenant.dateCarteSejour,
@@ -382,8 +480,8 @@ this.data = this.data.concat({
 	 });
 		
 	
-	      // Save the PDF
-	     this.excelService.exportAsExcelFile(this.data, 'FeuilleEmargement');
+	      // Save excel
+	     this.excelService.exportAsExcelFile(this.data, 'ListeAppreants');
 	
 	    
 	  }

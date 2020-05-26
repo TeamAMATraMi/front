@@ -9,6 +9,7 @@ import {Observable} from 'rxjs';
 import {MatDialog, MatDialogRef, MatPaginator, MatSnackBar, MatSort, MatTableDataSource, Sort} from '@angular/material';
 import {Groupe} from '../shared/interfaces/groupe';
 import {GroupesService} from '../shared/services/groupes.service';
+import {ExcelService} from '../shared/services/excel.service';
 import {FormateurDialogComponent} from '../shared/dialogs/formateur-dialog/formateur-dialog.component';
 
 @Component({
@@ -22,6 +23,7 @@ export class FormateursComponent implements OnInit {
   private _displayedColumns = ['NomPrenom', 'Tel', 'Adresse', 'DeleteEdit'];
 
   private _formateur: Formateur;
+  private data : any[];
   private readonly _delete$: EventEmitter<Formateur>;
 
   private _formateurs: Formateur[];
@@ -41,7 +43,7 @@ export class FormateursComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _router: Router, private _formateursService: FormateursService, private _sitesService: SitesService,
+  constructor(private _router: Router, private excelService:ExcelService ,private _formateursService: FormateursService, private _sitesService: SitesService,
               private _dialog: MatDialog, private _groupesService: GroupesService, private snackBar: MatSnackBar) {
     this._formateurs = [];
     this._formateursTemp = [];
@@ -229,6 +231,40 @@ export class FormateursComponent implements OnInit {
       duration: 3000
     });
   }
+
+
+downloadFomateursExcel(){
+this.data=[];
+var siteF;
+
+this._formateurs.forEach(formateur => {
+	this._sites.forEach(site => {
+		if(site.id==formateur.idSite){
+		siteF=site.ville;
+}
+	this.data = this.data.concat({
+	  Nom: formateur.nom,
+	  Prenom: formateur.prenom,
+	  Site: siteF,
+	 
+	  Telephone: formateur.telephone,
+	  Adresse: formateur.adresse,
+	  CodePostal: formateur.codePostal,
+	  Commune: formateur.commune,
+	  Salarie: formateur.salarie
+
+
+
+});
+});
+});
+
+
+
+
+this.excelService.exportAsExcelFile(this.data, 'ListeFormateurs');
+
+}
 
 }
 

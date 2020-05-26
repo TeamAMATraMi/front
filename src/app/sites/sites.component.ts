@@ -6,6 +6,7 @@ import {filter, flatMap} from 'rxjs/operators';
 import {MatDialog, MatDialogRef, MatPaginator, MatSnackBar, MatTableDataSource,MatSort, Sort} from '@angular/material';
 import {Observable} from 'rxjs';
 import {SiteDialogComponent} from '../shared/dialogs/site-dialog/site-dialog.component';
+import {ExcelService} from '../shared/services/excel.service';
 
 @Component({
   selector: 'app-sites',
@@ -17,13 +18,14 @@ export class SitesComponent implements OnInit {
   private _sites: Site[];
   private _dialogStatus: string;
   private _sitesDialog: MatDialogRef<SiteDialogComponent>;
-  private _displayedColumns = ['id', 'ville', 'Delete'];
+  private _displayedColumns = [ 'ville', 'Delete'];
+	  private data : any[];
 
   private _dataSource: MatTableDataSource<Site>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _router: Router, private _sitesService: SitesService, private _dialog: MatDialog,
+  constructor(private _router: Router, private _sitesService: SitesService,private excelService:ExcelService , private _dialog: MatDialog,
               private snackBar: MatSnackBar) {
     this._sites = [];
     this._dialogStatus = 'inactive';
@@ -139,6 +141,16 @@ sortData(sort: Sort) {
       duration: 3000
     });
   }
+
+downloadSitesExcel(){
+this.data=[];
+this._sites.forEach(site => {
+this.data = this.data.concat({Ville: site.ville});
+});
+
+this.excelService.exportAsExcelFile(this.data, 'ListeSites');
+
+}
 }
 function compare(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
