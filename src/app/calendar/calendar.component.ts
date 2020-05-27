@@ -33,7 +33,7 @@ constructor(private _coursService : CoursService){
 this._cours=[];
 }
 
-get calendarEvents : EventInput[]{
+get calendarEvents() : EventInput[]{
   return this._calendarEvents;
 }
 
