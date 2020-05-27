@@ -24,7 +24,6 @@ export class CalendarComponent implements OnInit{
 	private calendarWeekends : boolean;
 	private  calendarPlugins : any [];
 	private   locales : any[];
-	private locale : string;
 	@ViewChild('calendar') calendarComponent: FullCalendarComponent; 
 
 
