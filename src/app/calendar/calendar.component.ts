@@ -24,13 +24,17 @@ export class CalendarComponent implements OnInit{
 	private calendarWeekends : boolean;
 	private  calendarPlugins : any [];
 	private   locales : any[];
-	private  locale :string;
+	private locale : string;
 	@ViewChild('calendar') calendarComponent: FullCalendarComponent; 
 
 
 constructor(private _coursService : CoursService){
 this._cours=[];
 }
+
+get locale(): string {
+    return this.locale;
+  }
 
 ngOnInit(){
 this.calendarVisible=true;
