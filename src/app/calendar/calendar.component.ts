@@ -30,10 +30,6 @@ constructor(private _coursService : CoursService){
 this._cours=[];
 }
 
-get calendarVisible(): boolean {
-    return this.calendarVisible;
-  }
-
 ngOnInit(){
 
 this.calendarVisible=true;
