@@ -39,7 +39,7 @@ ngOnInit(){
 
 this.calendarVisible=true;
 this.locales=[frLocale];
-this.locales=frLocale;
+this.locale=frLocale;
 
 this.calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
  this._coursService.fetch().subscribe((cours: Cours[]) => {

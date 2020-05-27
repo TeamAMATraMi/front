@@ -749,12 +749,8 @@ get selectedSiteId(): number | string {
 
 set groupesSites(groupe: Groupe[]) {
     this._groupesSite = groupe;
-    this._dataSource = new MatTableDataSource<Apprenant>(this._apprenants);
-    this._dataSource.paginator = this.paginator;
-    this._dataSource.filterPredicate = (data: {nom: string}, filterValue: string) =>
-        data.nom.trim().toLowerCase().indexOf(filterValue) !== -1;
   }
-  
+
 
  private _buildForm(): FormGroup {
     return new FormGroup({finDate: new FormControl(formatDate(new Date(), 'yyyy-MM-dd', 'en'), Validators.compose([
