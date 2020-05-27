@@ -8,7 +8,7 @@
 <br>
      <div class='app'>  
 
-  <div class='app-calendar'>
+  <div class='app-calendar' *ngIf="calendarVisible">
     <full-calendar
       #calendar
       defaultView="dayGridMonth"
