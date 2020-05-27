@@ -31,9 +31,6 @@ constructor(private _coursService : CoursService){
 this._cours=[];
 }
 
-get locales(): any[] {
-    return this.locale;
-  }
 
 ngOnInit(){
 
