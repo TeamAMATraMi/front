@@ -258,7 +258,7 @@ this._formateurs.forEach(formateur => {
 	  Adresse: formateur.adresse,
 	  CodePostal: formateur.codePostal,
 	  Commune: formateur.commune,
-	  Salarie: formateur.salarie
+	  Salarie: salair
 
 
 
