@@ -31,10 +31,6 @@ constructor(private _coursService : CoursService){
 this._cours=[];
 }
 
-get locale(): string {
-    return this.locale;
-  }
-
 ngOnInit(){
 this.calendarVisible=true;
 this.locales=[frLocale];
