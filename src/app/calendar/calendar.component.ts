@@ -22,7 +22,8 @@ export class CalendarComponent implements OnInit{
 	private calendarVisible : boolean;
 	private  calendarEvents : EventInput[]=[];
 	private  calendarPlugins : any [];
-	private   locale : any[];
+	private   locales : any[];
+	private locale : string;
 	@ViewChild('calendar') calendarComponent: FullCalendarComponent; 
 
 
@@ -30,10 +31,16 @@ constructor(private _coursService : CoursService){
 this._cours=[];
 }
 
+get locales(): any[] {
+    return this.locale;
+  }
+
 ngOnInit(){
 
 this.calendarVisible=true;
-this.locale=[frLocale];
+this.locales=[frLocale];
+this.locales=frLocale;
+
 this.calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
  this._coursService.fetch().subscribe((cours: Cours[]) => {
 this._cours = cours;
