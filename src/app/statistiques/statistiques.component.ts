@@ -735,6 +735,14 @@ get selectedSiteId(): number | string {
     return this._selectedSiteId;
   }
 
+  get groupes(): Groupe[] {
+    return this._groupes;
+  }
+
+  get groupesSites(): Groupe[] {
+    return this._groupesSite;
+  }
+
   set selectedSiteId(value: number | string) {
     this._selectedSiteId = value;
   }
