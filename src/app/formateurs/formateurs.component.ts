@@ -235,13 +235,13 @@ export class FormateursComponent implements OnInit {
 
 downloadFomateursExcel(){
 this.data=[];
-var siteF;
+var siteF='';
 
 this._formateurs.forEach(formateur => {
 	this._sites.forEach(site => {
 		if(site.id==formateur.idSite){
 		siteF=site.ville;
-}
+
 	this.data = this.data.concat({
 	  Nom: formateur.nom,
 	  Prenom: formateur.prenom,
@@ -256,6 +256,7 @@ this._formateurs.forEach(formateur => {
 
 
 });
+}
 });
 });
 
