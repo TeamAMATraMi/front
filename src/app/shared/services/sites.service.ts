@@ -50,6 +50,13 @@ export class SitesService {
         return this._http.post<Site>(this._backendURL.allSites, site, this._options());
     }
 
+/**
+     * Function to return if a site exist
+     */
+    exist(ville: string): Observable<boolean> {
+        return this._http.get<boolean>(this._backendURL.siteExist.replace(':ville', ville));
+    }
+
     /**
      * Function to delete one Site for current id
      */
