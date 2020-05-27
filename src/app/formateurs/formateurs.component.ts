@@ -236,11 +236,18 @@ export class FormateursComponent implements OnInit {
 downloadFomateursExcel(){
 this.data=[];
 var siteF='';
+var salair='';
 
 this._formateurs.forEach(formateur => {
 	this._sites.forEach(site => {
 		if(site.id==formateur.idSite){
 		siteF=site.ville;
+		if(!formateur.salarie){
+        		salair='Non';
+        		}
+        		else{
+        		salair='Oui';
+        		}
 
 	this.data = this.data.concat({
 	  Nom: formateur.nom,
