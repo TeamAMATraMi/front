@@ -46,28 +46,30 @@ private _presences: Presence[];
 private _seance: Seance[];
 private _cours: Cours[];
 private _sites: Site[];
-private tmp: string;
+private cour: Cours;
 private presence:string;
 private date: string;
 private horaire: string;
 private _groupes: Groupe[];
-  
+
  private _groupesTemp: Groupe[];
-private _displayed = ['Matiere', 'Date', 'Horaire','Presences'];
+private _displayedColumns = ['Matiere', 'Date', 'Horaire','Presences'];
 
   constructor(private _statistiquesService: StatistiquesService , private _sitesService: SitesService,private _coursService: CoursService, private _seancesService: SeancesService ,private _apprenantsService: ApprenantsService,  private _groupesService: GroupesService, private _presencesService: PresencesService, private _route: ActivatedRoute) {
     this._modifier$ = new EventEmitter<Apprenant>();
     this._apprenant = {} as Apprenant;
-	this._seance = [];
-	this._cours = [];
+   this._seance = [];
+   this._cours = [];
   }
 
 
   get apprenant(): Apprenant {
     return this._apprenant;
   }
-get displayed(): any {
-    return this._displayed;
+
+
+get displayedColumns(): any {
+    return this._displayedColumns;
   }
 
   @Input()
@@ -83,52 +85,92 @@ get displayed(): any {
   ngOnInit() {
 this._route.params.subscribe((params: Params) => {
               this._apprenantsService.fetchOne(params['id']).subscribe((apprenant: Apprenant) => {
-                this._apprenant = apprenant;	
+                this._apprenant = apprenant;
 this._statistiquesService.fetchByPresences(this._apprenant.id).subscribe((stat: Map<String, number>) => {
       this.sexeData = [stat['Present'], stat['Absent']];
-	
+
     });
  });
  });
-  this._coursService.fetch().subscribe((cours: Cours[]) => { this._cours = cours; 
-});
+
 this._presencesService.fetch().subscribe((presences: Presence[]) => {
-	this._presences=presences;
+   this._presences=presences;
 });
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => {
       this._groupes = groupes;
-      this._dataSource = new MatTableDataSource<Groupe>(this._groupes);      
-    
-}); 
+      this._dataSource = new MatTableDataSource<Groupe>(this._groupes);
+      this._dataSource.filterPredicate = (data: {nom: string}, filterValue: string) =>
+          data.nom.trim().toLowerCase().indexOf(filterValue) !== -1;
+
+});
+  this._coursService.fetch().subscribe((cours: Cours[]) => { this._cours = cours;
+});
 
   }
 
-  
+
+ get cours(): Cours[] {
+    return this._cours;
+  }
+
+  set cours(value: Cours[]) {
+    this._cours = value;
+  }
+
+ get presences(): Presence[] {
+    return this._presences;
+  }
+
+  set presences(value: Presence[]) {
+    this._presences = value;
+  }
+
+
+ get groupes(): Groupe[] {
+    return this._groupes;
+  }
+
+  set groupes(value: Groupe[]) {
+    this._groupes = value;
+  }
+
+
+
 getMatiereById(id: number): string {
     this._cours.forEach(s => {
       if (s.idGroupe === id && this._apprenant.idGroupe== id ) {
-        this.tmp = s.matiere;
+        this.cour= s;
       }
     });
-    return this.tmp;
+    return this.cour.matiere;
   }
 
 
 getHoraireById(id: number): string {
-	 
-      this._cours.forEach(s => {	
-   if (s.idGroupe === id && this._apprenant.idGroupe== id){
-	s.seances.forEach(seance=>{
-	 this.horaire =seance.horaire.toString(); 
-});
+
+      this._cours.forEach(s => {
+ s.seances.forEach(seance=>{
+   var courid= String(s.id);
+   var seaid= String(seance.cours);
+
+   if (s.idGroupe === id && this._apprenant.idGroupe== id && courid === seaid){
+
+    this.horaire =seance.horaire.toString();
+
 }
-});  
- 
+});
+});
+
      return this.horaire;
   }
 
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this._dataSource.filter = filterValue;
 
+  }
 
   modifier() {
     this._modifier$.emit(this._apprenant);
@@ -138,50 +180,59 @@ getHoraireById(id: number): string {
     return this._dataSource;
   }
 
-  
+
 
 
  getDateByIdFor(id: number): string {
- this._cours.forEach(s => {	
-   if (s.idGroupe === id && this._apprenant.idGroupe== id){
-	s.seances.forEach(seance=>{
-	 this.date =seance.date.toString(); 
-});
+ this._cours.forEach(s => {
+ s.seances.forEach(seance=>{
+   var courid= String(s.id);
+   var seaid= String(seance.cours);
+
+   if (s.idGroupe === id && this._apprenant.idGroupe== id && courid === seaid){
+
+    this.date =seance.date.toString();
 }
-}); 
- 
+});
+
+});
+
      return this.date;
-   
+
   }
 
 
 getPresenceByIdFor(id: number): string {
- this._cours.forEach(s => {	
-   if (s.idGroupe === id && this._apprenant.idGroupe== id){
-	s.seances.forEach(seance=>{
-  	 if(this._presences == null || this._presences.length ==0){
-		this.presence=' ';
-		}
+ this._cours.forEach(s => {
+   s.seances.forEach(seance=>{
+  var courid= String(s.id);
+   var seaid= String(seance.cours);
+
+ if (s.idGroupe === id && this._apprenant.idGroupe== id && courid === seaid ){
+
+    if(this._presences == null || this._presences.length ==0){
+      this.presence=' ';
+      }
 
 else{
-	this._presences.forEach(pres => {
-		if(pres.idSeance== seance.id && this._apprenant.id == pres.idApprenant && pres.present){
-		this.presence='Present';
-		}
-	else if(pres.idSeance== seance.id && this._apprenant.id == pres.idApprenant && !pres.present){
-		this.presence='Absent';
-		}
-		});
-	}
-	  
-	});
+   this._presences.forEach(pres => {
+      if(pres.idSeance== seance.id && this._apprenant.id == pres.idApprenant && pres.present){
+      this.presence='Present';
+      }
+   else if(pres.idSeance== seance.id && this._apprenant.id == pres.idApprenant && !pres.present){
+      this.presence='Absent';
+      }
+      });
+   }
+
 }
-}); 
+   });
+});
       return this.presence;
-   
+
   }
 
-	 // events
+    // events
   public chartClicked(e: any): void {
     console.log(e);
   }
