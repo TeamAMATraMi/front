@@ -189,7 +189,7 @@ else{
       if(pres.idSeance== id && pres.present){
       this.presence='Present';
       }
-   else if(pres.idSeance== id &&  !pres.present){
+    if(pres.idSeance== id &&  !pres.present){
       this.presence='Absent';
       }
       });
