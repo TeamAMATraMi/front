@@ -186,10 +186,10 @@ getPresenceById(id: number): string {
 
 else{
    this._presences.forEach(pres => {
-      if(pres.idSeance== id && pres.present){
+      if(pres.idSeance== id && this._apprenant.id==pres.idApprenant && pres.present){
       this.presence='Present';
       }
-    if(pres.idSeance== id &&  !pres.present){
+   else if(pres.idSeance== id && this._apprenant.id==pres.idApprenant &&  !pres.present){
       this.presence='Absent';
       }
       });
