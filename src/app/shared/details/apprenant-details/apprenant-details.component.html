@@ -1,196 +1,199 @@
 <section>
 
-  <mat-card class="mat-whiteframe-2dp">
-    <mat-dialog-actions >
-      <button style="position: absolute;left: 20px;margin: 0;" mat-button type="button" mat-raised-button color="primary" [routerLink]="['/updateApprenant', apprenant.id]">Modifier</button>
-    </mat-dialog-actions>
+    <mat-card class="mat-whiteframe-2dp">
+        <mat-dialog-actions >
+            <button style="position: absolute;left: 20px;margin: 0;" mat-button type="button" mat-raised-button color="primary" [routerLink]="['/updateApprenant', apprenant.id]">Modifier</button>
+        </mat-dialog-actions>
 
 
-    <br/><br/><br/>
-    <mat-tab-group>
-      <mat-tab label="Etat Civil">
-        <mat-card>
-          <mat-card-title-group style="justify-content: center">
-            <mat-card-title>
+        <br/><br/><br/>
+        <mat-tab-group>
+            <mat-tab label="Etat Civil">
+                <mat-card>
+                    <mat-card-title-group style="justify-content: center">
+                        <mat-card-title>
               <span>{{ apprenant.nom }} {{ apprenant.prenom }}
                 <mat-icon style="color: blue" svgIcon="gender-male" *ngIf="apprenant.genre=='M'"></mat-icon>
                 <mat-icon style="color: pink" svgIcon="gender-female" *ngIf="apprenant.genre=='F'"></mat-icon>
               </span>
-            </mat-card-title>
-          </mat-card-title-group>
-          <mat-grid-list cols="2" rowHeight="14:1">
-            <mat-grid-tile><mat-card-content><mat-icon svgIcon="address"></mat-icon> {{ apprenant.adresse}} {{ apprenant.codePostal }} {{ apprenant.commune }}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Majeur
-              <mat-icon style="color: green" svgIcon="check" *ngIf="apprenant.majeur==true"></mat-icon>
-              <mat-icon style="color: red" svgIcon="not-check" *ngIf="apprenant.majeur==false"></mat-icon></mat-card-content>
-            </mat-grid-tile>
-            <mat-grid-tile><mat-card-content><mat-icon svgIcon="phone"></mat-icon> {{ apprenant.telephone}}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>RSA
-              <mat-icon style="color: green" svgIcon="check" *ngIf="apprenant.rsa==true"></mat-icon>
-              <mat-icon style="color: red" svgIcon="not-check" *ngIf="apprenant.rsa==false"></mat-icon></mat-card-content></mat-grid-tile>
-            <mat-grid-tile><mat-card-content><mat-icon svgIcon="birthday"></mat-icon> {{ apprenant.dateNaissance | date:'dd/MM/yyyy' }}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Situation personnelle : {{ apprenant.situationPersonnelle}}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Pays d'origine : {{ apprenant.paysOrigine }}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Nationalité : {{ apprenant.nationalite }}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Statut professionnel : {{ apprenant.statutPro }}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Type de contrat : {{ apprenant.typeContrat }}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile></mat-grid-tile>
-          </mat-grid-list>
-        </mat-card>
-      </mat-tab>
+                        </mat-card-title>
+                    </mat-card-title-group>
+                    <mat-grid-list cols="2" rowHeight="14:1">
+                        <mat-grid-tile><mat-card-content><mat-icon svgIcon="address"></mat-icon> {{ apprenant.adresse}} {{ apprenant.codePostal }} {{ apprenant.commune }}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Majeur
+                            <mat-icon style="color: green" svgIcon="check" *ngIf="apprenant.majeur==true"></mat-icon>
+                            <mat-icon style="color: red" svgIcon="not-check" *ngIf="apprenant.majeur==false"></mat-icon></mat-card-content>
+                        </mat-grid-tile>
+                        <mat-grid-tile><mat-card-content><mat-icon svgIcon="phone"></mat-icon> {{ apprenant.telephone}}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>RSA
+                            <mat-icon style="color: green" svgIcon="check" *ngIf="apprenant.rsa==true"></mat-icon>
+                            <mat-icon style="color: red" svgIcon="not-check" *ngIf="apprenant.rsa==false"></mat-icon></mat-card-content></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content><mat-icon svgIcon="birthday"></mat-icon> {{ apprenant.dateNaissance | date:'dd/MM/yyyy' }}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Situation personnelle : {{ apprenant.situationPersonnelle}}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Pays d'origine : {{ apprenant.paysOrigine }}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Nationalité : {{ apprenant.nationalite }}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Statut professionnel : {{ apprenant.statutPro }}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Type de contrat : {{ apprenant.typeContrat }}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile></mat-grid-tile>
+                    </mat-grid-list>
+                </mat-card>
+            </mat-tab>
 
-      <mat-tab label="Niveau d'études">
-        <mat-card>
-          <mat-card-title-group style="justify-content: center">
-            <mat-card-title>
+            <mat-tab label="Niveau d'études">
+                <mat-card>
+                    <mat-card-title-group style="justify-content: center">
+                        <mat-card-title>
               <span>{{ apprenant.nom }} {{ apprenant.prenom }}
                 <mat-icon style="color: blue" svgIcon="gender-male" *ngIf="apprenant.genre=='M'"></mat-icon>
                 <mat-icon style="color: pink" svgIcon="gender-female" *ngIf="apprenant.genre=='F'"></mat-icon>
               </span>
-            </mat-card-title>
-          </mat-card-title-group>
-          <mat-grid-list cols="2" rowHeight="14:1">
-            <mat-grid-tile><mat-card-content>Temps de scolarisation : {{ apprenant.tempsScolarisation}}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Diplôme : {{ apprenant.diplome }}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile> <mat-card-content>Milieu scolaire <mat-icon style="color: green" svgIcon="check" *ngIf="apprenant.milieuScolaire==true"></mat-icon><mat-icon style="color: red" svgIcon="not-check" *ngIf="apprenant.milieuScolaire==false"></mat-icon></mat-card-content></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Niveau de langue : {{ apprenant.niveauLangue }}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Sait lire dans sa langue <mat-icon style="color: green" svgIcon="check" *ngIf="apprenant.lireLangue==true"></mat-icon><mat-icon style="color: red" svgIcon="not-check" *ngIf="apprenant.lireLangue==false"></mat-icon></mat-card-content></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Sait écrire dans sa langue <mat-icon style="color: green" svgIcon="check" *ngIf="apprenant.ecrireLangue==true"></mat-icon><mat-icon style="color: red" svgIcon="not-check" *ngIf="apprenant.ecrireLangue==false"></mat-icon></mat-card-content></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Sait lire l'alphabet latin <mat-icon style="color: green" svgIcon="check" *ngIf="apprenant.lireAlphaLatin==true"></mat-icon><mat-icon style="color: red" svgIcon="not-check" *ngIf="apprenant.lireAlphaLatin==false"></mat-icon></mat-card-content></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Sait écrire l'alphabet latin <mat-icon style="color: green" svgIcon="check" *ngIf="apprenant.ecrireAlphaLatin==true"></mat-icon><mat-icon style="color: red" svgIcon="not-check" *ngIf="apprenant.ecrireAlphaLatin==false"></mat-icon></mat-card-content></mat-grid-tile>
-          </mat-grid-list>
-        </mat-card>
-      </mat-tab>
+                        </mat-card-title>
+                    </mat-card-title-group>
+                    <mat-grid-list cols="2" rowHeight="14:1">
+                        <mat-grid-tile><mat-card-content>Temps de scolarisation : {{ apprenant.tempsScolarisation}}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Diplôme : {{ apprenant.diplome }}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile> <mat-card-content>Milieu scolaire <mat-icon style="color: green" svgIcon="check" *ngIf="apprenant.milieuScolaire==true"></mat-icon><mat-icon style="color: red" svgIcon="not-check" *ngIf="apprenant.milieuScolaire==false"></mat-icon></mat-card-content></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Niveau de langue : {{ apprenant.niveauLangue }}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Sait lire dans sa langue <mat-icon style="color: green" svgIcon="check" *ngIf="apprenant.lireLangue==true"></mat-icon><mat-icon style="color: red" svgIcon="not-check" *ngIf="apprenant.lireLangue==false"></mat-icon></mat-card-content></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Sait écrire dans sa langue <mat-icon style="color: green" svgIcon="check" *ngIf="apprenant.ecrireLangue==true"></mat-icon><mat-icon style="color: red" svgIcon="not-check" *ngIf="apprenant.ecrireLangue==false"></mat-icon></mat-card-content></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Sait lire l'alphabet latin <mat-icon style="color: green" svgIcon="check" *ngIf="apprenant.lireAlphaLatin==true"></mat-icon><mat-icon style="color: red" svgIcon="not-check" *ngIf="apprenant.lireAlphaLatin==false"></mat-icon></mat-card-content></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Sait écrire l'alphabet latin <mat-icon style="color: green" svgIcon="check" *ngIf="apprenant.ecrireAlphaLatin==true"></mat-icon><mat-icon style="color: red" svgIcon="not-check" *ngIf="apprenant.ecrireAlphaLatin==false"></mat-icon></mat-card-content></mat-grid-tile>
+                    </mat-grid-list>
+                </mat-card>
+            </mat-tab>
 
-      <mat-tab label="Séjour">
-        <mat-card>
-          <mat-card-title-group style="justify-content: center">
-            <mat-card-title>
+            <mat-tab label="Séjour">
+                <mat-card>
+                    <mat-card-title-group style="justify-content: center">
+                        <mat-card-title>
               <span>{{ apprenant.nom }} {{ apprenant.prenom }}
                 <mat-icon style="color: blue" svgIcon="gender-male" *ngIf="apprenant.genre=='M'"></mat-icon>
                 <mat-icon style="color: pink" svgIcon="gender-female" *ngIf="apprenant.genre=='F'"></mat-icon>
               </span>
-            </mat-card-title>
-          </mat-card-title-group>
-          <mat-grid-list cols="2" rowHeight="14:1">
-            <mat-grid-tile><mat-card-content>Date d'arrivée : {{ apprenant.dateArrivee | date:'dd/MM/yyyy' }}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Statut de séjour : {{ apprenant.statutSejour }}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Date de la carte de séjour : {{ apprenant.dateCarteSejour }}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Date de fin de la carte de séjour : {{ apprenant.dateFinCarteSejour }}</mat-card-content></mat-grid-tile>
-          </mat-grid-list>
-        </mat-card>
-      </mat-tab>
+                        </mat-card-title>
+                    </mat-card-title-group>
+                    <mat-grid-list cols="2" rowHeight="14:1">
+                        <mat-grid-tile><mat-card-content>Date d'arrivée : {{ apprenant.dateArrivee | date:'dd/MM/yyyy' }}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Statut de séjour : {{ apprenant.statutSejour }}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Date de la carte de séjour : {{ apprenant.dateCarteSejour }}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Date de fin de la carte de séjour : {{ apprenant.dateFinCarteSejour }}</mat-card-content></mat-grid-tile>
+                    </mat-grid-list>
+                </mat-card>
+            </mat-tab>
 
 
-      <mat-tab label="Inscription">
-        <mat-card>
-          <mat-card-title-group style="justify-content: center">
-            <mat-card-title>
+            <mat-tab label="Inscription">
+                <mat-card>
+                    <mat-card-title-group style="justify-content: center">
+                        <mat-card-title>
               <span>{{ apprenant.nom }} {{ apprenant.prenom }}
                 <mat-icon style="color: blue" svgIcon="gender-male" *ngIf="apprenant.genre=='M'"></mat-icon>
                 <mat-icon style="color: pink" svgIcon="gender-female" *ngIf="apprenant.genre=='F'"></mat-icon>
               </span>
-            </mat-card-title>
-          </mat-card-title-group>
-          <mat-grid-list cols="2" rowHeight="14:1">
+                        </mat-card-title>
+                    </mat-card-title-group>
+                    <mat-grid-list cols="2" rowHeight="14:1">
 
-            <mat-grid-tile><mat-card-content>Date de l'inscription : {{ apprenant.dateInscription | date:'dd/MM/yyyy' }}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Cotisation <mat-icon style="color: green" svgIcon="check" *ngIf="apprenant.cotisationPayee==true"></mat-icon><mat-icon style="color: red" svgIcon="not-check" *ngIf="apprenant.cotisationPayee==false"></mat-icon></mat-card-content></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Auteur du dossier : {{ apprenant.auteurDossier }}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Numéro de groupe : {{ apprenant.idGroupe }}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Quartier prioritaire : {{ apprenant.quartierPrioritaire}}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Prise en charge : {{ apprenant.priseCharge }}</mat-card-content></mat-grid-tile>
-            <mat-grid-tile><mat-card-content>Remarques : {{ apprenant.remarques }}</mat-card-content></mat-grid-tile>
-          </mat-grid-list>
-        </mat-card>
-      </mat-tab>
+                        <mat-grid-tile><mat-card-content>Date de l'inscription : {{ apprenant.dateInscription | date:'dd/MM/yyyy' }}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Cotisation <mat-icon style="color: green" svgIcon="check" *ngIf="apprenant.cotisationPayee==true"></mat-icon><mat-icon style="color: red" svgIcon="not-check" *ngIf="apprenant.cotisationPayee==false"></mat-icon></mat-card-content></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Auteur du dossier : {{ apprenant.auteurDossier }}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Numéro de groupe : {{ apprenant.idGroupe }}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Quartier prioritaire : {{ apprenant.quartierPrioritaire}}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Prise en charge : {{ apprenant.priseCharge }}</mat-card-content></mat-grid-tile>
+                        <mat-grid-tile><mat-card-content>Remarques : {{ apprenant.remarques }}</mat-card-content></mat-grid-tile>
+                    </mat-grid-list>
+                </mat-card>
+            </mat-tab>
 
 
-<mat-tab label="Presence">
-        <mat-card>
-          <mat-card-title-group style="justify-content: center">
-            <mat-card-title>
+            <mat-tab label="Presence">
+                <mat-card>
+                    <mat-card-title-group style="justify-content: center">
+                        <mat-card-title>
               <span>{{ apprenant.nom }} {{ apprenant.prenom }}
                 <mat-icon style="color: blue" svgIcon="gender-male" *ngIf="apprenant.genre=='M'"></mat-icon>
                 <mat-icon style="color: pink" svgIcon="gender-female" *ngIf="apprenant.genre=='F'"></mat-icon>
               </span>
-            </mat-card-title>
-          </mat-card-title-group>
-          <mat-grid-list cols="2" rowHeight="14:1">
+                        </mat-card-title>
+                    </mat-card-title-group>
+                    <mat-grid-list cols="2" rowHeight="14:1">
 
-           <div style="display: block">
-	
-          <canvas baseChart
-                  [data]="sexeData"
-                  [labels]="sexeLabels"
-                  [chartType]="doughnut"
-                  [colors]="chartColors"
-                  (chartHover)="chartHovered($event)"
-                  (chartClick)="chartClicked($event)"
-		></canvas>
-	       
-</div>
-	
-          </mat-grid-list>
-        </mat-card>
-      </mat-tab>
+                        <div style="display: block">
+
+                            <canvas baseChart
+                                    [data]="sexeData"
+                                    [labels]="sexeLabels"
+                                    [chartType]="doughnut"
+                                    [colors]="chartColors"
+                                    (chartHover)="chartHovered($event)"
+                                    (chartClick)="chartClicked($event)"
+                            ></canvas>
+
+                        </div>
+
+                    </mat-grid-list>
+                </mat-card>
+            </mat-tab>
 
 
-<mat-tab label="Assiduité">
-<mat-card>
-          <mat-card-title-group style="justify-content: center">
-            <mat-card-title>
+            <mat-tab label="Assiduité">
+                <mat-card>
+                    <mat-card-title-group style="justify-content: center">
+                        <mat-card-title>
               <span>{{ apprenant.nom }} {{ apprenant.prenom }}
                 <mat-icon style="color: blue" svgIcon="gender-male" *ngIf="apprenant.genre=='M'"></mat-icon>
                 <mat-icon style="color: pink" svgIcon="gender-female" *ngIf="apprenant.genre=='F'"></mat-icon>
               </span>
-            </mat-card-title>
-          </mat-card-title-group>
+                        </mat-card-title>
+                    </mat-card-title-group>
 
 
-    <div style="width:100%;">
-        <mat-table [dataSource]="dataSource">
-               <ng-container matColumnDef="Matiere">
-                <mat-header-cell *matHeaderCellDef >Matiere</mat-header-cell>
-                 <mat-cell *matCellDef="let element"> {{ getMatiereById(element.id) }}  </mat-cell>
-            </ng-container>
 
- 		<ng-container matColumnDef="Date">
-                <mat-header-cell *matHeaderCellDef> Date</mat-header-cell>
-                 <mat-cell *matCellDef="let element"> {{ getDateByIdFor(element.id) }}  </mat-cell>
-            </ng-container>
+                    <div style="width:100%;">
+                        <mat-table [dataSource]="dataSource">
+                            <ng-container matColumnDef="Matiere">
+                                <mat-header-cell *matHeaderCellDef >Matiere</mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{ getMatiereById(element.id) }}  </mat-cell>
+                            </ng-container>
 
-	<ng-container matColumnDef="Horaire">
-                <mat-header-cell *matHeaderCellDef> Horaire</mat-header-cell>
-                 <mat-cell *matCellDef="let element"> {{ getHoraireById(element.id) }}  </mat-cell>
-            </ng-container>
+                            <ng-container matColumnDef="Date">
+                                <mat-header-cell *matHeaderCellDef> Date</mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{ getDateByIdFor(element.id) }}  </mat-cell>
+                            </ng-container>
 
-            <ng-container matColumnDef="Presences">
-                <mat-header-cell *matHeaderCellDef>Presences</mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{ getPresenceByIdFor(element.id) }}  </mat-cell>
-            </ng-container>
+                            <ng-container matColumnDef="Horaire">
+                                <mat-header-cell *matHeaderCellDef> Horaire</mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{ getHoraireById(element.id) }}  </mat-cell>
+                            </ng-container>
 
-            
-
-            <mat-header-row *matHeaderRowDef="displayed"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayed;"></mat-row>
-        </mat-table>
-
-       
-    </div>
+                            <ng-container matColumnDef="Presences">
+                                <mat-header-cell *matHeaderCellDef>Presences</mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{ getPresenceByIdFor(element.id) }}  </mat-cell>
+                            </ng-container>
 
 
-  </mat-card>
 
- </mat-tab>
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        </mat-table>
 
-    </mat-tab-group>
 
-  </mat-card>
+                    </div>
+
+
+
+
+                </mat-card>
+
+            </mat-tab>
+
+        </mat-tab-group>
+
+    </mat-card>
 
 </section>
