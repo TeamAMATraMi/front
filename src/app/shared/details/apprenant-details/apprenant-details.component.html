@@ -158,22 +158,22 @@
                         <mat-table [dataSource]="dataSource">
                             <ng-container matColumnDef="Matiere">
                                 <mat-header-cell *matHeaderCellDef >Matiere</mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{ getMatiereById(element.id) }}  </mat-cell>
+                                <mat-cell *matCellDef="let element"> {{ getMatiere(element.cours) }} </mat-cell>
                             </ng-container>
 
                             <ng-container matColumnDef="Date">
                                 <mat-header-cell *matHeaderCellDef> Date</mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{ getDateByIdFor(element.id) }}  </mat-cell>
+                                <mat-cell *matCellDef="let element"> {{ element.date  }}  </mat-cell>
                             </ng-container>
 
                             <ng-container matColumnDef="Horaire">
                                 <mat-header-cell *matHeaderCellDef> Horaire</mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{ getHoraireById(element.id) }}  </mat-cell>
+                                <mat-cell *matCellDef="let element"> {{element.horaire }}  </mat-cell>
                             </ng-container>
 
                             <ng-container matColumnDef="Presences">
                                 <mat-header-cell *matHeaderCellDef>Presences</mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{ getPresenceByIdFor(element.id) }}  </mat-cell>
+                                <mat-cell *matCellDef="let element"> {{ getPresenceById(element.id)  }}  </mat-cell>
                             </ng-container>
 
 

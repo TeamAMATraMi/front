@@ -42,11 +42,12 @@ export class ApprenantDetailsComponent implements OnInit {
   private _apprenant: Apprenant;
   private readonly _modifier$: EventEmitter<Apprenant>;
 private _presences: Presence[];
- private _dataSource: MatTableDataSource<Groupe>;
+ private _dataSource: MatTableDataSource<Seance>;
 private _seance: Seance[];
 private _cours: Cours[];
+private tmp :string;
+
 private _sites: Site[];
-private cour: Cours;
 private presence:string;
 private date: string;
 private horaire: string;
@@ -86,25 +87,35 @@ get displayedColumns(): any {
 this._route.params.subscribe((params: Params) => {
               this._apprenantsService.fetchOne(params['id']).subscribe((apprenant: Apprenant) => {
                 this._apprenant = apprenant;
+ this._coursService.fetchFromGroup(this._apprenant.idGroupe).subscribe((cours: Cours[]) => { 
+this._cours = cours;
+this._cours.forEach(cour=>{
+	cour.seances.forEach(seance=>{
+	this._seance.push(seance);
+});
+ this._dataSource = new MatTableDataSource<Seance>(this._seance);
+});
+});
 this._statistiquesService.fetchByPresences(this._apprenant.id).subscribe((stat: Map<String, number>) => {
       this.sexeData = [stat['Present'], stat['Absent']];
 
     });
  });
+
  });
+
 
 this._presencesService.fetch().subscribe((presences: Presence[]) => {
    this._presences=presences;
 });
+
+
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => {
       this._groupes = groupes;
-      this._dataSource = new MatTableDataSource<Groupe>(this._groupes);
-      this._dataSource.filterPredicate = (data: {nom: string}, filterValue: string) =>
-          data.nom.trim().toLowerCase().indexOf(filterValue) !== -1;
+     
 
 });
-  this._coursService.fetch().subscribe((cours: Cours[]) => { this._cours = cours;
-});
+ 
 
   }
 
@@ -136,33 +147,18 @@ this._presencesService.fetch().subscribe((presences: Presence[]) => {
 
 
 
-getMatiereById(id: number): string {
-    this._cours.forEach(s => {
-      if (s.idGroupe === id && this._apprenant.idGroupe== id ) {
-        this.cour= s;
-      }
-    });
-    return this.cour.matiere;
-  }
-
-
-getHoraireById(id: number): string {
-
-      this._cours.forEach(s => {
- s.seances.forEach(seance=>{
-   var courid= String(s.id);
-   var seaid= String(seance.cours);
-
-   if (s.idGroupe === id && this._apprenant.idGroupe== id && courid === seaid){
-
-    this.horaire =seance.horaire.toString();
-
+getMatiere(cours: Cours): string { 
+  
+ this._cours.forEach(cour=>{
+    if(String(cour.id) === String(cours)){
+    this.tmp=cour.matiere;
 }
 });
-});
 
-     return this.horaire;
+     return  this.tmp;
   }
+ 
+
 
 
   applyFilter(filterValue: string) {
@@ -176,58 +172,29 @@ getHoraireById(id: number): string {
     this._modifier$.emit(this._apprenant);
   }
 
- get dataSource(): MatTableDataSource<Groupe> {
+ get dataSource(): MatTableDataSource<Seance> {
     return this._dataSource;
   }
 
 
 
 
- getDateByIdFor(id: number): string {
- this._cours.forEach(s => {
- s.seances.forEach(seance=>{
-   var courid= String(s.id);
-   var seaid= String(seance.cours);
-
-   if (s.idGroupe === id && this._apprenant.idGroupe== id && courid === seaid){
-
-    this.date =seance.date.toString();
-}
-});
-
-});
-
-     return this.date;
-
-  }
-
-
-getPresenceByIdFor(id: number): string {
- this._cours.forEach(s => {
-   s.seances.forEach(seance=>{
-  var courid= String(s.id);
-   var seaid= String(seance.cours);
-
- if (s.idGroupe === id && this._apprenant.idGroupe== id && courid === seaid ){
-
-    if(this._presences == null || this._presences.length ==0){
+getPresenceById(id: number): string {
+   if(this._presences == null || this._presences.length ==0){
       this.presence=' ';
       }
 
 else{
    this._presences.forEach(pres => {
-      if(pres.idSeance== seance.id && this._apprenant.id == pres.idApprenant && pres.present){
+      if(pres.idSeance== id && pres.present){
       this.presence='Present';
       }
-   else if(pres.idSeance== seance.id && this._apprenant.id == pres.idApprenant && !pres.present){
+   else if(pres.idSeance== id &&  !pres.present){
       this.presence='Absent';
       }
       });
    }
 
-}
-   });
-});
       return this.presence;
 
   }
