@@ -66,6 +66,13 @@ export class SitesService {
                 map(_ => id)
             );
     }
+     /**
+         * Function get site id by ville
+         */
+
+    getIdByVille(ville: string): Observable<number> {
+        return this._http.get<number>(this._backendURL.siteByVille.replace(':ville', ville));
+     }
 
     /**
      * Function to update-apprenant one Site

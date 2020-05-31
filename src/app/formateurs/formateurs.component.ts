@@ -11,6 +11,8 @@ import {Groupe} from '../shared/interfaces/groupe';
 import {GroupesService} from '../shared/services/groupes.service';
 import {ExcelService} from '../shared/services/excel.service';
 import {FormateurDialogComponent} from '../shared/dialogs/formateur-dialog/formateur-dialog.component';
+import * as XLSX from 'xlsx';
+
 
 @Component({
   selector: 'app-formateurs',
@@ -21,10 +23,11 @@ import {FormateurDialogComponent} from '../shared/dialogs/formateur-dialog/forma
 export class FormateursComponent implements OnInit {
 
   private _displayedColumns = ['NomPrenom', 'Tel', 'Adresse', 'DeleteEdit'];
-
+ 
   private _formateur: Formateur;
   private data : any[];
   private readonly _delete$: EventEmitter<Formateur>;
+  private siteId: number;
 
   private _formateurs: Formateur[];
   private _formateursTemp: Formateur[];
@@ -33,10 +36,12 @@ export class FormateursComponent implements OnInit {
   private _groupesSite: Groupe[];
   private _groupes: Groupe[];
   private _selectedSiteId: number | string;
-
+  private line : any[];
   private _dialogStatus: string;
   private _formateursDialog: MatDialogRef<FormateurDialogComponent>;
   private _dataSource: MatTableDataSource<Formateur>;
+ 
+
 
   value = '';
 
@@ -52,6 +57,9 @@ export class FormateursComponent implements OnInit {
     this._groupesSite = [];
     this._groupes = [];
     this._selectedSiteId = 'allSites';
+    
+
+
   }
 
   ngOnInit() {
@@ -71,7 +79,8 @@ export class FormateursComponent implements OnInit {
     });
     this._sitesService.fetch().subscribe((sites: Site[]) => this._sites = sites);
     this._groupesService.fetch().subscribe((groupes: Groupe[]) => { this._groupes = groupes; this._groupesSite = this._groupes; });
-  }
+    this.data=[];  
+}
 
   get formateurs(): Formateur[] {
     return this._formateurs;
@@ -235,35 +244,26 @@ export class FormateursComponent implements OnInit {
 
 downloadFomateursExcel(){
 this.data=[];
-var siteF='';
-var salair='';
-
+this.line=[]; 
 this._formateurs.forEach(formateur => {
+	var siteF='';
 	this._sites.forEach(site => {
-		if(site.id==formateur.idSite){
+	if(site.id==formateur.idSite ){
 		siteF=site.ville;
-		if(!formateur.salarie){
-        		salair='Non';
-        		}
-        		else{
-        		salair='Oui';
-        		}
-
+	}
+});
+		
 	this.data = this.data.concat({
 	  Nom: formateur.nom,
-	  Prenom: formateur.prenom,
-	  Site: siteF,
-	 
+	  Prenom: formateur.prenom,	 
 	  Telephone: formateur.telephone,
 	  Adresse: formateur.adresse,
 	  CodePostal: formateur.codePostal,
 	  Commune: formateur.commune,
-	  Salarie: salair
+	  Salarie: formateur.salarie,
+	  site : siteF
 
 
-
-});
-}
 });
 });
 
@@ -276,8 +276,94 @@ this.excelService.exportAsExcelFile(this.data, 'ListeFormateurs');
 
 
 
+onFileChange(event: any) {
+    var salair;
+   
+    /* wire up file reader */
+    const target: DataTransfer = <DataTransfer>(event.target);
+    if (target.files.length !== 1) {
+      throw new Error('Cannot use multiple files');
+    }
+    const reader: FileReader = new FileReader();
+    reader.readAsBinaryString(target.files[0]);
+    reader.onload = (e: any) => {
+      /* create workbook */
+      const binarystr: string = e.target.result;
+      const wb: XLSX.WorkBook = XLSX.read(binarystr, { type: 'binary' });
+
+      /* selected the first sheet */
+      const wsname: string = wb.SheetNames[0];
+      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+      /* save data */
+      const data = XLSX.utils.sheet_to_json(ws); // to get 2d array pass 2nd parameter as object {header: 1}
+
+Object.keys(data).forEach(k =>{
+this._sitesService.exist(data[k]['site']).subscribe((existRes:boolean)=>{
+if(existRes==false){
+this._sitesService.create({
+			 id: null,
+             ville:data[k]['site']
+ } as Site).subscribe();
+}
+});
 
 
+this._formateursService.exist(data[k]['Nom'],data[k]['Prenom']).subscribe((res:boolean) => {
+//check si le site existe 
+if(res==false){
+
+//pour boolean
+if(data[k]['Salarie']=='Non' || data[k]['Salarie']=='non' || data[k]['Salarie']=='NON' || data[k]['Salarie']==''){
+   salair=false;
+}
+else{
+salair=true;
+}
+
+
+
+//Recupere l'id du site depuis la ville
+this._sitesService.getIdByVille(data[k]['site']).subscribe((resVille:number) => {
+this.siteId=resVille;
+this._formateursService.create({
+          id: null,
+          idSite:this.siteId,
+	  nom: data[k]['Nom'],
+	  prenom :data[k]['Prenom'],
+	  telephone : data[k]['Telephone'],    
+	  adresse: data[k]['Adresse'],
+          codePostal: data[k]['CodePostal'],
+   	  commune: data[k]['site'],
+   	  salarie: salair,
+
+    
+ } as Formateur).subscribe();
+}); 
+
+    }
+    
+
+});
+
+});
+   }
+this._formateursService.fetch().subscribe(formateurs => {
+      this._dataSource = new MatTableDataSource<Formateur>(formateurs);
+      this._formateurs = formateurs;
+      this._formateursTemp = formateurs;
+      this._dataSource.paginator = this.paginator;
+      this._dataSource.sort = this.sort;
+      this._dataSource.filterPredicate = (data: {nom: string, prenom: string}, filterValue: string) => {
+        if ((data.nom.trim().toLowerCase().indexOf(filterValue) !== -1) || (data.prenom.trim().toLowerCase().indexOf(filterValue) !== -1)) {
+          return true;
+        } else {
+          return false;
+        }
+      };
+    });
+console.log(this._dataSource);
+ }
 
 }
 
