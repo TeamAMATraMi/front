@@ -252,7 +252,15 @@ this._formateurs.forEach(formateur => {
 		siteF=site.ville;
 	}
 });
-		
+
+//Affichage de boolean
+if(formateur.salarie==false){
+   salair='Non';
+}
+else{
+salair='Oui';
+}
+
 	this.data = this.data.concat({
 	  Nom: formateur.nom,
 	  Prenom: formateur.prenom,	 

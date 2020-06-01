@@ -432,8 +432,48 @@ if(apprenant.genre=="M"){
 		});
 	       }
 
-else{
+else if(apprenant.genre=="" || apprenant.genre==null){
+this.data = this.data.concat({
+		Nom : apprenant.nom,
+		Prenom :apprenant.prenom,
+		Naissance : apprenant.dateNaissance,
+		Genre: ' ',
+		Nationalité : apprenant.nationalite,
+		PaysOrigine : apprenant.paysOrigine,
+		Inscription :apprenant.dateInscription,
+		Groupe : e.nom,
+		DateArrivee : apprenant.dateArrivee,
+		Telephone : apprenant.telephone,
+		Adresse :apprenant.adresse,
+		CodePostal : apprenant.codePostal,
+		Commune : apprenant.commune,
+		AuteurDossier:apprenant.auteurDossier,
+		PrimoArrivant:primoArrivant,
+		Majeur : majeur,
+		QuartierPrioritaire: apprenant.quartierPrioritaire,
+		SituationPersonnelle:apprenant.situationPersonnelle,
+		PriseCharge : apprenant.priseCharge,
+		RSA : rsa,
+		tempsScolarisation: apprenant.tempsScolarisation,
+  		diplome: apprenant.diplome,
+		  milieuScolaire: milieuScolaire,
+		  niveauLangue: apprenant.niveauLangue,
+		  lireLangue: lireLangue,
+		  ecrireLangue: ecrireLangue,
+		  lireAlphaLatin: lireAlphaLatin,
+		  ecrireAlphaLatin: ecrireAlphaLatin,
+		  cotisationPayee:cotisationPayee,
+		  remarques: apprenant.remarques,
+		  statutSejour: apprenant.statutSejour,
+		  dateCarteSejour: apprenant.dateCarteSejour,
+		  dateFinCarteSejour: apprenant.dateFinCarteSejour,
+		  statutPro: apprenant.statutPro,
+		  typeContrat: apprenant.typeContrat
+		
+		});
+		}
 
+else{
 this.data = this.data.concat({
 		Nom : apprenant.nom,
 		Prenom :apprenant.prenom,
@@ -470,12 +510,14 @@ this.data = this.data.concat({
 		  dateFinCarteSejour: apprenant.dateFinCarteSejour,
 		  statutPro: apprenant.statutPro,
 		  typeContrat: apprenant.typeContrat
-		
+
 		});
 
 
 
 }
+
+
 
 }
 	      });
