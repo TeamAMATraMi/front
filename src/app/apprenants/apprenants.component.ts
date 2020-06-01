@@ -432,13 +432,13 @@ if(apprenant.genre=="M"){
 		});
 	       }
 
-else{
+else if(apprenant.genre==""){
 
 this.data = this.data.concat({
 		Nom : apprenant.nom,
 		Prenom :apprenant.prenom,
 		Naissance : apprenant.dateNaissance,
-		Genre: 'F',
+		Genre: ' ',
 		Nationalité : apprenant.nationalite,
 		PaysOrigine : apprenant.paysOrigine,
 		Inscription :apprenant.dateInscription,
@@ -476,6 +476,49 @@ this.data = this.data.concat({
 
 
 }
+else{
+this.data = this.data.concat({
+		Nom : apprenant.nom,
+		Prenom :apprenant.prenom,
+		Naissance : apprenant.dateNaissance,
+		Genre: 'F',
+		Nationalité : apprenant.nationalite,
+		PaysOrigine : apprenant.paysOrigine,
+		Inscription :apprenant.dateInscription,
+		Groupe : e.nom,
+		DateArrivee : apprenant.dateArrivee,
+		Telephone : apprenant.telephone,
+		Adresse :apprenant.adresse,
+		CodePostal : apprenant.codePostal,
+		Commune : apprenant.commune,
+		AuteurDossier:apprenant.auteurDossier,
+		PrimoArrivant:primoArrivant,
+		Majeur : majeur,
+		QuartierPrioritaire: apprenant.quartierPrioritaire,
+		SituationPersonnelle:apprenant.situationPersonnelle,
+		PriseCharge : apprenant.priseCharge,
+		RSA : rsa,
+		tempsScolarisation: apprenant.tempsScolarisation,
+  		diplome: apprenant.diplome,
+		  milieuScolaire: milieuScolaire,
+		  niveauLangue: apprenant.niveauLangue,
+		  lireLangue: lireLangue,
+		  ecrireLangue: ecrireLangue,
+		  lireAlphaLatin: lireAlphaLatin,
+		  ecrireAlphaLatin: ecrireAlphaLatin,
+		  cotisationPayee:cotisationPayee,
+		  remarques: apprenant.remarques,
+		  statutSejour: apprenant.statutSejour,
+		  dateCarteSejour: apprenant.dateCarteSejour,
+		  dateFinCarteSejour: apprenant.dateFinCarteSejour,
+		  statutPro: apprenant.statutPro,
+		  typeContrat: apprenant.typeContrat
+
+		});
+		}
+
+
+
 
 }
 	      });
@@ -528,13 +571,13 @@ if(existRes==false){
 this._groupesService.create({
 			 id: null,
 			idSite :null,
-                        nom:datas[k]['Groupe']
+            nom:datas[k]['Groupe']
  } as Groupe).subscribe();
 
 
 this._apprenantsService.exist(datas[k]['Nom'],datas[k]['Prenom']).subscribe((existRes:boolean)=>{
 if(existRes==false){
-// gestion d'affichage des boolean 
+// gestion d'affichage des boolean
 
 if(datas[k]['RSA']==='Non'){
 		rsa=false;
@@ -634,7 +677,7 @@ this._groupesService.groupeByNom(datas[k]['Groupe']).subscribe((resNom:number) =
 this.goupeId=resNom;
 this._apprenantsService.create({
 		id :null,
-                nom : datas[k]['Nom'],
+        nom : datas[k]['Nom'],
 		prenom :datas[k]['Prenom'],
 		dateNaissance : datas[k]['Naissance'],
 		genre: datas[k]['Genre'],
@@ -673,6 +716,8 @@ this._apprenantsService.create({
     
  } as Apprenant).subscribe();
 });
+
+
 }
 }); 
 
