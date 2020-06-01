@@ -303,7 +303,7 @@ this._sitesService.exist(data[k]['site']).subscribe((existRes:boolean)=>{
 if(existRes==false){
 this._sitesService.create({
 			 id: null,
-             ville:data[k]['site']
+                        ville:data[k]['site']
  } as Site).subscribe();
 }
 });
@@ -344,10 +344,6 @@ this._formateursService.create({
     }
     
 
-});
-
-});
-   }
 this._formateursService.fetch().subscribe(formateurs => {
       this._dataSource = new MatTableDataSource<Formateur>(formateurs);
       this._formateurs = formateurs;
@@ -363,6 +359,12 @@ this._formateursService.fetch().subscribe(formateurs => {
       };
     });
 console.log(this._dataSource);
+});
+
+});
+   
+
+}
  }
 
 }

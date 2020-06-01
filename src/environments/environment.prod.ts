@@ -3,7 +3,7 @@ export const environment = {
     production: true,
     backend: {
         protocol: 'http',
-        host: '92.222.9.74',
+        host: '51.178.82.205',
         port: '28080',
         endpoints: {
             auth: {
