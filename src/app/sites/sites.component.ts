@@ -203,7 +203,7 @@ this._sitesService.fetch().subscribe((sites: Site[]) => {
     });
 
 }
-
+console.log(this._dataSource);
 
 
 
@@ -214,16 +214,6 @@ this._sitesService.fetch().subscribe((sites: Site[]) => {
 });
      
     };
-
-this._sitesService.fetch().subscribe((sites: Site[]) => {
-      this._sites = sites;
-      this._dataSource = new MatTableDataSource<Site>(this._sites);
-      this._dataSource.paginator = this.paginator;
-      this._dataSource.sort = this.sort;
-      this._dataSource.filterPredicate = (data: {ville: string}, filterValue: string) =>
-        data.ville.trim().toLowerCase().indexOf(filterValue) !== -1;
-    });
-
 console.log(this._dataSource);
  }
    

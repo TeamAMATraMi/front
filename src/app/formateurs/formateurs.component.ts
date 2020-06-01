@@ -241,13 +241,10 @@ export class FormateursComponent implements OnInit {
     });
   }
 
-/**
-*Function downloadFomateursExcel qui export la liste des formateurs en fichier excel
-**/
+
 downloadFomateursExcel(){
 this.data=[];
-this.line=[];
-var salair
+this.line=[]; 
 this._formateurs.forEach(formateur => {
 	var siteF='';
 	this._sites.forEach(site => {
@@ -255,14 +252,6 @@ this._formateurs.forEach(formateur => {
 		siteF=site.ville;
 	}
 });
-
-//Affichage de boolean
-if(formateur.salarie==false){
-   salair='Non';
-}
-else{
-salair='Oui';
-}
 		
 	this.data = this.data.concat({
 	  Nom: formateur.nom,
@@ -271,7 +260,7 @@ salair='Oui';
 	  Adresse: formateur.adresse,
 	  CodePostal: formateur.codePostal,
 	  Commune: formateur.commune,
-	  Salarie: salair,
+	  Salarie: formateur.salarie,
 	  site : siteF
 
 
@@ -286,9 +275,7 @@ this.excelService.exportAsExcelFile(this.data, 'ListeFormateurs');
 }
 
 
-/**
-*Function onFileChange qui importe la liste des formateurs depuis un  fichier excel
-**/
+
 onFileChange(event: any) {
     var salair;
    
@@ -378,6 +365,7 @@ console.log(this._dataSource);
    
 
 }
+console.log(this._dataSource);
  }
 
 }

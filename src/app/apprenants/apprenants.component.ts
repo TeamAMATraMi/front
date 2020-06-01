@@ -432,13 +432,13 @@ if(apprenant.genre=="M"){
 		});
 	       }
 
-else if(apprenant.genre==""){
+else{
 
 this.data = this.data.concat({
 		Nom : apprenant.nom,
 		Prenom :apprenant.prenom,
 		Naissance : apprenant.dateNaissance,
-		Genre: ' ',
+		Genre: 'F',
 		Nationalité : apprenant.nationalite,
 		PaysOrigine : apprenant.paysOrigine,
 		Inscription :apprenant.dateInscription,
@@ -476,49 +476,6 @@ this.data = this.data.concat({
 
 
 }
-else{
-this.data = this.data.concat({
-		Nom : apprenant.nom,
-		Prenom :apprenant.prenom,
-		Naissance : apprenant.dateNaissance,
-		Genre: 'F',
-		Nationalité : apprenant.nationalite,
-		PaysOrigine : apprenant.paysOrigine,
-		Inscription :apprenant.dateInscription,
-		Groupe : e.nom,
-		DateArrivee : apprenant.dateArrivee,
-		Telephone : apprenant.telephone,
-		Adresse :apprenant.adresse,
-		CodePostal : apprenant.codePostal,
-		Commune : apprenant.commune,
-		AuteurDossier:apprenant.auteurDossier,
-		PrimoArrivant:primoArrivant,
-		Majeur : majeur,
-		QuartierPrioritaire: apprenant.quartierPrioritaire,
-		SituationPersonnelle:apprenant.situationPersonnelle,
-		PriseCharge : apprenant.priseCharge,
-		RSA : rsa,
-		tempsScolarisation: apprenant.tempsScolarisation,
-  		diplome: apprenant.diplome,
-		  milieuScolaire: milieuScolaire,
-		  niveauLangue: apprenant.niveauLangue,
-		  lireLangue: lireLangue,
-		  ecrireLangue: ecrireLangue,
-		  lireAlphaLatin: lireAlphaLatin,
-		  ecrireAlphaLatin: ecrireAlphaLatin,
-		  cotisationPayee:cotisationPayee,
-		  remarques: apprenant.remarques,
-		  statutSejour: apprenant.statutSejour,
-		  dateCarteSejour: apprenant.dateCarteSejour,
-		  dateFinCarteSejour: apprenant.dateFinCarteSejour,
-		  statutPro: apprenant.statutPro,
-		  typeContrat: apprenant.typeContrat
-
-		});
-		}
-
-
-
 
 }
 	      });
@@ -565,24 +522,25 @@ onFileChange(event: any) {
       const datas = XLSX.utils.sheet_to_json(ws); // to get 2d array pass 2nd parameter as object {header: 1}
 
 Object.keys(datas).forEach(k =>{
-//Creation du groupe si pas existant
+
 this._groupesService.existGroup(datas[k]['Groupe']).subscribe((existRes:boolean)=>{
 if(existRes==false){
 this._groupesService.create({
 			 id: null,
 			idSite :null,
-            nom:datas[k]['Groupe']
+                        nom:datas[k]['Groupe']
  } as Groupe).subscribe();
+
+}
 
 
 this._apprenantsService.exist(datas[k]['Nom'],datas[k]['Prenom']).subscribe((existRes:boolean)=>{
 if(existRes==false){
-// gestion d'affichage des boolean
 
 if(datas[k]['RSA']==='Non'){
 		rsa=false;
 		}
-		else if(datas[k]['RSA']=='Oui'){
+		else if(datas[k]['RSA']==='Oui'){
 		rsa=true;
 		}
 		else{
@@ -600,10 +558,10 @@ if(datas[k]['Majeur']==='Non'){
 		}
 
 
-if(datas[k]['PrimoArrivant']=='Non'){
+if(datas[k]['PrimoArrivant']==='Non'){
 		primoArrivant=false;
 		}
-		else if(datas[k]['primoArrivant']=='Oui'){
+		else if(datas[k]['PrimoArrivant']==='Oui'){
 		primoArrivant=true;
 		}
 		else{
@@ -611,10 +569,10 @@ if(datas[k]['PrimoArrivant']=='Non'){
 		}
 
 
-if(datas[k]['milieuScolaire']=='Non'){
+if(datas[k]['milieuScolaire']==='Non'){
 		milieuScolaire=false;
 		}
-		else if(datas[k]['milieuScolaire']=='Oui'){
+		else if(datas[k]['milieuScolaire']==='Oui'){
 		milieuScolaire=true;
 		}
 		else{
@@ -624,47 +582,47 @@ if(datas[k]['milieuScolaire']=='Non'){
 if(datas[k]['lireLangue']=='Non'){
 		lireLangue=false;
 		}
-		else if(datas[k]['lireLangue']=='Oui'){
+		else if(datas[k]['lireLangue']==='Oui'){
 		lireLangue=true;
 		}
 		else{
 		lireLangue='';
 		}
 
-if(datas[k]['ecrireAlphaLatin']=='Non'){
+if(datas[k]['ecrireAlphaLatin']==='Non'){
 		ecrireAlphaLatin=false;
 		}
-		else if(datas[k]['ecrireAlphaLatin']=='Oui'){
+		else if(datas[k]['ecrireAlphaLatin']==='Oui'){
 		ecrireAlphaLatin=true;
 		}
 		else{
 		ecrireAlphaLatin='';
 		}
 
-if(datas[k]['cotisationPayee']=='Non'){
+if(datas[k]['cotisationPayee']==='Non'){
 		cotisationPayee=false;
 		}
-		else if(datas[k]['cotisationPayee']=='Oui'){
+		else if(datas[k]['cotisationPayee']==='Oui'){
 		cotisationPayee=true;
 		}
 		else{
 		cotisationPayee='';
 		}
 
-if(datas[k]['ecrireLangue']=='Non'){
+if(datas[k]['ecrireLangue']==='Non'){
 		ecrireLangue=false;
 		}
-		else if(datas[k]['ecrireLangue']=='Oui'){
+		else if(datas[k]['ecrireLangue']==='Oui'){
 		ecrireLangue=true;
 		}
 		else{
 		ecrireLangue='';
 		}
 
-if(datas[k]['lireAlphaLatin']=='Non'){
+if(datas[k]['lireAlphaLatin']==='Non'){
 		lireAlphaLatin=false;
 		}
-		else if(datas[k]['lireAlphaLatin']=='Oui'){
+		else if(datas[k]['lireAlphaLatin']==='Oui'){
 		lireAlphaLatin=true;
 		}
 		else{
@@ -672,12 +630,11 @@ if(datas[k]['lireAlphaLatin']=='Non'){
 		}
 
 
-
 this._groupesService.groupeByNom(datas[k]['Groupe']).subscribe((resNom:number) => {
 this.goupeId=resNom;
 this._apprenantsService.create({
 		id :null,
-        nom : datas[k]['Nom'],
+                nom : datas[k]['Nom'],
 		prenom :datas[k]['Prenom'],
 		dateNaissance : datas[k]['Naissance'],
 		genre: datas[k]['Genre'],
@@ -715,16 +672,31 @@ this._apprenantsService.create({
 
     
  } as Apprenant).subscribe();
+this._apprenantsService.fetch().subscribe((apprenants) => {
+      this._dataSource = new MatTableDataSource<Apprenant>(apprenants);
+      this._apprenants = apprenants;
+      this._apprenantsTemp = apprenants;
+      this._dataSource.paginator = this.paginator;
+      this._dataSource.sort = this.sort;
+      this._dataSource.filterPredicate = (data: {nom: string, prenom: string}, filterValue: string) => {
+        if ((data.nom.trim().toLowerCase().indexOf(filterValue) !== -1) || (data.prenom.trim().toLowerCase().indexOf(filterValue) !== -1)) {
+          return true;
+        } else {
+          return false;
+        }
+      };
+    });
+console.log(this._dataSource);
 });
 
-
 }
-}); 
+});
 
- }
 });
 }); 
+
 }
+console.log(this._dataSource);
  }
 
 }
