@@ -244,7 +244,8 @@ export class FormateursComponent implements OnInit {
 
 downloadFomateursExcel(){
 this.data=[];
-this.line=[]; 
+this.line=[];
+var salair;
 this._formateurs.forEach(formateur => {
 	var siteF='';
 	this._sites.forEach(site => {
@@ -268,7 +269,7 @@ salair='Oui';
 	  Adresse: formateur.adresse,
 	  CodePostal: formateur.codePostal,
 	  Commune: formateur.commune,
-	  Salarie: formateur.salarie,
+	  Salarie: salair,
 	  site : siteF
 
 
