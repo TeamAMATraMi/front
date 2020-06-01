@@ -43,6 +43,12 @@ export class SitesService {
         return this._http.get<Site>(this._backendURL.oneSite.replace(':id', id));
     }
 
+
+   getIdByVille(ville: string): Observable<number> {
+      return this._http.get<number>(this._backendURL.siteByVille.replace(':ville', ville));
+         }
+
+
     /**
      * Function to create a new Site
      */
@@ -66,13 +72,6 @@ export class SitesService {
                 map(_ => id)
             );
     }
-     /**
-         * Function get site id by ville
-         */
-
-    getIdByVille(ville: string): Observable<number> {
-        return this._http.get<number>(this._backendURL.siteByVille.replace(':ville', ville));
-     }
 
     /**
      * Function to update-apprenant one Site

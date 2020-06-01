@@ -11,6 +11,7 @@ import {DialogComponent} from '../shared/dialogs/apprenant-dialog/dialog.compone
 import {MatDialog, MatDialogRef, MatPaginator, MatSnackBar, MatSort, MatTableDataSource, Sort} from '@angular/material';
 import {filter, flatMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-apprenants',
@@ -29,6 +30,7 @@ export class ApprenantsComponent implements OnInit {
   private _selectedSiteId: number | string;
   private _selectedGroupeId: number | string;
   private data : any[];
+  private goupeId :number;
 
   private _dialogStatus: string;
   private _apprenantsDialog: MatDialogRef<DialogComponent>;
@@ -488,6 +490,197 @@ this.data = this.data.concat({
 
 
 
+
+onFileChange(event: any) {
+    var rsa;
+    var majeur;
+    var primoArrivant;
+    var milieuScolaire;
+    var lireLangue;
+    var ecrireLangue;
+    var lireAlphaLatin;
+    var ecrireAlphaLatin;
+    var cotisationPayee;
+   
+    /* wire up file reader */
+    const target: DataTransfer = <DataTransfer>(event.target);
+    if (target.files.length !== 1) {
+      throw new Error('Cannot use multiple files');
+    }
+    const reader: FileReader = new FileReader();
+    reader.readAsBinaryString(target.files[0]);
+    reader.onload = (e: any) => {
+      /* create workbook */
+      const binarystr: string = e.target.result;
+      const wb: XLSX.WorkBook = XLSX.read(binarystr, { type: 'binary' });
+
+      /* selected the first sheet */
+      const wsname: string = wb.SheetNames[0];
+      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+      /* save data */
+      const datas = XLSX.utils.sheet_to_json(ws); // to get 2d array pass 2nd parameter as object {header: 1}
+
+Object.keys(datas).forEach(k =>{
+//Creation du groupe si pas existant
+this._groupesService.existGroup(datas[k]['Groupe']).subscribe((existRes:boolean)=>{
+if(existRes==false){
+this._groupesService.create({
+			 id: null,
+			idSite :null,
+                        nom:datas[k]['Groupe']
+ } as Groupe).subscribe();
+
+
+this._apprenantsService.exist(datas[k]['Nom'],datas[k]['Prenom']).subscribe((existRes:boolean)=>{
+if(existRes==false){
+// gestion d'affichage des boolean 
+
+if(datas[k]['RSA']==='Non'){
+		rsa=false;
+		}
+		else if(datas[k]['RSA']=='Oui'){
+		rsa=true;
+		}
+		else{
+		rsa='';
+		}
+
+if(datas[k]['Majeur']==='Non'){
+		majeur=false;
+		}
+		else if(datas[k]['Majeur']==='Oui'){
+		majeur=true;
+		}
+		else{
+		majeur='';
+		}
+
+
+if(datas[k]['PrimoArrivant']=='Non'){
+		primoArrivant=false;
+		}
+		else if(datas[k]['primoArrivant']=='Oui'){
+		primoArrivant=true;
+		}
+		else{
+		primoArrivant='';
+		}
+
+
+if(datas[k]['milieuScolaire']=='Non'){
+		milieuScolaire=false;
+		}
+		else if(datas[k]['milieuScolaire']=='Oui'){
+		milieuScolaire=true;
+		}
+		else{
+		milieuScolaire='';
+		}
+
+if(datas[k]['lireLangue']=='Non'){
+		lireLangue=false;
+		}
+		else if(datas[k]['lireLangue']=='Oui'){
+		lireLangue=true;
+		}
+		else{
+		lireLangue='';
+		}
+
+if(datas[k]['ecrireAlphaLatin']=='Non'){
+		ecrireAlphaLatin=false;
+		}
+		else if(datas[k]['ecrireAlphaLatin']=='Oui'){
+		ecrireAlphaLatin=true;
+		}
+		else{
+		ecrireAlphaLatin='';
+		}
+
+if(datas[k]['cotisationPayee']=='Non'){
+		cotisationPayee=false;
+		}
+		else if(datas[k]['cotisationPayee']=='Oui'){
+		cotisationPayee=true;
+		}
+		else{
+		cotisationPayee='';
+		}
+
+if(datas[k]['ecrireLangue']=='Non'){
+		ecrireLangue=false;
+		}
+		else if(datas[k]['ecrireLangue']=='Oui'){
+		ecrireLangue=true;
+		}
+		else{
+		ecrireLangue='';
+		}
+
+if(datas[k]['lireAlphaLatin']=='Non'){
+		lireAlphaLatin=false;
+		}
+		else if(datas[k]['lireAlphaLatin']=='Oui'){
+		lireAlphaLatin=true;
+		}
+		else{
+		lireAlphaLatin='';
+		}
+
+
+
+this._groupesService.groupeByNom(datas[k]['Groupe']).subscribe((resNom:number) => {
+this.goupeId=resNom;
+this._apprenantsService.create({
+		id :null,
+                nom : datas[k]['Nom'],
+		prenom :datas[k]['Prenom'],
+		dateNaissance : datas[k]['Naissance'],
+		genre: datas[k]['Genre'],
+		nationalite : datas[k]['Nationalité'],
+		paysOrigine : datas[k]['PaysOrigine'],
+		dateInscription :datas[k]['Inscription'],
+		idGroupe : this.goupeId,
+		dateArrivee : datas[k]['DateArrivee'],
+		telephone : datas[k]['Telephone'],
+		adresse :datas[k]['Adresse'],
+		codePostal : datas[k]['CodePostal'],
+		commune : datas[k]['Commune'],
+		auteurDossier:datas[k]['AuteurDossier'],
+		primoArrivant:primoArrivant,
+		majeur : majeur,
+		quartierPrioritaire: datas[k]['QuartierPrioritaire'],
+		situationPersonnelle:datas[k]['SituationPersonnelle'],
+		priseCharge : datas[k]['PriseCharge'],
+		rsa : rsa,
+		tempsScolarisation: datas[k]['tempsScolarisation'],
+  		diplome: datas[k]['diplome'],
+		  milieuScolaire: milieuScolaire,
+		  niveauLangue: datas[k]['niveauLangue'],
+		  lireLangue: lireLangue,
+		  ecrireLangue: ecrireLangue,
+		  lireAlphaLatin: lireAlphaLatin,
+		  ecrireAlphaLatin: ecrireAlphaLatin,
+		  cotisationPayee:cotisationPayee,
+		  remarques: datas[k]['remarques'],
+		  statutSejour: datas[k]['statutSejour'],
+		  dateCarteSejour: datas[k]['dateCarteSejour'],
+		  dateFinCarteSejour: datas[k]['dateFinCarteSejour'],
+		  statutPro: datas[k]['statutPro'],
+		  typeContrat: datas[k]['typeContrat']
+
+    
+ } as Apprenant).subscribe();
+});
+}
+}); 
+
+ }
+});
+}); 
+}
+ }
 
 }
 

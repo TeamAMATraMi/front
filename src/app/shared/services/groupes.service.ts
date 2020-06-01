@@ -50,6 +50,22 @@ export class GroupesService {
     return this._http.get<string>(this._backendURL.clearGroupe.replace(':id', id));
   }
 
+/**
+     * Function to return if a groupe exist
+     */
+    existGroup(nom: string): Observable<boolean> {
+        return this._http.get<boolean>(this._backendURL.existGroup.replace(':nom', nom));
+    }
+
+ /**
+   * Function to get group id from groupeName
+   */
+   groupeByNom(nom: string): Observable<number> {
+      return this._http.get<number>(this._backendURL.groupeByNom.replace(':nom', nom));
+         }
+
+
+
   /**
    * Function to create a new Groupe
    */

@@ -33,13 +33,15 @@ export const environment = {
                         sites: {
                             allSites: '/api/sites',
                             oneSite: '/api/sites/:id',
-            		         siteExist :'/api/siteExist/:ville',
-                            siteByVille: '/api/siteByVille/:ville'
+                             siteExist :'/api/siteExist/:ville',
+                             siteByVille: '/api/siteByVille/:ville'
                         },
                         groupes: {
                             allGroupes: '/api/groupes',
                             oneGroupe: '/api/groupes/:id',
-                            clearGroupe: '/api/groupesClear/:id'
+                            clearGroupe: '/api/groupesClear/:id',
+                             existGroup: '/api/groupExist/:nom',
+                             groupeByNom : '/api/groupeByNom/:nom'
                         },
                         associations: {
                             allAssociations: '/api/associations',
