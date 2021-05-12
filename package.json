@@ -24,7 +24,7 @@
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
     "@types/html2canvas": "0.0.35",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "core-js": "^2.6.11",
     "html2canvas": "^1.0.0-rc.5",
     "jspdf": "^1.5.3",
